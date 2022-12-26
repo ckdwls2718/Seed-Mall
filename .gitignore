@@ -16,6 +16,7 @@ local.properties
 
 
 # 협업을 위한 파일 삭제
+target/*.xml
 *.class
 .classpath
 .project
