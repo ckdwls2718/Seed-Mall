@@ -14,8 +14,14 @@ local.properties
 .loadpath
 .recommenders
 
+
+# 협업을 위한 파일 삭제
+*.class
+.classpath
+.project
 MANIFEST.MF
 pom.properties
+
 
 # External tool builders
 .externalToolBuilders/
