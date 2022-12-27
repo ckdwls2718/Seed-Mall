@@ -15,7 +15,7 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-public class AuthController {
+public class MemberController {
 
 	@Resource(name = "MemberService")
 	private MemberService MemberService;

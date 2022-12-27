@@ -25,7 +25,7 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminProductController {
+public class AdminController {
 	
 
 	@GetMapping("/prodForm")
