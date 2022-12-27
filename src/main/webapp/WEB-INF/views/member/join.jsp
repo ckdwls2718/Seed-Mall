@@ -2,9 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/top.jsp"%>
 
+<script type="text/javascript" src="./js/userCheck.js"></script>
+
 
 <div class="container" style="height:750px;overflow: auto;">
-	<h1 class="text-center mt-1">Signup</h1>
+	<h1 class="text-center mt-1"></h1>
 	<form name="mf" action="join" method="post">
 		<!-- hidden data----------------------------------------- -->
 		<input type="text" name="id_flag" id="id_flag" value="N">
@@ -13,17 +15,17 @@
 			<tr>
 				<td width="20%" class="m1"><b>이름</b></td>
 				<td width="80%" class="m2">
-				<input type="text" name="name" id="name" placeholder="Name">
+				<input type="text" name="MNAME" id="MNAME" placeholder="MNAME">
 				<br><span class='ck'>*이름은 한글만 가능해요</span>
 				</td>
 			</tr>
 			<tr>
-				<td width="20%" class="m1"><b>아이디</b></td>
+				<td width="20%" class="m1"><b>이메일</b></td>
 				<td width="80%" class="m2">
-				<input type="text" name="userid" id="userid"
-				 onkeyup=""   placeholder="User ID">
-				<button type="button"  class="btn btn-success" onclick="">아이디 중복 체크</button>
-				<br><span class='ck' id="id_result">*아이디는 영문자, 숫자, _, !만 사용 가능해요</span>
+				<input type="text" name="EMAIL" id="EMAIL"
+				 onkeyup=""   placeholder="EMAIL">
+				<button type="button"  class="btn btn-success" onclick="">이메일 중복 체크</button>
+				<br><span class='ck' id="id_result">이메일양식 XXX@XXX.XXX</span>
 				</td>
 			</tr>
 			<tr>
@@ -64,7 +66,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" class="m3 text-center">
-					<button class="btn btn-primary" type="button" onclick="">회원가입</button>
+					<button class="btn btn-primary" type="summit" >회원가입</button>
 					<button class="btn btn-danger" type="reset">다시쓰기</button>
 				</td>
 			</tr>
@@ -72,4 +74,8 @@
 	</form>
 	
 </div>
+
+<script>
+
+</script>
 <%@ include file="/WEB-INF/views/foot.jsp"%>

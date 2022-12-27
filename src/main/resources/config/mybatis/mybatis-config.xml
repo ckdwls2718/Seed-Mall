@@ -6,9 +6,14 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<!-- typeAlias 타입 별칭 설정 =============================== -->
 	<typeAliases>
 		<typeAlias type="com.board.model.BoardVO" alias="Board"/>
+		<typeAlias type="com.member.model.MemberVO" alias="Member"/>
+		<typeAlias type="com.product.model.ProductVO" alias="Product"/>
+		
 	</typeAliases>
 	<!-- mapper 정의 ========================================= -->
 	<mappers>
 		<mapper resource="config/mybatis/mapper/BoardMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/MemberMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/ProductMapper.xml"/>
 	</mappers>
 </configuration>
