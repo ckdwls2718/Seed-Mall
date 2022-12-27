@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.user.mapper.MemberMapper">
+	<insert id="insertMember" parameterType="member">
+		<selectKey keyProperty="Midx" resultType="int" order="BEFORE">
+			select member_seq.nextval from dual
+		</selectKey>
+		insert into member(MIDX,EMAIL,PWD,MNAME,MHP1,MHP2,MHP3,MPOST,MADDR1,MADDR2,GRADE,
+		,MDATE)
+		values(#{MIDX},#{MEMAIL},#{PWD},#{MNAME},#{MHP1},#{MHP2},#{MHP3},#{post:VARCHAR},
+		#{MADDR1:VARCHAR},#{MADDR2:VARCHAR},#{GRADE},sysdate,#{status})
+	</insert>
+	
+	<!-- <select id="idCheck" resultType="int"  parameterType="string">
+		select MIDX from member where EMAIL=#{value}
+	</select>
+	
+	<select id="selectUserByUserid" parameterType="string" resultType="User">
+		select * from member where EMAIL=#{value}	
+	</select>
+	
+	<select id="listUser" resultType="User" parameterType="com.user.model.PagingVO">
+		select member.*, decode(status,0,'일반회원',-1,'정지회원',-2,'탈퇴회원') statusStr
+		from member order by MIDX desc
+	</select>
+	
+	<delete id="deleteUser" parameterType="int">
+		delete from member where MIDX=#{value}
+	</delete> -->
+	
+</mapper>
