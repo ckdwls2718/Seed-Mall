@@ -16,17 +16,22 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        
+
     </head>
+    
     <body>
+    <c:set var="myctx" value="${pageContext.request.contextPath}"/>
+    
         <!-- Navigation-->
         <nav class="py-2 bg-white border-bottom">
             <div class="container d-flex flex-wrap text-end">
               <ul class="nav me-auto">
               </ul>
               <ul class="nav">
-                <li class="nav-item"><a href="#" class="nav-link link-dark px-2">로그인 </a></li>
+                <li class="nav-item"><a href="${myctx}/login" class="nav-link link-dark px-2">로그인 </a></li>
                 <li class="nav-item"><span href="#" class="nav-link link-dark px-2" style="color:silver"> |</span></li>
-                <li class="nav-item" ><a href="#" class="nav-link link-dark px-2" style="margin-right:1em ;">회원가입</a></li>
+                <li class="nav-item" ><a href="${myctx}/join" class="nav-link link-dark px-2" style="margin-right:1em ;">회원가입</a></li>
               </ul>
               <div class="flex-shrink-0 dropdown">
                 <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">

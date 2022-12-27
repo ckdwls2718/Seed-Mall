@@ -42,9 +42,6 @@ public class HomeController {
 		return "member/login";
 	}
 	
-	@GetMapping("/join")
-	public String joinForm() {
-		return "member/join";
-	}
+	
 	
 }
