@@ -108,6 +108,10 @@
 	background-color: #bb3535;
 	color: #fff
 }
+div#upCategory button{
+}
+
+
 </style>
 <script type='text/javascript' src=''></script>
 <script type='text/javascript'
@@ -115,9 +119,92 @@
 <script type='text/javascript'
 	src='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js'></script>
 </head>
+
+<script type='text/javascript'>
+	const changeSort = function(sort){
+		const urlParams = new URL(location.href).searchParams;
+
+		const keyword = urlParams.get('findKeyword');
+		
+		if(keyword){
+			sortF.findKeyword.value = keyword;
+		}
+		
+		alert(keyword);
+		
+		sortF.submit();
+	}
+	
+</script>
 <body oncontextmenu='return false' class='snippet-body bg-white'>
 	<div class="container bg-white">
-		<h2>여기에 식물종류 적기</h2>
+<div id="upCategory" class='container row'>
+	<div class="col-md-5">
+  		<button class="btn btn-outline-success" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample1" >초보</button>
+  	</div>
+  	<div class="col-md-5">
+	  	<button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2" >중급</button>
+	</div>
+	<div class="col-md-2">
+	  	<button class="btn btn-outline-danger" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample3" >전문가</button>
+	</div>
+</div>
+
+
+<div class="row">
+  <div class="col">
+    <div class="collapse multi-collapse" id="multiCollapseExample1">
+      <div class="card card-body">
+        <ul class="list-group list-group-flush">
+        	<!-- db에서 카테고리 목록 가져오기  -->
+  			<li class="list-group-item"><a class="btn btn-default" href="#">공기정화식물</a></li>
+  			<li class="list-group-item"><a class="btn btn-default" href="#">관엽식물</a></li>
+  			<li class="list-group-item"><a class="btn btn-default" href="#">꽃식물</a></li>
+  			<li class="list-group-item"><a class="btn btn-default" href="#">난초</a></li>
+  			<li class="list-group-item"><a class="btn btn-default" href="#">허브</a></li>
+  			<li class="list-group-item"><a class="btn btn-default" href="#">다육이</a></li>
+		</ul>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="collapse multi-collapse" id="multiCollapseExample2">
+      <div class="card card-body">
+        중급 목록 리스트
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="collapse multi-collapse" id="multiCollapseExample3">
+      <div class="card card-body">
+        전문가 목록 리스트
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 정렬 방식 -->
+<div class="row mt-3 ml-3 mb-3 mr-0">
+	<form name="sortF" id="sortF">
+		<input type="hidden" name="findKeyword"> 
+		<select class="form-select" style="width:15%; margin-left: auto" name="sort" onchange="changeSort(this.value)">
+			<option value="1" <c:if test="${paging.sort eq 1}">selected</c:if>>최신순</option>
+			<option value="2" <c:if test="${paging.sort eq 2}">selected</c:if>>평점순</option>
+			<option value="3" <c:if test="${paging.sort eq 3}">selected</c:if>>높은 가격순</option>
+			<option value="4" <c:if test="${paging.sort eq 4}">selected</c:if>>낮은 가격순</option>
+		</select>
+	</form>
+</div>
+
+<!-- 검색창 -->
+<div class="row mb-3">
+	<form name="searchF" id="searchF" class="d-flex" role="search">
+	  	<input name="findKeyword" class="form-control me-2" type="search" placeholder="검색어를 입력하세요" aria-label="Search" style="width:25% ;margin-left: auto">
+	  	<button class="btn btn-outline-success" type="submit">검색</button>
+	</form>
+</div>
+
+  		<!-- 식물 목록 출력 -->
 		<div class="row">
 			<div
 				class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">
@@ -297,7 +384,7 @@
 			</div>
 		</div>
 	</div>
-	<script type='text/javascript'></script>
+	
 </body>
 </html>
 <%@ include file="/WEB-INF/views/foot.jsp"%>

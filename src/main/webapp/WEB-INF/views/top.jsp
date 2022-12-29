@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>    
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<c:set var="myctx" value="${pageContext.request.contextPath}"/>
+  
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -15,10 +18,11 @@
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/booztstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="./css/styles.css" rel="stylesheet" />
+        <link href="${myctx}/css/styles.css" rel="stylesheet" />
+        
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
     </head>
     <body>
-    <c:set var="myctx" value="${pageContext.request.contextPath}"/>
         <!-- Navigation-->
         <nav class="py-2 bg-white border-bottom">
             <div class="container d-flex flex-wrap text-end ">
@@ -61,7 +65,7 @@
               </div>
                 <form class="col-12 col-lg-4 mb-3 mb-lg-0 " role="search" >
                     <input type="search" class="form-control mb-lg-0" style="margin-left:auto;margin-top:2em ;width:80%" placeholder="검색..." aria-label="검색">
-              </div>
+                </form>
             </div>
           </header>
         <nav class="navbar navbar-expand navbar-light bg-white">
