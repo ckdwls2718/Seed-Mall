@@ -5,15 +5,15 @@
 <div class="container" style="width:30%">
 
 <main class="form-signin w-100 m-auto text-center">
-  <form>
+  <form action="login" method="post">
     <!-- <img class="mb-4" src="./assets/name-removebg-preview.png" alt="" width="100" height="80"> -->
 
     <div class="form-floating mt-4">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
       <label for="floatingInput">이메일</label>
     </div><br>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <input type="password" class="form-control" id="floatingPassword" name="pwd" placeholder="Password">
       <label for="floatingPassword">비밀번호</label>
     </div>
 
