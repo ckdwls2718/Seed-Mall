@@ -3,4 +3,55 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.product.mapper.ProductMapper">
 
+	<insert id="productInsert" parameterType="ProductF" useGeneratedKeys="true" keyProperty="pidx">
+		
+		insert into product(pidx,upCg_code,downCg_code,pname,price,
+		psaleprice,pqty,ppoint,pspec,pcontent,pdate,preadnum,plikenum)
+		values(product_seq.nextval,#{upCg_code},#{downCg_code},#{pname},
+		#{price},#{psaleprice},#{pqty},#{ppoint},#{pspec},
+		#{pcontent:VARCHAR},sysdate,#{preadnum},#{plikenum})
+		
+		<selectKey keyProperty="pidx" resultType="int" order="AFTER">
+			select product_seq.currval from dual
+		</selectKey>
+	</insert>
+	
+	<insert id="insertPimage" parameterType="ProductI">
+		<selectKey keyProperty="image_pidx" resultType="int" order="BEFORE">
+			select product_image_seq.nextval from dual
+		</selectKey>
+		
+		insert into product_image(image_pidx, pidx, pThumbnail, pimage, pOriginFilename)
+		values(product_image_seq.nextval, #{pidx},#{pThumbnail:VARCHAR},#{pimage},#{pOriginFilename})
+		
+	</insert>
+	
+	
+	<select id="getProducts" resultType="Product">
+		select p.*,
+		(select upCg_name from upCategory where upCg_code=p.upCg_code) upCg_name,
+		(select downCg_name from downCategory where downCg_code=p.downCg_code) downCg_name 
+		from product p order by pidx desc
+	</select>
+	
+	<select id="selectByPspec" resultType="Product" parameterType="string">
+		select * from product where pspec=#{value}
+	</select>
+	
+	<select id="selectByPnum" resultType="Product" parameterType="_int">
+		select * from product where pidx=#{value}
+	</select>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
