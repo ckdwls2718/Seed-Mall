@@ -26,7 +26,11 @@ public class MemberVO {
 	}
 	
 	public String getAllAddr() {
+<<<<<<< HEAD
+		return maddr1+" "+maddr2;
+=======
 		return "["+mpost+"] "+maddr1+" "+maddr2;
+>>>>>>> develop
 	}
 
 }

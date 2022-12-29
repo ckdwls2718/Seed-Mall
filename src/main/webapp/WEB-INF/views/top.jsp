@@ -24,11 +24,15 @@
             <div class="container d-flex flex-wrap text-end ">
               <ul class="nav me-auto">
               </ul>
+              <!-- 로그인시 기능 생성 -->
+              <%-- <c:if test="${loginUser eq null}"> --%>
               <ul class="nav">
                 <li class="nav-item"><a href="${myctx}/login" class="nav-link link-dark px-2">로그인 </a></li>
                 <li class="nav-item"><span href="#" class="nav-link link-dark px-2" style="color:silver"> |</span></li>
                 <li class="nav-item" ><a href="${myctx}/join" class="nav-link link-dark px-2" style="margin-right:1em ;">회원가입</a></li>
               </ul>
+              <%-- </c:if> --%>
+              <%-- <c:if test="${loginUser ne null}"> --%>
               <div class="flex-shrink-0 dropdown">
                 <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
                   <img src="${myctx}/assets/몬스테라.jpg" alt="mdo" width="32" height="32" class="rounded-circle" style="margin-top:3px">
@@ -50,6 +54,7 @@
                 </button>
             </form>
             </div>
+             <%--  </c:if> --%>
           </nav>
         <header class="py-3 mb-4 border-bottom ">
             <div class="container d-flex flex-wrap" >
@@ -61,10 +66,13 @@
               </div>
                 <form class="col-12 col-lg-4 mb-3 mb-lg-0 " role="search" >
                     <input type="search" class="form-control mb-lg-0" style="margin-left:auto;margin-top:2em ;width:80%" placeholder="검색..." aria-label="검색">
+<<<<<<< HEAD
+              	</form>
+=======
 				</form>                    
+>>>>>>> develop
               </div>
-            </div>
-          </header>
+	</header>
         <nav class="navbar navbar-expand navbar-light bg-white">
             <div class="container px-4 px-lg-5 text-start" style="height: 0px;">
                 
@@ -85,7 +93,8 @@
                                 <li><a class="dropdown-item" href="#!">다육식물</a></li>
                             </ul>
                         </li>
-                        
+                        <!-- 로그인시 생성 -->
+                       <%--  <c:if test="${loginUser ne null}"> --%>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">관리자 도구</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -93,8 +102,10 @@
                                 <li><hr class="dropdown-divider" /></li>
                                 <li><a class="dropdown-item" href="/seedmall/admin/prodForm">상품 등록</a></li>
                                 <li><a class="dropdown-item" href="/seedmall/admin/prodList">상품 목록</a></li>
+                                <li><a class="dropdown-item" href="/seedmall/memberlist">회원 관리</a></li>
                             </ul>
                         </li>
+                      <%--  </c:if> --%>
                     </ul>
                     
                 </div>

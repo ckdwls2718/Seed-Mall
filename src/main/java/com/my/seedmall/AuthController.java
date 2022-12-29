@@ -1,5 +1,7 @@
 package com.my.seedmall;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -11,18 +13,28 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.user.model.MemberVO;
+<<<<<<< HEAD:src/main/java/com/my/seedmall/AuthController.java
+
+=======
 import com.user.model.NotUserException;
+>>>>>>> develop:src/main/java/com/my/seedmall/MemberController.java
 import com.user.service.MemberService;
 
 import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-public class MemberController {
+public class AuthController {
 
+<<<<<<< HEAD:src/main/java/com/my/seedmall/AuthController.java
+	@Resource(name = "MemberService" )
+	private MemberService MemberService;
+
+=======
 	@Resource(name = "MemberService")
 	private MemberService memberService;
 	
+>>>>>>> develop:src/main/java/com/my/seedmall/MemberController.java
 	@GetMapping("/join")
 	public String joinForm() {
 		return "member/join";
@@ -37,6 +49,13 @@ public class MemberController {
 
 			return "redirect:join";
 		}
+<<<<<<< HEAD:src/main/java/com/my/seedmall/AuthController.java
+		return "redirect:join";
+	}
+
+	
+}//
+=======
 
 		int n = memberService.createMember(Member);
 		String str = (n > 0) ? "회원가입 완료" : "가입 실패";
@@ -68,3 +87,4 @@ public class MemberController {
 		return "redirect:/";
 	}
 }
+>>>>>>> develop:src/main/java/com/my/seedmall/MemberController.java
