@@ -11,11 +11,10 @@
         <meta name="author" content="" />
         <title>시드몰</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/booztstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="./css/styles.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
     </head>
     <body>
     <c:set var="myctx" value="${pageContext.request.contextPath}"/>
@@ -63,7 +62,6 @@
                     <input type="search" class="form-control mb-lg-0" style="margin-left:auto;margin-top:2em ;width:80%" placeholder="검색..." aria-label="검색">
 				</form>                    
               </div>
-            </div>
           </header>
         <nav class="navbar navbar-expand navbar-light bg-white">
             <div class="container px-4 px-lg-5 text-start" style="height: 0px;">
@@ -91,8 +89,8 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#!">어드민페이지</a></li>
                                 <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="/seedmall/admin/prodForm">상품 등록</a></li>
-                                <li><a class="dropdown-item" href="/seedmall/admin/prodList">상품 목록</a></li>
+                                <li><a class="dropdown-item" href="${myctx}/admin/prodForm">상품 등록</a></li>
+                                <li><a class="dropdown-item" href="${myctx}/admin/prodList">상품 목록</a></li>
                             </ul>
                         </li>
                     </ul>
