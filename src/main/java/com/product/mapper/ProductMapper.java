@@ -3,19 +3,22 @@ package com.product.mapper;
 import java.util.List;
 
 import com.product.model.CategoryVO;
+import com.product.model.ProductForm;
+import com.product.model.ProductImageVO;
 import com.product.model.ProductVO;
 
 public interface ProductMapper {
 	
-	int insertProduct(ProductVO vo);
+	int productInsert(ProductForm vo);
 	
-	List<ProductVO> getProdList();
+	List<ProductVO> getProducts();
 	
-	int updateProd(ProductVO vo);
-	
-	List<ProductVO> selectByspec(String spec);
-	
+	List<ProductVO> selectByPspec(String pspec);
 	List<ProductVO> selectByCategory(CategoryVO cvo);
 	
-	ProductVO selectByIdx(int idx);
+	ProductVO selectByPidx(int pidx);
+
+	int insertPimage(ProductImageVO piVo);
+		
+
 }

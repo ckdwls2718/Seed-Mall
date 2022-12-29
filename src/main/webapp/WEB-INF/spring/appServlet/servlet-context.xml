@@ -26,8 +26,9 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.my.seedmall,com.board, com.product, com.user" />
-		
+<context:component-scan base-package="com.my.seedmall,com.board, com.product, com.user" />
+
+	
 	<!-- 파일 업로드 위한 MultipartResolver 설정 ============================== -->
 	<!--주의: 빈의 id는 반드시 multipartResolver로 등록해야 한다.
 	다른 아이디를 주면 DispatcherServlet이 MultipartResolver로

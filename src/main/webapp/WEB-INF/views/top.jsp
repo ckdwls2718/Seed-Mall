@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<c:set var="myctx" value="${pageContext.request.contextPath}"/>
-  
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>    
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -14,24 +11,22 @@
         <meta name="author" content="" />
         <title>시드몰</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/booztstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="${myctx}/css/styles.css" rel="stylesheet" />
-        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
     </head>
     <body>
+    <c:set var="myctx" value="${pageContext.request.contextPath}"/>
         <!-- Navigation-->
         <nav class="py-2 bg-white border-bottom">
             <div class="container d-flex flex-wrap text-end ">
               <ul class="nav me-auto">
               </ul>
               <ul class="nav">
-                <li class="nav-item"><a href="#" class="nav-link link-dark px-2">로그인 </a></li>
+                <li class="nav-item"><a href="${myctx}/login" class="nav-link link-dark px-2">로그인 </a></li>
                 <li class="nav-item"><span href="#" class="nav-link link-dark px-2" style="color:silver"> |</span></li>
-                <li class="nav-item" ><a href="#" class="nav-link link-dark px-2" style="margin-right:1em ;">회원가입</a></li>
+                <li class="nav-item" ><a href="${myctx}/join" class="nav-link link-dark px-2" style="margin-right:1em ;">회원가입</a></li>
               </ul>
               <div class="flex-shrink-0 dropdown">
                 <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
@@ -43,7 +38,7 @@
                   <li><a class="dropdown-item" href="#">마이페이지</a></li>
                   <li><a class="dropdown-item" href="#">설정</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">로그아웃</a></li>
+                  <li><a class="dropdown-item" href="${myctx}/">로그아웃</a></li>
                 </ul>
               </div>
               <form class="d-flex" style="margin-left:1em">
@@ -65,8 +60,8 @@
               </div>
                 <form class="col-12 col-lg-4 mb-3 mb-lg-0 " role="search" >
                     <input type="search" class="form-control mb-lg-0" style="margin-left:auto;margin-top:2em ;width:80%" placeholder="검색..." aria-label="검색">
-                </form>
-            </div>
+				</form>                    
+              </div>
           </header>
         <nav class="navbar navbar-expand navbar-light bg-white">
             <div class="container px-4 px-lg-5 text-start" style="height: 0px;">
@@ -94,8 +89,8 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#!">어드민페이지</a></li>
                                 <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="/seedmall/admin/prodForm">상품 등록</a></li>
-                                <li><a class="dropdown-item" href="/seedmall/admin/prodList">상품 목록</a></li>
+                                <li><a class="dropdown-item" href="${myctx}/admin/prodForm">상품 등록</a></li>
+                                <li><a class="dropdown-item" href="${myctx}/admin/prodList">상품 목록</a></li>
                             </ul>
                         </li>
                     </ul>

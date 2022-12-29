@@ -14,6 +14,9 @@
 	<logger name="com.my.seedmall">
 		<level value="info" />
 	</logger>
+	<logger name="com.product.service">
+		<level value="info" />
+	</logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">

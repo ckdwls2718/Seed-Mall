@@ -1,10 +1,14 @@
 package com.product.model;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 
 @Data
-public class ProductVO {
+public class ProductForm {
 	//property
 	private String upCg_code;//상위 카테고리 코드
 	private String upCg_name;//상위 카테고리명
@@ -14,8 +18,7 @@ public class ProductVO {
 	
 	private int pidx;
 	private String pname;
-	
-	
+		
 	private int price;
 	private int psaleprice;
 	private int pqty;
@@ -28,6 +31,7 @@ public class ProductVO {
 	private int preadnum;
 	private int plikenum;
 	
+	private List<MultipartFile> pimage;
 	
 	private int totalPrice; /*총판매가 = 상품판매가 x수량*/
 	private int totalPoint; /*총포인트 = 포인트 x수량*/
