@@ -5,7 +5,7 @@
 
 <script type="text/javascript" src="./js/orderCheck.js"></script>
 
-<!-- 장바구니에서 타고 들어온 주문 페이지(장바구니 컨트롤러에서 order페이지를 리턴해줄 것이다) -->
+<!-- 상품 클릭 후 주문하기 버튼을 통해 주문페이지를 바로 들어왔을 때 화면 -->
 <div class="container" style="height: 600px; overflow: auto;">
 	<h1 class="text-center mt-5 mb-5">배송지정보</h1>
 	<div class="checkbox mb-3" style="text-align: left;">

@@ -27,6 +27,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.my.seedmall,com.board" />
+	<context:component-scan base-package="com.order" />
 	
 	<!-- 파일 업로드 위한 MultipartResolver 설정 ============================== -->
 	<!--주의: 빈의 id는 반드시 multipartResolver로 등록해야 한다.
