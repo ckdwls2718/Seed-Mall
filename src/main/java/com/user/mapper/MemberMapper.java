@@ -1,10 +1,12 @@
 package com.user.mapper;
+
 import java.util.List;
 
 import com.user.model.MemberVO;
 import com.user.model.PagingVO;
+
 public interface MemberMapper {
-	int createMember(MemberVO Member);
+	int createMember(MemberVO member);
 
 	int getMemberCount(PagingVO pvo);
 
@@ -12,11 +14,12 @@ public interface MemberMapper {
 
 	MemberVO getMember(Integer midx);
 
-	Integer idCheck(String Email);
+	Integer emailCheck(String email);
 
 	MemberVO findUser(MemberVO findUser);
 
 	int deleteUser(Integer midx);
 
-	int updateUser(MemberVO Member);
+	int updateUser(MemberVO member);
+
 }
