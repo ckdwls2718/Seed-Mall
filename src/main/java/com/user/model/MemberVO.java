@@ -14,7 +14,7 @@ public class MemberVO {
 	private String pwd;
 	private String mname;
 	private String mhp1,mhp2,mhp3;
-	private String post;
+	private String mpost;
 	private String maddr1, maddr2;
 	private String grade;
 	private int status;//
@@ -26,7 +26,7 @@ public class MemberVO {
 	}
 	
 	public String getAllAddr() {
-		return "["+post+"] "+maddr1+" "+maddr2;
+		return "["+mpost+"] "+maddr1+" "+maddr2;
 	}
 
 }
