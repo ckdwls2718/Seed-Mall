@@ -25,9 +25,9 @@
               <ul class="nav me-auto">
               </ul>
               <ul class="nav">
-                <li class="nav-item"><a href="#" class="nav-link link-dark px-2">로그인 </a></li>
+                <li class="nav-item"><a href="${myctx}/login" class="nav-link link-dark px-2">로그인 </a></li>
                 <li class="nav-item"><span href="#" class="nav-link link-dark px-2" style="color:silver"> |</span></li>
-                <li class="nav-item" ><a href="#" class="nav-link link-dark px-2" style="margin-right:1em ;">회원가입</a></li>
+                <li class="nav-item" ><a href="${myctx}/join" class="nav-link link-dark px-2" style="margin-right:1em ;">회원가입</a></li>
               </ul>
               <div class="flex-shrink-0 dropdown">
                 <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,7 +39,7 @@
                   <li><a class="dropdown-item" href="#">마이페이지</a></li>
                   <li><a class="dropdown-item" href="#">설정</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">로그아웃</a></li>
+                  <li><a class="dropdown-item" href="${myctx}/">로그아웃</a></li>
                 </ul>
               </div>
               <form class="d-flex" style="margin-left:1em">
@@ -61,6 +61,7 @@
               </div>
                 <form class="col-12 col-lg-4 mb-3 mb-lg-0 " role="search" >
                     <input type="search" class="form-control mb-lg-0" style="margin-left:auto;margin-top:2em ;width:80%" placeholder="검색..." aria-label="검색">
+				</form>                    
               </div>
             </div>
           </header>
