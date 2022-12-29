@@ -7,22 +7,22 @@ import com.user.model.NotUserException;
 import com.user.model.PagingVO;
 
 public interface MemberService {
-	int createMember(MemberVO Member);
+	int createMember(MemberVO member);
 
 	int getMemberCount(PagingVO pvo);
 
 	List<MemberVO> listUser(PagingVO pvo);
 
-	boolean EmailCheck(String Email);
+	boolean EmailCheck(String email);
 
 	int deleteMember(Integer midx);
 
-	int updateMember(MemberVO Member);
+	int updateMember(MemberVO member);
 
 	MemberVO getMember(Integer midx);
 
 	MemberVO findUser(MemberVO findUser) throws NotUserException;
 
-	MemberVO loginCheck(String Email, String Pwd) throws NotUserException;
+	MemberVO loginCheck(String email, String pwd) throws NotUserException;
 
 }

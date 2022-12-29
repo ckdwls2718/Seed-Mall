@@ -4,31 +4,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.user.mapper.MemberMapper">
-	<insert id="insertMember" parameterType="member">
-		<selectKey keyProperty="Midx" resultType="int" order="BEFORE">
+	<insert id="createMember" parameterType="member">
+		<selectKey keyProperty="midx" resultType="int" order="BEFORE">
 			select member_seq.nextval from dual
 		</selectKey>
-		insert into member(MIDX,EMAIL,PWD,MNAME,MHP1,MHP2,MHP3,MPOST,MADDR1,MADDR2,GRADE,
-		,MDATE)
-		values(#{MIDX},#{MEMAIL},#{PWD},#{MNAME},#{MHP1},#{MHP2},#{MHP3},#{post:VARCHAR},
-		#{MADDR1:VARCHAR},#{MADDR2:VARCHAR},#{GRADE},sysdate,#{status})
+		insert into member(MIDX,EMAIL,PWD,MNAME,MHP1,MHP2,MHP3,MPOST,MADDR1,MADDR2,GRADE
+		,MDATE,status)
+		values(#{midx},#{email},#{pwd},#{mname},#{mhp1},#{mhp2},#{mhp3},#{mpost:VARCHAR},
+		#{maddr1:VARCHAR},#{maddr2:VARCHAR},'새싹회원',sysdate,#{status})
 	</insert>
 	
-	<!-- <select id="idCheck" resultType="int"  parameterType="string">
+    <select id="emailCheck" resultType="int"  parameterType="string">
 		select MIDX from member where EMAIL=#{value}
 	</select>
 	
-	<select id="selectUserByUserid" parameterType="string" resultType="User">
-		select * from member where EMAIL=#{value}	
+	<select id="findUser" parameterType="Member" resultType="Member">
+		select * from member where EMAIL=#{email}	
 	</select>
 	
-	<select id="listUser" resultType="User" parameterType="com.user.model.PagingVO">
+	<select id="listUser" resultType="Member" parameterType="com.user.model.PagingVO">
 		select member.*, decode(status,0,'일반회원',-1,'정지회원',-2,'탈퇴회원') statusStr
 		from member order by MIDX desc
 	</select>
 	
 	<delete id="deleteUser" parameterType="int">
 		delete from member where MIDX=#{value}
-	</delete> -->
+	</delete>
+	
 	
 </mapper>
