@@ -13,5 +13,5 @@ public interface ProductService {
 	
 	List<ProductVO> selectByCategory(CategoryVO cvo);
 	
-	ProductVO selectByIdx(int idx);
+	ProductVO selectByIdx(int pidx);
 }
