@@ -26,7 +26,14 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+<<<<<<< HEAD
 <context:component-scan base-package="com.my.seedmall,com.board, com.product, com.user, com.order" />
+=======
+
+	<context:component-scan base-package="com.my.seedmall,com.board, com.product, com.user" />
+
+
+>>>>>>> develop
 
 	
 	<!-- 파일 업로드 위한 MultipartResolver 설정 ============================== -->

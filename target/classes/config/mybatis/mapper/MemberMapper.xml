@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{maddr1:VARCHAR},#{maddr2:VARCHAR},'새싹회원',sysdate,#{status})
 	</insert>
 	
-    <select id="emailCheck" resultType="int"  parameterType="string">
+	<select id="emailCheck" resultType="int"  parameterType="string">
 		select MIDX from member where EMAIL=#{value}
 	</select>
 	
@@ -23,13 +23,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="listUser" resultType="Member" parameterType="com.user.model.PagingVO">
-		select member.*, decode(status,0,'일반회원',-1,'정지회원',-2,'탈퇴회원') statusStr
+		select member.*, decode(status,0,'일반회원', 1,'정지회원',2,'탈퇴회원') statusStr
 		from member order by MIDX desc
 	</select>
 	
-	<delete id="deleteUser" parameterType="int">
+	<select id="selectUserByUserid" parameterType="string" resultType="Member">
+		select * from member where EMAIL=#{value}	
+	</select>
+
+	<update id="updateUser" parameterType="Member">
+		update  member set status=#{status} where midx=#{midx}
+	</update>
+	
+	<delete id="deleteUser" parameterType="_int">
 		delete from member where MIDX=#{value}
 	</delete>
-	
 	
 </mapper>
