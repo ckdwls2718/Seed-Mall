@@ -53,7 +53,7 @@
           </nav>
         <header class="py-3 mb-4 border-bottom ">
             <div class="container d-flex flex-wrap" >
-              <a href="#"  class="d-flex align-items-center mb-3 mb-lg-2 me-lg-auto text-dark text-decoration-none" style="margin-left:2em">
+              <a href="/seedmall"  class="d-flex align-items-center mb-3 mb-lg-2 me-lg-auto text-dark text-decoration-none" style="margin-left:2em">
                 <img src="${myctx}/assets/logo-removebg-preview.png" style="width:100%;height:70px" >
               </a>
               <div class="me-lg-7 align-items-center">
