@@ -2,7 +2,9 @@ package com.user.service;
 
 import java.util.List;
 
+
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int createMember(MemberVO Member) {
+
 		return MemberMapper.createMember(Member);
 	}
 
@@ -44,13 +47,12 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int deleteMember(Integer midx) {
-		return this.MemberMapper.deleteUser(midx);
+		return MemberMapper.deleteUser(midx);
 	}
 
 	@Override
 	public int updateMember(MemberVO member) {
-		
-		return this.MemberMapper.updateUser(member);
+		return MemberMapper.updateUser(member);
 	}
 
 	@Override
@@ -63,7 +65,7 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO findUser(MemberVO findUser) throws NotUserException {
 		MemberVO user = MemberMapper.findUser(findUser);
 		if (user == null) {
-			throw new NotUserException("존재하지 않는 아이디에요");
+			throw new NotUserException("존재하지 않는 이메일입니다");
 		}
 		return user;
 	}
@@ -72,14 +74,25 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO loginCheck(String email, String pwd) throws NotUserException {
 		MemberVO tmpVo = new MemberVO();
 		tmpVo.setEmail(email);
-		
+
 		MemberVO member = this.findUser(tmpVo);
 		if (member == null) {
-			throw new NotUserException("존재하지 않는 아이디에요");
+			throw new NotUserException("존재하지 않는 이메일입니다.");
 		}
 		if (!member.getPwd().equals(pwd)) {
-			throw new NotUserException("비밀번호가 일치하지 않아요");
+			throw new NotUserException("비밀번호가 일치하지 않습니다.");
 		}
+
 		return member;
+
 	}
+
+	@Override
+	public void logout(HttpSession session) throws Exception {
+		session.invalidate();
+		
+	}
+
+	
+
 }

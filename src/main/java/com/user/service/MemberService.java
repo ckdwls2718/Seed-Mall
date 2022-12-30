@@ -2,6 +2,8 @@ package com.user.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.user.model.MemberVO;
 import com.user.model.NotUserException;
 import com.user.model.PagingVO;
@@ -24,5 +26,6 @@ public interface MemberService {
 	MemberVO findUser(MemberVO findUser) throws NotUserException;
 
 	MemberVO loginCheck(String email, String pwd) throws NotUserException;
-
+	
+	void logout(HttpSession session) throws Exception;
 }

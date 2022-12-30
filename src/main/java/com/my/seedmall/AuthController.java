@@ -5,9 +5,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.user.model.MemberVO;
 import com.user.model.NotUserException;
@@ -50,7 +53,7 @@ public class AuthController {
 	public String loginProcess(HttpSession session, @ModelAttribute("member") MemberVO member) throws NotUserException {
 		log.info("member===" + member);
 		if (member.getEmail().trim().isEmpty() || member.getPwd().trim().isEmpty()) {
-			return "redirect:index";
+			return "redirect:/login";
 		}
 		MemberVO loginUser = memberService.loginCheck(member.getEmail(), member.getPwd());
 		if (loginUser != null) {
@@ -60,10 +63,20 @@ public class AuthController {
 		return "redirect:/";
 	}// ------------------------------
 
-	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:/";
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session) throws Exception {
+	 log.info("get logout");
+	 
+	 memberService.logout(session);
+	   
+	 return "redirect:/";
 	}
+	
+	//예외처리하는 메서드앞에 @ExceptionHandler를 붙이고 구체적인 예외 클래스를 지정한다
+		@ExceptionHandler(NotUserException.class)
+		public String exceptionHandler(Exception ex) {
+			log.error(ex);
+			return "member/errorAlert";
+		}
 }
 
