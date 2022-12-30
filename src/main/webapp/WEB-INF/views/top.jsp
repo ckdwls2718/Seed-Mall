@@ -101,6 +101,7 @@
                                 <li><hr class="dropdown-divider" /></li>
                                 <li><a class="dropdown-item" href="${myctx}/admin/prodForm">상품 등록</a></li>
                                 <li><a class="dropdown-item" href="${myctx}/admin/prodList">상품 목록</a></li>
+                                <li><a class="dropdown-item" href="${myctx}/admin/memberList">회원 관리</a></li>
                             </ul>
                         </li>
                     </ul>

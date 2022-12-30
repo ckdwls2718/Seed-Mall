@@ -22,33 +22,33 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class AuthController {
 
-	@Resource(name = "MemberService")
+	@Resource(name = "MemberService" )
 	private MemberService memberService;
-	
+
 	@GetMapping("/join")
 	public String joinForm() {
 		return "member/join";
 	}
 
-	@PostMapping("/join")
-	public String joinEnd(Model m, @ModelAttribute("Member") MemberVO Member) {
-		log.info("join === Member: " + Member);
-		if (Member.getEmail() == null || Member.getPwd() == null || Member.getMname() == null
-				|| Member.getEmail().trim().isEmpty() || Member.getPwd().trim().isEmpty()
-				|| Member.getMname().trim().isEmpty()) {
+	   @PostMapping("/join")
+	   public String joinEnd(Model m, @ModelAttribute("Member") MemberVO member) {
+	      log.info("join === Member: " + member);
+	      if (member.getEmail() == null || member.getPwd() == null || member.getMname() == null
+	            || member.getEmail().trim().isEmpty() || member.getPwd().trim().isEmpty()
+	            || member.getMname().trim().isEmpty()) {
 
-			return "redirect:join";
-		}
+	         return "redirect:join";
+	      }
 
-		int n = memberService.createMember(Member);
-		String str = (n > 0) ? "회원가입 완료" : "가입 실패";
-		String loc = (n > 0) ? "/seedmall" : "javascript:history.back()";
+	      int n = memberService.createMember(member);
+	      String str = (n > 0) ? "회원가입 완료" : "가입 실패";
+	      String loc = (n > 0) ? "/seedmall" : "javascript:history.back()";
 
-		m.addAttribute("message", str);
-		m.addAttribute("loc", loc);
-		return "msg";
-	}
-	
+	      m.addAttribute("message", str);
+	      m.addAttribute("loc", loc);
+	      return "msg";
+	   }
+
 	@PostMapping("/login")
 	public String loginProcess(HttpSession session, @ModelAttribute("member") MemberVO member) throws NotUserException {
 		log.info("member===" + member);
@@ -60,7 +60,6 @@ public class AuthController {
 			// 로그인 인증을 받았다면
 			session.setAttribute("loginUser", loginUser);
 		}
-
 		return "redirect:/";
 	}// ------------------------------
 
@@ -80,3 +79,4 @@ public class AuthController {
 			return "member/errorAlert";
 		}
 }
+

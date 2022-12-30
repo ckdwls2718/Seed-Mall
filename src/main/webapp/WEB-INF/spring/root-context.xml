@@ -35,7 +35,7 @@
 	<context:component-scan
 		base-package="com.my.multiweb,com.memo.controller,com.memo.model" />
 	<context:component-scan
-		base-package="com.user,com.shop,com.common,com.board" />
+		base-package="com.user,com.user.model,com.shop,com.common,com.board" />
 
 	<!-- 파일 업로드 위한 MultipartResolver 설정 ============================== -->
 	<!--주의: 빈의 id는 반드시 multipartResolver로 등록해야 한다. 다른 아이디를 주면 DispatcherServlet이 
