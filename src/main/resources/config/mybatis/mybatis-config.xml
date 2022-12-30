@@ -10,6 +10,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.product.model.ProductVO" alias="Product"/>
 		<typeAlias type="com.product.model.ProductForm" alias="ProductF"/>
 		<typeAlias type="com.product.model.ProductImageVO" alias="ProductI"/>
+		<typeAlias type="com.product.model.PagingVO" alias="Paging"/>
 		<typeAlias type="com.product.model.CategoryVO" alias="Category"/>
 		
 	</typeAliases>

@@ -133,7 +133,7 @@ public class AdminProductServiceImpl implements AdminProductService {
 
 	@Override
 	public List<ProductVO> productList() {
-		return this.productMapper.getProducts();
+		return this.productMapper.getProducts(null);
 	}
 	
 	@Override
