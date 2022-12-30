@@ -19,7 +19,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int createMember(MemberVO Member) {
-
 		return MemberMapper.createMember(Member);
 	}
 
@@ -45,13 +44,13 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int deleteMember(Integer midx) {
-		return MemberMapper.deleteUser(midx);
+		return this.MemberMapper.deleteUser(midx);
 	}
 
 	@Override
 	public int updateMember(MemberVO member) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return this.MemberMapper.updateUser(member);
 	}
 
 	@Override
@@ -73,7 +72,7 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO loginCheck(String email, String pwd) throws NotUserException {
 		MemberVO tmpVo = new MemberVO();
 		tmpVo.setEmail(email);
-
+		
 		MemberVO member = this.findUser(tmpVo);
 		if (member == null) {
 			throw new NotUserException("존재하지 않는 아이디에요");
@@ -81,9 +80,6 @@ public class MemberServiceImpl implements MemberService {
 		if (!member.getPwd().equals(pwd)) {
 			throw new NotUserException("비밀번호가 일치하지 않아요");
 		}
-
 		return member;
-
 	}
-
 }

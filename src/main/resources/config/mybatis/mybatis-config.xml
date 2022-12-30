@@ -7,21 +7,14 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<typeAliases>
 		<typeAlias type="com.board.model.BoardVO" alias="Board"/>
 		<typeAlias type="com.user.model.MemberVO" alias="Member"/>
-<<<<<<< HEAD
-		<!-- <typeAlias type="com.product.model.ProductVO" alias="Product"/> -->
-=======
 		<typeAlias type="com.product.model.ProductVO" alias="Product"/>
->>>>>>> develop
 		
 	</typeAliases>
 	<!-- mapper 정의 ========================================= -->
 	<mappers>
 		<mapper resource="config/mybatis/mapper/BoardMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/MemberMapper.xml"/>
-<<<<<<< HEAD
-		<!-- <mapper resource="config/mybatis/mapper/ProductMapper.xml"/> -->
-=======
 		<mapper resource="config/mybatis/mapper/ProductMapper.xml"/>
->>>>>>> develop
+
 	</mappers>
 </configuration>

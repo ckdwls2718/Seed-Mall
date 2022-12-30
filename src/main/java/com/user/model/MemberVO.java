@@ -17,7 +17,7 @@ public class MemberVO {
 	private String mpost;
 	private String maddr1, maddr2;
 	private String grade;
-	private int status;//
+	private int status;// 회원상태: 0(일반회원),-1(정지회원), -2(탈퇴회원), 9(관리자)
 	private String statusStr;
 	private java.sql.Date mdate;
 	
@@ -26,11 +26,6 @@ public class MemberVO {
 	}
 	
 	public String getAllAddr() {
-<<<<<<< HEAD
 		return maddr1+" "+maddr2;
-=======
-		return "["+mpost+"] "+maddr1+" "+maddr2;
->>>>>>> develop
 	}
-
-}
+}////

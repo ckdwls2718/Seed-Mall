@@ -9,80 +9,96 @@ import lombok.Data;
 
 @Data
 public class PagingVO {
+	//페이징 처리 관련 프로퍼티
+	private int mpage;//현재 보여줄 페이지 번호
+	private int pageSize=5;// 한 페이지 당 보여줄 목록 개수
+	private int totalCount;//총 게시글 수
+	private int pageCount;//페이지 수
 	
-	private int cpage;
-	private int pageSize=5;
-	private int totalCount;
-	private int pageCount;
-	
+	//DB에서 레코드를 끊어오기 위한 프로퍼티
 	private int start;
 	private int end;
 	
-	private int pagingBlock=5;
-	private int prevBlock;
-	private int nextBlock;
+	//페이징 블럭 처리를 위한 프로퍼티
+	private int pagingBlock=5;// 한 블럭 당 보여줄 페이지 수
+	private int prevBlock;//이전 5개
+	private int nextBlock;//이후 5개
 	
-	private String findType;
-	private String findKeyword;
+	//검색 관련 프로퍼티
+	private String findType; //검색 유형
+	private String findKeyword;//검색 키워드
 	
+	//페이징 처리 연산을 수행하는 메서드
 	public void init(HttpSession ses) {
 		if(ses!=null) {
 			ses.setAttribute("pageSize", pageSize);
 		}
-		
 		pageCount=(totalCount-1)/pageSize+1;
-		if(cpage<1) {
-			cpage=1;
+		if(mpage<1) {
+			mpage=1;//1페이지를 디폴트로
 		}
-		if(cpage>pageCount) {
-			cpage=pageCount;
+		if(mpage>pageCount) {
+			mpage=pageCount;//마지막 페이지로 설정
 		}
-		start=(cpage-1)/pagingBlock * pagingBlock;
+		
+		start=(mpage-1)*pageSize;
+		end=start +(pageSize+1);
+		
+		prevBlock=(mpage-1)/pagingBlock * pagingBlock;
 		nextBlock=prevBlock+(pagingBlock+1);
 	}
-	
 	public String getPageNavi(String myctx, String loc, String userAgent) {
-		if(findType==null) {
+		//myctx: 컨텍스트명, loc="board/list", userAgent: 브라우저 종류 파악하기 위한 문자열
+		//검색관련-------------------
+		
+		if(findType==null) {// 검색어가 넘어오지 않을 경우
 			findType="";
 			findKeyword="";
 		}else {
-			if(userAgent.indexOf("MSIE")>-1||userAgent.indexOf("Tridnt")>-1) {
+			//브라우저 IE일경우 검색어 한글 처리하기
+			if(userAgent.indexOf("MSIE")>-1||userAgent.indexOf("Trident")>-1) {
 				try {
-					findKeyword=URLEncoder.encode(findKeyword,"UTF-8");
-				} catch (UnsupportedEncodingException e) {
+				findKeyword=URLEncoder.encode(findKeyword,"UTF-8");
+				}catch (UnsupportedEncodingException e) {
 					System.out.println(e);
 				}
 			}
 		}
-		String link=myctx+"/"+loc;
+		String link=myctx+"/"+loc; //"/multiweb/board/list"
 		String qStr="?pageSize="+pageSize+"&findType="+findType+"&findKeyword="+findKeyword;
 		link+=qStr;
 		String str="";
 		StringBuilder buf=new StringBuilder();
 		buf.append("<ul class='pagination justify-content-center'>");
 		if(prevBlock>0) {
-			buf.append("<li class='page-item'>")
-				.append("<a class='page-link' href='"+link+"$cpage"+prevBlock+"'>")
-				.append("Prev")
-				.append("</a>")
-				.append("</li>");
+			buf.append("<li class='page-item'>") //"multiweb/board/list?mpage=5"
+			   .append("<a class='page-link' href='"+link+"&mpage="+prevBlock+"'>")
+			   .append("Prev")
+			   .append("</a>")
+			   .append("</li>");
 		}
 		
-		for(int i=prevBlock+1; i<=nextBlock-1 && i<=pageCount; i++) {
-			String css=(i==cpage)? "active":"";
+		for(int i=prevBlock+1; i<=nextBlock-1 && i<=pageCount;i++) {
+			String css=(i==mpage)? "active":"";
 			
 			buf.append("<li class='page-item "+css+"'>");
-			buf.append("<a class='page-link' href='"+link+"&cpage"+i+"'>");
+			buf.append("<a class='page-link' href='"+link+"&mpage="+i+"'>");
 			buf.append(i);
 			buf.append("</a>");
 			buf.append("</li>");
 		}
 		
+		if(nextBlock<=pageCount) {
+		buf.append("<li class='page-item'>") //"multiweb/board/list?mpage=5"
+		   .append("<a class='page-link' href='"+link+"&mpage="+nextBlock+"'>")
+		   .append("Next")
+		   .append("</a>")
+		   .append("</li>");
+		}
 		buf.append("</ul>");
 		str=buf.toString();
+//		System.out.println(str);
 		
 		return str;
 	}
-	
-	
-}
+}///////////////////
