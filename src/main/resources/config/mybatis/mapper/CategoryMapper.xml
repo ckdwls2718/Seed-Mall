@@ -12,4 +12,10 @@
 	order by 1 asc
 </select>
 
+
+<select id="getAllDowncategory" resultType="Category" >
+	select * from downCategory
+</select>
+
+
 </mapper>

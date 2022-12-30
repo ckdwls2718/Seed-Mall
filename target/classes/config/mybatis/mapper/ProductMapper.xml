@@ -17,30 +17,42 @@
 	</insert>
 	
 	<insert id="insertPimage" parameterType="ProductI">
-		<selectKey keyProperty="image_pidx" resultType="int" order="BEFORE">
-			select product_image_seq.nextval from dual
-		</selectKey>
-		
 		insert into product_image(image_pidx, pidx, pThumbnail, pimage, pOriginFilename)
 		values(product_image_seq.nextval, #{pidx},#{pThumbnail:VARCHAR},#{pimage},#{pOriginFilename})
-		
 	</insert>
 	
 	
 	<select id="getProducts" resultType="Product">
-		select p.*,
-		(select upCg_name from upCategory where upCg_code=p.upCg_code) upCg_name,
-		(select downCg_name from downCategory where downCg_code=p.downCg_code) downCg_name 
-		from product p order by pidx desc
+		<include refid="selectProd"/>
+	</select>
+	
+	<select id="getProductImg" resultType="ProductI">
+		select * from product_image order by image_pidx desc
+	</select>
+	
+	
+	<select id="getProdImages" resultType="ProductI" parameterType="_int">
+		select *
+		from product_image
+		where pidx=#{value}
+		order by 1 asc
 	</select>
 	
 	<select id="selectByPspec" resultType="Product" parameterType="string">
-		select * from product where pspec=#{value}
+		<include refid="selectProd"/>
+		where pspec=#{value}
 	</select>
 	
-	<select id="selectByPnum" resultType="Product" parameterType="_int">
-		select * from product where pidx=#{value}
+	<select id="selectByPidx" resultType="Product" parameterType="_int">
+		<include refid="selectProd"/>
+		where pidx=#{value}
 	</select>
+	
+	<sql id="selectProd">
+		select p.*,decode(c.upcg_code,1,'초보',2,'중급',3,'전문가') upcg_name,c.downCg_name
+		from product p join downcategory c 
+		on p.downCg_code = c.downCg_code and p.upCg_code =c.upCg_code
+	</sql>
 </mapper>
 
 

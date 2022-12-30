@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.product.model.CategoryVO;
 import com.product.model.ProductForm;
+import com.product.model.ProductImageVO;
 import com.product.model.ProductVO;
 import com.product.service.AdminProductService;
 
@@ -104,9 +105,12 @@ public class AdminProductController {
 	@GetMapping("/prodList")
 	public String productList(Model m) {
 		
-		List<ProductVO> prodArr=adminProductService.productList();
+		List<ProductVO> prodArr= adminProductService.productList();
+		List<ProductImageVO> prodImageArr= adminProductService.productImageList();
+
 		m.addAttribute("prodArr",prodArr);
-		
+		m.addAttribute("prodImageArr", prodImageArr);
+
 		return "admin/prodList";
 	}
 	

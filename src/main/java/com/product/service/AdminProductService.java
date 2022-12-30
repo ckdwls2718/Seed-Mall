@@ -26,6 +26,7 @@ public interface AdminProductService {
 	/** [관리자 모드]- 상품 정보 등록하기 */
 	public int productInsert(ProductForm prod, HttpServletRequest req);
 	public List<ProductVO> productList();
-	
+	public List<ProductImageVO> productImageList();
+
 
 }
