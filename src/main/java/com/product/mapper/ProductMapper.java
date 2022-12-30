@@ -20,6 +20,7 @@ public interface ProductMapper {
 	ProductVO selectByPidx(int pidx);
 
 	int insertPimage(ProductImageVO piVo);
-		
+	
+	List<ProductImageVO> getProductImg();
 
 }

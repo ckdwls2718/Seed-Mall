@@ -26,6 +26,11 @@
 		<include refid="selectProd"/>
 	</select>
 	
+	<select id="getProductImg" resultType="ProductI">
+		select * from product_image order by image_pidx desc
+	</select>
+	
+	
 	<select id="getProdImages" resultType="ProductI" parameterType="_int">
 		select *
 		from product_image
