@@ -135,5 +135,11 @@ public class AdminProductServiceImpl implements AdminProductService {
 	public List<ProductVO> productList() {
 		return this.productMapper.getProducts();
 	}
+	
+	@Override
+	public List<ProductImageVO> productImageList() {
+		return this.productMapper.getProductImg();
+
+	}
 
 }

@@ -4,7 +4,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.user.mapper.MemberMapper">
-	<insert id="insertMember" parameterType="member"/>
 	<insert id="createMember" parameterType="member">
 		<selectKey keyProperty="midx" resultType="int" order="BEFORE">
 			select member_seq.nextval from dual
@@ -15,8 +14,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{maddr1:VARCHAR},#{maddr2:VARCHAR},'새싹회원',sysdate,#{status})
 	</insert>
 	
-	<select id="idCheck" resultType="int"  parameterType="string">
+	<select id="emailCheck" resultType="int"  parameterType="string">
 		select MIDX from member where EMAIL=#{value}
+	</select>
+	
+	<select id="findUser" parameterType="Member" resultType="Member">
+		select * from member where EMAIL=#{email}	
 	</select>
 	
 	<select id="listUser" resultType="Member" parameterType="com.user.model.PagingVO">

@@ -12,6 +12,7 @@ public interface ProductMapper {
 	int productInsert(ProductForm vo);
 	
 	List<ProductVO> getProducts();
+	List<ProductImageVO> getProdImages(int pidx);
 	
 	List<ProductVO> selectByPspec(String pspec);
 	List<ProductVO> selectByCategory(CategoryVO cvo);
@@ -19,6 +20,7 @@ public interface ProductMapper {
 	ProductVO selectByPidx(int pidx);
 
 	int insertPimage(ProductImageVO piVo);
-		
+	
+	List<ProductImageVO> getProductImg();
 
 }
