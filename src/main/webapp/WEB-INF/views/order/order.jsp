@@ -3,8 +3,6 @@
 
 <%@ include file="/WEB-INF/views/top.jsp"%>
 
-<script type="text/javascript" src="./js/orderCheck.js"></script>
-
 <!-- 장바구니에서 타고 들어온 주문 페이지(장바구니 컨트롤러에서 order페이지를 리턴해줄 것이다) -->
 <div class="container" style="height: 600px; overflow: auto;">
 	<h1 class="text-center mt-5 mb-5">배송지정보</h1>

@@ -63,7 +63,6 @@
                     <input type="search" class="form-control mb-lg-0" style="margin-left:auto;margin-top:2em ;width:80%" placeholder="검색..." aria-label="검색">
 				</form>                    
               </div>
-            </div>
           </header>
         <nav class="navbar navbar-expand navbar-light bg-white">
             <div class="container px-4 px-lg-5 text-start" style="height: 0px;">

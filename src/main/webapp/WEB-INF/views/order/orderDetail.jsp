@@ -1,10 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
 <%@ include file="/WEB-INF/views/top.jsp"%>
-
-<script type="text/javascript" src="./js/orderCheck.js"></script>
-
+<script>
+	function order_check() { //유효성체크 
+		if (!$('#oname').val()) {
+			alert('받는분을 입력하세요.');
+			$('#oname').focus();
+			return false;
+		}
+		if (!$('#ohp1').val()) {
+			alert('연락처를 입력하세요.');
+			$('#ohp1').focus();
+			return false;
+		}
+		if (!$('#ohp2').val()) {
+			alert('연락처를 입력하세요.');
+			$('#ohp2').focus();
+			return false;
+		}
+		if (!$('#ohp3').val()) {
+			alert('연락처를 입력하세요.');
+			$('#ohp3').focus();
+			return false;
+		}
+		if (!$('#oaddr1').val()) {
+			alert('주소를 입력하세요.');
+			$('#oaddr1').focus();
+			return false;
+		}
+		return true;
+	}
+	
+</script>
 <!-- 상품 클릭 후 주문하기 버튼을 통해 주문페이지를 바로 들어왔을 때 화면 -->
 <div class="container" style="height: 600px; overflow: auto;">
 	<h1 class="text-center mt-5 mb-5">배송지정보</h1>
@@ -13,7 +42,9 @@
 			배송지 설정
 		</label>
 	</div>
-	<form name="frm" action="index" method="post">
+
+	<form name="frm" id="frm" action="index" method="post"
+		enctype="multipart/form-data" onsubmit="return order_check()">
 		<table class="table">
 			<tr>
 				<td width="20%" class="m1">받는분</td>
@@ -129,8 +160,9 @@
 				</tr>
 			</table>
 		</div>
-		<button class="btn btn-success" style="text-align: center;"
-			onclick="order_check()">결제하기</button>
+		<div class="text-center">
+			<button class="btn btn-success">결제하기</button>
+		</div>
 	</form>
 </div>
 
