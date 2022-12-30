@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="listUser" resultType="Member" parameterType="com.user.model.PagingVO">
-		select member.*, decode(status,0,'일반회원', 1,'정지회원',2,'탈퇴회원') statusStr
+		select member.*, decode(status,0,'일반회원', 1,'정지회원',2,'탈퇴회원', 9,'관리자') statusStr
 		from member order by MIDX desc
 	</select>
 	

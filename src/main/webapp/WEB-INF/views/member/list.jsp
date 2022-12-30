@@ -133,8 +133,11 @@ button {
 							<option value="1"
 							<c:if test="${user.status eq 1}">selected</c:if>>정지회원</option>
 							<option value="2" style="color: red;"
-							<c:if test="${user.status eq 2}">selected</c:if>>탈퇴회원</option>
+							<c:if test="${user.status eq 2}">selected</c:if>>탈퇴회원</option>							
 						</select>
+						</c:if>
+						<c:if test="${user.status eq 9}">
+							<c:out value="-관리자-"/>
 						</c:if>
 						</td>
 						<td>
