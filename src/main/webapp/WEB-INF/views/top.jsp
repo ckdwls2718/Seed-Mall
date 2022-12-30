@@ -23,22 +23,31 @@
             <div class="container d-flex flex-wrap text-end ">
               <ul class="nav me-auto">
               </ul>
-              <ul class="nav">
+              <ul class="nav">       
+              <c:if test="${loginUser == null}">   
                 <li class="nav-item"><a href="${myctx}/login" class="nav-link link-dark px-2">로그인 </a></li>
+                
                 <li class="nav-item"><span href="#" class="nav-link link-dark px-2" style="color:silver"> |</span></li>
-                <li class="nav-item" ><a href="${myctx}/join" class="nav-link link-dark px-2" style="margin-right:1em ;">회원가입</a></li>
+                <li class="nav-item" ><a href="${myctx}/join" class="nav-link link-dark px-2" style="margin-right:1em ;">회원가입</a></li>              
+              </c:if>  
               </ul>
+              <c:if test="${loginUser != null}"> 
               <div class="flex-shrink-0 dropdown">
+               
                 <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
                   <img src="${myctx}/assets/몬스테라.jpg" alt="mdo" width="32" height="32" class="rounded-circle" style="margin-top:3px">
                 </a>
+                
                 <ul class="dropdown-menu text-small shadow" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; margin-top:5px;  transform: translate3d(0.5px, 34px, 0px);">
+                  
                   <li><span class="dropdown-item">등급</span></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="#">마이페이지</a></li>
                   <li><a class="dropdown-item" href="#">설정</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="${myctx}/">로그아웃</a></li>
+                  <li><hr class="dropdown-divider"></li>                  
+                  <li><a class="dropdown-item" href="${myctx}/logout">로그아웃</a></li> 
+                  
+                            
                 </ul>
               </div>
               <form class="d-flex" style="margin-left:1em">
@@ -48,11 +57,12 @@
                     <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                 </button>
             </form>
+            </c:if>
             </div>
           </nav>
         <header class="py-3 mb-4 border-bottom ">
             <div class="container d-flex flex-wrap" >
-              <a href="#"  class="d-flex align-items-center mb-3 mb-lg-2 me-lg-auto text-dark text-decoration-none" style="margin-left:2em">
+              <a href="/seedmall"  class="d-flex align-items-center mb-3 mb-lg-2 me-lg-auto text-dark text-decoration-none" style="margin-left:2em">
                 <img src="${myctx}/assets/logo-removebg-preview.png" style="width:100%;height:70px" >
               </a>
               <div class="me-lg-7 align-items-center">
