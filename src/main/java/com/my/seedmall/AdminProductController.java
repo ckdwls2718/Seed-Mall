@@ -1,6 +1,7 @@
 package com.my.seedmall;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,10 +21,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.product.model.CategoryVO;
 import com.product.model.ProductForm;
+import com.product.model.ProductImageVO;
 import com.product.model.ProductVO;
 import com.product.service.AdminProductService;
 
 import lombok.extern.log4j.Log4j;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
+import net.coobird.thumbnailator.name.Rename;
 
 @Controller
 @RequestMapping("/admin")
@@ -50,45 +55,7 @@ public class AdminProductController {
 		return downCgList;
 	}
 	
-	@ResponseBody
-	@PostMapping("/imageUpload")
-	public void uploadImage(MultipartFile[] pimage, HttpServletRequest req) {
-
-		log.info("imageUploadPOST..........");
-		String uploadFolder = "resources/product_images";
-		
-		ServletContext app=req.getServletContext();
-		String upDir=app.getRealPath("/resources/product_images");
-		log.info("upDir==="+upDir);
-		
-		File dir=new File(upDir);
-		if(!dir.exists()) {
-			dir.mkdirs();//업로드할 디렉토리 생성
-		}
-		
-		for(MultipartFile image : pimage) {
-			/* 파일 이름 */
-			String uploadFileName = image.getOriginalFilename();			
-			
-			
-			/* uuid 적용 파일 이름 */
-			String uuid = UUID.randomUUID().toString();
-			
-			uploadFileName = uuid + "_" + uploadFileName;
-			
-			/* 파일 위치, 파일 이름을 합친 File 객체 */
-			File saveFile = new File(upDir, uploadFileName);
-			
-			/* 파일 저장 */
-			try {
-				image.transferTo(saveFile);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		
-	}
+	
 	
 	@PostMapping("/prodInsert")
 	public String productRegister(Model m, @ModelAttribute ProductForm prod, HttpServletRequest req
@@ -97,15 +64,23 @@ public class AdminProductController {
 		log.info("product= "+prod);
 		
 		int result = adminProductService.productInsert(prod,req);
+		String str=(result>0)?"상품등록 성공":"등록 실패";
+		String loc=(result>0)?"prodList":"javascript:history.back()";
 		
-		return "/admin/prodInsert";
+		m.addAttribute("message",str);
+		m.addAttribute("loc",loc);
+		return "msg";
 	}//------------------------------------------
 	
 	@GetMapping("/prodList")
 	public String productList(Model m) {
 		
 		List<ProductVO> prodArr=adminProductService.productList();
+		List<ProductImageVO> prodImageArr=adminProductService.productImageList();
+		
 		m.addAttribute("prodArr",prodArr);
+		m.addAttribute("prodImageArr",prodImageArr);
+	
 		
 		return "admin/prodList";
 	}

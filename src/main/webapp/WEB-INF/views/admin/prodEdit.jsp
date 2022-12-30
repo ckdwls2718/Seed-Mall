@@ -78,7 +78,32 @@
 		}
 		return true;
 	}
-	
+	$(function() {
+		/* 이미지 업로드 */
+		$("input[type='file']").on("submit", function(e) {
+			let formData = new FormData();
+			let fileInput = $('input[name="pimage"]');
+			let fileList = fileInput[0].files;
+			let fileObj = fileList[0];
+
+			for (let i = 0; i < fileList.length; i++) {
+				formData.append("pimage", fileList[i]);
+				console.log(fileList[i]);
+			}
+
+			$.ajax({
+				url : '/seedmall/admin/imageUpload',
+				processData : false,
+				contentType : false,
+				data : formData,
+				type : 'POST',
+				dataType : 'json',
+
+			});
+
+		});
+		
+	});
 </script>
 
 <div class="py-5">

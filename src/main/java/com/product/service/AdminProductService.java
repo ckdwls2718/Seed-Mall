@@ -21,10 +21,12 @@ public interface AdminProductService {
 	public int categoryDelete(int cg_code);
 	
 	public ProductImageVO uploadImage(MultipartFile mf, HttpServletRequest req);
+	
 	public int insertImage(ProductImageVO piVo);
 
 	/** [관리자 모드]- 상품 정보 등록하기 */
 	public int productInsert(ProductForm prod, HttpServletRequest req);
+	public List<ProductImageVO> productImageList();
 	public List<ProductVO> productList();
 	
 

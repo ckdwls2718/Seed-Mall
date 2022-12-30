@@ -1,6 +1,9 @@
 package com.product.service;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,6 +22,7 @@ import com.product.model.ProductImageVO;
 import com.product.model.ProductVO;
 
 import lombok.extern.log4j.Log4j;
+import net.coobird.thumbnailator.Thumbnailator;
 
 @Service
 @Log4j
@@ -60,34 +64,34 @@ public class AdminProductServiceImpl implements AdminProductService {
 
 		// pk 받아와서 변수에 저장
 		int image_pidx = prod.getPidx();
-		
-		if (result == 0) return 0;
-		
-		//이미지 업로드
+
+		if (result == 0)
+			return 0;
+
+		// 이미지 업로드
 		List<MultipartFile> imageList = prod.getPimage();
 		if (imageList != null && !imageList.isEmpty()) {
-			for(MultipartFile mf : imageList) {
-				
-			// 원본 이미지 저장
-			ProductImageVO piVo = uploadImage(mf, req);
+			for (MultipartFile mf : imageList) {
 
-			// 썸네일 이미지 저장
+				// 원본 이미지 저장
+				ProductImageVO piVo = uploadImage(mf, req);
 
-			// 저장된 이름들 p i vo setter db에 저장
-			piVo.setPidx(image_pidx);
-			int result2 = insertImage(piVo);
-			
-			if(result2 == 0) {
-				log.info(mf.getOriginalFilename()+" DB 저장 실패");
-			}
-			
+				// 저장된 이름들 p i vo setter db에 저장
+				piVo.setPidx(image_pidx);
+				int result2 = insertImage(piVo);
+
+				if (result2 == 0) {
+					log.info(mf.getOriginalFilename() + " DB 저장 실패");
+
+				}
+
 			}
 		}
-		
 		// 0:1
 		return 1;
+
 	}
-	
+
 	@Override
 	public int insertImage(ProductImageVO piVo) {
 		return productMapper.insertPimage(piVo);
@@ -95,45 +99,71 @@ public class AdminProductServiceImpl implements AdminProductService {
 
 	@Override
 	public ProductImageVO uploadImage(MultipartFile mf, HttpServletRequest req) {
-		
+
 		ProductImageVO piVo = new ProductImageVO();
-		
-		ServletContext app=req.getServletContext();
-		String upDir=app.getRealPath("/resources/product_images");
-		log.info("upDir==="+upDir);
-		 
-		File dir=new File(upDir);
-		if(!dir.exists()) {
-			dir.mkdirs();//업로드할 디렉토리 생성
+
+		ServletContext app = req.getServletContext();
+		String upDir = app.getRealPath("/resources/product_images");
+		log.info("upDir===" + upDir);
+
+		File dir = new File(upDir);
+		if (!dir.exists()) {
+			dir.mkdirs();// 업로드할 디렉토리 생성
 		}
-		
-	
+
 		/* 파일 이름 */
-		String uploadFileName = mf.getOriginalFilename();			
+		String uploadFileName = mf.getOriginalFilename();
 		piVo.setPOriginFilename(uploadFileName);
 		
+
 		/* uuid 적용 파일 이름 */
 		String uuid = UUID.randomUUID().toString();
 		uploadFileName = uuid + "_" + uploadFileName;
 		piVo.setPimage(uploadFileName);
+		String ThumbnailFileName = "Thumb_"+uploadFileName;
+		piVo.setPThumbnail(ThumbnailFileName);
+
 		
-			
-		/* 파일 위치, 파일 이름을 합친 File 객체 */
-		File saveFile = new File(upDir, uploadFileName);
-			
+
 		/* 파일 저장 */
 		try {
+			/* 파일 위치, 파일 이름을 합친 File 객체 */
+			File saveFile = new File(upDir, uploadFileName);
+			
+			
+			if(checkImageType(saveFile)) {
+				FileOutputStream thumbnail = 
+					new FileOutputStream(new File(upDir,ThumbnailFileName));
+				Thumbnailator
+				.createThumbnail(mf.getInputStream(), thumbnail, 100, 100);
+					
+			}
 			mf.transferTo(saveFile);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return piVo;
 	}
 
 	@Override
 	public List<ProductVO> productList() {
 		return this.productMapper.getProducts();
+	}
+
+	@Override
+	public List<ProductImageVO> productImageList() {
+		return this.productMapper.getProductImg();
+	}
+	
+	private boolean checkImageType(File file) {
+		try {
+			String contentType= Files.probeContentType(file.toPath());
+			return contentType.startsWith("image");
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }
