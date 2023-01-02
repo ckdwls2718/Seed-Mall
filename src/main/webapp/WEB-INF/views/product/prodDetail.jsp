@@ -68,6 +68,13 @@ const minusQty = function(){
 	$('#prodQty').val(qty);
 }
 
+const insertCart = function(){
+	
+	prodF.action = "${myctx}/user/cart";
+	
+	prodF.submit();
+}
+
 </script>
 
 <div class='container d-flex'>
@@ -89,7 +96,9 @@ const minusQty = function(){
 			</div>
 		</div>
 	</div>
+	
 	<div id="rightDetail" class="m-3" style="width: 40%">
+	<form id="prodF" action="${myctx}/user/order" method="post">
 		<p>${prod.upCg_name} > ${prod.downCg_name}</p>
 		<!--right information-->
 		<div id="prodName">
@@ -120,7 +129,7 @@ const minusQty = function(){
 				<tr>
 					<th>수량선택</th>
 					<td>
-						<input id="prodQty" type="number" value="1" min="1" max="99" onchange="changePrice(this.value)" autocomplete="off">
+						<input id="prodQty"  name="oqty" type="number" value="1" min="1" max="99" onchange="changePrice(this.value)" autocomplete="off">
 						<button id="plusBtn" type="button" onclick="plusQty()" >▲</button>
 						<button id="minusBtn" type="button" onclick="minusQty()" disabled>▼</button>
 					</td>
@@ -133,10 +142,14 @@ const minusQty = function(){
 		</table>
 		<div class="halfFullButton">
 			<div class="halfCell text-center">
-				<button class="btn btn-outline-success btn-lg" type="button">주문하기</button>
+				<input type="hidden" name="pidx" value="${prod.pidx}">
+				<button class="btn btn-outline-success btn-lg" type="submit">주문하기</button>
+				<button class="btn btn-outline-info btn-lg" type="button" onclick="insertCart()">장바구니</button>
 			</div>
 		</div>
+		</form>
 	</div>
+	
 	<!--right-->
 </div>
 

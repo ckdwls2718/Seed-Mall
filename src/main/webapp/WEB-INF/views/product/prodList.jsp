@@ -239,9 +239,11 @@ div#upCategory button {
 		</div>
 		
 		
-		<!-- 검색창 -->
+		
 		<div class="row mb-3">
+			<!-- 검색창 -->
 			<form name="searchF" id="searchF" class="d-flex" role="search">
+				<span>총 ${fn:length(prodArr)}개의 상품</span>
 				<input name="findKeyword" class="form-control me-2" type="search"
 					placeholder="검색어를 입력하세요" aria-label="Search"
 					style="width: 25%; margin-left: auto">
@@ -250,13 +252,13 @@ div#upCategory button {
 		</div>
 		
 		<div class="text-right">
-			<c:if test="${paging.upcg ne null and not empty prodArr}">
+			<c:if test="${not empty paging.upcg and not empty prodArr}">
 				${prodArr[0].upCg_name}
-					<c:if test="${paging.downcg ne null and not empty prodArr}">
+					<c:if test="${not empty paging.downcg and not empty prodArr}">
 						> ${prodArr[0].downCg_name}
 					</c:if>
 			</c:if>
-			<c:if test="${paging.findKeyword ne null}">
+			<c:if test="${not empty paging.findKeyword}">
 				검색어 : ${paging.findKeyword}
 			</c:if>
 		</div>
