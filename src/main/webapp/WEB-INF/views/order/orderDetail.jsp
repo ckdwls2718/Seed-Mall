@@ -1,40 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<script type="text/javascript" src="./js/orderCheck.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
 <%@ include file="/WEB-INF/views/top.jsp"%>
+
 <script>
-	function order_check() { //유효성체크 
-		if (!$('#oname').val()) {
-			alert('받는분을 입력하세요.');
-			$('#oname').focus();
-			return false;
+//배송메시지 200자 이내로 작성하도록 처리하는 스크립트
+$(document).ready(function() {
+	$('#ocomment').on('keyup', function() {
+		$('#ocomment_cnt').html("("+$(this).val().length+" / 200)");
+		
+		if($(this).val().length > 200) {
+			$(this).val($(this).val().substring(0, 200));
+			$('#ocomment_cnt').html("(200 / 200)");
 		}
-		if (!$('#ohp1').val()) {
-			alert('연락처를 입력하세요.');
-			$('#ohp1').focus();
-			return false;
-		}
-		if (!$('#ohp2').val()) {
-			alert('연락처를 입력하세요.');
-			$('#ohp2').focus();
-			return false;
-		}
-		if (!$('#ohp3').val()) {
-			alert('연락처를 입력하세요.');
-			$('#ohp3').focus();
-			return false;
-		}
-		if (!$('#oaddr1').val()) {
-			alert('주소를 입력하세요.');
-			$('#oaddr1').focus();
-			return false;
-		}
-		return true;
-	}
+	});
+});
 </script>
 <!-- 상품 상세페이지에서 주문페이지로 들어왔을 때 화면 -->
-<div class="container" style="height: 2000px; overflow: y:hidden;">
+<div class="container" style="height: 2300px; overflow: y:hidden;">
 	<h1 class="text-center mt-5 mb-5">배송지정보</h1>
 	<div class="checkbox mb-3" style="text-align: left;">
 		<label> <input type="checkbox" value="remember-me"> 기본
@@ -72,34 +57,38 @@
 			</tr>
 			<tr>
 				<td width="20%" class="m1">배송 요청사항</td>
-				<td width="80%" class="m2"><input type="text" name="omsg"
-					id="omsg"></td>
+				<td width="80%" class="m3"><textarea name="ocomment"
+						id="ocomment" rows="5" cols="60"></textarea>
+					<div id="ocomment_cnt">(0 / 200)</div> <br> <span class='ck'>*200자
+						이내</span></td>
 			</tr>
 		</table>
 
 		<div style="height: 400px; overflow: auto;">
-			<h1 class="text-center mt-1 mb-5">주문상품</h1>
+			<h1 class="text-center mt-5 mb-5">주문상품</h1>
 			<table class="table">
 				<thead>
 					<tr class="info text-left">
 						<th>상품정보</th>
 						<th>판매가</th>
 						<th>배송비</th>
+						<th>수량</th>
 						<th>총액</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td>
-							<h4>${prod.pname}</h4> <br> <%-- <img
+							<h4>김상품</h4> <br> <%-- <img
 							src="../resources/product_images/${prod.pimage1}"
 							class="img-thumbnail" style="width: 140px"> --%>
 						</td>
-						<td><fmt:formatNumber value="${prod.saleprice}"
+						<td><fmt:formatNumber value=""
 								pattern="###,###" /> 원<br> <span
-							class="badge badge-danger">${prod.point}</span>POINT</td>
+							class="badge badge-danger">40</span>POINT</td>
 						<td>4,000원</td>
-						<td><fmt:formatNumber value="${prod.totalPrice}"
+						<td>개</td>
+						<td><fmt:formatNumber value=""
 								pattern="###,###" /> 원</td>
 					</tr>
 				</tbody>
@@ -107,7 +96,7 @@
 		</div>
 
 		<div style="height: 300px; overflow: auto;">
-			<h1 class="text-center mt-1 mb-5">등급할인 정보</h1>
+			<h1 class="text-center mt-5 mb-5">등급할인 정보</h1>
 			<table class="table">
 				<tr class="info text-left">
 					<th>어쩌구님의 회원 등급 :</th>
@@ -122,7 +111,7 @@
 		</div>
 
 		<div style="height: 400px; overflow: auto;">
-			<h1 class="text-center mb-5">결제수단 선택</h1>
+			<h1 class="text-center mt-5 mb-5">결제수단 선택</h1>
 			<input type="radio" name="paymentMethod" value="creditCard" checked>신용카드<br>
 			<br> <input type="radio" name="paymentMethod"
 				value="bankTransfer">무통장입금<br> <br> <input

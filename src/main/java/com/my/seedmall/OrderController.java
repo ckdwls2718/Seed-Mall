@@ -1,33 +1,36 @@
 package com.my.seedmall;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.order.mapper.OrderMapper;
+import com.order.model.OrderVO;
+import com.order.service.OrderService;
 import com.product.model.ProductVO;
-import com.product.service.ProductService;
 
 @Controller
+@RequestMapping("/user")
 public class OrderController {
 
 	@Autowired
-	ProductService productService;
-
-	// 임시
-	@GetMapping("/order")
-	public String orderDetail() {
-		return "order/orderDetail";
-	}
+	OrderService orderService;
 	
+	@Autowired
+	OrderMapper orderMapper;
+
 	// 상품 상세페이지 단일주문
-	@GetMapping("/order/{pidx}")
-	public String order(Model m, @PathVariable("pidx") int pidx) {
-		// 주문하기 버튼을 누르면 해당 상품번호로 상품정보를 출력해준다.
-		ProductVO prod = productService.selectByIdx(pidx);
-		m.addAttribute("prod", prod);
+	@PostMapping("/order")
+	public String order(Model m, @RequestParam("pidx") int pidx) {
+		OrderVO order = orderService.getOrder(pidx);
+		m.addAttribute("order", order);
 
 		return "order/orderDetail";
 	}

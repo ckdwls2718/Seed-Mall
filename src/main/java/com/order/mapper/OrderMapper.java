@@ -1,5 +1,7 @@
 package com.order.mapper;
 
-public interface OrderMapper {
+import com.order.model.OrderVO;
 
+public interface OrderMapper {
+	OrderVO getOrder(Integer pidx);
 }
