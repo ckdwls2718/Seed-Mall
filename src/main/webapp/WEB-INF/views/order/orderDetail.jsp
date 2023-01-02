@@ -32,10 +32,9 @@
 		}
 		return true;
 	}
-	
 </script>
-<!-- 상품 클릭 후 주문하기 버튼을 통해 주문페이지를 바로 들어왔을 때 화면 -->
-<div class="container" style="height: 600px; overflow: auto;">
+<!-- 상품 상세페이지에서 주문페이지로 들어왔을 때 화면 -->
+<div class="container" style="height: 2000px; overflow: y:hidden;">
 	<h1 class="text-center mt-5 mb-5">배송지정보</h1>
 	<div class="checkbox mb-3" style="text-align: left;">
 		<label> <input type="checkbox" value="remember-me"> 기본
@@ -43,7 +42,7 @@
 		</label>
 	</div>
 
-	<form name="frm" id="frm" action="index" method="post"
+	<form name="frm" id="frm" action="payment" method="post"
 		enctype="multipart/form-data" onsubmit="return order_check()">
 		<table class="table">
 			<tr>
@@ -85,38 +84,25 @@
 					<tr class="info text-left">
 						<th>상품정보</th>
 						<th>판매가</th>
-						<th>수량</th>
-						<th>구매가</th>
+						<th>배송비</th>
+						<th>총액</th>
 					</tr>
 				</thead>
-				<%-- <tbody>
-			<c:forEach var="ovo" items="${orderArr}" varStatus="state">
-				<tr>
-					<td>
-					<label> 
-					<input type="checkbox" name="pnum${state.index}" id="pnum" value="${cvo.pnum_fk}">
-							${cvo.pnum_fk}</label>
-					</td>
-					<td>
-						<h4>${cvo.pname}</h4> <br> <a
-						href="../prodDetail?pnum=${cvo.pnum_fk}" target="_blank"> <img
-							src="../resources/product_images/${cvo.pimage1}"
-							class="img-thumbnail" style="width: 140px">
-					</a>
-					</td>
-					<td><input type="number" name="oqty" id="oqty${state.index}"
-						value="${cvo.oqty}" min="1" max="50" size="3">
-						<button type="button" class="btn btn-success"
-							onclick="cartEdit('${cvo.cartNum}','${state.index}')">
-							수정</button></td>
-					<td><fmt:formatNumber value="${cvo.saleprice}"
-							pattern="###,###" /> 원<br> <span class="badge badge-danger">${cvo.point}</span>POINT</td>
-					<td><fmt:formatNumber value="${cvo.totalPrice}"
-							pattern="###,###" /> 원<br> <span class="badge badge-danger">${cvo.totalPoint}</span>POINT</td>
-					<td><a href="#" onclick="cartDel('${cvo.cartNum}')">삭제</a></td>
-				</tr>
-			</c:forEach>
-		</tbody> --%>
+				<tbody>
+					<tr>
+						<td>
+							<h4>${prod.pname}</h4> <br> <%-- <img
+							src="../resources/product_images/${prod.pimage1}"
+							class="img-thumbnail" style="width: 140px"> --%>
+						</td>
+						<td><fmt:formatNumber value="${prod.saleprice}"
+								pattern="###,###" /> 원<br> <span
+							class="badge badge-danger">${prod.point}</span>POINT</td>
+						<td>4,000원</td>
+						<td><fmt:formatNumber value="${prod.totalPrice}"
+								pattern="###,###" /> 원</td>
+					</tr>
+				</tbody>
 			</table>
 		</div>
 
@@ -148,7 +134,8 @@
 			<table class="table">
 				<tr>
 					<td width="20%" class="m1">총 상품금액</td>
-					<td width="80%" class="m1">10원</td>
+					<td width="80%" class="m1"><fmt:formatNumber
+							value="${prod.totalPrice}" pattern="###,###" /> 원</td>
 				</tr>
 				<tr>
 					<td width="20%" class="m2">할인금액</td>
