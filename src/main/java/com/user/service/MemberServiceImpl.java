@@ -1,7 +1,7 @@
 package com.user.service;
 
 import java.util.List;
-
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -90,9 +90,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void logout(HttpSession session) throws Exception {
 		session.invalidate();
-		
-	}
 
-	
+	}
 
 }
