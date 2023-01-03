@@ -31,8 +31,10 @@ public class PagingVO {
 	private int nextBlock; // 이후 5개
 
 	// 검색 관련 프로퍼티
-	private String findType; // 검색 유형
 	private String findKeyword; // 검색 키워드
+	private String upcg; // 상위 카테고리
+	private String downcg; // 하위 카테고리
+	
 	
 	// 정렬 관련 프로퍼티
 	private int sort=1; // 정렬 유형
@@ -74,6 +76,7 @@ public class PagingVO {
 		
 		
 	}
+	/*
 	public String getPageNavi(String myctx, String loc, String userAgent) {
 		//myctx:컨텍스트명, loc:/multiweb/board/list, userAgent: 브라우저 종류를 파악하기 위한 문자열
 		//검색관련---------
@@ -127,4 +130,5 @@ public class PagingVO {
 		//System.out.println(str);
 		return str;
 	}
+	*/
 }
