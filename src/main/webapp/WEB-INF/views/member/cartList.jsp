@@ -3,14 +3,83 @@
 <%@ include file="/WEB-INF/views/top.jsp"%>
 
 <script>
+
+$(function(){
+	
+	$('input:checkbox').prop('checked',false);
+	
+	
+})
 const edit = function(cidx){
 	// ajax 요청으로 수정 요청 보내기
+	let pqty = $('#pqty'+cidx).val();
+	
+	//alert(cidx +'/'+pqty);
+	
+	let url = "cartEdit"
+	$.ajax({
+		url:url,
+		type:'post',
+		dataType:'json',
+		data:'cart_idx='+cidx+'&pqty='+pqty,
+		cache:false,
+		success:function(res){
+			//alert(res);
+			if(res.result>0){
+				location.reload();
+			} else {
+				alert('수정에 실패하였습니다');
+			}
+		},
+		error:function(err){
+			alert("err : "+err.status);
+		}
+	}) 
 }
 
 const remove = function(cidx){
 	// ajax 요청으로 삭제 요청 보내기
+	
+	let url = "cartDel"
+		$.ajax({
+			url:url,
+			type:'post',
+			dataType:'json',
+			data:'cart_idx='+cidx,
+			cache:false,
+			success:function(res){
+				//alert(res);
+				if(res.result>0){
+					location.reload();
+				} else {
+					alert('삭제에 실패하였습니다');
+				}
+			},
+			error:function(err){
+				alert("err : "+err.status);
+			}
+		}) 
 }
 
+const chageTotal = function(cidx){
+	
+	//체크박스 체크여부
+	let isCheck = $('#cidx'+cidx).is(':checked');
+	
+	//체크된 상품의 총 가격	
+	let total = Number($("#total"+cidx).text().replace(/[,원]/g, ""));
+	
+	//선택한 가격
+	let selectTotal = Number($("#selectPrice").text().replace(/[,원]/g, ""));
+	
+	if(isCheck){
+		selectTotal += total;
+	} else{
+		selectTotal -= total;
+	}
+	
+	$("#selectPrice").html(selectTotal.toLocaleString('ko-KR')+" 원");
+}
 </script>
 
 <div class="container" style="text-align: center">
@@ -28,7 +97,7 @@ const remove = function(cidx){
 						<th data-sort="string">가 격</th>
 						<th>수 량</th>
 						<th>총 가격</th>
-						<th>수정|삭제</th>
+						<th>삭제</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -42,7 +111,7 @@ const remove = function(cidx){
 					<c:if test="${cartArr ne null and not empty cartArr}">
 						<c:forEach var="cart" items="${cartArr}" varStatus="status">
 							<tr>
-								<td><input type="checkbox" name="cidx" value="${cart.cart_idx}"> ${cart.product.pidx}</td>
+								<td><input type="checkbox" id="cidx${cart.cart_idx}" name="cidx" value="${cart.cart_idx}" onclick="chageTotal('${cart.cart_idx}')"> ${cart.product.pidx}</td>
 								<td>${cart.product.upCg_name}>${cart.product.downCg_name}</td>
 								<td>${cart.product.pname}</td>
 								
@@ -59,17 +128,20 @@ const remove = function(cidx){
 											value="${cart.product.psaleprice}" pattern="###,###" /> 원
 								</b><br> <span class="badge bg-danger">${cart.product.percent}
 										%할인</span></td>
-								<td><input type="number" value="${cart.pqty}"></td>
-								<td><fmt:formatNumber value="${cart.ctotalprice}" pattern="###,###,### 원"/></td> 
-								<td><a href="javascript:edit('${cart.cart_idx}')">수정</a> | <a
-									href="#" onclick="remove('${cart.cart_idx}')">삭제</a></td>
+								<td width="10%"><input type="number" id="pqty${cart.cart_idx}" class="form-control mb-2" style="margin:auto" value="${cart.pqty}" style="width:40%"> 
+									<button class="btn btn-outline-success btn-sm" type="button" onclick="edit('${cart.cart_idx}')" style="width:50%">수정</button>
+									</td>
+								<td><span id="total${cart.cart_idx}"><fmt:formatNumber value="${cart.ctotalprice}" pattern="###,###,### 원"/></span></td>
+								<td><button class="btn btn-outline-danger" type="button" onclick="remove('${cart.cart_idx}')">삭제</button></td>
 							</tr>
 						</c:forEach>
 					</c:if>
 					<!-- ------------------------ -->
 				</tbody>
 			</table>
-			<div class="text-right" style="text-align: right" id="cartTotalPrice">장바구니 총 가격 : <fmt:formatNumber value="${cartTotalPrice}" pattern="###,###,### 원"/><br>
+			<div class="text-right" style="text-align: right" id="cartTotalPrice">
+				선택한 상품 가격 : <span id="selectPrice">0원</span><br>
+				장바구니 총 가격 : <fmt:formatNumber value="${cartTotalPrice}" pattern="###,###,### 원"/><br>
 				<button class="m-3 btn btn-outline-info btn-lg">주문하기</button>
 			</div>
 			

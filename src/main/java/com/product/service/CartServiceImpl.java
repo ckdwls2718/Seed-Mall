@@ -16,13 +16,17 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public int insertCart(CartVO cart) {
-		return cartMapper.insertCart(cart);
+		int n = cartMapper.existCart(cart);
+		if(n>0) {
+			return cartMapper.plusCart(cart);
+		} else {
+			return cartMapper.insertCart(cart);
+		}
 	}
 
 	@Override
 	public int updateCart(CartVO cart) {
-		// TODO Auto-generated method stub
-		return 0;
+		return cartMapper.updateCart(cart);
 	}
 
 	@Override
@@ -32,8 +36,7 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public int deleteCart(int cart_idx) {
-		// TODO Auto-generated method stub
-		return 0;
+		return cartMapper.deleteCart(cart_idx);
 	}
 
 }

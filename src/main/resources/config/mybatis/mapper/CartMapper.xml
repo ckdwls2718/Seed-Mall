@@ -11,4 +11,20 @@
 	<select id="selectMyCartList" parameterType="_int" resultType="Cart">
 		select * from cart where midx = #{value}
 	</select>
+	
+	<select id="existCart" parameterType="Cart" resultType="_int">
+		select count(*) from cart where midx=#{midx} and pidx=#{pidx}
+	</select>
+	
+	<update id="plusCart" parameterType="Cart">
+		update cart set pqty=pqty+#{pqty} where midx=#{midx} and pidx=#{pidx}
+	</update>
+	
+	<update id="updateCart" parameterType="Cart">
+		update cart set pqty=#{pqty} where cart_idx=#{cart_idx}
+	</update>
+	
+	<delete id="deleteCart" parameterType="_int">
+		delete from cart where cart_idx = ${value}
+	</delete>
 </mapper>
