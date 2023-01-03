@@ -22,7 +22,7 @@
 	</insert>
 	
 	
-	<select id="getProducts" resultType="Product" parameterType="Paging">
+	<select id="getProducts" resultType="Product" parameterType="ProdPaging">
 		<include refid="selectProd"/>
 		<include refid="findProdWhere"/>
 		<include refid="prodSort"/>
