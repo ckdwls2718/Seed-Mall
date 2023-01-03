@@ -1,6 +1,7 @@
 package com.user.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,7 +16,7 @@ public interface MemberService {
 
 	List<MemberVO> listUser(PagingVO pvo);
 
-	boolean EmailCheck(String email);
+	boolean emailCheck(String email);
 
 	int deleteMember(Integer midx);
 
@@ -28,4 +29,6 @@ public interface MemberService {
 	MemberVO loginCheck(String email, String pwd) throws NotUserException;
 	
 	void logout(HttpSession session) throws Exception;
+	
+
 }

@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="emailCheck" resultType="int"  parameterType="string">
-		select MIDX from member where EMAIL=#{value}
+		select MIDX,status from member where EMAIL=#{value}
 	</select>
 	
 	<select id="findUser" parameterType="Member" resultType="Member">

@@ -1,7 +1,7 @@
 package com.user.service;
 
 import java.util.List;
-
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -36,14 +36,7 @@ public class MemberServiceImpl implements MemberService {
 		return MemberMapper.listUser(pvo);
 	}
 
-	@Override
-	public boolean EmailCheck(String email) {
-		Integer n = MemberMapper.emailCheck(email);
-		if (n == null) {
-			return true;
-		}
-		return false;
-	}
+	
 
 	@Override
 	public int deleteMember(Integer midx) {
@@ -90,9 +83,18 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void logout(HttpSession session) throws Exception {
 		session.invalidate();
-		
+
 	}
 
-	
+	@Override
+	public boolean emailCheck(String email) {
+		Integer n= MemberMapper.emailCheck(email);
+		if(n==null) {
+			return true;
+		}
+		return false;
+	}
+
+
 
 }
