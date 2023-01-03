@@ -1,6 +1,7 @@
 package com.user.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -24,9 +25,17 @@ public interface MemberMapper {
 	int deleteUser(Integer midx);
 
 	int updateUser(MemberVO member);
-	
+
 	MemberVO loginCheck(String email, String pwd) throws NotUserException;
-	
+
 	void logout(HttpSession session) throws Exception;
+
+
+	List<MemberVO> findMember(PagingVO paging);
+
+	List<MemberVO> selectMemberAllPaging(PagingVO paging);
+
+	List<MemberVO> selectMemberAll(Map<String, Integer> map);
+
 
 }

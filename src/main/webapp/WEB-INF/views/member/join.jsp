@@ -13,8 +13,8 @@
 	
 	<form name="mf" id="mf" action="join" method="post">
 		<!-- hidden data----------------------------------------- -->
-		<!-- <input type="text" name="id_flag" id="id_flag" value="N"> -->
-		<!-- --------------------------------------------------- -->
+		<input type="hidden" name="id_flag" id="id_flag" value="N"> 
+		
 		<table class="table">
 			<tr>
 				<td width="20%" class="m1"><b>이름</b></td>
@@ -26,23 +26,23 @@
 			<tr>
 				<td width="20%" class="m1"><b>이메일</b></td>
 				<td width="80%" class="m2">
-				<input type="text" name="Email" id="Email"
-				 onkeyup=""   placeholder="Email" class="form-control" style="width:17%">
-				<!-- <button type="button"  class="btn btn-success" onclick="">이메일 중복 체크</button> -->
+				<input type="text" name="Email" id="email"
+				 onkeyup=""   placeholder="Email" class="form-control" style="width:23%">
+				<button type="button"  class="btn btn-success" id="emailCheck" onclick="ajax_email()">이메일 중복 체크</button>
 				<br><span class='ck' id="id_result">이메일양식 XXX@XXX.XXX</span>
 				</td>
 			</tr>
 			<tr>
 				<td width="20%" class="m1"><b>비밀번호</b></td>
 				<td width="80%" class="m2">
-				<input type="password" name="Pwd" id="Pwd" placeholder="비밀번호" class="form-control" style="width:17%">
+				<input type="password" name="Pwd" id="Pwd" placeholder="비밀번호" class="form-control" style="width:20%">
 				<br><span class='ck'>*비밀번호는 문자,숫자,!,. 포함해서 4~8자리 이내</span>
 				</td>
 			</tr>
 			<tr>
 				<td width="20%" class="m1"><b>비밀번호 확인</b></td>
 				<td width="80%" class="m2">
-				<input type="password" name="Pwd2" id="Pwd2" placeholder="비밀번호 확인" class="form-control" style="width:17%">
+				<input type="password" name="Pwd2" id="Pwd2" placeholder="비밀번호 확인" class="form-control" style="width:20%">
 				</td>
 			</tr>
 			<tr>
@@ -78,7 +78,9 @@
 </form>
 	
 </div>
-	
+
+
+
 	
 
 <%@ include file="/WEB-INF/views/foot.jsp"%>
