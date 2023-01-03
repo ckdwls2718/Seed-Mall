@@ -25,9 +25,9 @@ public interface MemberMapper {
 	int deleteUser(Integer midx);
 
 	int updateUser(MemberVO member);
-	
+
 	MemberVO loginCheck(String email, String pwd) throws NotUserException;
-	
+
 	void logout(HttpSession session) throws Exception;
 
 

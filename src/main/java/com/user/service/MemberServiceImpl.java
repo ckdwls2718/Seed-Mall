@@ -35,14 +35,7 @@ public class MemberServiceImpl implements MemberService {
 		return MemberMapper.listUser(pvo);
 	}
 
-	@Override
-	public boolean EmailCheck(String email) {
-		Integer n = MemberMapper.emailCheck(email);
-		if (n == null) {
-			return true;
-		}
-		return false;
-	}
+	
 
 	@Override
 	public int deleteMember(Integer midx) {
@@ -89,7 +82,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void logout(HttpSession session) throws Exception {
 		session.invalidate();
-		
+
 	}
 	// 게시목록 가져오기
 	@Override
@@ -106,4 +99,15 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberVO> findMember(PagingVO pvo){
 		return this.MemberMapper.findMember(pvo);
 	}
+
+	@Override
+	public boolean emailCheck(String email) {
+		Integer n= MemberMapper.emailCheck(email);
+		if(n==null) {
+			return true;
+		}
+		return false;
+	}
+
+
 }
