@@ -107,7 +107,7 @@ button {
 				<!-- ---hidden data------------------------------------------ -->
 				<input type="hidden" name="findType" value="${paging.findType}">
 				<input type="hidden" name="findKeyword" value="${paging.findKeyword}">
-				<%-- <input type="hidden" name="mpage" value="${paging.mpage}"> --%>
+				<input type="hidden" name="mpage" value="${paging.mpage}">
 				<!-- ------------------------------------------------------- -->
 			</form>
 		</div>
@@ -206,8 +206,8 @@ button {
 </form>
 <!-- 수정 폼  -->
 <form name="ef" id="ef" action="userEdit" method="post">
-	<input type="hidden" name="midx" id="midx2"> <input
-		type="hidden" name="status" id="status">
+	<input type="hidden" name="midx" id="midx2"> 
+	<input type="hidden" name="status" id="status">
 </form>
 
 <script>
