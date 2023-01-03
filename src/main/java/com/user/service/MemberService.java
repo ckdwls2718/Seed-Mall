@@ -16,7 +16,7 @@ public interface MemberService {
 
 	List<MemberVO> listUser(PagingVO pvo);
 
-	boolean EmailCheck(String email);
+	boolean emailCheck(String email);
 
 	int deleteMember(Integer midx);
 

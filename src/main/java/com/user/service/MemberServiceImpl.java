@@ -36,14 +36,7 @@ public class MemberServiceImpl implements MemberService {
 		return MemberMapper.listUser(pvo);
 	}
 
-	@Override
-	public boolean EmailCheck(String email) {
-		Integer n = MemberMapper.emailCheck(email);
-		if (n == null) {
-			return true;
-		}
-		return false;
-	}
+	
 
 	@Override
 	public int deleteMember(Integer midx) {
@@ -92,5 +85,16 @@ public class MemberServiceImpl implements MemberService {
 		session.invalidate();
 
 	}
+
+	@Override
+	public boolean emailCheck(String email) {
+		Integer n= MemberMapper.emailCheck(email);
+		if(n==null) {
+			return true;
+		}
+		return false;
+	}
+
+
 
 }

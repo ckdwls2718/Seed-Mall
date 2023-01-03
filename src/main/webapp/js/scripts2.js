@@ -2,35 +2,8 @@ function member_check(){
 	var Mpost = $("#Mpost").val();
     var Maddr1 = $("#Maddr1").val();
     var Maddr2 = $("#Maddr2").val();
-    
-function check(){
-	id = $("#email").val();
-	
-	$.ajax({
-	    url: 'email_check',
-	    type: 'POST',
-	    dataType: 'text', //서버로부터 내가 받는 데이터의 타입
-	    contentType : 'text/plain; charset=utf-8;',//내가 서버로 보내는 데이터의 타입
-	    data: email ,
-
-	    success: function(data){
-	         if(data == 0){
-	         console.log("이메일 없음");
-	         alert("사용하실 수 있는 이메일입니다.");
-	         }else{
-	         	console.log("이메일 있음");
-	         	alert("중복된 이메일이 존재합니다.");
-	         }
-	    },
-	    error: function (){        
-	                      
-	    }
-	  });
-
-
-}
-
-    
+ 
+   
 	 if(!isKor(mf.Mname)){
 		alert('이름은 한글이름만 가능합니다');
 		mf.Mname.select();
@@ -200,3 +173,43 @@ function execPostCode() {
             }
          }).open();
      }
+     
+   function ajax_email(uid){
+	if(!uid){
+		uid=$('#email').val();
+		
+		if(!uid){
+			alert('이메일을 입력하세요');
+			$('#email').focus();
+			return;
+		}
+		if(!isEmail(mf.email)){
+			alert('이메일양식에 맞춰 써주세요 XXX@XXX.XXX');
+			mf.email.select();
+			return;
+		}
+	}
+
+	$.ajax({
+		type:'GET',
+		url:'emailCheck?email='+uid,
+		dataType:'json',
+		cache:false,
+		success:function(res){
+			//alert(JSON.stringify(res));
+			if(res.result=='ok'){
+				//$('#id_result').html(uid+"는 사용 가능합니다").css('color','green')
+				alert(uid+"는 사용가능합니다");
+				$('#id_flag').val("Y");
+			}else{
+				//$('#id_result').html(uid+"는 이미 사용 중입니다").css('color','red')
+				alert(uid+"는 이미 사용 중입니다");
+				$('#id_flag').val("N");
+			}
+		},
+		error:function(err){
+			alert('err: '+err.status);
+		}
+	
+	})
+}//----------------------------------

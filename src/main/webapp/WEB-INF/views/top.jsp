@@ -94,7 +94,7 @@
                             </ul>
                         </li>
                         
-                        <c:if test="${status == 9}">   
+                        <c:if test="${loginUser.status == 9}">   
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">관리자 도구</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
