@@ -71,6 +71,7 @@ const minusQty = function(){
 const insertCart = function(){
 	
 	prodF.action = "${myctx}/user/cart";
+	prodF.pqty.value = $('#prodQty').val();
 	
 	prodF.submit();
 }
@@ -143,6 +144,7 @@ const insertCart = function(){
 		<div class="halfFullButton">
 			<div class="halfCell text-center">
 				<input type="hidden" name="pidx" value="${prod.pidx}">
+				<input type="hidden" name="pqty" >
 				<button class="btn btn-outline-success btn-lg" type="submit">주문하기</button>
 				<button class="btn btn-outline-info btn-lg" type="button" onclick="insertCart()">장바구니</button>
 			</div>

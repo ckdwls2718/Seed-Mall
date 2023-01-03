@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.product.model.ProductImageVO" alias="ProductI"/>
 		<typeAlias type="com.product.model.PagingVO" alias="Paging"/>
 		<typeAlias type="com.product.model.CategoryVO" alias="Category"/>
+		<typeAlias type="com.product.model.CartVO" alias="Cart"/>
 		<typeAlias type="com.order.model.OrderVO" alias="Order"/>
 	</typeAliases>
 	<!-- mapper 정의 ========================================= -->
@@ -22,5 +23,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="config/mybatis/mapper/ProductMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/CategoryMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/OrderMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/CartMapper.xml"/>
 	</mappers>
 </configuration>
