@@ -30,4 +30,12 @@ public interface MemberMapper {
 
 	void logout(HttpSession session) throws Exception;
 
+
+	List<MemberVO> findMember(PagingVO paging);
+
+	List<MemberVO> selectMemberAllPaging(PagingVO paging);
+
+	List<MemberVO> selectMemberAll(Map<String, Integer> map);
+
+
 }

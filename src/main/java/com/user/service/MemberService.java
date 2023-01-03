@@ -10,6 +10,7 @@ import com.user.model.NotUserException;
 import com.user.model.PagingVO;
 
 public interface MemberService {
+	
 	int createMember(MemberVO member);
 
 	int getMemberCount(PagingVO pvo);
@@ -29,6 +30,14 @@ public interface MemberService {
 	MemberVO loginCheck(String email, String pwd) throws NotUserException;
 	
 	void logout(HttpSession session) throws Exception;
+
+	// 게시목록 가져오기
+	List<MemberVO> selectMemberAll(Map<String,Integer> map);
+	List<MemberVO> selectMemberAllPaging(PagingVO pvo);
+	   
+	// 검색목록 가져오기
+	List<MemberVO> findMember(PagingVO pvo);
+
 	
 
 }
