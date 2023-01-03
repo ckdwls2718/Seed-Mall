@@ -2,60 +2,89 @@ package com.my.seedmall;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.order.mapper.OrderMapper;
+import com.order.model.OrderProductVO;
 import com.order.model.OrderVO;
 import com.order.service.OrderService;
 import com.product.model.ProductVO;
+import com.product.service.ProductService;
+import com.user.model.MemberVO;
+
+import lombok.extern.log4j.Log4j;
 
 @Controller
 @RequestMapping("/user")
+@Log4j
 public class OrderController {
 
 	@Autowired
-	OrderService orderService;
+	private OrderService orderService;
+
+	@Autowired
+	private OrderMapper orderMapper;
 	
 	@Autowired
-	OrderMapper orderMapper;
+	private ProductService productService;
 
-	// 상품 상세페이지 단일주문
+	// 결제 전, 결제정보 출력
 	@PostMapping("/order")
-	public String order(Model m, @RequestParam("pidx") int pidx) {
-		OrderVO order = orderService.getOrder(pidx);
-		m.addAttribute("order", order);
+	public String order(Model m, @RequestParam("pidx") int pidx, @ModelAttribute OrderProductVO opvo) {
+		// 상품번호를 매개변수로 받아서 상품정보를 가져온다.
+		ProductVO pvo = productService.selectByIdx(pidx);
+		
+		// 주문상품 총액을 가져온다.(등급할인 전)
+		int total = (pvo.getPsaleprice() * opvo.getOqty()) + 4000;
+		
+		// 총 주문금액(등급할인 후)
+		int totalPayment = orderService.totalPayment();
+
+		m.addAttribute("pvo", pvo);
+		m.addAttribute("oqty", opvo.getOqty());
+		m.addAttribute("total", total);
+		m.addAttribute("totalPayment", totalPayment);
 
 		return "order/orderDetail";
 	}
 
-	
-	// 상품 상세페이지 단일주문 결제완료
-	@PostMapping("/payment")
-	public String payment() {
-		// 결제하기 버튼을 누르면 완료 페이지를 띄운다.
-		
-		/* 예외처리
-		 * log.info("join === Member: " + member); if (member.getEmail() == null ||
-		 * member.getPwd() == null || member.getMname() == null ||
-		 * member.getEmail().trim().isEmpty() || member.getPwd().trim().isEmpty() ||
-		 * member.getMname().trim().isEmpty()) {
-		 * 
-		 * return "redirect:join"; }
-		 * 
-		 * int n = memberService.createMember(member); String str = (n > 0) ? "회원가입 완료"
-		 * : "가입 실패"; String loc = (n > 0) ? "/seedmall" : "javascript:history.back()";
-		 * 
-		 * m.addAttribute("message", str); m.addAttribute("loc", loc);
-		 */
-		
-		return "order/payment";
+	// 결제완료 페이지 - 주문 명세서 생성
+	@PostMapping("/orderAdd")
+	public String orderAdd(Model m, HttpSession session) {
+		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+		int midx_fk = loginUser.getMidx();
+
+		OrderVO ovo = new OrderVO();
+
+		// 세션에서 로그인한 사람의 회원번호를 꺼내서 OrderVO에 셋팅
+		ovo.setMidx(midx_fk);
+
+		// 주문 명세서 생성
+		int n = orderService.createOrderList(ovo);
+
+		// 주문 명세서 가져오기
+		List<OrderVO> orderArr = orderService.getOrderList(ovo.getMidx());
+
+		m.addAttribute("orderArr", orderArr);
+
+		return "redirect:orderEnd";
+	}
+
+	// 명세서 출력 페이지
+	@GetMapping("/orderEnd")
+	public String orderList() {
+		// 예외처리
+
+		return "order/orderEnd";
 	}
 
 }
