@@ -1,7 +1,7 @@
 package com.user.service;
 
 import java.util.List;
-
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -27,8 +27,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int getMemberCount(PagingVO pvo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return MemberMapper.getMemberCount(pvo);
 	}
 
 	@Override
@@ -92,7 +91,19 @@ public class MemberServiceImpl implements MemberService {
 		session.invalidate();
 		
 	}
-
-	
-
+	// 게시목록 가져오기
+	@Override
+	public List<MemberVO> selectMemberAll(Map<String,Integer> map){
+		return this.MemberMapper.selectMemberAll(map);
+	}
+	@Override
+	public List<MemberVO> selectMemberAllPaging(PagingVO pvo){
+		return this.MemberMapper.selectMemberAllPaging(pvo);
+	}
+	   
+	// 검색목록 가져오기
+	@Override
+	public List<MemberVO> findMember(PagingVO pvo){
+		return this.MemberMapper.findMember(pvo);
+	}
 }

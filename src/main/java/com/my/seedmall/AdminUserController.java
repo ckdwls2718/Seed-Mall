@@ -1,7 +1,10 @@
 package com.my.seedmall;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,14 +30,48 @@ public class AdminUserController {
 	private MemberService MemberService;
 	
 	@GetMapping("/memberList")
-	public String userlist(Model m, @ModelAttribute("page") PagingVO page, HttpServletRequest req,
-			@RequestHeader('user-Agent')String userAgent) {
-		List<MemberVO> userArr=this.MemberService.listUser(null);
-		log.info(userArr);
+	public String userlistpaging(Model m, @ModelAttribute("page") PagingVO page,HttpServletRequest req,
+			@RequestHeader("user-Agent")String userAgent) {
+		String myctx=req.getContextPath();
+		HttpSession ses=req.getSession();
+		
+		log.info("1"+page);
+		
+		int totalCount=this.MemberService.getMemberCount(page);
+		page.setTotalCount(totalCount);
+		//page.setPageSize(5);
+		page.setPagingBlock(5);
+
+		page.init(ses);
+		
+		log.info("2"+page);
+		
+		List<MemberVO> userArr=this.MemberService.selectMemberAllPaging(page);
+
+		String loc="admin/memberList";
+		String pageNavi=page.getPageNavi(myctx, loc, userAgent);
+				
+		//log.info(userArr);
+		
+		m.addAttribute("pageNavi",pageNavi);
+		m.addAttribute("paging",page);
 		m.addAttribute("userArr", userArr);
 		
 		return "/member/list";
 	}
+	
+	@GetMapping("/memberList_old")
+	public String userlist(Model m) {
+		
+		List<MemberVO> userArr=this.MemberService.listUser(null);
+		
+		log.info(userArr);
+		
+		m.addAttribute("userArr", userArr);
+		
+		return "/member/list";
+	}
+	
 	
 	@PostMapping("/userDel")
 	public String deleteMember(@RequestParam(defaultValue = "0") int midx) {
@@ -45,10 +82,8 @@ public class AdminUserController {
 		
 		return "redirect:memberList";
 	}
+	
 	MemberVO mvo=new MemberVO();
-	
-//	작업중-----------------
-	
 	@PostMapping("/userEdit")
 	public String updateUser(@ModelAttribute("mvo")MemberVO mvo) {
 		log.info("mvo=="+mvo);
@@ -58,6 +93,9 @@ public class AdminUserController {
 		
 		return "redirect:memberList";
 	}//----------
-//-----------------------
+
+	
+	
+	
 }//
 

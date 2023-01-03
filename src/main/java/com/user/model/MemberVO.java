@@ -1,7 +1,6 @@
 package com.user.model;
 
 import lombok.AllArgsConstructor;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberVO {
+	
+	
 	private int midx;
 	private String email;
 	private String pwd;
