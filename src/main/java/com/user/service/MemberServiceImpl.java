@@ -1,7 +1,7 @@
 package com.user.service;
 
 import java.util.List;
-
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -27,8 +27,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int getMemberCount(PagingVO pvo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return MemberMapper.getMemberCount(pvo);
 	}
 
 	@Override
@@ -36,14 +35,7 @@ public class MemberServiceImpl implements MemberService {
 		return MemberMapper.listUser(pvo);
 	}
 
-	@Override
-	public boolean EmailCheck(String email) {
-		Integer n = MemberMapper.emailCheck(email);
-		if (n == null) {
-			return true;
-		}
-		return false;
-	}
+	
 
 	@Override
 	public int deleteMember(Integer midx) {
@@ -90,9 +82,32 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void logout(HttpSession session) throws Exception {
 		session.invalidate();
-		
+
+	}
+	// 게시목록 가져오기
+	@Override
+	public List<MemberVO> selectMemberAll(Map<String,Integer> map){
+		return this.MemberMapper.selectMemberAll(map);
+	}
+	@Override
+	public List<MemberVO> selectMemberAllPaging(PagingVO pvo){
+		return this.MemberMapper.selectMemberAllPaging(pvo);
+	}
+	   
+	// 검색목록 가져오기
+	@Override
+	public List<MemberVO> findMember(PagingVO pvo){
+		return this.MemberMapper.findMember(pvo);
 	}
 
-	
+	@Override
+	public boolean emailCheck(String email) {
+		Integer n= MemberMapper.emailCheck(email);
+		if(n==null) {
+			return true;
+		}
+		return false;
+	}
+
 
 }

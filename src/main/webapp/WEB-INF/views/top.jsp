@@ -35,29 +35,23 @@
               <c:if test="${loginUser != null}"> 
               <div class="flex-shrink-0 dropdown">
                
-                <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
+                <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                   <img src="${myctx}/assets/몬스테라.jpg" alt="mdo" width="32" height="32" class="rounded-circle" style="margin-top:3px">
                 </a>
                 
                 <ul class="dropdown-menu text-small shadow" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; margin-top:5px;  transform: translate3d(0.5px, 34px, 0px);">
-                  
                   <li><span class="dropdown-item">등급</span></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="#">마이페이지</a></li>
                   <li><a class="dropdown-item" href="#">설정</a></li>
                   <li><hr class="dropdown-divider"></li>                  
                   <li><a class="dropdown-item" href="${myctx}/logout">로그아웃</a></li> 
-                  
-                            
                 </ul>
               </div>
-              <form class="d-flex" style="margin-left:1em">
-                <button class="btn btn-outline-dark" type="submit">
+                <a href="${myctx}/user/cart" class="btn btn-outline-dark" style="margin-left:1em">
                     <img src="${myctx}/assets/cart-fill.svg">
                     장바구니
-                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                </button>
-            </form>
+                </a>
             </c:if>
             </div>
           </nav>
@@ -95,6 +89,7 @@
                             </ul>
                         </li>
                         
+                        <c:if test="${loginUser.status == 9}">   
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">관리자 도구</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -105,6 +100,7 @@
                                 <li><a class="dropdown-item" href="${myctx}/admin/memberList">회원 관리</a></li>
                             </ul>
                         </li>
+                        </c:if> 
                     </ul>
                     
                 </div>

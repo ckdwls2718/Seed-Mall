@@ -2,7 +2,8 @@ function member_check(){
 	var Mpost = $("#Mpost").val();
     var Maddr1 = $("#Maddr1").val();
     var Maddr2 = $("#Maddr2").val();
-    
+ 
+   
 	 if(!isKor(mf.Mname)){
 		alert('이름은 한글이름만 가능합니다');
 		mf.Mname.select();
@@ -172,3 +173,43 @@ function execPostCode() {
             }
          }).open();
      }
+     
+   function ajax_email(uid){
+	if(!uid){
+		uid=$('#email').val();
+		
+		if(!uid){
+			alert('이메일을 입력하세요');
+			$('#email').focus();
+			return;
+		}
+		if(!isEmail(mf.email)){
+			alert('이메일양식에 맞춰 써주세요 XXX@XXX.XXX');
+			mf.email.select();
+			return;
+		}
+	}
+
+	$.ajax({
+		type:'GET',
+		url:'emailCheck?email='+uid,
+		dataType:'json',
+		cache:false,
+		success:function(res){
+			//alert(JSON.stringify(res));
+			if(res.result=='ok'){
+				//$('#id_result').html(uid+"는 사용 가능합니다").css('color','green')
+				alert(uid+"는 사용가능합니다");
+				$('#id_flag').val("Y");
+			}else{
+				//$('#id_result').html(uid+"는 이미 사용 중입니다").css('color','red')
+				alert(uid+"는 이미 사용 중입니다");
+				$('#id_flag').val("N");
+			}
+		},
+		error:function(err){
+			alert('err: '+err.status);
+		}
+	
+	})
+}//----------------------------------
