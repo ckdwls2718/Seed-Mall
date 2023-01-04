@@ -8,7 +8,7 @@ import com.product.model.PagingVO;
 import com.product.model.ProductVO;
 
 public interface OrderService {
-	// 주문 명세서 생성하기
+	// 주문 명세서 생성하기(+수령자)
 	int createOrderList(OrderVO ovo);
 	
 	// 주문VO 생성하기 - 상품 정보 생성하기
@@ -20,9 +20,6 @@ public interface OrderService {
 	// 상품정보 가져오기
 	List<OrderProductVO> getOrderProductList(int pidx);
 
-	// 수령자 생성하기
-	int createOrderMember(OrderVO ovo);
-	
 	int getOrderCount(PagingVO pvo);
 	
 	// 주문정보 수정

@@ -3,8 +3,39 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.order.mapper.OrderMapper">
 
+	<!-- 주문명세서 : 주문번호(pk)가 생성된다 -->
 	<insert id="createOrderList">
+		insert into order_desc(desc_oidx, midx, pidx, desc_oTotalPrice, delivaryState,
+		payment, gradePoint, gradeDiscount, ocomment, desc_odate)
+		values(order_desc_seq.nextval, #{midx}, #{pidx}, #{desc_oTotalPrice}, #{delivaryState},
+		#{payment}, #{gradePoint}, #{gradeDiscount}, #{ocomment:VARCHAR}, sysdate)
+		
+		<selectKey keyProperty="desc_oidx" resultType="int" order="AFTER">
+			select order_desc_seq.currval from dual
+		</selectKey>
+	</insert>
 	
+	<!-- 수령자 -->
+	<insert id="createOrderMember">
+		insert into ordermember(omidx, desc_oidx, omname, omhp1, omhp2, omhp3,
+		ompost, omaddr1, omaddr2, omdate)
+		values(ordermember_seq.nextval, #{desc_oidx}, #{omname}, #{omhp1}, #{omhp2}, #{omhp3},
+		#{ompost}, #{omaddr1}, #{omaddr2}, #{omdate})
+		
+		<selectKey keyProperty="omidx" resultType="int" order="AFTER">
+			select ordermember_seq.currval from dual
+		</selectKey>
+	</insert>
+	
+	<!-- 주문상품정보 -->
+	<insert id="createOrderProductList">
+		insert into orders(oidx, desc_oidx, pidx, oqty, osalePrice, opoint, odate)
+		values(orders_seq.nextval, #{desc_oidx}, #{pidx}, #{oqty}, #{osalePrice}
+		, #{opoint}, #{odate})
+		
+		<selectKey keyProperty="oidx" resultType="int" order="AFTER">
+			select orders_seq.currval from dual
+		</selectKey>
 	</insert>
 		
 </mapper>

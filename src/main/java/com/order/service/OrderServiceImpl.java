@@ -41,11 +41,6 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int createOrderMember(OrderVO ovo) {
-		return 0;
-	}
-
-	@Override
 	public int getOrderCount(PagingVO pvo) {
 		return 0;
 	}

@@ -12,7 +12,7 @@ public interface OrderMapper {
 	int createOrderList(OrderVO ovo);
 
 	// 주문VO 생성하기 - 상품 정보 생성하기
-	int createOrderProductList(int pidx);
+	int createOrderProductList(int midx);
 
 	// 주문 명세서 가져오기
 	List<OrderVO> getOrderList(int midx);
