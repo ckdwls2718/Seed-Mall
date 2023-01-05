@@ -2,7 +2,10 @@ package com.user.mapper;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.user.model.MemberVO;
+import com.user.model.NotUserException;
 import com.user.model.PagingVO;
 
 public interface MemberMapper {
@@ -21,5 +24,9 @@ public interface MemberMapper {
 	int deleteUser(Integer midx);
 
 	int updateUser(MemberVO member);
+	
+	MemberVO loginCheck(String email, String pwd) throws NotUserException;
+	
+	void logout(HttpSession session) throws Exception;
 
 }

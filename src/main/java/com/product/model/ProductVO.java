@@ -1,5 +1,8 @@
 package com.product.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.Data;
 
 
@@ -22,12 +25,17 @@ public class ProductVO {
 	private int ppoint;
 	
 	private String pspec;
+	private String sun;
+	private String temp;
+	private String soil;
 	private String pcontent;
 	
 	private java.sql.Date pdate;
 	private int preadnum;
 	private int plikenum;
 	
+	//상품 이미지 리스트
+	List<ProductImageVO> pimageList = new ArrayList<>();
 	
 	private int totalPrice; /*총판매가 = 상품판매가 x수량*/
 	private int totalPoint; /*총포인트 = 포인트 x수량*/
@@ -41,6 +49,7 @@ public class ProductVO {
 		this.totalPoint = this.ppoint*this.pqty;
 		//////////////////////////////////////////////
 	}//------------------------
+	
 	/**할인율을 반환하는 메서드*/
 	public int getPercent() {
 		//   (정가-판매가)*100/정가

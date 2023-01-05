@@ -8,7 +8,7 @@ public class ProductImageVO {
 	private int image_pidx;
 	private int pidx;
 	
-	private String pThumbnail;
+	private String pthumbnail;
 	private String pimage;
 	private String pOriginFilename;
 	

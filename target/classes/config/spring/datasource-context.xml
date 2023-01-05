@@ -37,7 +37,7 @@
 	<!-- MySQL -->
 	<!-- <bean id="dataSource-mysql" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="${Global.DriverClassName}"/>
-		<property name="url" value="${Global.Url}"/>
+		<property name="url" value="${Global.Url}?allowMultiQueries=true/>
 		<property name="username" value="${Global.Username}"/>
 		<property name="password" value="${Global.Password}"/>
 	</bean> -->
