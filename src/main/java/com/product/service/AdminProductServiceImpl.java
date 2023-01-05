@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.product.mapper.CategoryMapper;
 import com.product.mapper.ProductMapper;
 import com.product.model.CategoryVO;
+import com.product.model.PagingVO;
 import com.product.model.ProductForm;
 import com.product.model.ProductImageVO;
 import com.product.model.ProductVO;
@@ -147,8 +148,8 @@ public class AdminProductServiceImpl implements AdminProductService {
 	}
 
 	@Override
-	public List<ProductVO> productList() {
-		List<ProductVO> prodArr = this.productMapper.getProducts();
+	public List<ProductVO> productList(PagingVO page) {
+		List<ProductVO> prodArr = this.productMapper.getProducts(page);
 		for(ProductVO prod : prodArr) {
 			List<ProductImageVO> prodImageArr = productMapper.getProdImages(prod.getPidx());
 			prod.setPimageList(prodImageArr);
@@ -166,6 +167,7 @@ public class AdminProductServiceImpl implements AdminProductService {
 			e.printStackTrace();
 		}
 		return false;
+
 	}
 	
 	@Override

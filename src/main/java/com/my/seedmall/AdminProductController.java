@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.product.model.CategoryVO;
+import com.product.model.PagingVO;
 import com.product.model.ProductForm;
 import com.product.model.ProductVO;
 import com.product.service.AdminProductService;
@@ -58,9 +59,9 @@ public class AdminProductController {
 	}// ------------------------------------------
 
 	@GetMapping("/prodList")
-	public String productList(Model m) {
+	public String productList(Model m, PagingVO page) {
 		// 상품을 가져온다
-		List<ProductVO> prodArr = adminProductService.productList();
+		List<ProductVO> prodArr = adminProductService.productList(page);
 		m.addAttribute("prodArr", prodArr);
 
 		return "admin/prodList";

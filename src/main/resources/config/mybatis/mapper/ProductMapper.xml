@@ -25,8 +25,11 @@
 		#{pidx},#{pthumbnail:VARCHAR},#{pimage},#{pOriginFilename})
 	</insert>
 
-	<select id="getProducts" resultType="Product">
-		<include refid="selectProd" />
+
+	<select id="getProducts" resultType="Product" parameterType="ProdPaging">
+		<include refid="selectProd"/>
+		<include refid="findProdWhere"/>
+		<include refid="prodSort"/>
 	</select>
 
 	<select id="getProdImages" resultType="ProductI"
@@ -84,6 +87,39 @@
 		from product p join downcategory c
 		on
 		p.downCg_code = c.downCg_code and p.upCg_code =c.upCg_code
+	</sql>
+	
+	<sql id="findProdWhere">
+		<if test="upcg!=null and upcg!=''">
+			<where>
+				p.upcg_code = #{upcg}
+			</where>
+		</if>
+		<if test="downcg!=null and downcg!=''">
+			and p.downcg_code = #{downcg}
+		</if>
+		<if test="findKeyword!=null and findKeyword!=''">
+			<where>
+				p.pname like '%'||#{findKeyword}||'%'
+			</where>
+		</if>
+	</sql>
+	
+	<sql id="prodSort">
+		<if test="sort!=null and sort!=''">
+			<if test="sort==1">
+				order by pidx desc
+			</if>
+			<if test="sort==2">
+				
+			</if>
+			<if test="sort==3">
+				order by price desc, pidx desc
+			</if>
+			<if test="sort==4">
+				order by price asc, pidx desc
+			</if>
+		</if>
 	</sql>
 </mapper>
 

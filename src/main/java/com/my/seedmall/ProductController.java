@@ -35,10 +35,10 @@ public class ProductController {
 		log.info("page = "+page);
 		List<CategoryVO> categoryArr = categoryMapper.getAllDowncategory();
 		
-		log.info("category = "+categoryArr);
-		log.info("categorySize = "+categoryArr.size());
+		//log.info("category = "+categoryArr);
+		//log.info("categorySize = "+categoryArr.size());
 		
-		List<ProductVO> prodArr = productService.getProdList();
+		List<ProductVO> prodArr = productService.getProdList(page);
 		m.addAttribute("prodArr", prodArr);
 		m.addAttribute("paging", page);
 		m.addAttribute("downcategory",categoryArr);

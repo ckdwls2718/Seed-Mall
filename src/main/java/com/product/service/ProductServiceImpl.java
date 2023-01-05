@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.product.mapper.ProductMapper;
 import com.product.model.CategoryVO;
+import com.product.model.PagingVO;
 import com.product.model.ProductImageVO;
 import com.product.model.ProductVO;
 
@@ -21,8 +22,8 @@ public class ProductServiceImpl implements ProductService {
 	
 
 	@Override
-	public List<ProductVO> getProdList() {
-		List<ProductVO> prodArr = productMapper.getProducts();
+	public List<ProductVO> getProdList(PagingVO page) {
+		List<ProductVO> prodArr = productMapper.getProducts(page);
 		for(ProductVO prod : prodArr) {
 			List<ProductImageVO> prodImageArr = productMapper.getProdImages(prod.getPidx());
 			prod.setPimageList(prodImageArr);

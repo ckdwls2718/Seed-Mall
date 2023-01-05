@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.product.model.CategoryVO;
+import com.product.model.PagingVO;
 import com.product.model.ProductForm;
 import com.product.model.ProductImageVO;
 import com.product.model.ProductVO;
@@ -27,7 +28,7 @@ public interface AdminProductService {
 
 	/** [관리자 모드]- 상품 정보 등록하기 */
 	public int productInsert(ProductForm prod, HttpServletRequest req);
-	public List<ProductVO> productList();
+	public List<ProductVO> productList(PagingVO page);
 	
 	/** 상품 수정 삭제*/
 	public int updateProduct(ProductForm prod, HttpServletRequest req);
