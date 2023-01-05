@@ -19,29 +19,29 @@
 
 	// 유효성 체크
 	function order_check() {
-		if (!$('#oname').val()) {
+		if (!$('#omname').val()) {
 			alert('받는분을 입력하세요.');
 			$('#oname').focus();
 			return false;
 		}
-		if (!$('#ohp1').val()) {
+		if (!$('#omhp1').val()) {
 			alert('연락처를 입력하세요.');
 			$('#ohp1').focus();
 			return false;
 		}
-		if (!$('#ohp2').val()) {
+		if (!$('#omhp2').val()) {
 			alert('연락처를 입력하세요.');
 			$('#ohp2').focus();
 			return false;
 		}
-		if (!$('#ohp3').val()) {
+		if (!$('#omhp3').val()) {
 			alert('연락처를 입력하세요.');
 			$('#ohp3').focus();
 			return false;
 		}
-		if (!$('#oaddr1').val()) {
+		if (!$('#omaddr1').val()) {
 			alert('주소를 입력하세요.');
-			$('#oaddr1').focus();
+			$('#omaddr1').focus();
 			return false;
 		}
 		return true;
@@ -56,8 +56,10 @@
 		</label>
 	</div>
 
-	<form name="orderF" id="orderF" action="orderAdd" method="post"
-		enctype="multipart/form-data" onsubmit="return order_check()">
+	<form name="orderF" id="orderF" action="orderAdd" method="post" onsubmit="return order_check()">
+		<input type="hidden" name="pidx" value="${opvo.pidx}">
+		<input type="hidden" name="osalePrice" value="${opvo.osalePrice}">
+		<input type="hidden" name="desc_oTotalPrice" value="${total}">
 		<table class="table">
 			<tr>
 				<td width="20%" class="m1">받는분</td>
@@ -106,6 +108,7 @@
 					</tr>
 				</thead>
 				<tbody>
+				<c:forEach var="pvo" items="${orderArr}">
 					<tr>
 						<td>
 							<h5>${pvo.pname}</h5>
@@ -118,6 +121,7 @@
 						<td><fmt:formatNumber value="${total}" pattern="###,###" />
 							원</td>
 					</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
@@ -139,9 +143,9 @@
 
 		<div style="height: 400px; overflow: auto;">
 			<h1 class="text-center mt-5 mb-5">결제수단 선택</h1>
-			<input type="radio" name="paymentMethod" value="1" checked>신용카드<br>
-			<br> <input type="radio" name="paymentMethod" value="2">무통장입금<br>
-			<br> <input type="radio" name="paymentMethod" value="3">휴대폰결제
+			<input type="radio" name="payment" value="1" checked>신용카드<br>
+			<br> <input type="radio" name="payment" value="2">무통장입금<br>
+			<br> <input type="radio" name="payment" value="3">휴대폰결제
 		</div>
 
 		<div style="height: 400px; overflow: auto;">

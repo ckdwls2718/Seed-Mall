@@ -21,23 +21,22 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public int createOrderList(OrderVO ovo) {
-		return 0;
+		return orderMapper.createOrderList(ovo);
 	}
 
 	@Override
-	public int createOrderProductList(int pidx) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int createOrderProductList(OrderProductVO opvo) {
+		return orderMapper.createOrderProductList(opvo);
 	}
 
 	@Override
 	public List<OrderVO> getOrderList(int midx) {
-		return null;
+		return orderMapper.getOrderList(midx);
 	}
 
 	@Override
-	public List<OrderProductVO> getOrderProductList(int pidx) {
-		return null;
+	public List<OrderProductVO> getOrderProductList(int desc_oidx) {
+		return orderMapper.getOrderProductList(desc_oidx);
 	}
 
 	@Override
@@ -58,6 +57,21 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public int totalPayment() {
 		return 0;
+	}
+
+	@Override
+	public OrderProductVO getOrderProduct(int pidx) {
+		return orderMapper.getOrderProduct(pidx);
+	}
+
+	@Override
+	public OrderVO getOrderDesc(int desc_oidx) {
+		return orderMapper.getOrderDesc(desc_oidx);
+	}
+
+	@Override
+	public OrderVO getOrderMember(int desc_oidx) {
+		return orderMapper.getOrderMember(desc_oidx);
 	}
 
 }

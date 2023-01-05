@@ -1,10 +1,15 @@
 package com.order.model;
 
+import java.util.List;
+
 import lombok.Data;
 
 // 주문개요VO : 주문했을 때 담기는 정보(배송지 정보 등)
 @Data
 public class OrderVO {
+	// 여러 건 주문
+	// private List<OrderProductVO> products;
+	
 	// 주문명세서(order_desc)
 	private int desc_oidx; // 주문개요번호
 	private int midx; // 회원번호
@@ -12,11 +17,12 @@ public class OrderVO {
 	private int desc_oTotalPrice; // 전체가격
 	private String delivaryState; // 배송상태
 	private int payment; // 지불형태
+	private String payStr; // 지불방식
 	private int gradePoint; // 등급포인트
 	private int gradeDiscount; // 등급할인
 	private String ocomment; // 배송 요청사항
 	private java.sql.Date desc_odate; // 주문날짜
-
+	
 	// 수령자(ordermember)
 	private int omidx; // 수령자번호
 	private int pidx; // 상품번호
