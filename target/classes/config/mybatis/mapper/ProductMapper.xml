@@ -3,57 +3,90 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.product.mapper.ProductMapper">
 
-	<insert id="productInsert" parameterType="ProductF" useGeneratedKeys="true" keyProperty="pidx">
-		
+	<insert id="productInsert" parameterType="ProductF"
+		useGeneratedKeys="true" keyProperty="pidx">
+
 		insert into product(pidx,upCg_code,downCg_code,pname,price,
-		psaleprice,pqty,ppoint,pspec,pcontent,pdate,preadnum,plikenum)
+		psaleprice,pqty,ppoint,pspec,sun,temp,soil,pcontent,pdate,preadnum,plikenum)
 		values(product_seq.nextval,#{upCg_code},#{downCg_code},#{pname},
-		#{price},#{psaleprice},#{pqty},#{ppoint},#{pspec},
+		#{price},#{psaleprice},#{pqty},#{ppoint},#{pspec},#{sun:VARCHAR},#{temp:VARCHAR},#{soil:VARCHAR},
 		#{pcontent:VARCHAR},sysdate,#{preadnum},#{plikenum})
-		
+
 		<selectKey keyProperty="pidx" resultType="int" order="AFTER">
-			select product_seq.currval from dual
+			select
+			product_seq.currval from dual
 		</selectKey>
 	</insert>
-	
+
 	<insert id="insertPimage" parameterType="ProductI">
-		insert into product_image(image_pidx, pidx, pThumbnail, pimage, pOriginFilename)
-		values(product_image_seq.nextval, #{pidx},#{pThumbnail:VARCHAR},#{pimage},#{pOriginFilename})
+		insert into
+		product_image(image_pidx, pidx, pthumbnail, pimage, pOriginFilename)
+		values(product_image_seq.nextval,
+		#{pidx},#{pthumbnail:VARCHAR},#{pimage},#{pOriginFilename})
 	</insert>
-	
-	
-	<select id="getProducts" resultType="Product" parameterType="Paging">
+
+
+	<select id="getProducts" resultType="Product" parameterType="ProdPaging">
 		<include refid="selectProd"/>
 		<include refid="findProdWhere"/>
 		<include refid="prodSort"/>
 	</select>
-	
-	<select id="getProductImg" resultType="ProductI">
-		select * from product_image order by image_pidx desc
-	</select>
-	
-	
-	<select id="getProdImages" resultType="ProductI" parameterType="_int">
+
+	<select id="getProdImages" resultType="ProductI"
+		parameterType="_int">
 		select *
 		from product_image
 		where pidx=#{value}
-		order by 1 asc
+		order by 1
+		asc
 	</select>
-	
-	<select id="selectByPspec" resultType="Product" parameterType="string">
-		<include refid="selectProd"/>
+
+	<select id="selectByPspec" resultType="Product"
+		parameterType="string">
+		<include refid="selectProd" />
 		where pspec=#{value}
 	</select>
-	
-	<select id="selectByPidx" resultType="Product" parameterType="_int">
-		<include refid="selectProd"/>
+
+	<select id="selectByPidx" resultType="Product"
+		parameterType="_int">
+		<include refid="selectProd" />
 		where pidx=#{value}
 	</select>
-	
+
+	<delete id="deleteProduct" parameterType="_int">
+		{call
+		declare
+		begin
+		delete from product_image where pidx=#{value};
+		delete from product
+		where pidx=#{value};
+		end
+		}
+	</delete>
+
+	<delete id="deleteImage" parameterType="_int">
+		delete from product_image where pidx=#{value}
+	</delete>
+
+	<update id="updateProduct" parameterType="ProductF">
+
+		UPDATE product
+
+		SET
+		upCg_code=#{upCg_code},downCg_code=#{downCg_code},pname=#{pname},price=#{price},
+		psaleprice=#{psaleprice},pqty=#{pqty},ppoint=#{ppoint},pspec=#{pspec},
+		sun=#{sun},temp=#{temp},soil=#{soil},pcontent=#{pcontent}
+		WHERE pidx
+		=#{pidx}
+
+	</update>
+
 	<sql id="selectProd">
-		select p.*,decode(c.upcg_code,1,'초보',2,'중급',3,'전문가') upcg_name,c.downCg_name
-		from product p join downcategory c 
-		on p.downCg_code = c.downCg_code and p.upCg_code =c.upCg_code
+		select p.*,decode(c.upcg_code,1,'초보',2,'중급',3,'전문가')
+		upcg_name,c.downCg_name
+		from product p join downcategory c
+		on
+		p.downCg_code = c.downCg_code and p.upCg_code =c.upCg_code
 	</sql>
 	
 	<sql id="findProdWhere">

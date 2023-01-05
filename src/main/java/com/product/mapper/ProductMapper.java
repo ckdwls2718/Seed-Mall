@@ -21,7 +21,10 @@ public interface ProductMapper {
 	ProductVO selectByPidx(int pidx);
 
 	int insertPimage(ProductImageVO piVo);
-	
-	List<ProductImageVO> getProductImg();
 
+	int deleteProduct(int pidx);
+	
+	int deleteImage(int pidx);
+
+	int updateProduct(ProductForm prod);
 }

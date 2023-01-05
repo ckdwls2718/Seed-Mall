@@ -38,4 +38,12 @@ public interface MemberMapper {
 	
 	
 
+
+	List<MemberVO> findMember(PagingVO paging);
+
+	List<MemberVO> selectMemberAllPaging(PagingVO paging);
+
+	List<MemberVO> selectMemberAll(Map<String, Integer> map);
+
+
 }

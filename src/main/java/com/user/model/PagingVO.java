@@ -48,10 +48,10 @@ public class PagingVO {
 		nextBlock=prevBlock+(pagingBlock+1);
 	}
 	public String getPageNavi(String myctx, String loc, String userAgent) {
-		//myctx: 컨텍스트명, loc="board/list", userAgent: 브라우저 종류 파악하기 위한 문자열
+		//myctx: 컨텍스트명, loc="member/list", userAgent: 브라우저 종류 파악하기 위한 문자열
 		//검색관련-------------------
 		
-		if(findType==null) {// 검색어가 넘어오지 않을 경우
+		if(findType==null) {
 			findType="";
 			findKeyword="";
 		}else {
@@ -64,14 +64,14 @@ public class PagingVO {
 				}
 			}
 		}
-		String link=myctx+"/"+loc; //"/multiweb/board/list"
+		String link=myctx+"/"+loc;
 		String qStr="?pageSize="+pageSize+"&findType="+findType+"&findKeyword="+findKeyword;
 		link+=qStr;
 		String str="";
 		StringBuilder buf=new StringBuilder();
 		buf.append("<ul class='pagination justify-content-center'>");
 		if(prevBlock>0) {
-			buf.append("<li class='page-item'>") //"multiweb/board/list?mpage=5"
+			buf.append("<li class='page-item'>")
 			   .append("<a class='page-link' href='"+link+"&mpage="+prevBlock+"'>")
 			   .append("Prev")
 			   .append("</a>")
@@ -89,7 +89,7 @@ public class PagingVO {
 		}
 		
 		if(nextBlock<=pageCount) {
-		buf.append("<li class='page-item'>") //"multiweb/board/list?mpage=5"
+		buf.append("<li class='page-item'>") 
 		   .append("<a class='page-link' href='"+link+"&mpage="+nextBlock+"'>")
 		   .append("Next")
 		   .append("</a>")

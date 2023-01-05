@@ -14,6 +14,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{maddr1:VARCHAR},#{maddr2:VARCHAR},'새싹회원',sysdate,#{status})
 	</insert>
 	
+	<sql id="findWhere">
+		<if test="findKeyword!=''">
+			<where>
+				<if test="findType==1"> <!-- 이름 -->
+					MNAME like '%'||#{findKeyword}||'%'
+				</if>
+				<if test="findType==2"> <!-- 이메일 -->
+					EMAIL like '%' ||#{findKeyword}||'%'
+				</if>
+				<if test="findType==3"> <!-- 회원등급 -->
+					GRADE like '%' ||#{findKeyword}||'%'
+				</if>
+				
+			</where>
+		</if>
+	</sql>
+	
+	<select id="getMemberCount" resultType="_int" parameterType="Member">
+		select count(MIDX) from MEMBER
+		<include refid="findWhere"/>
+	</select>
+	
+	<select id="selectMemberAll" resultType="Member" parameterType="map">
+				select * from MEMBER order by MIDX desc
+			<![CDATA[
+			where rn > #{start} and rn < #{end}
+			]]>
+	</select>
+	
+	<select id="selectMemberAllPaging" resultType="Member" parameterType="Member">
+		select * from(
+		 		select row_number() over(order by midx desc,mdate asc) rn, MEMBER.*
+				from MEMBER
+				<include refid="findWhere"/>
+				)
+				<![CDATA[
+				where rn > #{start} and rn < #{end}
+				]]>
+	</select>
+
+
+
 	<select id="emailCheck" resultType="int"  parameterType="string">
 		select MIDX,status from member where EMAIL=#{value}
 	</select>
@@ -38,6 +80,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteUser" parameterType="_int">
 		delete from member where MIDX=#{value}
 	</delete>
+
 	
 	<!--이메일 찾기  -->
 	<select id="findemail" parameterType="Member" resultType="Member">
@@ -53,4 +96,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	
+
+
+
+
 </mapper>
