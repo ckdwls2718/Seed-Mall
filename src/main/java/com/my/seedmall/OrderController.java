@@ -40,7 +40,7 @@ public class OrderController {
 
 	// 결제 전, 결제정보 출력
 	@PostMapping("/order")
-	public String order(Model m, @RequestParam("pidx") int pidxs[], HttpSession session,
+	public String order(Model m, @RequestParam("pidx") int pidxs[],@RequestParam("oqty") int oqtys[], HttpSession session,
 			@ModelAttribute OrderProductVO opvo) {
 		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
 		if (loginUser == null) {
@@ -56,10 +56,14 @@ public class OrderController {
 				
 				// 상품번호로 해당 상품 정보 가져오기
 				ProductVO pvo = productService.selectByIdx(pidx);
+				
+				// ProductVO에서 재고수량으로 사용되던 pqty를 사용자가 선택한 수량(oqty)으로 덮어쓴다 -> 상품 정보를 세션으로 넘겨야하기 때문
+				pvo.setPqty(oqtys[i]);
 				orderArr.add(pvo); // List에 추가
 				
 				// 주문VO 셋팅
 				opvo.setPidx(pidx);
+				opvo.setOqty(oqtys[i]);
 				opvo.setOsalePrice(pvo.getPsaleprice());
 
 				// 주문상품 총액(등급할인 전)
@@ -94,7 +98,7 @@ public class OrderController {
 
 		// 주문 명세서 + 수령자 DB에 생성
 		int n = orderService.createOrderList(ovo);
-		int n2 = orderMapper.createOrderMember(ovo); // Mapper에서는 명세서와 수령자를 따로 insert해줬다.
+		int n2 = orderMapper.createOrderMember(ovo); // Mapper에서는 명세서와 수령자를 따로 insert해줬다
 
 		// 세션에서 아까 저장해둔 List를 가져온다
 		List<ProductVO> orderProdArr = (List<ProductVO>) session.getAttribute("orderArr");
@@ -102,10 +106,15 @@ public class OrderController {
 		// 주문개요 DB에 생성
 		if (orderProdArr != null) {
 			for (ProductVO pd : orderProdArr) {
-				// 주문 상품정보에 해당 주문개요번호를 넣는다.
+				// 주문 상품정보에 해당 주문개요번호를 넣는다
 				OrderProductVO opvo = orderService.getOrderProduct(pd.getPidx());
+				
+				// 그리고 OrderProductVO에 값을 넣어준다
 				opvo.setDesc_oidx(ovo.getDesc_oidx()); 
-
+				opvo.setOqty(pd.getPqty());
+				opvo.setOsalePrice(pd.getPsaleprice());
+				opvo.setOpoint(pd.getPpoint());
+				
 				int n3 = orderMapper.createOrderProductList(opvo);
 			}
 		}
