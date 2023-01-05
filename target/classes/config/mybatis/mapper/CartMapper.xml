@@ -16,6 +16,13 @@
 		select count(*) from cart where midx=#{midx} and pidx=#{pidx}
 	</select>
 	
+	<select id="getCartListByCidx" resultType="Cart" >
+		select * from cart where cart_idx in
+		<foreach collection="cidxs" item="cidx" index="index" separator="," open="(" close=")">
+			#{cidx}
+		</foreach>
+	</select>
+	
 	<update id="plusCart" parameterType="Cart">
 		update cart set pqty=pqty+#{pqty} where midx=#{midx} and pidx=#{pidx}
 	</update>

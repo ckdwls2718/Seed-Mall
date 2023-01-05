@@ -86,7 +86,7 @@ const chageTotal = function(cidx){
 	<div class="row">
 		<div class="col-md-12">
 			<h2 class="text-center m-4" style="margin: 1em">:::장바구니 목록:::</h2>
-			<form action="${myctx}/user/order" method="post">
+			<form action="${myctx}/user/cartOrder" method="post">
 			<table class="table table-striped" id="products">
 				<thead>
 					<tr>
