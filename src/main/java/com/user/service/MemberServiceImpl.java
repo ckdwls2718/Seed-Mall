@@ -58,7 +58,7 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO findUser(MemberVO findUser) throws NotUserException {
 		MemberVO user = MemberMapper.findUser(findUser);
 		if (user == null) {
-			throw new NotUserException("존재하지 않는 이메일입니다");
+			throw new NotUserException("존재하지 않는 이메일입니다1");
 		}
 		return user;
 	}
@@ -93,6 +93,23 @@ public class MemberServiceImpl implements MemberService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public MemberVO findemail(MemberVO vo) {
+		
+		return MemberMapper.findemail(vo);
+	}
+
+	@Override
+	public MemberVO findPassword(MemberVO vo) {
+		return MemberMapper.findPassword(vo);
+	}
+
+	@Override
+	public MemberVO updatePassword(MemberVO vo) {
+		
+		return MemberMapper.updatePassword(vo);
 	}
 
 

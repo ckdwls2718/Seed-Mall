@@ -39,4 +39,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from member where MIDX=#{value}
 	</delete>
 	
+	<!--이메일 찾기  -->
+	<select id="findemail" parameterType="Member" resultType="Member">
+		select * from member where mname=#{mname} and mhp1=#{mhp1} and mhp2=#{mhp2} and mhp3=#{mhp3}
+	</select>
+	<!--비밀번호 찾기  -->
+	<select id="findPassword" parameterType="Member" resultType="Member">
+		select * from member where email=#{email} and mname=#{mname} and mhp1=#{mhp1} and mhp2=#{mhp2} and mhp3=#{mhp3}
+	</select>
+	<!--비밀번호 변경  -->
+	<update id="updatePassword" parameterType="Member">
+		update users set pwd=#{pwd} where email=#{email}
+	</update>
+	
+	
 </mapper>

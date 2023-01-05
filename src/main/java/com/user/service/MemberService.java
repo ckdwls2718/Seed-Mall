@@ -27,8 +27,13 @@ public interface MemberService {
 	MemberVO findUser(MemberVO findUser) throws NotUserException;
 
 	MemberVO loginCheck(String email, String pwd) throws NotUserException;
-	
+
 	void logout(HttpSession session) throws Exception;
-	
+
+	MemberVO findemail(MemberVO vo);
+
+	MemberVO findPassword(MemberVO vo);
+
+	MemberVO updatePassword(MemberVO vo);
 
 }
