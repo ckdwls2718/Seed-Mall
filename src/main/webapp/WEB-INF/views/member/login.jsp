@@ -25,8 +25,8 @@
     
     <div>
     	<a href="join">회원가입</a> | 
-    	<a>아이디 찾기</a> | 
-    	<a>비밀번호 찾기</a>
+    	<a href="findemail">이메일 찾기</a> | 
+    	<a href="findPassword">비밀번호 찾기</a>
     </div>
     <br>
     <button class="w-100 btn btn-lg btn-primary mb-4" type="submit">로그인</button>
