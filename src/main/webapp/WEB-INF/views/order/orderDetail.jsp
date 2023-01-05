@@ -104,9 +104,9 @@
 
 	<form name="orderF" id="orderF" action="orderAdd" method="post"
 		onsubmit="return order_check()">
-		<input type="text" name="oqty" value="${opvo.oqty}"> <input
+		<input type="hidden" name="oqty" value="${opvo.oqty}"> <input
 			type="hidden" name="pidx" value="${opvo.pidx}"> <input
-			type="text" name="osalePrice" value="${opvo.osalePrice}"> <input
+			type="hidden" name="osalePrice" value="${opvo.osalePrice}"> <input
 			type="hidden" name="desc_oTotalPrice" value="${total}">
 		<table class="table">
 			<tr>
@@ -152,7 +152,6 @@
 						<th>상품정보</th>
 						<th>판매가</th>
 						<th>수량</th>
-						<th>배송비</th>
 						<th>총액</th>
 					</tr>
 				</thead>
@@ -166,7 +165,6 @@
 									pattern="###,###" /> 원<br> <span
 								class="badge badge-danger">${pvo.ppoint}</span>POINT</td>
 							<td>${oqty}개</td>
-							<td>4,000원</td>
 							<td><fmt:formatNumber value="${total}" pattern="###,###" />
 								원</td>
 						</tr>
@@ -208,6 +206,10 @@
 				<tr>
 					<td width="20%" class="m2">할인금액</td>
 					<td width="80%" class="m2">10원</td>
+				</tr>
+				<tr>
+					<td width="20%" class="m2">배송비</td>
+					<td width="80%" class="m2">4000원</td>
 				</tr>
 				<tr>
 					<td width="20%" class="m2">최종 결제금액</td>
