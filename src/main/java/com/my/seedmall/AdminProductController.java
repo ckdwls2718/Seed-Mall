@@ -1,11 +1,8 @@
 package com.my.seedmall;
 
-import java.io.File;
 import java.util.List;
-import java.util.UUID;
 
 import javax.inject.Inject;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -16,11 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.product.model.CategoryVO;
+import com.product.model.PagingVO;
 import com.product.model.ProductForm;
-import com.product.model.ProductImageVO;
 import com.product.model.ProductVO;
 import com.product.service.AdminProductService;
 
@@ -30,107 +26,97 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/admin")
 @Log4j
 public class AdminProductController {
-	
+
 	@Inject
 	private AdminProductService adminProductService;
-	
+
 	@GetMapping("/prodForm")
 	public String productForm(Model m) {
-		List<CategoryVO> upCgList=adminProductService.getUpcategory();
-		log.info("upCgList=="+upCgList);
+		List<CategoryVO> upCgList = adminProductService.getUpcategory();
 		m.addAttribute("upCgList", upCgList);
-		
+
 		return "/admin/prodForm";
 	}
-	//ajax요청에 대해 json으로 응답데이터를 보낸다
+
+	// ajax요청에 대해 json으로 응답데이터를 보낸다
 	@ResponseBody
-	@GetMapping(value="/getDownCategory", produces = "application/json")
-	public List<CategoryVO> getDownCategory(@RequestParam("upCg_code") String upCg_code){
-		log.info("upCg_code==="+upCg_code);
-		List<CategoryVO> downCgList=adminProductService.getDowncategory(upCg_code);
+	@GetMapping(value = "/getDownCategory", produces = "application/json")
+	public List<CategoryVO> getDownCategory(@RequestParam("upCg_code") String upCg_code) {
+		List<CategoryVO> downCgList = adminProductService.getDowncategory(upCg_code);
 		return downCgList;
 	}
-	
-	@ResponseBody
-	@PostMapping("/imageUpload")
-	public void uploadImage(MultipartFile[] pimage, HttpServletRequest req) {
 
-		log.info("imageUploadPOST..........");
-		String uploadFolder = "resources/product_images";
-		
-		ServletContext app=req.getServletContext();
-		String upDir=app.getRealPath("/resources/product_images");
-		log.info("upDir==="+upDir);
-		
-		File dir=new File(upDir);
-		if(!dir.exists()) {
-			dir.mkdirs();//업로드할 디렉토리 생성
-		}
-		
-		for(MultipartFile image : pimage) {
-			/* 파일 이름 */
-			String uploadFileName = image.getOriginalFilename();			
-			
-			
-			/* uuid 적용 파일 이름 */
-			String uuid = UUID.randomUUID().toString();
-			
-			uploadFileName = uuid + "_" + uploadFileName;
-			
-			/* 파일 위치, 파일 이름을 합친 File 객체 */
-			File saveFile = new File(upDir, uploadFileName);
-			
-			/* 파일 저장 */
-			try {
-				image.transferTo(saveFile);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		
-	}
-	
 	@PostMapping("/prodInsert")
-	public String productRegister(Model m, @ModelAttribute ProductForm prod, HttpServletRequest req
-			) {
-		
-		log.info("product= "+prod);
-		
-		int result = adminProductService.productInsert(prod,req);
-		
-		return "/admin/prodInsert";
-	}//------------------------------------------
-	
-	@GetMapping("/prodList")
-	public String productList(Model m) {
-		
-		List<ProductVO> prodArr= adminProductService.productList();
-		List<ProductImageVO> prodImageArr= adminProductService.productImageList();
+	public String productRegister(Model m, @ModelAttribute ProductForm prod, HttpServletRequest req) {
+		log.info("inprod="+prod);
+		int result = adminProductService.productInsert(prod, req);
+		String str = (result > 0) ? "상품등록 성공" : "등록 실패";
+		String loc = (result > 0) ? "prodList" : "javascript:history.back()";
 
-		m.addAttribute("prodArr",prodArr);
-		m.addAttribute("prodImageArr", prodImageArr);
+		m.addAttribute("message", str);
+		m.addAttribute("loc", loc);
+		return "msg";
+	}// ------------------------------------------
+
+	@GetMapping("/prodList")
+	public String productList(Model m, PagingVO page) {
+		// 상품을 가져온다
+		List<ProductVO> prodArr = adminProductService.productList(page);
+		m.addAttribute("prodArr", prodArr);
 
 		return "admin/prodList";
 	}
-	
+
+	@GetMapping("/prodEdit")
+	public String productEdit(Model m, @RequestParam(defaultValue = "0") int pidx) {
+		if (pidx == 0) {
+			return "redirect:prodList";
+		}
+
+		ProductVO pvo = adminProductService.selectByPidx(pidx);
+		List<CategoryVO> UpArr = adminProductService.getUpcategory();
+		List<CategoryVO> DownArr = adminProductService.getDowncategory(pvo.getUpCg_code());
+		m.addAttribute("pvo", pvo);
+		m.addAttribute("UpArr", UpArr);
+		m.addAttribute("DownArr", DownArr);
+
+		return "admin/prodEdit";
+	}
+
+	@GetMapping("/prodDel")
+	public String DeleteProduct(Model m, @RequestParam(defaultValue = "0") int pidx, HttpServletRequest req) {
+		if (pidx == 0) {
+			return "redirect:prodList";
+		}
+		int x = adminProductService.deleteImage(pidx, req);
+
+		int n = adminProductService.deleteProduct(pidx);
+		String str = (n != 0 && x > 0) ? "삭제 성공" : "삭제 실패";
+		String loc = (n != 0 && x > 0) ? "prodList" : "javascript:history.back()";
+
+		m.addAttribute("message", str);
+		m.addAttribute("loc", loc);
+
+		return "msg";
+	}
+
+	@PostMapping("/updateProd")
+	public String updateProduct(Model m, @ModelAttribute ProductForm prod, HttpServletRequest req) {
+//		if (pvo.getPidx() == 0) {
+//			return "redirect:prodEdit";
+//		}
+		log.info("upprod="+prod);
+		int x = adminProductService.deleteImage(prod.getPidx(), req);
+		int n = adminProductService.updateProduct(prod, req);
+		
+
+		String str = (n > 0 && x > 0) ? "수정 성공" : "수정 실패";
+		String loc = (n > 0 && x > 0) ? "prodList" : "javascript:history.back()";
+
+		m.addAttribute("message", str);
+		m.addAttribute("loc", loc);
+
+		return "msg";
+	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

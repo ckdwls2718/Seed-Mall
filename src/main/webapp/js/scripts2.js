@@ -13,8 +13,8 @@ function member_check(){
 	if(!isEmail(mf.Email)){
 		alert('이메일 형식에 맞아야 합니다');
 		mf.Email.select();
-		return;
-	}
+		return; 
+	}		
 	
 	if(!isPasswd(mf.Pwd)){
 		alert('비밀번호는 영문자,숫자,!,. 로 4~8자리까지 가능해요');
@@ -37,7 +37,12 @@ function member_check(){
         $("#Maddr2").focus();
         return false;
     }
-	
+    
+	if(mf.id_flag.value=='N'){
+	    alert('이메일 중복 체크를 해야 합니다');
+	    mf.Email.select();
+	    return false;
+	}
 	mf.submit();
 }//-----------------------
 
@@ -201,10 +206,15 @@ function execPostCode() {
 				//$('#id_result').html(uid+"는 사용 가능합니다").css('color','green')
 				alert(uid+"는 사용가능합니다");
 				$('#id_flag').val("Y");
+				
+				
 			}else{
 				//$('#id_result').html(uid+"는 이미 사용 중입니다").css('color','red')
 				alert(uid+"는 이미 사용 중입니다");
 				$('#id_flag').val("N");
+			
+			
+			
 			}
 		},
 		error:function(err){

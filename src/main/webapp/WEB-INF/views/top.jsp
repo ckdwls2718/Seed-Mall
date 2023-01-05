@@ -57,11 +57,11 @@
           </nav>
         <header class="py-3 mb-4 border-bottom ">
             <div class="container d-flex flex-wrap" >
-              <a href="/seedmall"  class="d-flex align-items-center mb-3 mb-lg-2 me-lg-auto text-dark text-decoration-none" style="margin-left:2em">
+              <a href="${myctx}"  class="d-flex align-items-center mb-3 mb-lg-2 me-lg-auto text-dark text-decoration-none" style="margin-left:2em">
                 <img src="${myctx}/assets/logo-removebg-preview.png" style="width:100%;height:70px" >
               </a>
-              <div class="me-lg-7 align-items-center">
-                <img src="${myctx}/assets/name-removebg-preview.png" style="width:100%">
+              <div class="align-items-center" style="margin-right: 10%"><a href="${myctx}">
+                <img src="${myctx}/assets/name-removebg-preview.png" style="width:100%"></a>
               </div>
                 <form class="col-12 col-lg-4 mb-3 mb-lg-0 " role="search" >
                     <input type="search" class="form-control mb-lg-0" style="margin-left:auto;margin-top:2em ;width:80%" placeholder="검색..." aria-label="검색">
@@ -106,5 +106,5 @@
                 </div>
             </div>
         </nav>
-        <hr>
+        <hr style="margin-bottom:0">
 

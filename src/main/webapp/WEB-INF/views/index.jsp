@@ -3,7 +3,7 @@
 
 <%@ include file="/WEB-INF/views/top.jsp"%>
 
-<header class="bg-lightgreen">
+<header style="background-color:#d1e7dd">
 	<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
 		<div class="carousel-inner " style="width:60%; margin:auto;">
 		  <div class="carousel-item active">
