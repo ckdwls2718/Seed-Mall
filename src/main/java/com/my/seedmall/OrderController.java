@@ -78,6 +78,7 @@ public class OrderController {
 		// List를 세션에 저장해둔다
 		session.setAttribute("orderArr", orderArr);
 		
+		m.addAttribute("loginUser", loginUser);
 		m.addAttribute("oqty", opvo.getOqty());
 		m.addAttribute("total", total);
 		m.addAttribute("totalPayment", totalPayment);
