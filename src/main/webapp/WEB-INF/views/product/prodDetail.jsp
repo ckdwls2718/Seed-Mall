@@ -47,7 +47,7 @@ const plusQty = function(){
 	qty=qty+1;
 	
 	$('#prodQty').val(qty);
-
+	changePrice(qty);
 }
 
 const minusQty = function(){
@@ -66,6 +66,7 @@ const minusQty = function(){
 	qty=qty-1;
 	
 	$('#prodQty').val(qty);
+	changePrice(qty);
 }
 
 const insertCart = function(){
