@@ -158,9 +158,11 @@ div#upCategory button {
 	<div class="container bg-white">
 		<div id="upCategory" class='container row'>
 			<div class="col-md-5">
-				<button class="btn btn-outline-success" type="button"
+				<a class="btn btn-outline-info" href="${myctx}/prod">전체 상품보기</a>
+				<button class="btn btn-outline-success m-3" type="button"
 					data-bs-toggle="collapse" data-bs-target="#multiCollapseExample1"
 					aria-expanded="false" aria-controls="multiCollapseExample1">전체카테고리보기</button>
+				
 			</div>
 		</div><br>
 		
