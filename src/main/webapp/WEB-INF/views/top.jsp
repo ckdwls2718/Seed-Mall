@@ -83,7 +83,7 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="/seedmall">홈</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">공지사항</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">Q&A</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">FAQ</a></li>
+                        <li class="nav-item"><a class="nav-link" href="${myctx}/FAQ">FAQ</a></li>
                         
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">쇼핑</a>
