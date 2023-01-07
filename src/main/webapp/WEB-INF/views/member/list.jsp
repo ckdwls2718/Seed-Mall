@@ -10,6 +10,7 @@ h2 {
 	margin: 40px 40px 40px 0px;
 	font-weight: bolder;
 	color: #133337;
+	font-size: calc(1.325rem + .9vw);
 }
 
 tr>th {
@@ -69,8 +70,10 @@ button {
   background-color: #198754;
   border-color: #198754;
 }
+
 </style>
 <!-- 검색 오류 알림 -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
 	function check() {
 		if (!searchF.findKeyword.value) {
@@ -144,7 +147,7 @@ button {
 	</div>
 	<!-- 회원 리스트 -->
 	<div>
-		<table class="table table-condensed ">
+		<table class="table table-condensed">
 			<thead>
 				<tr class="table-success">
 					<th>번호</th>

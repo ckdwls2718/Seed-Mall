@@ -13,6 +13,10 @@
 
 const changeImage = function(idx){
 	let url = $('#thumbnailImage'+idx).attr('src');
+	
+	//원본이미지 출력을 위한 처리
+	url = url.replace('Thumb_','');
+	
 	//alert(url);
 	$('#prodImage>div>img').attr('src',url);
 }
@@ -47,7 +51,7 @@ const plusQty = function(){
 	qty=qty+1;
 	
 	$('#prodQty').val(qty);
-
+	changePrice(qty);
 }
 
 const minusQty = function(){
@@ -66,6 +70,7 @@ const minusQty = function(){
 	qty=qty-1;
 	
 	$('#prodQty').val(qty);
+	changePrice(qty);
 }
 
 const insertCart = function(){
@@ -90,7 +95,7 @@ const insertCart = function(){
 			<c:forEach var="pimage" items="${prod.pimageList}">
 				<div class="col-xs col-md-2">
 					<a onclick="changeImage('${pimage.image_pidx}')" class="thumbnail"> <img id="thumbnailImage${pimage.image_pidx}" class="img-fluid" style="width:100px; height:100px"
-						src="${myctx}/resources/product_images/${pimage.pimage}">
+						src="${myctx}/resources/product_images/Thumb_${pimage.pimage}">
 					</a>
 				</div>
 			</c:forEach>
