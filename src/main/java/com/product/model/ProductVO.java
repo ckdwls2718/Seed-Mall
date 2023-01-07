@@ -25,6 +25,9 @@ public class ProductVO {
 	private int ppoint;
 	
 	private String pspec;
+	private String sun;
+	private String temp;
+	private String soil;
 	private String pcontent;
 	
 	private java.sql.Date pdate;

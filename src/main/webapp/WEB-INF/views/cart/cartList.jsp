@@ -14,6 +14,13 @@ const edit = function(cidx){
 	// ajax 요청으로 수정 요청 보내기
 	let pqty = $('#pqty'+cidx).val();
 	
+	//0개로 수정 시 막기
+	if(pqty == 0){
+		alert('0개로는 수정할 수 없습니다');
+		location.reload();
+		return;
+	}
+	
 	//alert(cidx +'/'+pqty);
 	
 	let url = "cartEdit"
@@ -80,13 +87,25 @@ const chageTotal = function(cidx){
 	
 	$("#selectPrice").html(selectTotal.toLocaleString('ko-KR')+" 원");
 }
+
+const submitCheck = function(){
+	let sum = $('input:checkbox[name=cidx]:checked').length;
+	if(sum>0){
+		return true;
+	}
+	
+	alert('상품을 선택해주세요');
+	return false;
+	
+}
+
 </script>
 
 <div class="container" style="text-align: center">
 	<div class="row">
 		<div class="col-md-12">
 			<h2 class="text-center m-4" style="margin: 1em">:::장바구니 목록:::</h2>
-			<form action="${myctx}/user/order">
+			<form action="${myctx}/user/cartOrder" method="post" onsubmit="return submitCheck()">
 			<table class="table table-striped" id="products">
 				<thead>
 					<tr>

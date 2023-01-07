@@ -35,39 +35,33 @@
               <c:if test="${loginUser != null}"> 
               <div class="flex-shrink-0 dropdown">
                
-                <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
+                <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                   <img src="${myctx}/assets/몬스테라.jpg" alt="mdo" width="32" height="32" class="rounded-circle" style="margin-top:3px">
                 </a>
                 
                 <ul class="dropdown-menu text-small shadow" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; margin-top:5px;  transform: translate3d(0.5px, 34px, 0px);">
-                  
                   <li><span class="dropdown-item">등급</span></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="#">마이페이지</a></li>
                   <li><a class="dropdown-item" href="#">설정</a></li>
                   <li><hr class="dropdown-divider"></li>                  
                   <li><a class="dropdown-item" href="${myctx}/logout">로그아웃</a></li> 
-                  
-                            
                 </ul>
               </div>
-              <form class="d-flex" style="margin-left:1em">
-                <button class="btn btn-outline-dark" type="submit">
+                <a href="${myctx}/user/cart" class="btn btn-outline-dark" style="margin-left:1em">
                     <img src="${myctx}/assets/cart-fill.svg">
                     장바구니
-                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                </button>
-            </form>
+                </a>
             </c:if>
             </div>
           </nav>
         <header class="py-3 mb-4 border-bottom ">
             <div class="container d-flex flex-wrap" >
-              <a href="/seedmall"  class="d-flex align-items-center mb-3 mb-lg-2 me-lg-auto text-dark text-decoration-none" style="margin-left:2em">
+              <a href="${myctx}"  class="d-flex align-items-center mb-3 mb-lg-2 me-lg-auto text-dark text-decoration-none" style="margin-left:2em">
                 <img src="${myctx}/assets/logo-removebg-preview.png" style="width:100%;height:70px" >
               </a>
-              <div class="me-lg-7 align-items-center">
-                <img src="${myctx}/assets/name-removebg-preview.png" style="width:100%">
+              <div class="align-items-center" style="margin-right: 10%"><a href="${myctx}">
+                <img src="${myctx}/assets/name-removebg-preview.png" style="width:100%"></a>
               </div>
                 <form class="col-12 col-lg-4 mb-3 mb-lg-0 " role="search" >
                     <input type="search" class="form-control mb-lg-0" style="margin-left:auto;margin-top:2em ;width:80%" placeholder="검색..." aria-label="검색">
@@ -112,5 +106,5 @@
                 </div>
             </div>
         </nav>
-        <hr>
+        <hr style="margin-bottom:0">
 
