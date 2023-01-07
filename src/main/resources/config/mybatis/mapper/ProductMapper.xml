@@ -111,7 +111,7 @@
 				order by pidx desc
 			</if>
 			<if test="sort==2">
-				
+				order by plikenum desc, pidx desc
 			</if>
 			<if test="sort==3">
 				order by price desc, pidx desc
