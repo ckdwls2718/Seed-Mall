@@ -2,4 +2,5 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/top.jsp"%>
 <%@ include file="/WEB-INF/views/member/mypageSidebar.jsp"%>
+
 <%@ include file="/WEB-INF/views/foot.jsp"%>

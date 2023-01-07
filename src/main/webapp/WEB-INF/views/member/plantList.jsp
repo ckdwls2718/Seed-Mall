@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/top.jsp"%>
 
-
+<div class="d-flex">
+<%@ include file="/WEB-INF/views/member/mypageSidebar.jsp"%>
 <main>
-
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
@@ -77,6 +77,6 @@
   </div>
 
 </main>
-
+</div>
 
 <%@ include file="/WEB-INF/views/foot.jsp"%>
