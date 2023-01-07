@@ -21,7 +21,7 @@ public interface MemberMapper {
 	Integer emailCheck(String email);
 
 	MemberVO findUser(MemberVO findUser);
-
+	
 	int deleteUser(Integer midx);
 
 	int updateUser(MemberVO member);
@@ -29,6 +29,14 @@ public interface MemberMapper {
 	MemberVO loginCheck(String email, String pwd) throws NotUserException;
 
 	void logout(HttpSession session) throws Exception;
+	
+	MemberVO findemail(MemberVO vo);
+	
+	MemberVO findPassword(MemberVO vo);
+	
+	MemberVO updatePassword(MemberVO vo);
+	
+	
 
 
 	List<MemberVO> findMember(PagingVO paging);
