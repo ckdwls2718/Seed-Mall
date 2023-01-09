@@ -26,13 +26,13 @@
 	</insert>
 
 
-	<select id="getProducts_old" resultType="Product" parameterType="ProdPaging">
+	<select id="getProducts" resultType="Product" parameterType="ProdPaging">
 		<include refid="selectProd"/>
 		<include refid="findProdWhere"/>
 		<include refid="prodSort"/>
 	</select>
 	
-	<select id="getProducts" resultType="Product" parameterType="ProdPaging">
+	<select id="getProductsPaging" resultType="Product" parameterType="ProdPaging">
 		select * from(
 		select row_number() over(<include refid="prodSort"/>) rn, product.*
 		from product

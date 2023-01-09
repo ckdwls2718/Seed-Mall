@@ -15,6 +15,8 @@ public interface ProductMapper {
 	int getProdCount(PagingVO page);
 
 	List<ProductVO> getProducts(PagingVO page);
+	
+	List<ProductVO> getProductsPaging(PagingVO page);
 
 	List<ProductImageVO> getProdImages(int pidx);
 

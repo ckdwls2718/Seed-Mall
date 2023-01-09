@@ -47,8 +47,6 @@ public class ProductController {
 		
 		int totalCount = productService.getProdTotal(page);
 		page.setTotalCount(totalCount);
-		page.setPagingBlock(10);
-		
 		page.init(ses);
 		
 		log.info("totalCount = "+totalCount);
@@ -58,7 +56,7 @@ public class ProductController {
 		
 		List<CategoryVO> categoryArr = categoryMapper.getAllDowncategory();
 		
-		List<ProductVO> prodArr = productService.getProdList(page);
+		List<ProductVO> prodArr = productService.getProdListPaging(page);
 		m.addAttribute("prodArr", prodArr);
 		m.addAttribute("paging", page);
 		m.addAttribute("downcategory",categoryArr);

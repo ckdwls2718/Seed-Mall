@@ -35,6 +35,17 @@ public class ProductServiceImpl implements ProductService {
 		log.info("prodArr" + prodArr);
 		return prodArr;
 	}
+	
+	@Override
+	public List<ProductVO> getProdListPaging(PagingVO page) {
+		List<ProductVO> prodArr = productMapper.getProductsPaging(page);
+		for (ProductVO prod : prodArr) {
+			List<ProductImageVO> prodImageArr = productMapper.getProdImages(prod.getPidx());
+			prod.setPimageList(prodImageArr);
+		}
+		log.info("prodArr" + prodArr);
+		return prodArr;
+	}
 
 	@Override
 	public List<ProductVO> selectByspec(String spec) {

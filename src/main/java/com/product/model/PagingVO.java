@@ -17,7 +17,7 @@ import lombok.Data;
 public class PagingVO {
 	// 페이징 처리 관련 프로퍼티
 	private int cpage; // 현재 보여줄 페이지 번호
-	private int pageSize=5; // 한페이지당 보여줄 목록 갯수
+	private int pageSize=20; // 한페이지당 보여줄 목록 갯수
 	private int totalCount; // 총 게시글 수
 	private int pageCount; // 페이지 수
 
@@ -26,7 +26,7 @@ public class PagingVO {
 	private int end;
 
 	// 페이징 블럭 처리를 위한 프로퍼티
-	private int pagingBlock = 5; // 한 블럭당 보여줄 페이지 수
+	private int pagingBlock = 10; // 한 블럭당 보여줄 페이지 수
 	private int prevBlock; // 이전 5개
 	private int nextBlock; // 이후 5개
 
