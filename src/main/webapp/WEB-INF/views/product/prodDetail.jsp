@@ -141,6 +141,10 @@ const insertCart = function(){
 					</td>
 				</tr>
 				<tr>
+					<th>옵션</th>
+					<td><input type="checkbox" name="glow"> 키워주세요</td>
+				</tr>
+				<tr>
 					<th>주문금액</th>
 					<td><div id="total"><span id="priceSum"> ${prod.psaleprice}</span> <span>원</span></div></td>
 				</tr>
