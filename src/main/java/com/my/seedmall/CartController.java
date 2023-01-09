@@ -187,16 +187,20 @@ public class CartController {
 					//상품번호
 					orderProdVo.setPidx(cart.getProduct().getPidx());
 					
-					//상품갯수
-					orderProdVo.setOqty(cart.getPqty());
-					
 					//상품가격
 					orderProdVo.setOsalePrice(cart.getProduct().getPsaleprice());
 					
 					//상품포인트
 					orderProdVo.setOpoint(cart.getProduct().getPpoint());
-
+					
+					//상품갯수
+					orderProdVo.setOqty(cart.getPqty());
+					
 					orderMapper.createOrderProductList(orderProdVo);
+					
+					
+					
+					//식물관리에 저장할 부분
 					
 					//장바구니 목록 삭제
 					cartService.deleteCart(cart.getCart_idx());
