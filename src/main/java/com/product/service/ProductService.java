@@ -8,6 +8,8 @@ import com.product.model.ProductVO;
 
 public interface ProductService {
 	
+	int getProdTotal(PagingVO page);
+	
 	List<ProductVO> getProdList(PagingVO page);
 	
 	List<ProductVO> selectByspec(String spec);

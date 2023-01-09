@@ -26,10 +26,29 @@
 	</insert>
 
 
-	<select id="getProducts" resultType="Product" parameterType="ProdPaging">
+	<select id="getProducts_old" resultType="Product" parameterType="ProdPaging">
 		<include refid="selectProd"/>
 		<include refid="findProdWhere"/>
 		<include refid="prodSort"/>
+	</select>
+	
+	<select id="getProducts" resultType="Product" parameterType="ProdPaging">
+		select * from(
+		select row_number() over(<include refid="prodSort"/>) rn, product.*
+		from product
+		<include refid="findProdWherePaging"/>
+		)
+		<![CDATA[
+		where rn > #{start} and rn < #{end}
+		]]>
+	</select>
+	
+	
+	
+	<select id="getProdCount" resultType="_int" parameterType="ProdPaging">
+		select count(*)
+		from product p
+		<include refid="findProdWhere"/>
 	</select>
 
 	<select id="getProdImages" resultType="ProductI"
@@ -87,6 +106,22 @@
 		from product p join downcategory c
 		on
 		p.downCg_code = c.downCg_code and p.upCg_code =c.upCg_code
+	</sql>
+	
+	<sql id="findProdWherePaging">
+		<if test="upcg!=null and upcg!=''">
+			<where>
+				upcg_code = #{upcg}
+			</where>
+		</if>
+		<if test="downcg!=null and downcg!=''">
+			and downcg_code = #{downcg}
+		</if>
+		<if test="findKeyword!=null and findKeyword!=''">
+			<where>
+				pname like '%'||#{findKeyword}||'%'
+			</where>
+		</if>
 	</sql>
 	
 	<sql id="findProdWhere">

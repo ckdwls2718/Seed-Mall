@@ -19,6 +19,11 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	ProductMapper productMapper;
+	
+	@Override
+	public int getProdTotal(PagingVO page) {
+		return productMapper.getProdCount(page);
+	}
 
 	@Override
 	public List<ProductVO> getProdList(PagingVO page) {

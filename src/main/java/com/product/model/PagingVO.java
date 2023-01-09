@@ -76,26 +76,13 @@ public class PagingVO {
 		
 		
 	}
-	/*
-	public String getPageNavi(String myctx, String loc, String userAgent) {
-		//myctx:컨텍스트명, loc:/multiweb/board/list, userAgent: 브라우저 종류를 파악하기 위한 문자열
-		//검색관련---------
-		if(findType==null) { //넘어오지 않을경우
-			findType="";
-			findKeyword="";
-		} else {
-			//브라우저가 IE일 경우 검색어 한글 처리하기
-			if(userAgent.indexOf("MSIE")>-1 || userAgent.indexOf("Trident")>-1) {
-				try {
-					findKeyword=URLEncoder.encode(findKeyword, "UTF-8");
-				} catch(UnsupportedEncodingException e) {
-					System.out.println(e);
-				}
-				
-			}
-		}
+	
+	public String getPageNavi(String myctx, String loc) {
+		
+		if(findKeyword==null) findKeyword="";
+		
 		String link=myctx+"/"+loc;
-		String qStr="?pageSize="+pageSize+"&findType="+findType+"&findKeyword="+findKeyword;
+		String qStr="?pageSize="+pageSize+"&sort="+sort+"&findKeyword="+findKeyword;
 		link+=qStr;
 		String str="";
 		StringBuilder sb = new StringBuilder();
@@ -130,5 +117,5 @@ public class PagingVO {
 		//System.out.println(str);
 		return str;
 	}
-	*/
+	
 }
