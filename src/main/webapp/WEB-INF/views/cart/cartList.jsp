@@ -161,6 +161,7 @@ const submitCheck = function(){
 			<div class="text-right" style="text-align: right" id="cartTotalPrice">
 				선택한 상품 가격 : <span id="selectPrice">0원</span><br>
 				장바구니 총 가격 : <fmt:formatNumber value="${cartTotalPrice}" pattern="###,###,### 원"/><br>
+				<input type="checkbox" id="growCheck" name="growCheck" value="Y"><label for="growCheck">키워주세요</label>
 				<button class="m-3 btn btn-outline-info btn-lg">주문하기</button>
 			</div>
 			
