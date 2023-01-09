@@ -12,8 +12,6 @@
 		payment, gradePoint, gradeDiscount, ocomment, desc_odate)
 		values(#{desc_oidx}, #{midx}, #{desc_oTotalPrice}, '0',
 		#{payment}, #{gradePoint}, #{gradeDiscount}, #{ocomment:VARCHAR}, sysdate)
-		
-		
 	</insert>
 	
 	<!-- 수령자 -->
@@ -36,15 +34,18 @@
 		insert into orders(oidx, desc_oidx, pidx, oqty, osalePrice, opoint, odate)
 		values(#{oidx}, #{desc_oidx}, #{pidx}, #{oqty}, #{osalePrice}
 		, #{opoint}, sysdate)
-		
 	</insert>
+	
+	<select id="getOrderList" parameterType="int" resultType="Order">
+		select * from order_desc where midx =#{value} order by desc_oidx desc
+	</select>
 	
 	<select id="getOrderProduct" parameterType="int" resultType="OrderProduct">
 		select * from product where pidx=#{value}
 	</select>
 	
 	<select id="getOrderProductList" parameterType="int" resultType="OrderProduct">
-		select * from product where pidx in (select pidx from orders where oidx=#{value})
+		select * from product join orders using(pidx) where pidx in (select pidx from orders where desc_oidx=#{value}) and desc_oidx=#{value}
 	</select>
 	
 	<select id="getOrderDesc" parameterType="int" resultType="Order">
