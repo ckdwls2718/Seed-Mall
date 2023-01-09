@@ -142,7 +142,7 @@ const insertCart = function(){
 				</tr>
 				<tr>
 					<th>옵션</th>
-					<td><input type="checkbox" name="growCheck"> 키워주세요</td>
+					<td><input type="checkbox" name="growCheck" value="Y"> 키워주세요</td>
 				</tr>
 				<tr>
 					<th>주문금액</th>
