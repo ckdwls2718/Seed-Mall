@@ -1,10 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<script>
+
+const detailPlant = function(pidx){
+	$('input[name=pidx]').val(pidx);
+	pdF.submit();
+}
+
+</script>
 <%@ include file="/WEB-INF/views/top.jsp"%>
 
 <div class="d-flex">
 <%@ include file="/WEB-INF/views/member/mypageSidebar.jsp"%>
-<main>
+
+<main class="m-3" style="width:70%">
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
@@ -20,57 +30,35 @@
 
   <div class="album py-5 bg-light">
     <div class="container">
-    
+    	
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <c:if test="${plantArr eq null or empty plantArr}">
+      <p class="lead text-muted">식물이 없습니다</p>
+        <a href="#" class="btn btn-primary my-2">쇼핑하러 가기</a>
+      </c:if>
+      
+      <c:if test="${plantArr ne null and not empty plantArr}">
+      
+      <c:forEach var="plant" items="${plantArr}">
         <div class="col">
           <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
+            <%-- <img src="${plant.plantImage }" alt=""> --%>
+            <img src="https://cdn.crowdpic.net/list-thumb/thumb_l_4291713E6EC8D22461618B2107D30880.jpg">
             <div class="card-body">
-              <h3 class="cart-text">꽃가루</h3><small class="text-muted"><b>17%</b></small>
-              <p class="card-text">관리자 코멘트</p>
+              <h4 class="cart-text">${plant.nickname}</h4><small class="text-muted"><b>${plant.percent}%</b></small>
+              <p class="card-text">${plant.pcomment}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-sm btn-outline-secondary">상세보기</a>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  <button class="btn btn-sm btn-outline-secondary" type="button" onclick="detailPlant('${plant.plant_idx}')">상세보기</button>
                 </div>
-                <small class="text-muted">2023.01.04</small>
+                <small class="text-muted">${plant.pdate}</small>
               </div>
             </div>
           </div>
         </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
+        </c:forEach>
+         
+        </c:if>
 		<!-- --------------------- -->
       </div>
     </div>
@@ -78,5 +66,8 @@
 
 </main>
 </div>
+<form id="pdF" action="plant" method="post"> 
+      <input type="hidden" name="pidx" id="pidx">
+</form>
 
 <%@ include file="/WEB-INF/views/foot.jsp"%>

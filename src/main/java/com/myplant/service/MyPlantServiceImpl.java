@@ -40,14 +40,12 @@ public class MyPlantServiceImpl implements MyPlantService {
 
 	@Override
 	public List<MyPlantVO> getMyPlantList(int midx) {
-		// TODO Auto-generated method stub
-		return null;
+		return myPlantMapper.getMyPlantList(midx);
 	}
 
 	@Override
 	public MyPlantVO getMyPlantDetail(int plant_idx) {
-		// TODO Auto-generated method stub
-		return null;
+		return myPlantMapper.getMyPlantDetail(plant_idx);
 	}
 
 	@Override

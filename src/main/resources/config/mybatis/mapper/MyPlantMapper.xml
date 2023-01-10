@@ -11,5 +11,13 @@
 		values(#{plant_idx}, #{midx}, #{oidx}, #{nickname:VARCHAR}, #{plantImage},
 		#{percent}, #{pcomment:VARCHAR}, sysdate)
 	</insert>
+	
+	<select id="getMyPlantList" parameterType="int" resultType="MyPlant">
+		select * from myplant where midx=#{value}  order by pdate desc
+	</select>
+	
+	<select id="getMyPlantDetail" parameterType="int" resultType="MyPlant">
+		select * from myplant where plant_idx=#{value}
+	</select>
 
 </mapper>
