@@ -12,7 +12,7 @@ public class QNADTO {
 	private int midx; //회원번호
 	private String qtitle; //제목
 	private String qcontent; //내용
-	private String secret; //비밀글 여부
+	private String secret="N"; //비밀글 여부
 	private Date qdate; //작성일
 	
 	private List<QNA_ReDTO> qna_ReList; //QNA 댓글 리스트
