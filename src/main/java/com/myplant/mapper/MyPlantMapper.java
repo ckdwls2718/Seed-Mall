@@ -3,6 +3,7 @@ package com.myplant.mapper;
 import java.util.List;
 
 import com.myplant.model.MyPlantVO;
+import com.myplant.model.PlantImageVO;
 import com.user.model.PagingVO;
 
 public interface MyPlantMapper {
@@ -26,4 +27,10 @@ public interface MyPlantMapper {
 
 	// (관리자) 주문한 모든 키워주세요 식물 출력
 	List<MyPlantVO> selectAllMyPlant(PagingVO page);
+	
+	//db에 식물 이미지 저장
+	int insertImage(PlantImageVO piVo);
+	
+	//식물 이미지 리스트 출력
+	List<PlantImageVO> getPlantImages(int plant_idx);
 }

@@ -2,7 +2,12 @@ package com.myplant.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.myplant.model.MyPlantVO;
+import com.myplant.model.PlantImageVO;
 import com.user.model.PagingVO;
 
 public interface MyPlantService {
@@ -27,5 +32,10 @@ public interface MyPlantService {
 	
 	// (관리자) 주문한 모든 키워주세요 식물 출력
 	List<MyPlantVO> selectAllMyPlant(PagingVO page);
+	
+	//이미지 업로드 및 db에 저장하는 메서드
+	PlantImageVO uploadImage(MultipartFile mf, HttpServletRequest req);
+	
+	int insertImage(PlantImageVO piVo);
 
 }
