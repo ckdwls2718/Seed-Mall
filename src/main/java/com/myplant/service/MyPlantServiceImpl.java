@@ -7,17 +7,17 @@ import org.springframework.stereotype.Service;
 
 import com.myplant.mapper.MyPlantMapper;
 import com.myplant.model.MyPlantVO;
+import com.user.model.PagingVO;
 
 @Service
 public class MyPlantServiceImpl implements MyPlantService {
 	
 	@Autowired
-	MyPlantMapper myplantMapper;
+	MyPlantMapper myPlantMapper;
 
 	@Override
 	public int insertMyPlant(MyPlantVO plant) {
-		// TODO Auto-generated method stub
-		return 0;
+		return myPlantMapper.insertMyPlant(plant);
 	}
 
 	@Override
@@ -45,7 +45,13 @@ public class MyPlantServiceImpl implements MyPlantService {
 	}
 
 	@Override
-	public MyPlantVO getMyPlant(int plant_idx) {
+	public MyPlantVO getMyPlantDetail(int plant_idx) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MyPlantVO> selectAllMyPlant(PagingVO page) {
 		// TODO Auto-generated method stub
 		return null;
 	}

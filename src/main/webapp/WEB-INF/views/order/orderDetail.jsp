@@ -139,6 +139,7 @@
 			type="hidden" name="pidx" value="${opvo.pidx}"> <input
 			type="hidden" name="osalePrice" value="${opvo.osalePrice}"> <input
 			type="hidden" name="desc_oTotalPrice" value="${total}">
+			<input type="hidden" name="growCheck" value="${growCheck}">
 		<table class="table">
 			<tr>
 				<td width="20%" class="m1">받는분</td>

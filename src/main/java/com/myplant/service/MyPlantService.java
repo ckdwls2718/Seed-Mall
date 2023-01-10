@@ -3,6 +3,7 @@ package com.myplant.service;
 import java.util.List;
 
 import com.myplant.model.MyPlantVO;
+import com.user.model.PagingVO;
 
 public interface MyPlantService {
 	
@@ -22,6 +23,9 @@ public interface MyPlantService {
 	List<MyPlantVO> getMyPlantList(int midx);
 	
 	//내 식물 상세페이지 출력
-	MyPlantVO getMyPlant(int plant_idx);
+	MyPlantVO getMyPlantDetail(int plant_idx);
+	
+	// (관리자) 주문한 모든 키워주세요 식물 출력
+	List<MyPlantVO> selectAllMyPlant(PagingVO page);
 
 }
