@@ -34,7 +34,7 @@ public interface MemberMapper {
 	
 	MemberVO findPassword(MemberVO vo);
 	
-	MemberVO updatePassword(MemberVO vo);
+	int updatePassword(MemberVO vo);
 	
 	
 

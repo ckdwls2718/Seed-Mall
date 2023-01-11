@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.order.mapper.OrderMapper;
 import com.order.model.OrderProductVO;
 import com.order.model.OrderVO;
-import com.product.model.PagingVO;
+import com.user.model.PagingVO;
 import com.product.model.ProductVO;
 
 @Service
@@ -33,6 +33,11 @@ public class OrderServiceImpl implements OrderService {
 	public List<OrderVO> getOrderList(int midx) {
 		return orderMapper.getOrderList(midx);
 	}
+	
+	@Override
+	public List<OrderVO> getOrderList_paging(PagingVO page) {
+		return orderMapper.getOrderList_paging(page);
+	}
 
 	@Override
 	public List<OrderProductVO> getOrderProductList(int desc_oidx) {
@@ -41,7 +46,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public int getOrderCount(PagingVO pvo) {
-		return 0;
+		return orderMapper.getOrderCount(pvo);
 	}
 
 	@Override

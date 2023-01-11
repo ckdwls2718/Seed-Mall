@@ -14,11 +14,9 @@
 </script>
 <div class="d-flex">
 	<%@ include file="/WEB-INF/views/admin/adminPageSidebar.jsp"%>
-
 	<div class="container" style="width: 30%; height: 600px;">
 		<main class="form-signin w-100 m-auto text-center">
-			<form action="adminPage" method="post">
-
+			<form action="adminUpdatePassword" method="post">
 				<div class="form-floating mt-4">
 					<input type="email" class="form-control" id="floatingInput"
 						name="email"> <label for="floatingInput">이메일</label>
@@ -28,9 +26,12 @@
 					<input type="password" class="form-control" id="floatingPassword"
 						name="pwd"> <label for="floatingPassword">비밀번호</label>
 				</div>
+				<div class="form-floating">
+					<input type="password" class="form-control" id="floatingPassword"
+						name="pwdCheck"> <label for="floatingPassword">비밀번호 확인</label>
+				</div>
 				<br>
-				<button class="w-100 btn btn-lg btn-primary mb-4" type="submit">내
-					정보 수정하기</button>
+				<button class="w-100 btn btn-lg btn-primary mb-4" type="submit">수정하기</button>
 			</form>
 		</main>
 	</div>
