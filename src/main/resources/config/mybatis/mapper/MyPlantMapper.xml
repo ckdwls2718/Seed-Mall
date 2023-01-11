@@ -25,7 +25,7 @@
 	</select>
 	
 	<select id="getPlantImages" parameterType="int" resultType="MyPlantI">
-		select * from myplant_image where plant_idx=#{value} order by pidate desc
+		select * from myplant_image where plant_idx=#{value}
 	</select>
 	
 	<update id="updateMyPlant" parameterType="PlantForm">
@@ -34,11 +34,16 @@
 	</update>
 	
 	<select id="getMyPlantList" parameterType="int" resultType="MyPlant">
-		select * from myplant where midx=#{value}  order by pdate desc
+		select mp.*,m.email,m.mname 
+		from myplant mp join member m on mp.midx=m.midx 
+		where mp.midx=#{value} 
+		order by mp.pdate desc
 	</select>
 	
 	<select id="getMyPlantDetail" parameterType="int" resultType="MyPlant">
-		select * from myplant where plant_idx=#{value}
+		select mp.*,m.email,m.mname 
+		from myplant mp join member m on mp.midx=m.midx 
+		where plant_idx=#{value}
 	</select>
 
 </mapper>

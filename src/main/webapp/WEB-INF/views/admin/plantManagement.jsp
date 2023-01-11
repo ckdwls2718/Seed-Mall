@@ -1,6 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<script>
+function setThumbnail(event) {
+    for (var image of event.target.files) {
+      var reader = new FileReader();
 
+      reader.onload = function(event) {
+        var img = document.createElement("img");
+        img.setAttribute("src", event.target.result);
+        img.setAttribute("width", "45%");
+        img.setAttribute("height", "45%");
+        //document.querySelector("div#image_container").appendChild(img);
+        $('#image_container').html(img);
+      };
+
+      console.log(image);
+      reader.readAsDataURL(image);
+    }
+  }
+
+</script>
 <%@ include file="/WEB-INF/views/top.jsp"%>
 
 <div class="d-flex">
@@ -8,6 +27,21 @@
 <div class="container">
 <form action="plantManagementUpdate" method="post" enctype="multipart/form-data">
 <input type="hidden" name="plant_idx" value="${plant.plant_idx}">
+	<table class="table">
+		<tr>
+			<th colspan="3">구매자 정보</th>
+		</tr>
+		<tr>
+			<th>이름</th>
+			<th>이메일</th>
+			<th>구매일자</th>
+		</tr>
+		<tr>
+			<td>${plant.mname}</td>
+			<td>${plant.email}</td>
+			<td>${plant.pdate}</td>
+		</tr>
+	</table>
 	<table class="table">
 		<tr>
 			<th>종류</th>
@@ -27,7 +61,7 @@
 		<tr>		
 			<td>이미지</td>
 			<td><img src="${myctx}/resources/plant_images/${plant.plantImage}" width="300px"></td>
-			<td><input type="file" name="plantImage"></td>
+			<td><input type="file" name="plantImage" onchange="setThumbnail(event)"><div id="image_container"></div></td>
 		</tr>
 	
 	</table>

@@ -16,7 +16,7 @@ public class MyPlantVO {
 	private java.sql.Date pdate; // 작성일
 	
 	private String email; //구매자의 이메일
-	private String name; // 구매자의 이름
+	private String mname; // 구매자의 이름
 	
 	private List<PlantImageVO> plantImageList; // 식물 이미지 리스트
 }
