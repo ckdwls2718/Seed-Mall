@@ -56,90 +56,84 @@ public class AuthController {
 		m.addAttribute("loc", loc);
 		return "msg";
 	}
-	
+
 	@GetMapping(value = "/emailCheck", produces = "application/json")
 	@ResponseBody
-	public  Map<String, String> emailCheck(@RequestParam("email") String email){
-		log.info("userid==="+email);		
-		boolean isUse=memberService.emailCheck(email);
-		String result=(isUse)?"ok":"no";
-		
-		Map<String, String> map=new HashMap<>();
-		map.put("result", result);		
+	public Map<String, String> emailCheck(@RequestParam("email") String email) {
+		log.info("userid===" + email);
+		boolean isUse = memberService.emailCheck(email);
+		String result = (isUse) ? "ok" : "no";
+
+		Map<String, String> map = new HashMap<>();
+		map.put("result", result);
 		return map;
 	}
-	
+
 	@GetMapping("/findemail")
 	public String findEmailView() {
 		return "member/findemail";
 	}
-	
-	// 아이디 찾기 실행
-		@RequestMapping(value="find_email", method=RequestMethod.POST)
-		public String findEmailAction(MemberVO vo, Model model) {
-			MemberVO user = memberService.findemail(vo);
-			log.info(vo);
-		
-			if(user!=null) { 
-				model.addAttribute("check", 1);
-				model.addAttribute("email", user.getEmail());
-			} else { 
-				model.addAttribute("check", 0);
-			}
-			
-			return "member/findemail";
-		}
-		
-		// 비밀번호 찾기 페이지로 이동
-		@GetMapping("/findPassword")
-		public String findPasswordView() {
-			return "member/findPassword";
-		}
-		
-	    // 비밀번호 찾기 실행
-		@RequestMapping(value="find_Password", method=RequestMethod.POST)
-		public String findPasswordAction(MemberVO vo, Model model) {
-			MemberVO user = memberService.findPassword(vo);
-			log.info(vo);
-			if(user != null) { 
-				model.addAttribute("check", 1);
-				model.addAttribute("pwd", user.getPwd());
-			} else { 
-				model.addAttribute("check", 0);
-				
-			}
-			
-			return "member/findPassword";
-		}
-	
-	    // 비밀번호 바꾸기 실행
-		@RequestMapping(value="update_password", method=RequestMethod.POST)
-		public String updatePasswordAction(@RequestParam(value="updateid", defaultValue="", required=false) 
-	String email,MemberVO vo) {
-			vo.setEmail(email);
-			System.out.println(vo);
-			memberService.updatePassword(vo);
-			return "member/findPasswordConfirm";
-		}
-		
-	    // 비밀번호 바꾸기할 경우 성공 페이지 이동
-		@RequestMapping(value="check_password_view")
-		public String checkPasswordForModify(HttpSession session, Model model) {
-			MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
-			
-			if(loginUser == null) {
-				return "member/login";
-			} else {
-				return "mypage/checkformodify";
-			}
-		}
-	
 
-		
-		
-		
-		
-	
+	// 아이디 찾기 실행
+	@RequestMapping(value = "find_email", method = RequestMethod.POST)
+	public String findEmailAction(MemberVO vo, Model model) {
+		MemberVO user = memberService.findemail(vo);
+		log.info(vo);
+
+		if (user != null) {
+			model.addAttribute("check", 1);
+			model.addAttribute("email", user.getEmail());
+		} else {
+			model.addAttribute("check", 0);
+		}
+
+		return "member/findemail";
+	}
+
+	// 비밀번호 찾기 페이지로 이동
+	@GetMapping("/findPassword")
+	public String findPasswordView() {
+		return "member/findPassword";
+	}
+
+	// 비밀번호 찾기 실행
+	@RequestMapping(value = "find_Password", method = RequestMethod.POST)
+	public String findPasswordAction(MemberVO vo, Model model) {
+		MemberVO user = memberService.findPassword(vo);
+		log.info(vo);
+		if (user != null) {
+			model.addAttribute("check", 1);
+			model.addAttribute("pwd", user.getPwd());
+		} else {
+			model.addAttribute("check", 0);
+
+		}
+
+		return "member/findPassword";
+	}
+
+	// 비밀번호 바꾸기 실행
+	@RequestMapping(value = "update_password", method = RequestMethod.POST)
+	public String updatePasswordAction(
+			@RequestParam(value = "updateid", defaultValue = "", required = false) String email, MemberVO vo) {
+		vo.setEmail(email);
+		System.out.println(vo);
+		memberService.updatePassword(vo);
+		return "member/findPasswordConfirm";
+	}
+
+	// 비밀번호 바꾸기할 경우 성공 페이지 이동
+	@RequestMapping(value = "check_password_view")
+	public String checkPasswordForModify(HttpSession session, Model model) {
+		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+
+		if (loginUser == null) {
+			return "member/login";
+		} else {
+			return "mypage/checkformodify";
+		}
+	}
+
 ////로그인
 	@PostMapping("/login")
 	public String loginProcess(HttpSession session, @ModelAttribute("member") MemberVO member) throws NotUserException {
