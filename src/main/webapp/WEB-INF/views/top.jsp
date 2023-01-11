@@ -76,7 +76,6 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="/seedmall">홈</a></li>
                         <li class="nav-item"><a class="nav-link" href="${myctx}/board/notice">공지사항</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">공지사항</a></li>
                         <li class="nav-item"><a class="nav-link" href="${myctx}/boardComList">커뮤니티</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">Q&A</a></li>
                         <li class="nav-item"><a class="nav-link" href="${myctx}/FAQ">FAQ</a></li>
