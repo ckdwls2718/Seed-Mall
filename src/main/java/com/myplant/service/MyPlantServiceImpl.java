@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.myplant.mapper.MyPlantMapper;
 import com.myplant.model.MyPlantVO;
+import com.myplant.model.PlantForm;
 import com.myplant.model.PlantImageVO;
 import com.user.model.PagingVO;
 
@@ -34,16 +35,8 @@ public class MyPlantServiceImpl implements MyPlantService {
 	}
 
 	@Override
-	public int updateMyPlant(MyPlantVO plant) {
-
-		// PlantForm은 프론트 단에서 다 처리해버리자
-		
-		
-		//식물 정보 업데이트
-		
-		
-		
-		return 0;
+	public int updateMyPlant(PlantForm plantForm) {
+		return myPlantMapper.updateMyPlant(plantForm);
 	}
 
 	@Override
@@ -54,18 +47,24 @@ public class MyPlantServiceImpl implements MyPlantService {
 
 	@Override
 	public List<MyPlantVO> getMyPlantList(int midx) {
-		return myPlantMapper.getMyPlantList(midx);
+		List<MyPlantVO> plantArr = myPlantMapper.getMyPlantList(midx);
+		
+		return plantArr;
 	}
 
 	@Override
 	public MyPlantVO getMyPlantDetail(int plant_idx) {
-		return myPlantMapper.getMyPlantDetail(plant_idx);
+		
+		MyPlantVO plant = myPlantMapper.getMyPlantDetail(plant_idx);
+		List<PlantImageVO> piVoArr = myPlantMapper.getPlantImages(plant.getPlant_idx());
+		plant.setPlantImageList(piVoArr);
+		
+		return plant;
 	}
 
 	@Override
 	public List<MyPlantVO> selectAllMyPlant(PagingVO page) {
-		// TODO Auto-generated method stub
-		return null;
+		return myPlantMapper.selectAllMyPlant(page); 
 	}
 	
 	@Override
@@ -102,8 +101,7 @@ public class MyPlantServiceImpl implements MyPlantService {
 	
 	@Override
 	public int insertImage(PlantImageVO piVo) {
-		
-		return 0;
+		return myPlantMapper.insertImage(piVo); 
 	}
 		
 }

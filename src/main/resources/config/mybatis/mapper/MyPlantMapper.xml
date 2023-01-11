@@ -12,6 +12,27 @@
 		#{percent}, #{pcomment:VARCHAR}, sysdate)
 	</insert>
 	
+	<insert id="insertImage" parameterType="MyPlantI">
+		<selectKey keyProperty="image_pidx" resultType="int" order="BEFORE">
+			select myplant_image_seq.nextval from dual
+		</selectKey>
+		insert into myplant_image(image_pidx,pimage,pidate,plant_idx)
+		values(#{image_pidx},#{pimage},sysdate,#{plant_idx})
+	</insert>
+	
+	<select id="selectAllMyPlant" resultType="MyPlant">
+		select * from myplant
+	</select>
+	
+	<select id="getPlantImages" parameterType="int" resultType="MyPlantI">
+		select * from myplant_image where plant_idx=#{value} order by pidate desc
+	</select>
+	
+	<update id="updateMyPlant" parameterType="PlantForm">
+		update myplant set pcomment=#{pcomment}, plantimage=#{plantImageStr}, percent=#{percent}
+		where plant_idx=#{plant_idx}
+	</update>
+	
 	<select id="getMyPlantList" parameterType="int" resultType="MyPlant">
 		select * from myplant where midx=#{value}  order by pdate desc
 	</select>

@@ -3,6 +3,7 @@ package com.myplant.mapper;
 import java.util.List;
 
 import com.myplant.model.MyPlantVO;
+import com.myplant.model.PlantForm;
 import com.myplant.model.PlantImageVO;
 import com.user.model.PagingVO;
 
@@ -14,7 +15,7 @@ public interface MyPlantMapper {
 	int updateMyPlantNickname(MyPlantVO plant);
 
 	// 관리자가 코멘트, 성장률, 이미지를 설정
-	int updateMyPlant(MyPlantVO plant);
+	int updateMyPlant(PlantForm plantForm);
 
 	// 주문 취소 시 내 식물을 삭제하는 메서드
 	int deleteMyPlant(int plant_idx);

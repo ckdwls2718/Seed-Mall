@@ -17,6 +17,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.product.model.CartVO" alias="Cart"/>
 		<typeAlias type="com.order.model.OrderVO" alias="Order"/>
 		<typeAlias type="com.myplant.model.MyPlantVO" alias="MyPlant"/>
+		<typeAlias type="com.myplant.model.PlantImageVO" alias="MyPlantI"/>
+		<typeAlias type="com.myplant.model.PlantForm" alias="PlantForm"/>
 	</typeAliases>
 	<!-- mapper 정의 ========================================= -->
 	<mappers>
