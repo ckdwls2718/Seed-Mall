@@ -2,16 +2,13 @@ package com.order.service;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.order.mapper.OrderMapper;
 import com.order.model.OrderProductVO;
 import com.order.model.OrderVO;
-import com.product.model.PagingVO;
-import com.product.model.ProductVO;
+import com.user.model.PagingVO;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -39,6 +36,9 @@ public class OrderServiceImpl implements OrderService {
 		return orderMapper.orderConfirmed(oidx);
 	}
 	
+	public List<OrderVO> getOrderList_paging(PagingVO page) {
+		return orderMapper.getOrderList_paging(page);
+	}
 
 	@Override
 	public List<OrderProductVO> getOrderProductList(int desc_oidx) {
@@ -47,7 +47,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public int getOrderCount(PagingVO pvo) {
-		return 0;
+		return orderMapper.getOrderCount(pvo);
 	}
 
 	@Override

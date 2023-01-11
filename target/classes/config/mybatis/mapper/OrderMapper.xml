@@ -36,10 +36,19 @@
 		, #{opoint}, sysdate)
 	</insert>
 	
+	<select id="getOrderCount" parameterType="Paging" resultType="_int">
+		select count(*) from order_desc
+	</select>
+	
 	<select id="getOrderList" parameterType="int" resultType="Order">
 		select * 
 		from order_desc o join deliveryStatus d on o.delivaryState=d.statusNumber 
 		where midx =#{value} order by desc_oidx desc
+	</select>
+	
+	<select id="getOrderList_Paging" parameterType="Paging" resultType="Order">
+		select order_desc.*,(select email from member where midx=order_desc.midx) 
+		email from order_desc order by desc_oidx desc
 	</select>
 	
 	<select id="getOrderProduct" parameterType="int" resultType="OrderProduct">
