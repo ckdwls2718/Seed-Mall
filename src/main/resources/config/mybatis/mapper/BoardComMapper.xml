@@ -33,4 +33,12 @@
 	<update id="updateBoard" parameterType="BoardCom">
 		update board_com set ccontent=#{ccontent},ctitle=#{ctitle} where cidx=#{cidx}
 	</update>
+	
+	<update id="updateReadnum" parameterType="int">
+		update board_com set creadnum=creadnum+1 where cidx=#{cidx}
+	</update>
+	
+	<select id="selectBoardByIdx" resultType="BoardCom" parameterType="int">
+		select board_com.*,(select email from member where midx=board_com.midx ) email from  Board_Com where cidx=#{cidx}
+	</select>
 </mapper>

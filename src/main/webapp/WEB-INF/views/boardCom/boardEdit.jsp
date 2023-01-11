@@ -28,25 +28,22 @@ $(function(){
 		return true;
 	})
 })//$() end-----------------	
+
+const edit = function(){
+	alert('수정되었습니다');
+}
+
+
 	
 </script>
 <%
    String ctx = request.getContextPath();
 %>
 <div align="center" id="bbs" class="col-md-8 offset-md-2 my-4">
-   <h1>글 등록하기</h1>
-   <p>
-      <a href="<%=ctx%>/write">글쓰기</a>| <a
-         href="<%=ctx%>/boardComList">글목록</a>
-      <p>
-         <!--파일 업로드시
-   method: POST
-   enctype: multipart/form-data 
-    
-    -->   
+   <h1>글 수정</h1>
 
    <form name="bf" id="bf" role="form" action="updateEnd" method="POST">
-   <input type="hidden" name="midx" value="44">
+   <input type="hidden" name="midx" value="${loginUser.midx}">
    <input type="hidden" name="cidx" value="${board.cidx}">
    <!--세션에 저장된 회원번  -->
    <!-- 원본글쓰기mode는 write, 답변글쓰기 mode는 rewrite로 감  -->       
@@ -70,15 +67,10 @@ $(function(){
                   class="form-control">${board.ccontent}</textarea>
           </td>
        </tr>     
-      <!-- <tr>
-         <td style="width: 20%"><b>첨부파일</b></td>
-         <td style="width: 80%">
-         <input type="file" name="mfilename"
-            id="filename" class="form-control"></td>
-      </tr> -->
+      
       <tr>
          <td colspan="2">
-            <button type="submit" id="btnWrite" class="btn btn-success">글수정</button>
+            <button type="submit" id="btnWrite" class="btn btn-success" onclick="edit()">글수정</button>           
             <button type="reset" id="btnReset" class="btn btn-warning">다시쓰기</button>
          </td>
       </tr>

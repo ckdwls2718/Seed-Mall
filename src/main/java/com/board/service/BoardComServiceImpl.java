@@ -11,7 +11,7 @@ import com.user.model.PagingVO;
 
 @Service
 public class BoardComServiceImpl implements BoardComService {
-	
+
 	@Autowired
 	BoardComMapper boardComMapper;
 
@@ -41,19 +41,32 @@ public class BoardComServiceImpl implements BoardComService {
 
 	@Override
 	public int deleteboard(int cidx) {
-		
+
 		return this.boardComMapper.deleteboard(cidx);
 	}
 
 	@Override
 	public int updateBoard(BoardComVO vo) {
-		
+
 		return this.boardComMapper.updateBoard(vo);
 	}
 
-	
-	
+	@Override
+	public int updateReadnum(Integer cidx) {
+	// TODO Auto-generated method stub
+		return this.boardComMapper.updateReadnum(cidx);
+	}
+
+	@Override
+	public BoardComVO selectBoardByIdx(Integer cidx) {
+		// TODO Auto-generated method stub
+		return this.boardComMapper.selectBoardByIdx(cidx);
+	}
 
 
+
+	
+
+	
 
 }

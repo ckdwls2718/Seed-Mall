@@ -10,11 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.board.model.BoardComVO;
+import com.board.model.BoardVO;
 import com.board.service.BoardComService;
 import com.user.model.PagingVO;
 
@@ -51,23 +54,9 @@ public class BoardComController {
 		m.addAttribute("boardComArr", boardComArr);
 
 		return "boardCom/boardComList";
-	}
+	}// 게시만 목록 보기
 
-	@GetMapping("/boardGet")
-	public String getBoardCom(Model m, @ModelAttribute BoardComVO boardCom, HttpServletRequest req,
-			@RequestHeader("user-Agent") String userAgent) {
-		String myctx = req.getContextPath();
-		HttpSession ses = req.getSession();
-
-		BoardComVO getBoardCom = boardComService.getBoardCom(boardCom);
-
-		String loc = "boardCom/boardComList";
-
-		m.addAttribute("boardCom", getBoardCom);
-
-		return "boardCom/boardComView";
-	}
-
+	
 	@GetMapping("/write")
 	public String boardForm() {
 
@@ -79,27 +68,42 @@ public class BoardComController {
 		boardComService.insertBoard(boardvo);
 
 		return "redirect:boardComList";
-	}
+	}// 게시판 글쓰기
+
 	@PostMapping("/delete")
-	public String boardDelete(int cidx,@ModelAttribute("boardComVO") BoardComVO boardvo, Model m) {
+	public String boardDelete(int cidx, @ModelAttribute("boardComVO") BoardComVO boardvo, Model m) {
 		boardComService.deleteboard(cidx);
-		
-		
+
 		return "redirect:/boardComList";
-		
-	}
+
+	}// 게시판 삭제하기
+
 	@PostMapping("/update")
-	public String boardupdate(Model m,@ModelAttribute BoardComVO boardvo) {
+	public String boardupdate(Model m, @ModelAttribute BoardComVO boardvo) {
 		BoardComVO boardCom = boardComService.getBoardCom(boardvo);
 		m.addAttribute("board", boardCom);
 		return "boardCom/boardEdit";
-		
+
 	}
-	
+
 	@PostMapping("/updateEnd")
 	public String boardEdit(@ModelAttribute("boardComVO") BoardComVO boardvo, Model m) {
 		boardComService.updateBoard(boardvo);
-		
+
 		return "redirect:boardComList";
-	}
+
+	}// 게시판 수정 하기
+	
+	@GetMapping("/boardGet")
+	public String boardView(Model m,@RequestParam("cidx") int cidx) {
+		log.info("num==="+cidx);
+		
+		int n=boardComService.updateReadnum(cidx);
+		log.info("n==="+n);
+		m.addAttribute("boardCom",boardComService.selectBoardByIdx(cidx));
+		
+		return "boardCom/boardComView";
+		//게시판 글보기 및 조회수 업데이트
+	}//-------------------------------
+
 }

@@ -18,4 +18,8 @@ public interface BoardComService {
 	int deleteboard(int cidx);
 	
 	int updateBoard(BoardComVO vo);
+	
+	int updateReadnum(Integer cidx);
+	
+	BoardComVO selectBoardByIdx(Integer cidx);
 }
