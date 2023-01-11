@@ -79,8 +79,9 @@
                         <li class="nav-item"><a class="nav-link" href="${myctx}/boardComList">커뮤니티</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">Q&A</a></li>
                         <li class="nav-item"><a class="nav-link" href="${myctx}/FAQ">FAQ</a></li>
+                        <li class="nav-item"><a class="nav-link" href="${myctx}/prod">쇼핑하기</a></li>
                         
-                        <li class="nav-item dropdown">
+                        <%-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">쇼핑</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="${myctx}/prod">전체보기</a></li>
@@ -88,7 +89,7 @@
                                 <li><a class="dropdown-item" href="#!">관엽식물</a></li>
                                 <li><a class="dropdown-item" href="#!">다육식물</a></li>
                             </ul>
-                        </li>
+                        </li> --%>
                         
                         <c:if test="${loginUser.status == 9}">   
                         <li class="nav-item dropdown">
