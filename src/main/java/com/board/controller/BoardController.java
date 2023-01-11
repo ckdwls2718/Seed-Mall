@@ -17,7 +17,7 @@ public class BoardController {
 	
 	@GetMapping("/test")
 	public String test(Model m) {
-		m.addAttribute("boardArr", boardService.getBoardList());
+		m.addAttribute("boardArr", boardService.getBoardList(null));
 		return "test";
 	}
 }

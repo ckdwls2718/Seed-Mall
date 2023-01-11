@@ -12,7 +12,7 @@ const detailPlant = function(pidx){
 <%@ include file="/WEB-INF/views/top.jsp"%>
 
 <div class="d-flex">
-<%@ include file="/WEB-INF/views/member/mypageSidebar.jsp"%>
+<%@ include file="/WEB-INF/views/admin/adminPageSidebar.jsp"%>
 
 <main class="m-3" style="width:70%">
   <section class="py-5 text-center container">
@@ -34,7 +34,6 @@ const detailPlant = function(pidx){
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
       <c:if test="${plantArr eq null or empty plantArr}">
       <p class="lead text-muted">식물이 없습니다</p>
-        <a href="#" class="btn btn-primary my-2">쇼핑하러 가기</a>
       </c:if>
       
       <c:if test="${plantArr ne null and not empty plantArr}">
@@ -65,7 +64,7 @@ const detailPlant = function(pidx){
 
 </main>
 </div>
-<form id="pdF" action="plant" method="post"> 
+<form id="pdF" action="plantManagementDetail" method="post"> 
       <input type="hidden" name="pidx" id="pidx">
 </form>
 
