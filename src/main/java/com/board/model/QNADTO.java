@@ -15,5 +15,6 @@ public class QNADTO {
 	private String secret="N"; //비밀글 여부
 	private Date qdate; //작성일
 	
+	private String email; //작성자 이메일
 	private List<QNA_ReDTO> qna_ReList; //QNA 댓글 리스트
 }

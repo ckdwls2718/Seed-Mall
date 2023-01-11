@@ -2,5 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.board.mapper.QNAMapper">
-
+	<insert id="insertQNA" parameterType="QNA">
+	<selectKey keyProperty="qidx" order="BEFORE" resultType="int" >
+		select board_qna_seq.nextval from dual
+	</selectKey>
+	insert into board_qna(qidx, pidx, midx, qtitle, qcontent, secret, qdate)
+	values(#{qidx},#{pidx},#{midx},#{qtitle},#{qcontent},#{secret}, sysdate)
+	</insert>
+	
+	<select id="getQNAList" parameterType="int" resultType="QNA">
+		select b.*, m.email 
+		from board_qna b join member m on b.midx=m.midx 
+		where pidx=#{value}
+	</select>
+	
+	<delete id="deleteQNA" parameterType="int">
+		delete from board_qna where qidx=#{value}
+	</delete>
 </mapper>

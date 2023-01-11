@@ -16,14 +16,12 @@ public class QNAServiceImpl implements QNAService {
 	
 	@Override
 	public int insertQNA(QNADTO qna) {
-		// TODO Auto-generated method stub
-		return 0;
+		return qnaMapper.insertQNA(qna);
 	}
 
 	@Override
 	public List<QNADTO> getQNAList(int pidx) {
-		// TODO Auto-generated method stub
-		return null;
+		return qnaMapper.getQNAList(pidx);
 	}
 
 	@Override
@@ -33,9 +31,8 @@ public class QNAServiceImpl implements QNAService {
 	}
 
 	@Override
-	public int deleteQNA(QNADTO qna) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteQNA(int qidx) {
+		return qnaMapper.deleteQNA(qidx);
 	}
 
 	@Override

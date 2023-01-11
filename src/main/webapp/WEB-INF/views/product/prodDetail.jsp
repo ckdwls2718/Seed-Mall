@@ -155,7 +155,7 @@ const insertCart = function(){
 	<!--right-->
 </div>
 
-<%@ include file="/WEB-INF/views/board/QNAList.jsp"%>
+<c:import url="/QNA/${prod.pidx}"/>
 
 
 <%@ include file="/WEB-INF/views/foot.jsp"%>

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.board.model.QNADTO;
@@ -36,8 +37,18 @@ public class QNAController {
 	@ResponseBody
 	public int insertQNA(QNADTO qna) {
 		
-		System.out.println("qna =>"+qna);
+		//System.out.println("qna =>"+qna);
 		int result = qnaService.insertQNA(qna);
+		
+		return result;
+	}
+	
+	@PostMapping(value="/del", produces = "application/json")
+	@ResponseBody
+	public int deleteQNA(@RequestParam int qidx) {
+		
+		//System.out.println("qidx =>"+qidx);
+		int result = qnaService.deleteQNA(qidx);
 		
 		return result;
 	}

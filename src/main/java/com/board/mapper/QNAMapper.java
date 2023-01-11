@@ -16,7 +16,7 @@ public interface QNAMapper {
 	public int updateQNA(QNADTO qna);
 	
 	// QNA 삭제
-	public int deleteQNA(QNADTO qna);
+	public int deleteQNA(int qidx);
 	
 	// 내가 작성한 QNA 보기
 	public List<QNADTO> getMyQNAList(int midx);

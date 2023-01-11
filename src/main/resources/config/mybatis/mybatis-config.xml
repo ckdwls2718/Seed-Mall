@@ -15,6 +15,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.product.model.CategoryVO" alias="Category"/>
 		<typeAlias type="com.product.model.CartVO" alias="Cart"/>
 		<typeAlias type="com.order.model.OrderVO" alias="Order"/>
+		<typeAlias type="com.board.model.QNADTO" alias="QNA"/>
 	</typeAliases>
 	<!-- mapper 정의 ========================================= -->
 	<mappers>
@@ -24,5 +25,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="config/mybatis/mapper/CategoryMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/OrderMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/CartMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/QNAMapper.xml"/>
 	</mappers>
 </configuration>
