@@ -19,7 +19,10 @@ public interface OrderMapper {
 
 	// 상품정보 가져오기
 	List<OrderProductVO> getOrderProductList(int desc_oidx);
-
+	
+	// 주문 구매확정 버튼
+	int orderConfirmed(int oidx);
+	
 	// 수령자 생성하기
 	int createOrderMember(OrderVO ovo);
 

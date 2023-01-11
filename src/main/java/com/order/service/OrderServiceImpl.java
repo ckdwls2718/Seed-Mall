@@ -33,6 +33,12 @@ public class OrderServiceImpl implements OrderService {
 	public List<OrderVO> getOrderList(int midx) {
 		return orderMapper.getOrderList(midx);
 	}
+	
+	@Override
+	public int orderConfirmed(int oidx) {
+		return orderMapper.orderConfirmed(oidx);
+	}
+	
 
 	@Override
 	public List<OrderProductVO> getOrderProductList(int desc_oidx) {

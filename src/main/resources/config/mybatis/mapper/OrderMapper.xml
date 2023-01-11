@@ -37,7 +37,9 @@
 	</insert>
 	
 	<select id="getOrderList" parameterType="int" resultType="Order">
-		select * from order_desc where midx =#{value} order by desc_oidx desc
+		select * 
+		from order_desc o join deliveryStatus d on o.delivaryState=d.statusNumber 
+		where midx =#{value} order by desc_oidx desc
 	</select>
 	
 	<select id="getOrderProduct" parameterType="int" resultType="OrderProduct">
@@ -56,5 +58,9 @@
 	<select id="getOrderMember" parameterType="int" resultType="Order">
 		select * from ordermember where desc_oidx=#{value}
 	</select>
+	
+	<update id="orderConfirmed" parameterType="int">
+		update order_desc set delivaryState='4' where desc_oidx=#{value}
+	</update>
 		
 </mapper>
