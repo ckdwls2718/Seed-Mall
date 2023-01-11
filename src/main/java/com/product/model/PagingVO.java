@@ -17,7 +17,7 @@ import lombok.Data;
 public class PagingVO {
 	// 페이징 처리 관련 프로퍼티
 	private int cpage; // 현재 보여줄 페이지 번호
-	private int pageSize=5; // 한페이지당 보여줄 목록 갯수
+	private int pageSize=20; // 한페이지당 보여줄 목록 갯수
 	private int totalCount; // 총 게시글 수
 	private int pageCount; // 페이지 수
 
@@ -26,7 +26,7 @@ public class PagingVO {
 	private int end;
 
 	// 페이징 블럭 처리를 위한 프로퍼티
-	private int pagingBlock = 5; // 한 블럭당 보여줄 페이지 수
+	private int pagingBlock = 10; // 한 블럭당 보여줄 페이지 수
 	private int prevBlock; // 이전 5개
 	private int nextBlock; // 이후 5개
 
@@ -76,26 +76,13 @@ public class PagingVO {
 		
 		
 	}
-	/*
-	public String getPageNavi(String myctx, String loc, String userAgent) {
-		//myctx:컨텍스트명, loc:/multiweb/board/list, userAgent: 브라우저 종류를 파악하기 위한 문자열
-		//검색관련---------
-		if(findType==null) { //넘어오지 않을경우
-			findType="";
-			findKeyword="";
-		} else {
-			//브라우저가 IE일 경우 검색어 한글 처리하기
-			if(userAgent.indexOf("MSIE")>-1 || userAgent.indexOf("Trident")>-1) {
-				try {
-					findKeyword=URLEncoder.encode(findKeyword, "UTF-8");
-				} catch(UnsupportedEncodingException e) {
-					System.out.println(e);
-				}
-				
-			}
-		}
+	
+	public String getPageNavi(String myctx, String loc) {
+		
+		if(findKeyword==null) findKeyword="";
+		
 		String link=myctx+"/"+loc;
-		String qStr="?pageSize="+pageSize+"&findType="+findType+"&findKeyword="+findKeyword;
+		String qStr="?pageSize="+pageSize+"&sort="+sort+"&findKeyword="+findKeyword;
 		link+=qStr;
 		String str="";
 		StringBuilder sb = new StringBuilder();
@@ -130,5 +117,5 @@ public class PagingVO {
 		//System.out.println(str);
 		return str;
 	}
-	*/
+	
 }
