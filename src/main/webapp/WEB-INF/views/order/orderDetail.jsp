@@ -92,13 +92,44 @@
 			}
 		}).open();
 	}
+
+	// 내 정보 불러오기
+	function myInfo() {
+		let result = $('#myInfo').is(':checked');
+		if(result){
+			let name = "${loginUser.mname}";
+			let hp1 = "${loginUser.mhp1}";
+			let hp2 = "${loginUser.mhp2}";
+			let hp3 = "${loginUser.mhp3}";
+			let post = "${loginUser.mpost}";
+			let addr1 = "${loginUser.maddr1}";
+			let addr2 = "${loginUser.maddr2}";
+			
+			$('#omname').val(name);
+			$('#omhp1').val(hp1);
+			$('#omhp2').val(hp2);
+			$('#omhp3').val(hp3);
+			$('#ompost').val(post);
+			$('#omaddr1').val(addr1);
+			$('#omaddr2').val(addr2);
+		} else{
+			$('#omname').val("");
+			$('#omhp1').val("");
+			$('#omhp2').val("");
+			$('#omhp3').val("");
+			$('#ompost').val("");
+			$('#omaddr1').val("");
+			$('#omaddr2').val("");
+		}
+	}
+	
 </script>
 <!-- 결제정보 출력해주는 페이지 -->
 <div class="container" style="height: 2300px; overflow: y:hidden;">
 	<h1 class="text-center mt-5 mb-5">배송지정보</h1>
-	<div class="checkbox mb-3" style="text-align: left;">
-		<label> <input type="checkbox" value="remember-me"> 기본
-			배송지 설정
+	<div class="option mb-3" style="text-align: left;">
+		<label for="myInfo"> <input type="checkbox" id="myInfo"
+			name="myInfo" onclick="myInfo()"> 내 정보 불러오기
 		</label>
 	</div>
 
@@ -108,11 +139,12 @@
 			type="hidden" name="pidx" value="${opvo.pidx}"> <input
 			type="hidden" name="osalePrice" value="${opvo.osalePrice}"> <input
 			type="hidden" name="desc_oTotalPrice" value="${total}">
+			<input type="hidden" name="growCheck" value="${growCheck}">
 		<table class="table">
 			<tr>
 				<td width="20%" class="m1">받는분</td>
 				<td width="80%" class="m2"><input type="text" name="omname"
-					id="omname"></td>
+					id="omname" value=""></td>
 			</tr>
 			<tr>
 				<td width="20%" class="m1">연락처</td>

@@ -8,6 +8,7 @@ public class OrderProductVO {
 	private int oidx; // 주문번호
 	private int desc_oidx; // 주문개요번호
 	private int pidx; // 상품번호
+	private String pname; // 상품이름
 	private int oqty; // 상품개수
 	private int osalePrice; // 가격
 	private int opoint; // 포인트

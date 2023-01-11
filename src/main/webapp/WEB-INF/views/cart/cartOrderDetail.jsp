@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="/resources/js/addressapi.js"></script>
 <%@ include file="/WEB-INF/views/top.jsp"%>
 
 <script>
@@ -46,13 +47,87 @@
 		}
 		return true;
 	}
+	
+	// 우편번호 찾기
+	function execPostCode() {
+		new daum.Postcode({
+			oncomplete : function(data) {
+				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+				// 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+				var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+				var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+				// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+				// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+				if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+					extraRoadAddr += data.bname;
+				}
+				// 건물명이 있고, 공동주택일 경우 추가한다.
+				if (data.buildingName !== '' && data.apartment === 'Y') {
+					extraRoadAddr += (extraRoadAddr !== '' ? ', '
+							+ data.buildingName : data.buildingName);
+				}
+				// 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+				if (extraRoadAddr !== '') {
+					extraRoadAddr = ' (' + extraRoadAddr + ')';
+				}
+				// 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+				if (fullRoadAddr !== '') {
+					fullRoadAddr += extraRoadAddr;
+				}
+
+				// 우편번호와 주소 정보를 해당 필드에 넣는다.
+				console.log(data.zonecode);
+				console.log(fullRoadAddr);
+
+				$("[name=ompost]").val(data.zonecode);
+				$("[name=omaddr1]").val(fullRoadAddr);
+
+				/* document.getElementById('signUpUserPostNo').value = data.zonecode;*///5자리 새우편번호 사용
+				document.getElementById('ompost').value = data.zonecode; //5자리 새우편번호 사용
+				document.getElementById('omaddr1').value = fullRoadAddr;
+			}
+		}).open();
+	}
+	
+	// 내 정보 불러오기
+	function myInfo() {
+		let result = $('#myInfo').is(':checked');
+		if(result){
+			let name = "${loginUser.mname}";
+			let hp1 = "${loginUser.mhp1}";
+			let hp2 = "${loginUser.mhp2}";
+			let hp3 = "${loginUser.mhp3}";
+			let post = "${loginUser.mpost}";
+			let addr1 = "${loginUser.maddr1}";
+			let addr2 = "${loginUser.maddr2}";
+			
+			$('#omname').val(name);
+			$('#omhp1').val(hp1);
+			$('#omhp2').val(hp2);
+			$('#omhp3').val(hp3);
+			$('#ompost').val(post);
+			$('#omaddr1').val(addr1);
+			$('#omaddr2').val(addr2);
+		} else{
+			$('#omname').val("");
+			$('#omhp1').val("");
+			$('#omhp2').val("");
+			$('#omhp3').val("");
+			$('#ompost').val("");
+			$('#omaddr1').val("");
+			$('#omaddr2').val("");
+		}
+	}
 </script>
 <!-- 결제정보 출력해주는 페이지 -->
 <div class="container" style="height: 2300px; overflow: y:hidden;">
 	<h1 class="text-center mt-5 mb-5">배송지정보</h1>
 	<div class="checkbox mb-3" style="text-align: left;">
-		<label> <input type="checkbox" value="remember-me"> 기본
-			배송지 설정
+		<label for="myInfo"> <input type="checkbox" id="myInfo"
+			name="myInfo" onclick="myInfo()"> 내 정보 불러오기
 		</label>
 	</div>
 
@@ -76,7 +151,8 @@
 				<td width="20%" class="m1">우편번호</td>
 				<td width="80%" class="m2"><input type="text" name="ompost"
 					id="ompost" maxlength="5">
-					<button type="submit" class="btn btn-success">우편번호 찾기</button></td>
+					<button type="button" class="btn btn-success"
+						onclick="execPostCode()">우편번호 찾기</button></td>
 			</tr>
 			<tr>
 				<td width="20" class="m1">주소</td>
@@ -95,6 +171,7 @@
 		<br> <br> <br>
 		<div style="height: 350px; overflow: auto;">
 			<h1 class="text-center mt-1 mb-5">주문상품</h1>
+			<c:if test="${growCheck eq 'Y'}">해당 상품들은 식물관리가 적용됩니다</c:if>
 			<table class="table">
 				<thead>
 					<tr class="info text-left">
