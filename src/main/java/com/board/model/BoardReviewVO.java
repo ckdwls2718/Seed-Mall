@@ -1,5 +1,7 @@
 package com.board.model;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +20,8 @@ public class BoardReviewVO {
     private int rlikenum;//좋아요수
     private int rdate;//평점
 	private java.sql.Date qdate; // 작성일
+	
+	private List<BoardReviewVO> boardReviewVO;
 	
 	
 }
