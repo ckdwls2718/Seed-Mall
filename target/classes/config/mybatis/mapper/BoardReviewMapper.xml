@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.mapper.BoardReviewMapper">
+<insert id="reviewWrite">
+	insert into board_review(
+	ridx,midx,oidx,rtitle,rcontent,rname,rreadnum,rlikenum,score,rdate) value(
+	${ridx},${midx},${oidx},${rtitle},${rcontent},${rname},${rreadnum},${rlikenum},${score},${rdate}
+	)	
+</insert>
+
+</mapper>

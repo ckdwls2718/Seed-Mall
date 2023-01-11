@@ -163,6 +163,10 @@ const insertCart = function(){
 	
 	<!--right-->
 </div>
+<div class="page-header"> 
+	<h2>리뷰</h2>
+</div>
+<form></form>
 
 
 <%@ include file="/WEB-INF/views/foot.jsp"%>
