@@ -255,7 +255,7 @@ div#upCategory button {
 		<div class="row mb-3">
 			<!-- 검색창 -->
 			<form name="searchF" id="searchF" class="d-flex" role="search">
-				<span>총 ${fn:length(prodArr)}개의 상품</span>
+				<span>총 ${paging.totalCount}개의 상품</span>
 				<input name="findKeyword" class="form-control me-2" type="search"
 					placeholder="검색어를 입력하세요" aria-label="Search"
 					style="width: 25%; margin-left: auto">
@@ -283,7 +283,7 @@ div#upCategory button {
 						</ul>
 					</div>
 					<div class="tag ${prod.pspec}">${prod.pspec}</div>
-					<div class="title pt-4 pb-1"><h5>${prod.pname}</h5></div>
+					<div class="title pt-4 pb-1"><h5>${prod.pname}</h5><span class="badge bg-danger">${prod.percent}%할인</span></div>
 					<!-- <div class="d-flex align-content-center justify-content-center">
 						별점
 						<span class="fas fa-star"></span> <span class="fas fa-star"></span>
@@ -291,16 +291,19 @@ div#upCategory button {
 						<span class="fas fa-star"></span>
 					</div> -->
 					<div class="price">
-						<del><fmt:formatNumber value="${prod.price}"
-							pattern="###,###,### 원" />
-						</del><br>
+						<del><small style="color:gray;"><fmt:formatNumber value="${prod.price}" pattern="###,###,### 원" /></small></del>
 						<b><fmt:formatNumber value="${prod.psaleprice}" pattern="###,###,### 원" /></b>
-								<br> <span class="badge bg-danger">${prod.percent}%할인</span>
+						
 					</div>
 				</div>
 			</c:forEach>
 		</div>
+		<!-- 페이지 기능  -->
+			<div id="pageNavi">
+				${pageNavi}
+			</div>
 	</div>
+	
 </body>
 </html>
 <%@ include file="/WEB-INF/views/foot.jsp"%>

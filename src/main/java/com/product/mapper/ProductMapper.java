@@ -11,8 +11,12 @@ import com.product.model.ProductVO;
 public interface ProductMapper {
 
 	int productInsert(ProductForm vo);
+	
+	int getProdCount(PagingVO page);
 
 	List<ProductVO> getProducts(PagingVO page);
+	
+	List<ProductVO> getProductsPaging(PagingVO page);
 
 	List<ProductImageVO> getProdImages(int pidx);
 
