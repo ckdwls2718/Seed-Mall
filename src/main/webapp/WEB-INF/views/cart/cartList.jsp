@@ -14,6 +14,13 @@ const edit = function(cidx){
 	// ajax 요청으로 수정 요청 보내기
 	let pqty = $('#pqty'+cidx).val();
 	
+	//0개로 수정 시 막기
+	if(pqty == 0){
+		alert('0개로는 수정할 수 없습니다');
+		location.reload();
+		return;
+	}
+	
 	//alert(cidx +'/'+pqty);
 	
 	let url = "cartEdit"
@@ -80,13 +87,25 @@ const chageTotal = function(cidx){
 	
 	$("#selectPrice").html(selectTotal.toLocaleString('ko-KR')+" 원");
 }
+
+const submitCheck = function(){
+	let sum = $('input:checkbox[name=cidx]:checked').length;
+	if(sum>0){
+		return true;
+	}
+	
+	alert('상품을 선택해주세요');
+	return false;
+	
+}
+
 </script>
 
 <div class="container" style="text-align: center">
 	<div class="row">
 		<div class="col-md-12">
 			<h2 class="text-center m-4" style="margin: 1em">:::장바구니 목록:::</h2>
-			<form action="${myctx}/user/order" method="post">
+			<form action="${myctx}/user/cartOrder" method="post" onsubmit="return submitCheck()">
 			<table class="table table-striped" id="products">
 				<thead>
 					<tr>
@@ -104,7 +123,7 @@ const chageTotal = function(cidx){
 					<!-- ------------------------ -->
 					<c:if test="${cartArr eq null or empty cartArr}">
 						<tr>
-							<td colspan="6">장바구니에 담긴 상품이 없습니다</td>
+							<td colspan="8">장바구니에 담긴 상품이 없습니다</td>
 						</tr>
 					</c:if>
 					
@@ -142,6 +161,7 @@ const chageTotal = function(cidx){
 			<div class="text-right" style="text-align: right" id="cartTotalPrice">
 				선택한 상품 가격 : <span id="selectPrice">0원</span><br>
 				장바구니 총 가격 : <fmt:formatNumber value="${cartTotalPrice}" pattern="###,###,### 원"/><br>
+				<input type="checkbox" id="growCheck" name="growCheck" value="Y"><label for="growCheck">키워주세요</label>
 				<button class="m-3 btn btn-outline-info btn-lg">주문하기</button>
 			</div>
 			
