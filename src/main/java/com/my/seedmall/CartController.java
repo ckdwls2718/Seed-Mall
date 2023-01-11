@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.myplant.model.MyPlantVO;
+import com.myplant.service.MyPlantService;
 import com.order.mapper.OrderMapper;
 import com.order.model.OrderProductVO;
 import com.order.model.OrderVO;
@@ -44,6 +46,9 @@ public class CartController {
 
 	@Autowired
 	OrderMapper orderMapper;
+	
+	@Autowired
+	MyPlantService mpService;
 
 	@GetMapping("/cart")
 	public String cartList(Model m, HttpServletRequest req) {
@@ -164,7 +169,7 @@ public class CartController {
 
 	// 결제완료 페이지 - 주문 명세서 생성
 	@PostMapping("/cartOrderAdd")
-	public String orderAdd(Model m, @ModelAttribute() OrderVO order, HttpSession session) {
+	public String orderAdd(Model m, @ModelAttribute() OrderVO order, @RequestParam("growCheck")String growCheck, HttpSession session) {
 		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
 		int midx_fk = loginUser.getMidx();
 
@@ -200,6 +205,19 @@ public class CartController {
 				orderMapper.createOrderProductList(orderProdVo);
 
 				// 식물관리에 저장할 부분
+				if (growCheck.equals("Y")) {
+					for (int i = 0; i < orderProdVo.getOqty(); i++) {
+						MyPlantVO mpvo = new MyPlantVO();
+						mpvo.setMidx(order.getMidx());
+						mpvo.setOidx(orderProdVo.getOidx());
+						mpvo.setNickname("애칭");
+						mpvo.setPcomment("피드백");
+						mpvo.setPercent(0);
+						mpvo.setPlantImage("noImage");
+
+						int n4 = mpService.insertMyPlant(mpvo);
+					}
+				}
 
 				// 장바구니 목록 삭제
 				cartService.deleteCart(cart.getCart_idx());

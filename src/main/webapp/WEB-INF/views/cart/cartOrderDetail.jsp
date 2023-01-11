@@ -133,6 +133,7 @@
 
 	<form name="orderF" id="orderF" action="cartOrderAdd" method="post" onsubmit="return order_check()">
 		<input type="hidden" name="desc_oTotalPrice" value="${total}">
+		<input type="hidden" name="growCheck" value="${growCheck}">
 		<table class="table">
 			<tr>
 				<td width="20%" class="m1">받는분</td>
