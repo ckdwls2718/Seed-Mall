@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.mapper.BoardNoticeMapper">
+	
+	<insert id="insertBoard" parameterType="BoardN" useGeneratedKeys="true" keyProperty="nidx">
+		<selectKey keyProperty="nidx" resultType="_int" order="BEFORE">
+			select board_notice_seq.nextval from dual
+		</selectKey>
+		insert into board_notice(nidx,midx,ntitle,ncontent,nreadnum,priority,ndate)
+		values(#{nidx},#{midx},#{ntitle},#{ncontent},#{nreadnum},#{priority},SYSDATE)
+	</insert>
+	
+	<select id="getNoticeList" resultType="BoardN" parameterType="BoardPaging">
+		select * from board_notice order by priority asc
+	</select>
+	
+	<sql id="findWhere">
+		<if test="findType!=null and findKeyword!=''">
+			<where>
+				<if test="findType==1"> <!-- 글제목 -->
+					ntitle like '%'||#{findKeyword}||'%'
+				</if>
+				<if test="findType==2"> <!-- 글내용 -->
+					ncontent like '%'||#{findKeyword}||'%'
+				</if>
+			</where>
+		</if>
+	</sql>
+	
+	<select id="getTotalCount" resultType="int" parameterType="Paging">
+		select count(nidx) from board_notice
+		
+		<include refid="findWhere"/>
+		
+	</select>
+	
+	<select id="selectNoticeAllPaging" resultType="BoardN" parameterType="Paging">
+		select * from(
+			 select row_number() over(order by priority desc) rn, board_notice.*
+			 from board_notice
+			 
+			 <include refid="findWhere"/>
+			 
+			 )
+			 <![CDATA[
+			 where rn > #{start} and rn < #{end}
+			 ]]>
+	</select>
+	
+	<select id="selectNoticeAll" resultType="BoardN" parameterType="map">
+		<!-- select * from spring_board order by num desc  [단순형 게시판]-->
+		select * 
+		 from board_notice order by priority desc
+		 <!-- 부등호 등의 문자가 나올때는 CDATA Section으로 감싸자. CDATA는 Character Data라는
+		 의미. CDATA로 감싸진 부분은 xml문서로 파싱하지 않고 문자로 취급한다 -->
+		 <!-- where rn &gt; #{start} and rn &lt; #{end} -->
+		 <!-- where rn between #{start} and #{end} -->
+		 
+	</select>
+	
+	<update id="updateReadnum" parameterType="int">
+		update board_notice set nreadnum=nreadnum+1 where nidx=#{value}
+	</update>
+	
+	<select id="selectBoardByNidx" resultType="BoardN" parameterType="_int">
+		select * from board_notice where nidx=#{value}
+	</select>
+	
+	<delete id="deleteNotice" parameterType="int">
+		delete from board_notice where nidx=#{value}
+	</delete>
+	
+	<update id="updateNotice" parameterType="BoardN">
+		update board_notice set ntitle=#{ntitle}, ncontent=#{ncontent:VARCHAR}, priority=#{priority}
+		<where>
+			nidx=#{nidx}
+		</where>
+	</update>
+	
+	<update id="updateImgSrc" parameterType="BoardN">
+		update board_notice set ncontent=#{ncontent:VARCHAR}
+		<where>
+			nidx=#{nidx}
+		</where>
+	</update>
+	
+</mapper>
