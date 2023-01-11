@@ -2,8 +2,11 @@ package com.board.service;
 
 import java.util.List;
 
-import com.board.model.BoardVO;
+import com.board.model.BoardComVO;
+import com.user.model.PagingVO;
 
 public interface BoardService {
-	List<BoardVO> getBoardList();
+	List<BoardComVO> getBoardList(PagingVO paging);
+
+	int getBoardCount(PagingVO paging);
 }

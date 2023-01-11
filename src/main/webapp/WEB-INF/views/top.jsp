@@ -42,7 +42,7 @@
                 <ul class="dropdown-menu text-small shadow" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; margin-top:5px;  transform: translate3d(0.5px, 34px, 0px);">
                   <li><span class="dropdown-item">등급</span></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">마이페이지</a></li>
+                  <li><a class="dropdown-item" href="${myctx}/user/mypage">마이페이지</a></li>
                   <li><a class="dropdown-item" href="#">설정</a></li>
                   <li><hr class="dropdown-divider"></li>                  
                   <li><a class="dropdown-item" href="${myctx}/logout">로그아웃</a></li> 
@@ -76,8 +76,9 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="/seedmall">홈</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">공지사항</a></li>
+                        <li class="nav-item"><a class="nav-link" href="${myctx}/boardComList">커뮤니티</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">Q&A</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">FAQ</a></li>
+                        <li class="nav-item"><a class="nav-link" href="${myctx}/FAQ">FAQ</a></li>
                         
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">쇼핑</a>
@@ -93,7 +94,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">관리자 도구</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">어드민페이지</a></li>
+                                <li><a class="dropdown-item" href="${myctx}/admin/adminPage">어드민페이지</a></li>
                                 <li><hr class="dropdown-divider" /></li>
                                 <li><a class="dropdown-item" href="${myctx}/admin/prodForm">상품 등록</a></li>
                                 <li><a class="dropdown-item" href="${myctx}/admin/prodList">상품 목록</a></li>

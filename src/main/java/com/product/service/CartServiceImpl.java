@@ -6,13 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.product.mapper.CartMapper;
+import com.product.mapper.ProductMapper;
 import com.product.model.CartVO;
+import com.product.model.ProductVO;
 
 @Service
 public class CartServiceImpl implements CartService {
 	
 	@Autowired
 	CartMapper cartMapper;
+	
+	@Autowired
+	ProductMapper prodMapper;
 
 	@Override
 	public int insertCart(CartVO cart) {
@@ -23,7 +28,20 @@ public class CartServiceImpl implements CartService {
 			return cartMapper.insertCart(cart);
 		}
 	}
-
+	
+	//카트 번호를 이용해 카트정보 가져오기
+	public List<CartVO> getCartListByCidx(int[] cidxs){
+		
+		List<CartVO> cartArr = cartMapper.getCartListByCidx(cidxs);
+		
+		for(CartVO cart : cartArr) {
+			ProductVO prod = prodMapper.selectByPidx(cart.getPidx());
+			cart.setProduct(prod);
+		}
+		
+		return cartArr;
+	}
+	
 	@Override
 	public int updateCart(CartVO cart) {
 		return cartMapper.updateCart(cart);

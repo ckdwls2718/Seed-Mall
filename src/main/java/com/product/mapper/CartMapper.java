@@ -2,6 +2,8 @@ package com.product.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.product.model.CartVO;
 
 public interface CartMapper {
@@ -15,6 +17,9 @@ public interface CartMapper {
 	
 	//장바구니 상품 수량을 수정
 	public int updateCart(CartVO cart);
+	
+	//카트 번호를 이용해 카트정보 가져오기
+	public List<CartVO> getCartListByCidx(@Param("cidxs")int[] cidxs);
 	
 	public List<CartVO> selectMyCartList(int midx);
 	
