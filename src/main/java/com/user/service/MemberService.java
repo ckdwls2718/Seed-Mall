@@ -36,7 +36,7 @@ public interface MemberService {
 
 	MemberVO findPassword(MemberVO vo);
 
-	MemberVO updatePassword(MemberVO vo);
+	int updatePassword(MemberVO vo);
 
 	// 게시목록 가져오기
 	List<MemberVO> selectMemberAll(Map<String,Integer> map);

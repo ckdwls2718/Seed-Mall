@@ -6,6 +6,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<!-- typeAlias 타입 별칭 설정 =============================== -->
 	<typeAliases>
 		<typeAlias type="com.board.model.BoardVO" alias="Board"/>
+		<typeAlias type="com.board.model.BoardNoticeVO" alias="BoardN"/>
+		<typeAlias type="com.board.model.PagingVO" alias="BoardPaging"/>
+		<typeAlias type="com.board.model.BoardComVO" alias="BoardCom"/>
 		<typeAlias type="com.board.model.FAQVO" alias="FAQ"/>
 		<typeAlias type="com.user.model.MemberVO" alias="Member"/>
 		<typeAlias type="com.user.model.PagingVO" alias="Paging"/>
@@ -17,17 +20,23 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.order.model.OrderProductVO" alias="OrderProduct"/>
 		<typeAlias type="com.product.model.CartVO" alias="Cart"/>
 		<typeAlias type="com.order.model.OrderVO" alias="Order"/>
+		<typeAlias type="com.board.model.QNADTO" alias="QNA"/>
 		<typeAlias type="com.myplant.model.MyPlantVO" alias="MyPlant"/>
+		<typeAlias type="com.myplant.model.PlantImageVO" alias="MyPlantI"/>
+		<typeAlias type="com.myplant.model.PlantForm" alias="PlantForm"/>
 	</typeAliases>
 	<!-- mapper 정의 ========================================= -->
 	<mappers>
 		<mapper resource="config/mybatis/mapper/BoardMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/BoardNoticeMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/BoardComMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/FAQMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/MemberMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/ProductMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/CategoryMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/OrderMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/CartMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/QNAMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/MyPlantMapper.xml"/>
 	</mappers>
 </configuration>

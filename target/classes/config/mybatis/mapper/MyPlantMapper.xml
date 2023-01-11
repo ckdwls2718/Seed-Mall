@@ -11,5 +11,43 @@
 		values(#{plant_idx}, #{midx}, #{oidx}, #{nickname:VARCHAR}, #{plantImage},
 		#{percent}, #{pcomment:VARCHAR}, sysdate)
 	</insert>
+	
+	<insert id="insertImage" parameterType="MyPlantI">
+		<selectKey keyProperty="image_pidx" resultType="int" order="BEFORE">
+			select myplant_image_seq.nextval from dual
+		</selectKey>
+		insert into myplant_image(image_pidx,pimage,pidate,plant_idx)
+		values(#{image_pidx},#{pimage},sysdate,#{plant_idx})
+	</insert>
+	
+	<select id="selectAllMyPlant" resultType="MyPlant">
+		select * from myplant
+	</select>
+	
+	<select id="getPlantImages" parameterType="int" resultType="MyPlantI">
+		select * from myplant_image where plant_idx=#{value}
+	</select>
+	
+	<update id="updateMyPlant" parameterType="PlantForm">
+		update myplant set pcomment=#{pcomment}, plantimage=#{plantImageStr}, percent=#{percent}
+		where plant_idx=#{plant_idx}
+	</update>
+	
+	<update id="updateMyPlantNickname" parameterType="MyPlant">
+		update myplant set nickname=#{nickname} where plant_idx=#{plant_idx}
+	</update>
+	
+	<select id="getMyPlantList" parameterType="int" resultType="MyPlant">
+		select mp.*,m.email,m.mname 
+		from myplant mp join member m on mp.midx=m.midx 
+		where mp.midx=#{value} 
+		order by mp.pdate desc
+	</select>
+	
+	<select id="getMyPlantDetail" parameterType="int" resultType="MyPlant">
+		select mp.*,m.email,m.mname 
+		from myplant mp join member m on mp.midx=m.midx 
+		where plant_idx=#{value}
+	</select>
 
 </mapper>
