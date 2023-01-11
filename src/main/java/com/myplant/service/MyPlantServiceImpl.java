@@ -30,8 +30,7 @@ public class MyPlantServiceImpl implements MyPlantService {
 
 	@Override
 	public int updateMyPlantNickname(MyPlantVO plant) {
-		// TODO Auto-generated method stub
-		return 0;
+		return myPlantMapper.updateMyPlantNickname(plant);
 	}
 
 	@Override

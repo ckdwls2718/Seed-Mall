@@ -34,11 +34,13 @@ function setThumbnail(event) {
 		<tr>
 			<th>이름</th>
 			<th>이메일</th>
+			<th>식물이름</th>
 			<th>구매일자</th>
 		</tr>
 		<tr>
 			<td>${plant.mname}</td>
 			<td>${plant.email}</td>
+			<td>${plant.nickname}</td>
 			<td>${plant.pdate}</td>
 		</tr>
 	</table>

@@ -33,6 +33,10 @@
 		where plant_idx=#{plant_idx}
 	</update>
 	
+	<update id="updateMyPlantNickname" parameterType="MyPlant">
+		update myplant set nickname=#{nickname} where plant_idx=#{plant_idx}
+	</update>
+	
 	<select id="getMyPlantList" parameterType="int" resultType="MyPlant">
 		select mp.*,m.email,m.mname 
 		from myplant mp join member m on mp.midx=m.midx 
