@@ -8,11 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.myplant.model.MyPlantVO;
+import com.myplant.service.MyPlantService;
 import com.order.model.OrderProductVO;
 import com.order.model.OrderVO;
 import com.order.service.OrderService;
@@ -27,6 +31,9 @@ public class MypageController {
 	
 	@Autowired
 	OrderService orderService;
+	
+	@Autowired
+	MyPlantService mpService;
 	
 	@GetMapping()
 	public String mypage() {
@@ -66,15 +73,33 @@ public class MypageController {
 	@GetMapping("/plantList")
 	public String myPlantList(Model m, HttpSession ses) {
 		
+		MemberVO loginUser = (MemberVO)ses.getAttribute("loginUser");
 		
+		List<MyPlantVO> plantArr = mpService.getMyPlantList(loginUser.getMidx());
+		
+		m.addAttribute("plantArr", plantArr);
 		
 		return "member/plantList";
 	}
 	
-	@GetMapping("/plant/{pidx}")
-	public String getPlantDetail(Model m, HttpSession ses, @PathVariable("pidx") int pidx) {
+	@PostMapping("/plant")
+	public String getPlantDetail(Model m, HttpSession ses, @RequestParam("pidx") int pidx) {
 		
+		log.info("pidx = "+pidx);
+		MyPlantVO plant = mpService.getMyPlantDetail(pidx);
+		
+		m.addAttribute("plant", plant);
 		
 		return "member/plantDetail";
 	}
+	@PostMapping("updateNick")
+	@ResponseBody
+	public int updateNickname(MyPlantVO plant) {
+		
+		log.info("plant="+plant);
+		int result = mpService.updateMyPlantNickname(plant);
+		
+		return result;
+	}
+	
 }
