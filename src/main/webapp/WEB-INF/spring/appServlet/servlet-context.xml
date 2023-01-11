@@ -32,7 +32,7 @@
 	</beans:bean>
 
 
-	<context:component-scan base-package="com.my.seedmall, com.board, com.product, com.user, com.order" />
+	<context:component-scan base-package="com.my.seedmall, com.board, com.product, com.user, com.order, com.myplant" />
 
 
 	<interceptors>		

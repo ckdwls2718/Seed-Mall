@@ -16,19 +16,34 @@ import lombok.extern.log4j.Log4j;
 @Service
 @Log4j
 public class ProductServiceImpl implements ProductService {
-	
+
 	@Autowired
 	ProductMapper productMapper;
 	
+	@Override
+	public int getProdTotal(PagingVO page) {
+		return productMapper.getProdCount(page);
+	}
 
 	@Override
 	public List<ProductVO> getProdList(PagingVO page) {
 		List<ProductVO> prodArr = productMapper.getProducts(page);
-		for(ProductVO prod : prodArr) {
+		for (ProductVO prod : prodArr) {
 			List<ProductImageVO> prodImageArr = productMapper.getProdImages(prod.getPidx());
 			prod.setPimageList(prodImageArr);
 		}
-		log.info("prodArr"+ prodArr);
+		log.info("prodArr" + prodArr);
+		return prodArr;
+	}
+	
+	@Override
+	public List<ProductVO> getProdListPaging(PagingVO page) {
+		List<ProductVO> prodArr = productMapper.getProductsPaging(page);
+		for (ProductVO prod : prodArr) {
+			List<ProductImageVO> prodImageArr = productMapper.getProdImages(prod.getPidx());
+			prod.setPimageList(prodImageArr);
+		}
+		log.info("prodArr" + prodArr);
 		return prodArr;
 	}
 
@@ -46,7 +61,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public ProductVO selectByIdx(int pidx) {
-		ProductVO prod =productMapper.selectByPidx(pidx);
+		ProductVO prod = productMapper.selectByPidx(pidx);
 		List<ProductImageVO> prodImageArr = productMapper.getProdImages(prod.getPidx());
 		prod.setPimageList(prodImageArr);
 		return prod;

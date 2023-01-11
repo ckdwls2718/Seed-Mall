@@ -158,9 +158,21 @@ div#upCategory button {
 	<div class="container bg-white">
 		<div id="upCategory" class='container row'>
 			<div class="col-md-5">
-				<button class="btn btn-outline-success" type="button"
+				<a class="btn btn-outline-info" href="${myctx}/prod">전체 상품보기</a>
+				<button class="btn btn-outline-success m-3" type="button"
 					data-bs-toggle="collapse" data-bs-target="#multiCollapseExample1"
 					aria-expanded="false" aria-controls="multiCollapseExample1">전체카테고리보기</button>
+				<div class="text-right">
+			<c:if test="${not empty paging.upcg and not empty prodArr}">
+				${prodArr[0].upCg_name}
+					<c:if test="${not empty paging.downcg and not empty prodArr}">
+						> ${prodArr[0].downCg_name}
+					</c:if>
+			</c:if>
+			<c:if test="${not empty paging.findKeyword}">
+				검색어 : ${paging.findKeyword}
+			</c:if>
+		</div>
 			</div>
 		</div><br>
 		
@@ -231,7 +243,7 @@ div#upCategory button {
 					class="form-select" style="width: 15%; margin-left: auto"
 					name="sort" onchange="changeSort(this.value)">
 					<option value="1" <c:if test="${paging.sort eq 1}">selected</c:if>>최신순</option>
-					<option value="2" <c:if test="${paging.sort eq 2}">selected</c:if>>평점순</option>
+					<option value="2" <c:if test="${paging.sort eq 2}">selected</c:if>>추천순</option>
 					<option value="3" <c:if test="${paging.sort eq 3}">selected</c:if>>높은가격순</option>
 					<option value="4" <c:if test="${paging.sort eq 4}">selected</c:if>>낮은가격순</option>
 				</select>
@@ -243,24 +255,12 @@ div#upCategory button {
 		<div class="row mb-3">
 			<!-- 검색창 -->
 			<form name="searchF" id="searchF" class="d-flex" role="search">
-				<span>총 ${fn:length(prodArr)}개의 상품</span>
+				<span>총 ${paging.totalCount}개의 상품</span>
 				<input name="findKeyword" class="form-control me-2" type="search"
 					placeholder="검색어를 입력하세요" aria-label="Search"
 					style="width: 25%; margin-left: auto">
 				<button class="btn btn-outline-success" type="submit">검색</button>
 			</form>
-		</div>
-		
-		<div class="text-right">
-			<c:if test="${not empty paging.upcg and not empty prodArr}">
-				${prodArr[0].upCg_name}
-					<c:if test="${not empty paging.downcg and not empty prodArr}">
-						> ${prodArr[0].downCg_name}
-					</c:if>
-			</c:if>
-			<c:if test="${not empty paging.findKeyword}">
-				검색어 : ${paging.findKeyword}
-			</c:if>
 		</div>
 		
 		<!-- 식물 목록 출력 -->
@@ -283,23 +283,27 @@ div#upCategory button {
 						</ul>
 					</div>
 					<div class="tag ${prod.pspec}">${prod.pspec}</div>
-					<div class="title pt-4 pb-1">${prod.pname}</div>
-					<div class="d-flex align-content-center justify-content-center">
+					<div class="title pt-4 pb-1"><h5>${prod.pname}</h5><span class="badge bg-danger">${prod.percent}%할인</span></div>
+					<!-- <div class="d-flex align-content-center justify-content-center">
+						별점
 						<span class="fas fa-star"></span> <span class="fas fa-star"></span>
 						<span class="fas fa-star"></span> <span class="fas fa-star"></span>
 						<span class="fas fa-star"></span>
-					</div>
+					</div> -->
 					<div class="price">
-						<del><fmt:formatNumber value="${prod.price}"
-							pattern="###,###,### 원" />
-						</del><br>
+						<del><small style="color:gray;"><fmt:formatNumber value="${prod.price}" pattern="###,###,### 원" /></small></del>
 						<b><fmt:formatNumber value="${prod.psaleprice}" pattern="###,###,### 원" /></b>
-								<br> <span class="badge bg-danger">${prod.percent}%할인</span>
+						
 					</div>
 				</div>
 			</c:forEach>
 		</div>
+		<!-- 페이지 기능  -->
+			<div id="pageNavi">
+				${pageNavi}
+			</div>
 	</div>
+	
 </body>
 </html>
 <%@ include file="/WEB-INF/views/foot.jsp"%>

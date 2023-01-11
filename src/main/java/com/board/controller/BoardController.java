@@ -7,14 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.board.service.BoardService;
 
+import lombok.extern.log4j.Log4j;
+
 @Controller
+@Log4j
 public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
 	@GetMapping("/test")
 	public String test(Model m) {
-		m.addAttribute("boardArr", boardService.getBoardList());
+		m.addAttribute("boardArr", boardService.getBoardList(null));
 		return "test";
 	}
 }
