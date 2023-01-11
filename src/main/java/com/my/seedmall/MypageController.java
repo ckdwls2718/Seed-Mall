@@ -38,6 +38,11 @@ public class MypageController {
 		return "member/mypage";
 	}
 	
+	@GetMapping("/infoForm")
+	public String myinfoForm() {
+		return "member/mypageEditForm";
+	}
+	
 	//주문 내역
 	@GetMapping("/orderList")
 	public String myOrderList(Model m, HttpSession ses) {
