@@ -83,8 +83,8 @@
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">쇼핑</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="${myctx}/prod">전체보기</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#!">관엽식물</a></li>
+                                <!-- <li><hr class="dropdown-divider" /></li> -->
+                                <li><a class="dropdown-item" href="#!"></a></li>
                                 <li><a class="dropdown-item" href="#!">다육식물</a></li>
                             </ul>
                         </li>
