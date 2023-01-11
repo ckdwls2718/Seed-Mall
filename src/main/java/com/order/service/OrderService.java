@@ -13,6 +13,9 @@ public interface OrderService {
 	// 주문VO 생성하기 - 상품 정보 생성하기
 	int createOrderProductList(OrderProductVO opvo);
 
+	// 주문 구매확정 버튼
+	int orderConfirmed(int oidx);
+	
 	// 주문 명세서 가져오기 - 회원번호로 List가져오기
 	List<OrderVO> getOrderList(int midx);
 
