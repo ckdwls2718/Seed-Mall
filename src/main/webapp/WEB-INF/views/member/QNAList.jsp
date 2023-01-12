@@ -1,29 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <script>
-	const detailOrder = function(oidx) {
-		$('input[name=oidx]').val(oidx);
-		odF.submit();
-	}
-
-	const orderEnd = function(oidx) {
-		$.ajax({
-			type : 'post',
-			url : 'orderEnd',
-			dataType : 'json',
-			data : 'oidx=' + oidx,
-			cache : false,
-			success : function(res) {
-				//alert(res);
-				if (res > 0) {
-					location.reload();
-				}
-			},
-			error : function(err) {
-				alert('err:' + err.status);
+const deleteQna = function(qidx){
+	
+	let myctx = "${pageContext.request.contextPath}";
+	url= myctx+"/QNA/del";
+	
+	$.ajax({
+		url:url,
+		type:'post',
+		dataType:'json',
+		data:'qidx='+qidx,
+		cache:false,
+		success:function(res){
+			//alert(res);
+			if(res>0){
+				location.reload();
 			}
-		})
-	}
+		},
+		error:function(err){
+			alert('err : '+err.status);
+		}
+	})
+}
 </script>
 <%@ include file="/WEB-INF/views/top.jsp"%>
 <div class="d-flex">
@@ -60,8 +59,10 @@
 											<c:if test="${qna.qna_ReList eq null or empty qna.qna_ReList}">미답변</c:if>
 											<c:if test="${qna.qna_ReList ne null and not empty qna.qna_ReList}">답변완료</c:if>
 										</td>
-										<td><img style="width: 100px; margin: auto" class="img-fluid"
+										<td><a href="${myctx}/prod/${qna.product.pidx}">
+											<img style="width: 100px; margin: auto" class="img-fluid"
 											src="${myctx}/resources/product_images/${qna.product.pimageList[0].pimage}">
+											</a>
 										</td>
 										
 										<td width="60%">
@@ -82,9 +83,8 @@
 											</div>
 										</div>
 										</td>
-										
-										
 										<td>${qna.qdate}</td>
+										<td><button type="button">수정</button><button type="button" onclick="deleteQna('${qna.qidx}')">삭제</button></td>
 										</tr>
 										
 
