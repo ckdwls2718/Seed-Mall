@@ -40,7 +40,6 @@ function execPostCode() {
 			$("[name=mpost]").val(data.zonecode);
 			$("[name=maddr1]").val(fullRoadAddr);
 
-			/* document.getElementById('signUpUserPostNo').value = data.zonecode;*///5자리 새우편번호 사용
 			document.getElementById('mpost').value = data.zonecode; //5자리 새우편번호 사용
 			document.getElementById('maddr1').value = fullRoadAddr;
 		}
@@ -51,7 +50,8 @@ function execPostCode() {
 <div class="d-flex">
 <%@ include file="/WEB-INF/views/member/mypageSidebar.jsp"%>
 <div class="container">
-<form>
+<form action="updateInfo" method="post">
+<input type="hidden" name="midx" value="${loginUser.midx}">
 	<table class="table">
 			<tr>
 				<td width="20%" class="m1"><b>등급</b></td>
@@ -71,16 +71,16 @@ function execPostCode() {
 			<tr>
 				<td width="20%" class="m1"><b>연락처</b></td>
 				<td width="80%" class="m2">
-				<input type="text" name="mhp1" id="mhp1" maxlength="3" value="${loginUser.mhp1}" style="width:19.5%; height: 35px; border-radius: 5px; border: 1px solid #ced4da;"> - 
-				<input type="text" name="mhp2" id="mhp2" maxlength="4" value="${loginUser.mhp2}" style="width:19.5%; height: 35px; border-radius: 5px; border: 1px solid #ced4da;"> -
-				<input type="text" name="mhp3" id="mhp3" maxlength="4" value="${loginUser.mhp3}" style="width:19.5%; height: 35px; border-radius: 5px; border: 1px solid #ced4da;">
+				<input type="text" name="mhp1" id="mhp1" maxlength="3" value="${loginUser.mhp1}" style="width:19.5%; height: 35px; border-radius: 5px; border: 1px solid #ced4da;" required> - 
+				<input type="text" name="mhp2" id="mhp2" maxlength="4" value="${loginUser.mhp2}" style="width:19.5%; height: 35px; border-radius: 5px; border: 1px solid #ced4da;" required> -
+				<input type="text" name="mhp3" id="mhp3" maxlength="4" value="${loginUser.mhp3}" style="width:19.5%; height: 35px; border-radius: 5px; border: 1px solid #ced4da;" required>
 				</td>
 			</tr>
 			<tr>
 				<td width="26%" class="m1"><b>주소</b></td>
 				<td width="74%" class="m2"><input type="text" name="mpost"
 					id="mpost" placeholder="우편번호" maxlength="5" class="form-control"
-					style="width:95px; height: 35px; margin-bottom: 10px; display: inline;" value="${loginUser.mpost}">
+					style="width:95px; height: 35px; margin-bottom: 10px; display: inline;" value="${loginUser.mpost}" required>
 					<button type="button" class="btn btn-outline-success"
 						style="width: 22%; height: 35px; vertical-align: top; font-size: 15px;
 						font-weight: bold; float:right; margin-right: 33%;" onclick="execPostCode()" >주소 찾기</button>
@@ -88,10 +88,10 @@ function execPostCode() {
 						style="width: 27%; height: 35px; vertical-align: top; font-size: 15px;
 						font-weight: bold; float:right; margin-right: 3.5%;">주소 찾기</button> -->
 				<input type="text" name="maddr1" id="maddr1" placeholder="도로명주소" class="form-control"
-					style="width: 67%;height: 35px; float:left; margin-bottom: 10px;" value="${loginUser.maddr1}">
+					style="width: 67%;height: 35px; float:left; margin-bottom: 10px;" value="${loginUser.maddr1}" required>
 					<input type="text"
 					name="maddr2" id="maddr2" placeholder="상세주소" class="form-control"
-					style="width: 67%; height: 35px;" value="${loginUser.maddr2}"></td>
+					style="width: 67%; height: 35px;" value="${loginUser.maddr2}" required></td>
 			</tr>
 			<tr>
 				<td colspan="2" class="m3 text-center">

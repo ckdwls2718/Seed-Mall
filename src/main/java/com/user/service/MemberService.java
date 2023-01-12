@@ -22,6 +22,9 @@ public interface MemberService {
 	int deleteMember(Integer midx);
 
 	int updateMember(MemberVO member);
+	
+	// 마이페이지 회원정보 수정하는 메서드
+	int updateMemberInfo(MemberVO member);
 
 	MemberVO getMember(Integer midx);
 
