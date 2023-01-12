@@ -18,9 +18,10 @@ public class BoardReviewVO {
     private String rname;//작성자
     private int rreadnum;//조회수
     private int rlikenum;//좋아요수
-    private int rdate;//평점
-	private java.sql.Date qdate; // 작성일
+    private int score;//평점
+	private java.sql.Date rdate; // 작성일
 	
+	private String email;
 	private List<BoardReviewVO> boardReviewVO;
 	
 	

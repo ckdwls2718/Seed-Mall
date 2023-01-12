@@ -163,12 +163,9 @@ const insertCart = function(){
 	
 	<!--right-->
 </div>
-<div class="page-header"> 
-	<h2>리뷰</h2>
-</div>
-<form></form>
 
 <c:import url="/QNA/${prod.pidx}"/>
+<c:import url="/review/${prod.pidx}"/>
 
 
 <%@ include file="/WEB-INF/views/foot.jsp"%>

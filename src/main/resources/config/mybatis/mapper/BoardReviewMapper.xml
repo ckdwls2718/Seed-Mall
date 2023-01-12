@@ -2,11 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.board.mapper.BoardReviewMapper">
-<insert id="reviewWrite">
-	insert into board_review(
-	ridx,midx,oidx,rtitle,rcontent,rname,rreadnum,rlikenum,score,rdate) value(
-	${ridx},${midx},${oidx},${rtitle},${rcontent},${rname},${rreadnum},${rlikenum},${score},${rdate}
-	)	
+<insert id="insertReview" parameterType="Review">
+	<selectKey keyProperty="ridx" order="BEFORE" resultType="int">
+		select board_review_seq.nextval from dual
+	</selectKey>
+	insert into board_review(ridx,midx,oidx,rtitle,rcontent,rname,rreadnum,rlikenum,score,rdate) 
+	values(#{ridx},#{midx},#{oidx},#{rtitle},#{rcontent},#{rname:VARCHAR},#{rreadnum},#{rlikenum},#{score},sysdate)	
 </insert>
+
+	<select id="getReview" resultType="Review" parameterType="_int">
+       select * from board_review b join orders o on b.oidx=o.oidx where pidx=#{value}
+    </select>
 
 </mapper>
