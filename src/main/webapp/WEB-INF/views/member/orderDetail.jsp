@@ -77,7 +77,7 @@ const reviewForm = function(oidx){
 		<div class="text-center">
 			<button class="btn btn-success" type="button" onclick="javascript:history.back()">뒤로가기</button>
 
-			<c:if test="${order.delivaryState ne '4'}">
+			<c:if test="${order.deliveryState ne '4'}">
 			<button class="btn btn-danger" type="button" >주문취소</button> 
 			</c:if>
 		</div>
