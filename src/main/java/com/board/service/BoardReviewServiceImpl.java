@@ -26,14 +26,32 @@ public class BoardReviewServiceImpl implements BoardReviewService {
 
 	@Override
 	public int updateReview(BoardReviewVO review) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return boardReviewMapper.updateReview(review);
 	}
 
 	@Override
 	public int deleteReview(int ridx) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return boardReviewMapper.deleteReview(ridx);
+	}
+
+	@Override
+	public int updateReadnum(Integer ridx) {
+		
+		return boardReviewMapper.updateReadnum(ridx);
+	}
+
+	@Override
+	public BoardReviewVO selectBoardByIdx(Integer ridx) {
+		
+		return boardReviewMapper.selectBoardByIdx(ridx);
+	}
+
+	@Override
+	public BoardReviewVO getReviewVO(BoardReviewVO review) {
+		
+		return boardReviewMapper.getReviewVO(review);
 	}
 
 	

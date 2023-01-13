@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BoardReviewVO {
 	private int ridx;// 글번호
+	private int pidx;//상품번호
 	private int midx;// 회원번호
 	private int oidx;// 주문번호
 	private String rtitle;//제목	
@@ -22,7 +23,7 @@ public class BoardReviewVO {
 	private java.sql.Date rdate; // 작성일
 	
 	private String email;
-	private List<BoardReviewVO> boardReviewVO;
+	private List<BoardReviewVO> boardReviewList;
 	
 	
 }

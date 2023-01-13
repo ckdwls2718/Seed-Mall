@@ -9,9 +9,16 @@ public interface BoardReviewMapper {
 	
 	public int insertReview(BoardReviewVO review);
 	
-	public int updateReview(BoardReviewVO review);
+	BoardReviewVO getReviewVO(BoardReviewVO review);
 	
-	public int deleteReview(int ridx);
+	int updateReview(BoardReviewVO review);
+	
+	int deleteReview(int ridx);
+	
+	int updateReadnum(Integer ridx);
+	
+	BoardReviewVO selectBoardByIdx(Integer ridx);
+	
 	
 	
 	

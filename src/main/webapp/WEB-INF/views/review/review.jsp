@@ -36,10 +36,7 @@ const insertReview = function(){
 		}
 	})
 }
-
-const listReview =function(){
-	$('#a').html("리뷰 목록 들어올 예정");
-}
+	 
 </script>
 
 <div class="container">
@@ -59,38 +56,38 @@ const listReview =function(){
 </ul>
 <h1>상품 리뷰</h1>
 
-
-<c:if test="${loginUser ne null}">
-<form id="rnaF">
-<input type="text" name="midx" value="${loginUser.midx}">
-<input type="text" name="ridx" value="${prod.pidx}">
-<input type="text" name="oidx" value="2">
-<div class="mb-3">
-  <label for="rtitle" class="form-label">제목</label>
-  <input type="text" class="form-control" id="rtitle" name="rtitle" required>
-</div>
-<div class="mb-3">
-  <label for="rcontent" class="form-label">내용</label>
-  <textarea class="form-control" id="rcontent" name="rcontent" rows="3" required></textarea>
-</div>
-<button class="btn btn-info" type="button" onclick="insertReview()">등록</button>
-</form>
-</c:if>
 <table class="table">
  <tr>
- 	<th>상태</th>
+ 	<!-- <th>글번호</th> -->
   	<th>제목</th>
+  	<th>평가점수</th>
   	<th>작성자</th>
   	<th>작성일</th>
+  	<th>조회수</th>
+  	 <c:if test="${rarr ne null and not empty rarr}">
+  	<c:forEach var="Review" items="${rarr}">
+					<tr>
+						<%-- <td><c:out value="${Review.ridx}" /></td> --%>
+						<td><a href="${pageContext.request.contextPath}/review/ReviewGet?ridx=${Review.ridx}">${Review.rtitle}</a>
+						</td>
+						<td><c:out value="${Review.score}" /></td>
+						<td><c:out value="${Review.email}" /></td>
+						<td><c:out value="${Review.rdate}" /></td>
+						<td><c:out value="${Review.rreadnum}" /></td>
+					</tr>
+				</c:forEach>
+			</c:if>
  </tr>
  </table>
- <c:if test="${rArr eq null or empty rArr}">
+ <c:if test="${rarr eq null or empty rarr}">
  	<table>
  	<tr>
  		<td colspan="4" id="a">등록된 리뷰가 없습니다</td>
  	</tr>
  	</table>
  </c:if>
- 
+
+ <table>
+				
  </table>
 </div>
