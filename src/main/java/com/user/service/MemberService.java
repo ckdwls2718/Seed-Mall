@@ -47,6 +47,10 @@ public interface MemberService {
 	   
 	// 검색목록 가져오기
 	List<MemberVO> findMember(PagingVO pvo);
+	
+	//마일리지 적립
+	int updateGrade(MemberVO vo);
+	
 
 	
 

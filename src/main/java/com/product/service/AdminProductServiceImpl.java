@@ -244,4 +244,14 @@ public class AdminProductServiceImpl implements AdminProductService {
 		return x;
 	}
 
+	@Override
+	public int insertUpcg(CategoryVO cvo) {
+		return this.productMapper.insertUpcg(cvo);
+	}
+
+	@Override
+	public int insertDowncg(CategoryVO cvo) {
+		return this.productMapper.insertDowncg(cvo);
+	}
+
 }

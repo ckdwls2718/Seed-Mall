@@ -44,6 +44,8 @@ input {
 				style="text-align: left; margin: 40px 40px 0 0; font-weight: bolder">상품
 				목록</h2>
 			<div style="text-align: right">
+			<button class="btn btn-outline-warning"
+					onclick="location.href='${myctx}/admin/categoryForm'">카테고리등록</button>
 				<button class="btn btn-outline-success"
 					onclick="location.href='${myctx}/admin/prodForm'">상품등록</button>
 			</div>
