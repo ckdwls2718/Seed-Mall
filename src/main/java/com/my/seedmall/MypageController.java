@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.board.model.QNADTO;
+import com.board.service.QNAService;
 import com.myplant.model.MyPlantVO;
 import com.myplant.service.MyPlantService;
 import com.order.model.OrderProductVO;
@@ -38,6 +40,9 @@ public class MypageController {
 	
 	@Autowired
 	MyPlantService mpService;
+	
+	@Autowired
+	QNAService qnaService;
 	
 	@GetMapping()
 	public String mypage() {
@@ -148,6 +153,7 @@ public class MypageController {
 		return "member/plantList";
 	}
 	
+	//식물 상세보기
 	@PostMapping("/plant")
 	public String getPlantDetail(Model m, HttpSession ses, @RequestParam("pidx") int pidx) {
 		
@@ -158,6 +164,8 @@ public class MypageController {
 		
 		return "member/plantDetail";
 	}
+	
+	//식물 애칭 변경
 	@PostMapping("updateNick")
 	@ResponseBody
 	public int updateNickname(MyPlantVO plant) {
@@ -168,4 +176,17 @@ public class MypageController {
 		return result;
 	}
 	
+	//QNA 리스트
+	@GetMapping("QNA")
+	public String getQnAList(Model m, HttpSession ses) {
+		MemberVO loginUser = (MemberVO)ses.getAttribute("loginUser");
+		
+		List<QNADTO> qArr = qnaService.getMyQNAList(loginUser.getMidx());
+		
+		m.addAttribute("qArr", qArr);
+		
+		return "member/QNAList";
+		
+	}
+		
 }
