@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.myplant.model.MyPlantVO;
 import com.myplant.service.MyPlantService;
 import com.order.mapper.OrderMapper;
+import com.order.model.DeliveryStatusVO;
 import com.order.model.OrderProductVO;
 import com.order.model.OrderVO;
 import com.order.service.OrderService;
@@ -124,6 +125,7 @@ public class OrderController {
 				opvo.setOqty(pd.getPqty()); // 선택한 상품 수량
 				opvo.setOsalePrice(pd.getPsaleprice());
 				opvo.setOpoint(pd.getPpoint());
+				ovo.setStatusStr("상품준비중");
 
 				int n3 = orderMapper.createOrderProductList(opvo);
 
