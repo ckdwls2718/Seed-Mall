@@ -92,7 +92,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!--비밀번호 변경  -->
 	<update id="updatePassword" parameterType="Member">
-		update users set pwd=#{pwd} where email=#{email}
+		update member set pwd=#{pwd} where email=#{email}
+	</update>
+	
+	<update id="updateGrade" parameterType="Member">
+		update member set grade=#{grade} where email=#{email}
 	</update>
 	
 	

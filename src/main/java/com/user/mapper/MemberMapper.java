@@ -45,5 +45,7 @@ public interface MemberMapper {
 
 	List<MemberVO> selectMemberAll(Map<String, Integer> map);
 
+	int updateGrade(MemberVO vo);
+
 
 }

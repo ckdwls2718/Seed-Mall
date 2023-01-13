@@ -21,6 +21,7 @@ public class MemberVO {
 	private int status;// 회원상태: 0(일반회원),-1(정지회원), -2(탈퇴회원), 9(관리자)
 	private String statusStr;
 	private java.sql.Date mdate;
+	private int mileage;
 	
 	public String getAllHp() {
 		return mhp1+"-"+mhp2+"-"+mhp3;

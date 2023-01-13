@@ -35,4 +35,8 @@ public interface AdminProductService {
 	public int deleteProduct(int pidx);
 	public int deleteImage(int pidx, HttpServletRequest req);
 
+	/** 카테고리 등록*/
+	public int insertUpcg(CategoryVO cvo);
+	public int insertDowncg(CategoryVO cvo);
+
 }
