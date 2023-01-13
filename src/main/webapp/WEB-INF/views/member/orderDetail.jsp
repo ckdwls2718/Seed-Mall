@@ -66,7 +66,7 @@ const reviewForm = function(oidx){
 				<td>${product.oqty}</td>
 				<td>${product.opoint}</td>
 				<td>${product.osalePrice*product.oqty}</td>
-				<c:if test="${order.delivaryState eq '4'}">
+				<c:if test="${order.deliveryState eq '4'}">
 				<td><button type="button" onclick="reviewForm('${product.oidx}')">리뷰 작성</button></td>
 				</c:if>
 			</tr>
@@ -76,6 +76,7 @@ const reviewForm = function(oidx){
 		<div class="container">${order.desc_oTotalPrice-4000} + 배송비(4000) = ${order.desc_oTotalPrice}</div>
 		<div class="text-center">
 			<button class="btn btn-success" type="button" onclick="javascript:history.back()">뒤로가기</button>
+
 			<c:if test="${order.delivaryState ne '4'}">
 			<button class="btn btn-danger" type="button" >주문취소</button> 
 			</c:if>

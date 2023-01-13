@@ -15,7 +15,7 @@ public class OrderVO {
 	private int midx; // 회원번호
 
 	private int desc_oTotalPrice; // 전체가격
-	private String delivaryState; // 배송상태
+	private String deliveryState; // 배송상태
 	private String statusStr; //배송상태 한글
 	private int payment; // 지불형태
 	private String payStr; // 지불방식

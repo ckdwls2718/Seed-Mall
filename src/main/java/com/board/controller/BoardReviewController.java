@@ -93,8 +93,7 @@ public class BoardReviewController {
 
 	@PostMapping("review/reviewUpdate")
 	public String reviewupdate(Model m, @ModelAttribute BoardReviewVO rv) {
-		BoardReviewVO boardreview = boardReviewService.getReviewVO(rv);
-		log.info("rv=="+rv);
+		BoardReviewVO boardreview = boardReviewService.getReviewVO(rv);		
 		m.addAttribute("boardreview", boardreview);
 		return "review/reviewEdit";
 

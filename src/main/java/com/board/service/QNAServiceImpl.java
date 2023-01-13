@@ -7,12 +7,17 @@ import org.springframework.stereotype.Service;
 
 import com.board.mapper.QNAMapper;
 import com.board.model.QNADTO;
+import com.product.model.ProductVO;
+import com.product.service.ProductService;
 
 @Service
 public class QNAServiceImpl implements QNAService {
 	
 	@Autowired
 	QNAMapper qnaMapper;
+	
+	@Autowired
+	ProductService prodService;
 	
 	@Override
 	public int insertQNA(QNADTO qna) {
@@ -37,8 +42,12 @@ public class QNAServiceImpl implements QNAService {
 
 	@Override
 	public List<QNADTO> getMyQNAList(int midx) {
-		// TODO Auto-generated method stub
-		return null;
+		List<QNADTO> qArr = qnaMapper.getMyQNAList(midx);
+		for(QNADTO qna : qArr) {
+			ProductVO prod = prodService.selectByIdx(qna.getPidx());
+			qna.setProduct(prod);
+		}
+		return qArr;
 	}
 
 }

@@ -27,7 +27,7 @@
 	</select>
 	
 	<update id="updateReview" parameterType="Review">
-		update board_review set rcontent=#{rcontent},rtitle=#{rtitle} where ridx=#{ridx}
+		update board_review set rcontent=#{rcontent:VARCHAR},rtitle=#{rtitle} where ridx=#{ridx}
 	</update>
 	
 	<delete id="deleteReview" parameterType="int">

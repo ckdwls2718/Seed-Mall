@@ -201,6 +201,8 @@ public class CartController {
 
 				// 상품갯수
 				orderProdVo.setOqty(cart.getPqty());
+				
+				order.setStatusStr("상품준비중");
 
 				orderMapper.createOrderProductList(orderProdVo);
 
