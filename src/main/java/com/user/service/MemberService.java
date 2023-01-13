@@ -22,6 +22,9 @@ public interface MemberService {
 	int deleteMember(Integer midx);
 
 	int updateMember(MemberVO member);
+	
+	// 마이페이지 회원정보 수정하는 메서드
+	int updateMemberInfo(MemberVO member);
 
 	MemberVO getMember(Integer midx);
 
@@ -36,7 +39,7 @@ public interface MemberService {
 
 	MemberVO findPassword(MemberVO vo);
 
-	MemberVO updatePassword(MemberVO vo);
+	int updatePassword(MemberVO vo);
 
 	// 게시목록 가져오기
 	List<MemberVO> selectMemberAll(Map<String,Integer> map);

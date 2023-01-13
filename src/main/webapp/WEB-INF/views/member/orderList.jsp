@@ -5,6 +5,25 @@ const detailOrder = function(oidx){
 	$('input[name=oidx]').val(oidx);
 	odF.submit();
 }
+
+const orderEnd = function(oidx){
+	$.ajax({
+		type:'post',
+		url:'orderEnd',
+		dataType:'json',
+		data:'oidx='+oidx,
+		cache:false,
+		success:function(res){
+			//alert(res);
+			if(res>0){
+				location.reload();
+			}
+		},
+		error:function(err){
+			alert('err:'+err.status);
+		}
+	})
+}
 </script>
 <%@ include file="/WEB-INF/views/top.jsp"%>
 <div class="d-flex">
@@ -38,9 +57,15 @@ const detailOrder = function(oidx){
 							<tr>
 								<td>${order.desc_oidx}</td>
 								<td>${order.desc_odate}</td>
-								<td>${order.delivaryState}</td>
+								<td>${order.statusStr}</td>
 								<td>${order.desc_oTotalPrice}</td>
-								<td><button class="btn btn-outline-danger" type="button" onclick="detailOrder('${order.desc_oidx}')" >상세보기</button></td>
+								<td>
+									<button class="btn btn-outline-danger" type="button" onclick="detailOrder('${order.desc_oidx}')" >상세보기</button>
+									<c:if test="${order.deliveryState eq 3}">
+									<button class="btn btn-outline-success" type="button" onclick="orderEnd('${order.desc_oidx}')" >구매확정</button>
+									</c:if>
+								</td>
+								
 							</tr>
 						</c:forEach>
 						</form>

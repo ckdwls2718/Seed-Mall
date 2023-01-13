@@ -69,12 +69,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from member order by MIDX desc
 	</select>
 	
-	<select id="selectUserByUserid" parameterType="string" resultType="Member">
-		select * from member where EMAIL=#{value}	
+	<select id="getMember" parameterType="int" resultType="Member">
+		select * from member where midx=#{value}	
 	</select>
 
 	<update id="updateUser" parameterType="Member">
 		update  member set status=#{status} where midx=#{midx}
+	</update>
+	
+	<update id="updateMemberInfo" parameterType="Member">
+		update member set mhp1=#{mhp1},mhp2=#{mhp2},mhp3=#{mhp3},mpost=#{mpost},maddr1=#{maddr1},maddr2=#{maddr2}
+		where midx=#{midx}
 	</update>
 	
 	<delete id="deleteUser" parameterType="_int">
@@ -93,10 +98,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--비밀번호 변경  -->
 	<update id="updatePassword" parameterType="Member">
 		update member set pwd=#{pwd} where email=#{email}
-	</update>
-	
-	<update id="updateGrade" parameterType="Member">
-		update member set grade=#{grade} where email=#{email}
 	</update>
 	
 	

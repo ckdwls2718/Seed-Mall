@@ -37,6 +37,11 @@ public class AuthController {
 	public String joinForm() {
 		return "member/join";
 	}
+	
+	@GetMapping("/check")
+	public String test() {
+		return "member/check";
+	}
 
 	@PostMapping("/join")
 	public String joinEnd(Model m, @ModelAttribute("Member") MemberVO member) {
