@@ -61,7 +61,7 @@ const orderEnd = function(oidx){
 								<td>${order.desc_oTotalPrice}</td>
 								<td>
 									<button class="btn btn-outline-danger" type="button" onclick="detailOrder('${order.desc_oidx}')" >상세보기</button>
-									<c:if test="${order.delivaryState eq 3}">
+									<c:if test="${order.deliveryState eq 3}">
 									<button class="btn btn-outline-success" type="button" onclick="orderEnd('${order.desc_oidx}')" >구매확정</button>
 									</c:if>
 								</td>
