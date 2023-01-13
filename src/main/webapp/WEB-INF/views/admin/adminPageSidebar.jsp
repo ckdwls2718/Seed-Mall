@@ -14,19 +14,19 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="${myctx}/admin/adminPage/orderManagement" class="nav-link link-dark">
+        <a href="${myctx}/admin/orderManagement" class="nav-link link-dark">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
           주문/취소 관리
         </a>
       </li>
       <li>
-        <a href="${myctx}/admin/adminPage/plantManagement" class="nav-link link-dark">
+        <a href="${myctx}/admin/plantManagement" class="nav-link link-dark">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
           식물 관리
         </a>
       </li>
       <li>
-        <a href="${myctx}/admin/adminPage/history" class="nav-link link-dark">
+        <a href="${myctx}/admin/history" class="nav-link link-dark">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
           히스토리
         </a>

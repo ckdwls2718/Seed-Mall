@@ -20,6 +20,7 @@ import com.myplant.model.MyPlantVO;
 import com.myplant.model.PlantForm;
 import com.myplant.model.PlantImageVO;
 import com.myplant.service.MyPlantService;
+import com.order.model.OrderProductVO;
 import com.order.model.OrderVO;
 import com.order.service.OrderService;
 import com.user.model.MemberVO;
@@ -117,10 +118,10 @@ public class AdminPageController {
         page.setPagingBlock(5);
         page.init(ses);
         
-        List<OrderVO> orderArr = orderService.getOrderList_paging(page);
-        
         String loc = "admin/orderManagement";
         String pageNavi = page.getPageNavi(myctx, loc, userAgent);
+        
+        List<OrderVO> orderArr = orderService.getOrderList_paging(page);
         
         m.addAttribute("pageNavi", pageNavi);
         m.addAttribute("paging", page);
@@ -128,6 +129,16 @@ public class AdminPageController {
         
 		return "admin/orderManagement";
 	}
+	
+	// 배송상태 설정완료 시
+	@PostMapping("/deliveryStatus")
+	public String deliveryStatus(Model m, @ModelAttribute OrderVO ovo) {
+		
+		int n = orderService.updateDeliveryStatus(ovo);
+		
+		return "redirect:orderManagement";
+	}
+	
 
 	// 키워주세요 식물관리
 	@GetMapping("/plantManagement")

@@ -19,6 +19,8 @@ public interface OrderMapper {
 
 	// 주문 명세서 가져오기 - 페이징 처리를 위한 메서드
 	List<OrderVO> getOrderList_paging(PagingVO page);
+	List<OrderVO> getOrderMemberList_paging(PagingVO page);
+	List<OrderProductVO> getOrderProductrList_paging(PagingVO page);
 
 	// 상품정보 가져오기
 	List<OrderProductVO> getOrderProductList(int desc_oidx);
@@ -50,4 +52,7 @@ public interface OrderMapper {
 
 	// 주문 건 별로 수령자 가져오기
 	OrderVO getOrderMember(int desc_oidx);
+
+	// 배송상태 수정하기
+	int updateDeliveryStatus(OrderVO ovo);
 }

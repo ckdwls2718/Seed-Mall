@@ -5,71 +5,118 @@
 
 	<!-- 주문명세서 : 주문번호(pk)가 생성된다 -->
 	<insert id="createOrderList" parameterType="Order">
-		<selectKey keyProperty="desc_oidx" resultType="int" order="BEFORE">
+		<selectKey keyProperty="desc_oidx" resultType="int"
+			order="BEFORE">
 			select order_desc_seq.nextval from dual
 		</selectKey>
-		insert into order_desc(desc_oidx, midx, desc_oTotalPrice, delivaryState,
-		payment, gradePoint, gradeDiscount, ocomment, desc_odate)
+		insert into order_desc(desc_oidx, midx, desc_oTotalPrice,
+		deliveryState,
+		payment, gradePoint, gradeDiscount, ocomment,
+		desc_odate)
 		values(#{desc_oidx}, #{midx}, #{desc_oTotalPrice}, '0',
-		#{payment}, #{gradePoint}, #{gradeDiscount}, #{ocomment:VARCHAR}, sysdate)
+		#{payment}, #{gradePoint}, #{gradeDiscount}, #{ocomment:VARCHAR},
+		sysdate)
 	</insert>
-	
+
 	<!-- 수령자 -->
 	<insert id="createOrderMember" parameterType="Order">
-		<selectKey keyProperty="omidx" resultType="int" order="BEFORE">
+		<selectKey keyProperty="omidx" resultType="int"
+			order="BEFORE">
 			select ordermember_seq.nextval from dual
 		</selectKey>
 		insert into ordermember(omidx, desc_oidx, omname, omhp1, omhp2, omhp3,
 		ompost, omaddr1, omaddr2, omdate)
-		values(#{omidx}, #{desc_oidx}, #{omname}, #{omhp1}, #{omhp2}, #{omhp3},
-		#{ompost}, #{omaddr1}, #{omaddr2}, sysdate)		
-	
+		values(#{omidx}, #{desc_oidx},
+		#{omname}, #{omhp1}, #{omhp2}, #{omhp3},
+		#{ompost}, #{omaddr1},
+		#{omaddr2}, sysdate)
+
 	</insert>
-	
+
 	<!-- 주문상품정보 -->
 	<insert id="createOrderProductList" parameterType="OrderProduct">
-		<selectKey keyProperty="oidx" resultType="_int" order="BEFORE">
+		<selectKey keyProperty="oidx" resultType="_int"
+			order="BEFORE">
 			select orders_seq.nextval from dual
 		</selectKey>
-		insert into orders(oidx, desc_oidx, pidx, oqty, osalePrice, opoint, odate)
+		insert into orders(oidx, desc_oidx, pidx, oqty, osalePrice, opoint,
+		odate)
 		values(#{oidx}, #{desc_oidx}, #{pidx}, #{oqty}, #{osalePrice}
-		, #{opoint}, sysdate)
+		,
+		#{opoint}, sysdate)
 	</insert>
-	
-	<select id="getOrderCount" parameterType="Paging" resultType="_int">
+
+	<select id="getOrderCount" parameterType="Paging"
+		resultType="_int">
 		select count(*) from order_desc
 	</select>
-	
+
 	<select id="getOrderList" parameterType="int" resultType="Order">
-		select * 
-		from order_desc o join deliveryStatus d on o.delivaryState=d.statusNumber 
-		where midx =#{value} order by desc_oidx desc
+		select
+		*
+		from order_desc o join deliveryStatus d on
+		o.deliveryState=d.statusNumber
+		where midx =#{value} order by desc_oidx
+		desc
 	</select>
-	
-	<select id="getOrderList_Paging" parameterType="Paging" resultType="Order">
-		select order_desc.*,(select email from member where midx=order_desc.midx) 
-		email from order_desc order by desc_oidx desc
+
+	<!-- (관리자용) -->
+	<select id="getOrderList_paging" parameterType="Paging"
+		resultType="Order">
+		select * from(
+		select row_number() over(order by desc_oidx desc, desc_odate asc) rn,
+		o.*, (select statusStr from deliverystatus where statusNumber =
+		o.deliverystate) statusStr from order_desc o)
+
+				<![CDATA[
+				where rn > #{start} and rn < #{end}
+				]]>
 	</select>
-	
-	<select id="getOrderProduct" parameterType="int" resultType="OrderProduct">
+	<select id="getOrderMemberList_paging" parameterType="Paging"
+		resultType="Order">
+		select * from ordermember
+	</select>
+	<select id="getOrderProductrList_paging" parameterType="Paging"
+		resultType="Order">
+		select * from product p join orders o on p.pidx=o.oidx
+
+	</select>
+	<!-- -->
+
+	<select id="getOrderProduct" parameterType="int"
+		resultType="OrderProduct">
 		select * from product where pidx=#{value}
 	</select>
-	
-	<select id="getOrderProductList" parameterType="int" resultType="OrderProduct">
-		select * from product join orders using(pidx) where pidx in (select pidx from orders where desc_oidx=#{value}) and desc_oidx=#{value}
+
+	<select id="getOrderProductList" parameterType="int"
+		resultType="OrderProduct">
+		select * from product join orders using(pidx) where pidx in
+		(select pidx from orders where desc_oidx=#{value}) and
+		desc_oidx=#{value}
 	</select>
-	
+
 	<select id="getOrderDesc" parameterType="int" resultType="Order">
-		select order_desc.*, decode(payment,1,'신용카드',2,'무통장입금',3,'휴대폰결제') payStr
-		from order_desc where desc_oidx=#{value}
+		select
+		order_desc.*, decode(payment,1,'신용카드',2,'무통장입금',3,'휴대폰결제') payStr
+		from
+		order_desc where desc_oidx=#{value}
 	</select>
-	
-	<select id="getOrderMember" parameterType="int" resultType="Order">
+
+	<select id="getOrderMember" parameterType="int"
+		resultType="Order">
 		select * from ordermember where desc_oidx=#{value}
 	</select>
-	
+
 	<update id="orderConfirmed" parameterType="int">
-		update order_desc set delivaryState='4' where desc_oidx=#{value}
+		update order_desc set
+		deliveryState='4' where desc_oidx=#{value}
 	</update>
-		
+
+	<update id="updateDeliveryStatus" parameterType="Order">
+		update
+		order_desc set
+		deliveryState=#{deliveryState} where
+		desc_oidx=#{desc_oidx}
+	</update>
+
 </mapper>
