@@ -5,37 +5,39 @@
 <script src="https://cdn.ckeditor.com/4.17.2/standard/ckeditor.js"></script>
 <script>
 	$(function() {
-
-		CKEDITOR.replace('rcontent');
-
 		$('#bf').submit(function() {
 			if ($('#rtitle').val() == '') {
 				alert('제목을 입력하세요');
 				$('#rtitle').focus();
 				return false;
 			}
-			/* if($('#email').val()==''){
+			if($('#email').val()==''){
 				alert('글쓴이를 입력하세요');
 				$('#email').focus();
 				return false;
-			} */
-			if (CKEDITOR.instances.rcontent.getData() == '') {
+			} 
+			if ($('#rcontent').val() == '') {
 				alert('글내용을 입력하세요');
-				CKEDITOR.instances.rcontent.focus();
+				$('#rcontent').focus();
 				return false;
 			}
 			alert('등록되었습니다');
 			return true;
 		})
+		
 	})//$() end-----------------
-	
+const reviewCheck = function(){
+		  
+	}
+
+
 </script>
 <%
 String ctx = request.getContextPath();
 %>
 <div align="center" id="bbs" class="col-md-8 offset-md-2 my-4">
 	<h1>리뷰 작성</h1>
-	<form name="bf" id="bf" role="form" action="reviewEnd" method="POST"
+	<form name="bf" id="bf" role="form" action="reviewEnd" method="POST" 
 		enctype="multipart/form-data">
 		<input type="hidden" name="midx" value="${loginUser.midx}">
 		<input type="hidden" name="pidx" value="${pidx}">
@@ -49,16 +51,16 @@ String ctx = request.getContextPath();
 			
 			<tr>
 				<td style="width: 20%"><b>글쓴이</b></td>
-				<td style="width: 80%"><input type="text" name="email" id="email" class="form-control" readonly value="${Review.email}"></td>
+				<td style="width: 80%"><input type="text" name="email" id="email" class="form-control" readonly value="${loginUser.email}"></td>
 			</tr>
 			
 			<tr>
 				<td style="width: 20%"><b>평점</b></td>
 				<td style="width: 80%">
         <!-- <input type="hidden" name="score" id="score"> -->
-	    <label for="score1"><input type="radio" name="score" id="score1" value="1">1점</label>
+	    <label for="score1"><input type="radio" name="score" id="score1" value="1" >1점</label>
 		<label for="score2"><input type="radio" name="score" id="score2" value="2">2점</label>
-		<label for="score3"><input type="radio" name="score"  id="score3" value="3">3점</label>
+		<label for="score3"><input type="radio" name="score"  id="score3" value="3" checked>3점</label>
 		<label for="score4"><input type="radio" name="score" id="score4" value="4">4점</label>
 		<label for="score5"><input type="radio" name="score"  id="score5"value="5">5점</label>
 					</td>
@@ -72,7 +74,7 @@ String ctx = request.getContextPath();
 
 			<tr>
 				<td colspan="2">
-					<button type="submit" id="btnWrite" class="btn btn-success" >글쓰기</button>
+					<button type="submit" id="btnWrite" class="btn btn-success">글쓰기</button>
 					<button type="reset" id="btnReset" class="btn btn-warning">다시쓰기</button>
 				</td>
 			</tr>

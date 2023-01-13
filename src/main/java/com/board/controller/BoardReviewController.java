@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.board.model.BoardReviewVO;
 import com.board.service.BoardReviewService;
+import com.board.service.NaverAiService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -23,6 +24,9 @@ public class BoardReviewController {
 	
 	@Autowired
 	BoardReviewService boardReviewService;
+	
+	@Autowired
+	NaverAiService aiService;
 	
 	@GetMapping("/review/{pidx}")
 	public String getreview(Model m, @PathVariable("pidx") int pidx) {
@@ -63,7 +67,14 @@ public class BoardReviewController {
 	}
 	
 	@PostMapping("/user/reviewEnd")
-	public String reviewInsert(@ModelAttribute("BoardReviewVO") BoardReviewVO rv, Model m) {
+	public String reviewInsert(@ModelAttribute BoardReviewVO rv) throws Exception {
+		log.info("rv = "+rv);
+		int sentiment = aiService.sentimentAnalyze(rv.getRcontent());
+		
+		log.info("sentiment"+sentiment);
+		
+		rv.setSentiment(sentiment);
+		
 		boardReviewService.insertReview(rv);
 
 		return "redirect:../prod/"+rv.getPidx();
@@ -97,5 +108,7 @@ public class BoardReviewController {
 		return result;
 
 	}// 게시판 수정 하기
+	
+	
 	
 }
