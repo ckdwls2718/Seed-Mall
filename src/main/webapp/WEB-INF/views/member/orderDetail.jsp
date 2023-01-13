@@ -55,9 +55,11 @@ const reviewForm = function(oidx){
 				<th>포인트</th>
 				<th>총 가격</th>
 			</tr>
-			
+			<c:set var="pidx"/>
 			<!-- 상품 반복문 -->
 			<c:forEach var="product" items="${orderProduct}">
+			<c:set var="pidx" value="${product.pidx}"/>
+			<!-- 상품 반복문 -->
 			<tr>
 				<td>${product.pname}</td>
 				<td>${product.osalePrice}</td>
@@ -74,8 +76,13 @@ const reviewForm = function(oidx){
 		<div class="container">${order.desc_oTotalPrice-4000} + 배송비(4000) = ${order.desc_oTotalPrice}</div>
 		<div class="text-center">
 			<button class="btn btn-success" type="button" onclick="javascript:history.back()">뒤로가기</button>
+<<<<<<< HEAD
 			<c:if test="${order.deliveryState ne '4'}">
 			<button class="btn btn-danger" type="button" >주문취소</button>
+=======
+			<c:if test="${order.delivaryState ne '4'}">
+			<button class="btn btn-danger" type="button" >주문취소</button> 
+>>>>>>> develop
 			</c:if>
 		</div>
 	</form>
@@ -83,5 +90,6 @@ const reviewForm = function(oidx){
 </div>
 <form id="goReviewF" action="../review" method="post">
 <input type="hidden" name="oidx">
+<input type="hidden" name="pidx" value="${pidx}">
 </form>
 <%@ include file="/WEB-INF/views/foot.jsp"%>

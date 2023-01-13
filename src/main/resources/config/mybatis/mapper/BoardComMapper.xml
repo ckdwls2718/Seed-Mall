@@ -31,7 +31,7 @@
 	</delete>
 	
 	<update id="updateBoard" parameterType="BoardCom">
-		update board_com set ccontent=#{ccontent},ctitle=#{ctitle} where cidx=#{cidx}
+		update board_com set ccontent=#{ccontent,jdbcType=VARCHAR},ctitle=#{ctitle} where cidx=#{cidx}
 	</update>
 	
 	<update id="updateReadnum" parameterType="int">
