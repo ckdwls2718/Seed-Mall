@@ -46,11 +46,15 @@ public class MemberServiceImpl implements MemberService {
 	public int updateMember(MemberVO member) {
 		return MemberMapper.updateUser(member);
 	}
+	
+	@Override
+	public int updateMemberInfo(MemberVO member) {
+		return MemberMapper.updateMemberInfo(member);
+	}
 
 	@Override
 	public MemberVO getMember(Integer midx) {
-		// TODO Auto-generated method stub
-		return null;
+		return MemberMapper.getMember(midx);
 	}
 
 	@Override
