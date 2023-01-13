@@ -66,7 +66,7 @@ const delete1 = function(){
       <tr>
          <td colspan="2">
          
-            <button type="button" class="btn btn-success" onclick="edit()">리뷰 수정</button>
+<!--             <button type="button" class="btn btn-success" onclick="edit()">리뷰 수정</button> -->
             <button type="button" class="btn btn-danger" onclick="delete1()">리뷰 삭제</button>
                        
          </td>

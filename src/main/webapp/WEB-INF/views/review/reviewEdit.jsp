@@ -32,6 +32,7 @@ $(function(){
 const edit = function(){
 	
 	let qStr = $('#bf').serialize();
+	alert(qStr)
 	qStr = decodeURIComponent(qStr);
 	//alert(qStr);
 	
@@ -40,6 +41,7 @@ const edit = function(){
 		type:'post',
 		data:qStr,
 		dataType:'json',
+		contentType: 'application/x-www-form-urlencoded;charset=UTF-8',
 		cache:false,
 		success:function(res){
 			//alert(res);
