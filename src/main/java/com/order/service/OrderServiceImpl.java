@@ -32,13 +32,26 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	@Override
+	public List<OrderVO> getOrderList_paging(PagingVO page) {
+		return orderMapper.getOrderList_paging(page);
+	}
+	
+	
+	@Override
+	public List<OrderVO> getOrderMemberList_paging(PagingVO page) {
+		return orderMapper.getOrderMemberList_paging(page);
+	}
+	
+	@Override
+	public List<OrderProductVO> getOrderProductrList_paging(PagingVO page) {
+		return orderMapper.getOrderProductrList_paging(page);
+	}
+	
+	@Override
 	public int orderConfirmed(int oidx) {
 		return orderMapper.orderConfirmed(oidx);
 	}
 	
-	public List<OrderVO> getOrderList_paging(PagingVO page) {
-		return orderMapper.getOrderList_paging(page);
-	}
 
 	@Override
 	public List<OrderProductVO> getOrderProductList(int desc_oidx) {
@@ -78,6 +91,11 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public OrderVO getOrderMember(int desc_oidx) {
 		return orderMapper.getOrderMember(desc_oidx);
+	}
+
+	@Override
+	public int updateDeliveryStatus(OrderVO ovo) {
+		return orderMapper.updateDeliveryStatus(ovo);
 	}
 
 }
