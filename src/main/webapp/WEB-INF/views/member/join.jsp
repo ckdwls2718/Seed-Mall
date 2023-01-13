@@ -20,7 +20,12 @@ h3 {
 #last {
 	border-bottom: 0;
 }
+label{
+padding-bottom: 12px;
+}
+
 </style>
+
 
 <div class="container" style="height:auto; overflow: auto;">
 	<div style="width: 590px; margin:auto; ">
@@ -90,8 +95,32 @@ h3 {
 					name="Maddr2" id="Maddr2" placeholder="상세주소" class="form-control"
 					style="width: 67%; height: 35px;"></td>
 			</tr>
+			
 			<tr>
-				<td colspan="2" class="text-center" id="last" ">
+				<td width="26%" class="m1"><b>약관 확인</b></td>
+				
+				<td width="97%" class="m2"><div class="checkbox_group" >
+				
+				<label for="check_all" >전체 동의</label>
+  				<input type="checkbox" id="check_all" >
+  				
+  				<label for="check_1" >개인정보 처리방침 동의(필수)</label>
+  				<input type="checkbox" id="check_1" class="normal" >
+  				
+  				<label for="check_2">서비스 이용약관 동의(필수)</label>
+  				<input type="checkbox" id="check_2" class="normal" >
+  				 						
+  				<label for="check_3">마케팅 수신 동의(선택)</label>
+  				<input type="checkbox" id="check_3" class="normal" >
+  				
+  				<a href="javascript:popup()">약관 상세보기</a>
+  				
+ 				
+</div>
+					</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="text-center" id="last">
 					<button class="btn btn-success" type="button"
 						onclick="member_check()" style="margin:20px 15px 20px;">회원가입</button>
 					<button class="btn btn-outline-danger" type="reset">다시쓰기</button>
@@ -103,6 +132,31 @@ h3 {
 	</div>
 	
 </div>
+
+
+<script type="text/javascript">
+//체크박스 전체 선택
+$(".checkbox_group").on("click", "#check_all", function () {
+    $(this).parents(".checkbox_group").find('input').prop("checked", $(this).is(":checked"));
+});
+
+// 체크박스 개별 선택
+$(".checkbox_group").on("click", ".normal", function() {
+    var is_checked = true;
+
+    $(".checkbox_group .normal").each(function(){
+        is_checked = is_checked && $(this).is(":checked");
+    });
+
+    $("#check_all").prop("checked", is_checked);
+});
+
+function popup(){
+    var url="check";
+    var option="width=1000, height=700, top=600";
+    window.open(url,"check", option);
+}
+</script>
 
 
 
