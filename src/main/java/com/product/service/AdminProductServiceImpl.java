@@ -243,5 +243,4 @@ public class AdminProductServiceImpl implements AdminProductService {
 		productMapper.deleteImage(pidx);
 		return x;
 	}
-
 }

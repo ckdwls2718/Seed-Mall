@@ -120,6 +120,20 @@
 div#upCategory button {
 	
 }
+/* 설명 */
+ .jb-text {
+        padding: 15px 20px;
+        background-color: #444444;
+        border-radius: 5px;
+        color: #ffffff;
+        /* position: absolute; */
+        
+        opacity: 0;
+        transition: all ease 0.5s;
+      }
+      .jb-title:hover + .jb-text {
+        opacity: 1;
+      }
 </style>
 <script type='text/javascript' src=''></script>
 <script type='text/javascript'
@@ -158,15 +172,15 @@ div#upCategory button {
 	<div class="container bg-white">
 		<div id="upCategory" class='container row'>
 			<div class="col-md-5">
-				<a class="btn btn-outline-info" href="${myctx}/prod">전체 상품보기</a>
+				<a class="btn btn-outline-info" href="${myctx}/prod">전체 상품</a>
 				<button class="btn btn-outline-success m-3" type="button"
 					data-bs-toggle="collapse" data-bs-target="#multiCollapseExample1"
-					aria-expanded="false" aria-controls="multiCollapseExample1">전체카테고리보기</button>
+					aria-expanded="false" aria-controls="multiCollapseExample1">카테고리</button>
 				<div class="text-right">
 			<c:if test="${not empty paging.upcg and not empty prodArr}">
 				${prodArr[0].upCg_name}
 					<c:if test="${not empty paging.downcg and not empty prodArr}">
-						> ${prodArr[0].downCg_name}
+						${prodArr[0].downCg_name}
 					</c:if>
 			</c:if>
 			<c:if test="${not empty paging.findKeyword}">
@@ -182,7 +196,7 @@ div#upCategory button {
 					<div class="card card-body">
 						<ul class="list-group list-group-flush">
 							<!-- db에서 카테고리 목록 가져오기  -->
-							<li class="list-group-item list-group-item-success">초보</li>
+							<li class="list-group-item list-group-item-success">초심자</li>
 							<li class="list-group-item <c:if test='${paging.upcg eq 1 and empty paging.downcg }'>active</c:if>"><a class="btn btn-default"
 										href="${myctx}/prod?upcg=1">전체보기</a></li>
 							<c:forEach var="downcategory" items="${downcategory}">
@@ -201,7 +215,7 @@ div#upCategory button {
 					<div class="card card-body">
 						<ul class="list-group list-group-flush">
 							<!-- db에서 카테고리 목록 가져오기  -->
-							<li class="list-group-item list-group-item-info">중급</li>
+							<li class="list-group-item list-group-item-info">중급자</li>
 							<li class="list-group-item <c:if test='${paging.upcg eq 2 and empty paging.downcg }'>active</c:if>"><a class="btn btn-default"
 										href="${myctx}/prod?upcg=2">전체보기</a></li>
 							<c:forEach var="downcategory" items="${downcategory}">
@@ -233,9 +247,42 @@ div#upCategory button {
 				</div>
 			</div>
 		</div>
+		<!-- 카테고리 -->
+		<div>
+			<c:forEach var="upcategory" items="${upcategory}">
+				<c:if test='${upcategory.upCg_code eq paging.upcg}' >
+					<h4 style="text-align: center; color: green; font-weight: 600; ">- ${upcategory.upCg_name} -</h4>
+					
+				</c:if>
+			</c:forEach>
+			<c:forEach var="downcategory" items="${downcategory}">
+				<c:if test='${downcategory.upCg_code eq paging.upcg and downcategory.downCg_code eq paging.downcg}' >
+					<h2 style="text-align: center; color: green; font-weight: 600; padding: 0px 0px 80px;">${downcategory.downCg_name}</h2>
+				</c:if>
+			</c:forEach>
+		</div>
+		<!-- 설명 -->
+		
+		<div style="text-align: right;">
+			 <p class="jb-title">작업물 ?</p>
+		 	<div class="jb-text" style="float: right;"> 설명 표시.</div>
+		</div>
+		 
+		 
+		<c:forEach var="cg_detail" items="${cg_detail}">
+		
+		<!--  새로운 테이블 -->
+			<c:if test='${cg_detail.downCg_code eq paging.downcg}' >
+				<div>
+					<div style="text-align: right;  position: relative;">
+						<a>${COMMENT_NAME}작업물</a><!-- 새로운 칼럼 -->
+					</div>
+				</div>
+			</c:if>
+		</c:forEach>
 		<!-- 정렬 방식 -->
-		<div class="row mt-3 ml-3 mb-3 mr-0">
-			<form name="sortF" id="sortF">
+		<div class="row mt-3 ml-3 mb-3 mr-0" >
+			<form name="sortF" id="sortF" style="position: relative;">
 				<input type="hidden" name="findKeyword"> 
 				<input type="hidden" name="upcg"> 
 				<input type="hidden" name="downcg"> 
@@ -249,6 +296,7 @@ div#upCategory button {
 				</select>
 			</form>
 		</div>
+	
 		
 		
 		

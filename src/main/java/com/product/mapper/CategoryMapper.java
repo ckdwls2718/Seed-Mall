@@ -9,10 +9,13 @@ public interface CategoryMapper {
 	public List<CategoryVO> getUpcategory();
 	
 	public List<CategoryVO> getDowncategory(String upCg_code);
-	
+	public List<CategoryVO> getCgDetail();
+		
 	public List<CategoryVO> getAllDowncategory();
-	
+
 	public int categoryAdd(CategoryVO cvo);
 	public int categoryDelete(int cg_code);
+
+
 
 }

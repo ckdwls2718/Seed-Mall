@@ -15,8 +15,9 @@ import com.product.model.ProductVO;
 public interface AdminProductService {
 	
 	public List<CategoryVO> getUpcategory();
-	
+
 	public List<CategoryVO> getDowncategory(String upCg_code);
+
 	
 	public int categoryAdd(CategoryVO cvo);
 	public int categoryDelete(int cg_code);

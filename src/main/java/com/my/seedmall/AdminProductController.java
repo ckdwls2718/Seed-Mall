@@ -46,6 +46,7 @@ public class AdminProductController {
 		return downCgList;
 	}
 
+
 	@PostMapping("/prodInsert")
 	public String productRegister(Model m, @ModelAttribute ProductForm prod, HttpServletRequest req) {
 		log.info("inprod="+prod);
