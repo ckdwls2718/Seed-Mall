@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into member(MIDX,EMAIL,PWD,MNAME,MHP1,MHP2,MHP3,MPOST,MADDR1,MADDR2,GRADE
 		,MDATE,status)
 		values(#{midx},#{email},#{pwd},#{mname},#{mhp1},#{mhp2},#{mhp3},#{mpost:VARCHAR},
-		#{maddr1:VARCHAR},#{maddr2:VARCHAR},'새싹회원',sysdate,#{status})
+		#{maddr1:VARCHAR},#{maddr2:VARCHAR},'씨앗회원',sysdate,#{status})
 	</insert>
 	
 	<sql id="findWhere">
@@ -69,12 +69,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from member order by MIDX desc
 	</select>
 	
-	<select id="selectUserByUserid" parameterType="string" resultType="Member">
-		select * from member where EMAIL=#{value}	
+	<select id="getMember" parameterType="int" resultType="Member">
+		select * from member where midx=#{value}	
 	</select>
 
 	<update id="updateUser" parameterType="Member">
 		update  member set status=#{status} where midx=#{midx}
+	</update>
+	
+	<update id="updateMemberInfo" parameterType="Member">
+		update member set mhp1=#{mhp1},mhp2=#{mhp2},mhp3=#{mhp3},mpost=#{mpost},maddr1=#{maddr1},maddr2=#{maddr2}
+		where midx=#{midx}
 	</update>
 	
 	<delete id="deleteUser" parameterType="_int">

@@ -24,6 +24,30 @@
 		values(product_image_seq.nextval,
 		#{pidx},#{pthumbnail:VARCHAR},#{pimage},#{pOriginFilename})
 	</insert>
+	
+	<insert id="insertUpcg" parameterType="Category"
+		useGeneratedKeys="true" keyProperty="upCg_code">
+		
+		<selectKey keyProperty="upCg_code" resultType="int" order="BEFORE">
+			select upcategory_seq.nextval from dual
+		</selectKey>
+
+		insert into upcategory(upCg_code,upCg_name)
+		values(#{upCg_code},#{upCg_name})
+
+	</insert>
+	
+	<insert id="insertDowncg" parameterType="Category"
+		useGeneratedKeys="true" keyProperty="downCg_code">
+		
+		<selectKey keyProperty="downCg_code" resultType="int" order="BEFORE">
+			select downcategory_seq.nextval from dual
+		</selectKey>
+
+		insert into downcategory(upCg_code,downCg_code,downCg_name)
+		values(#{upCg_code},#{downCg_code},#{downCg_name})
+
+	</insert>
 
 
 	<select id="getProducts" resultType="Product" parameterType="ProdPaging">
@@ -99,6 +123,8 @@
 		=#{pidx}
 
 	</update>
+	
+	
 
 	<sql id="selectProd">
 		select p.*,decode(c.upcg_code,1,'초심자',2,'중급자',3,'전문가')

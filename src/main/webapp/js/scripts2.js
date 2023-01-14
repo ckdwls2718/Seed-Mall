@@ -4,31 +4,31 @@ function member_check(){
     var Maddr2 = $("#Maddr2").val();
  
    
-	 if(!isKor(mf.Mname)){
+	 if(!isKor(mf.mname)){
 		alert('이름은 한글이름만 가능합니다');
 		mf.Mname.select();
 		return;
 	}
 	
-	if(!isEmail(mf.Email)){
+	if(!isEmail(mf.email)){
 		alert('이메일 형식에 맞아야 합니다');
-		mf.Email.select();
+		mf.email.select();
 		return; 
 	}		
 	
-	if(!isPasswd(mf.Pwd)){
+	if(!isPasswd(mf.pwd)){
 		alert('비밀번호는 영문자,숫자,!,. 로 4~8자리까지 가능해요');
-		mf.Pwd.select();
+		mf.pwd.select();
 		return;
 	}
-	if(mf.Pwd.value!=mf.Pwd2.value){
+	if(mf.pwd.value!=mf.pwd2.value){
 		alert('비밀번호와 비밀번호 확인이 달라요');
 		mf.Pwd2.select();
 		return;
 	}
-	if(!isMobile(mf.Mhp1, mf.Mhp2, mf.Mhp3)){
-		alert('핸드폰 형식에 맞지 않아요. (010|011)-(숫자3~4자리)-(숫자4자리)');
-		mf.Mhp1.select();
+	if(!isMobile(mf.mhp1, mf.mhp2, mf.mhp3)){
+		alert('핸드폰 형식에 맞지 않아요. (010|011)-(숫자4자리)-(숫자4자리)');
+		mf.mhp1.select();
 		return;
 	}
 	
@@ -40,7 +40,7 @@ function member_check(){
     
 	if(mf.id_flag.value=='N'){
 	    alert('이메일 중복 체크를 해야 합니다');
-	    mf.Email.select();
+	    mf.email.select();
 	    return false;
 	}
 	mf.submit();
@@ -67,6 +67,8 @@ function isDate(input){
 	return b;
 }//------------------------
 
+
+
 /** 
 	\b : 단어의 경계를 나타내며, 해당 패턴이 정확하게 일치해야 함을 의미
 	(010|011) : 010 또는 011이 와야 함을 의미
@@ -76,7 +78,7 @@ function isDate(input){
 function isMobile(input1,input2, input3){
 	let val=input1.value+"-"+input2.value+"-"+input3.value;
 	//alert(val);
-	let pattern=/\b(010|011)[-]\d{3,4}[-]\d{4}\b/;
+	let pattern=/\b(010|011)[-]\d{4}[-]\d{4}\b/;
 	let b=pattern.test(val);
 	//alert('hp '+b);
 	return b;
@@ -166,8 +168,8 @@ function execPostCode() {
                 console.log(fullRoadAddr);
                 
                  
-                $("[name=Mpost]").val(data.zonecode);
-                $("[name=Maddr1]").val(fullRoadAddr);
+                $("[name=mpost]").val(data.zonecode);
+                $("[name=maddr1]").val(fullRoadAddr);
                 
                 /* document.getElementById('signUpUserPostNo').value = data.zonecode;*/ //5자리 새우편번호 사용
                document.getElementById('Mpost').value = data.zonecode; //5자리 새우편번호 사용

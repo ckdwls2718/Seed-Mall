@@ -33,4 +33,8 @@ public interface ProductMapper {
 	int deleteImage(int pidx);
 
 	int updateProduct(ProductForm prod);
+
+	int insertUpcg(CategoryVO cvo);
+
+	int insertDowncg(CategoryVO cvo);
 }

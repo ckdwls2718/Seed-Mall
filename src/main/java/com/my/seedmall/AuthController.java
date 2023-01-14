@@ -37,6 +37,11 @@ public class AuthController {
 	public String joinForm() {
 		return "member/join";
 	}
+	
+	@GetMapping("/check")
+	public String test() {
+		return "member/check";
+	}
 
 	@PostMapping("/join")
 	public String joinEnd(Model m, @ModelAttribute("Member") MemberVO member) {
@@ -78,7 +83,7 @@ public class AuthController {
 	@RequestMapping(value = "find_email", method = RequestMethod.POST)
 	public String findEmailAction(MemberVO vo, Model model) {
 		MemberVO user = memberService.findemail(vo);
-		log.info(vo);
+		//log.info(vo);
 
 		if (user != null) {
 			model.addAttribute("check", 1);
@@ -86,7 +91,7 @@ public class AuthController {
 		} else {
 			model.addAttribute("check", 0);
 		}
-
+		log.info(vo);
 		return "member/findemail";
 	}
 
@@ -100,7 +105,7 @@ public class AuthController {
 	@RequestMapping(value = "find_Password", method = RequestMethod.POST)
 	public String findPasswordAction(MemberVO vo, Model model) {
 		MemberVO user = memberService.findPassword(vo);
-		log.info(vo);
+		//log.info(vo);
 		if (user != null) {
 			model.addAttribute("check", 1);
 			model.addAttribute("pwd", user.getPwd());
@@ -108,6 +113,7 @@ public class AuthController {
 			model.addAttribute("check", 0);
 
 		}
+		log.info(vo);
 
 		return "member/findPassword";
 	}

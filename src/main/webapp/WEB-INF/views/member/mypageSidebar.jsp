@@ -37,6 +37,12 @@
           내가 작성한 글
         </a>
       </li>
+      <li>
+        <a href="${myctx}/user/mypage/QNA" class="nav-link link-dark">
+          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+          나의 QNA
+        </a>
+      </li>
     </ul>
     <hr>
   </div>
