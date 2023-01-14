@@ -22,6 +22,8 @@ public class BoardReviewVO {
     private int score;//평점
 	private java.sql.Date rdate; // 작성일
 	
+	private int sentiment; //긍정도: 1(부정), 2(중립), 3(긍정)
+	
 	private String email;
 	private List<BoardReviewVO> boardReviewList;
 	

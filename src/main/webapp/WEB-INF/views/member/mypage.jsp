@@ -34,10 +34,8 @@
 			</tr>
 			<tr>
 				<td colspan="2" class="m3 text-center">
-					<button class="btn btn-primary" type="button"
-						onclick="member_check()">내 정보 수정</button>
-					<button class="btn btn-primary" type="button"
-						onclick="member_check()">비밀번호 변경</button>	
+					<a class="btn btn-primary" href="mypage/infoForm">내 정보 수정</a>
+					<a class="btn btn-primary" href="mypage/editPassForm">비밀번호 변경</a>	
 				</td>
 			</tr>
 		</table>

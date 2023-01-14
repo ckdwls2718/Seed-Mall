@@ -6,31 +6,31 @@
 	<selectKey keyProperty="ridx" order="BEFORE" resultType="int">
 		select board_review_seq.nextval from dual
 	</selectKey>
-	insert into board_review(ridx,midx,oidx,rtitle,rcontent,rname,rreadnum,rlikenum,score,rdate) 
+	insert into board_re(ridx,midx,oidx,rtitle,rcontent,rname,rreadnum,rlikenum,score,rdate) 
 	values(#{ridx},#{midx},#{oidx},#{rtitle},#{rcontent:VARCHAR},#{rname:VARCHAR},#{rreadnum},#{rlikenum},#{score},sysdate)	
 </insert>
 
 	<select id="getReview" resultType="Review" parameterType="_int">
-       select b.*,(select email from member where midx=b.midx ) email from board_review b join orders o on b.oidx=o.oidx where pidx=#{value}
+       select b.*,(select email from member where midx=b.midx ) email from board_re b join orders o on b.oidx=o.oidx where pidx=#{value}
     </select>
     
     <select id="getReviewVO" parameterType="Review" resultType="Review">
-		select board_review.*,(select email from member where midx=board_review.midx ) email from  board_review where ridx=#{ridx}
+		select board_re.*,(select email from member where midx=board_re.midx ) email from  board_re where ridx=#{ridx}
 	</select>
     
 	<update id="updateReadnum" parameterType="int">
-		update board_review set rreadnum=rreadnum+1 where ridx=#{value}
+		update board_re set rreadnum=rreadnum+1 where ridx=#{value}
 	</update>
 	
 	<select id="selectBoardByIdx" resultType="Review" parameterType="int">
-		select board_review.*,(select email from member where midx=board_review.midx ) email from  board_review where ridx=#{value}
+		select board_re.*,(select email from member where midx=board_re.midx ) email from  board_re where ridx=#{value}
 	</select>
 	
 	<update id="updateReview" parameterType="Review">
-		update board_review set rcontent=#{rcontent:VARCHAR},rtitle=#{rtitle} where ridx=#{ridx}
+		update board_re set rcontent=#{rcontent:VARCHAR},rtitle=#{rtitle} where ridx=#{ridx}
 	</update>
 	
 	<delete id="deleteReview" parameterType="int">
-		delete from board_review where ridx=#{value}
+		delete from board_re where ridx=#{value}
 	</delete>
 </mapper>

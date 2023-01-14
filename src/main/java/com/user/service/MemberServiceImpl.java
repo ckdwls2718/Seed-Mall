@@ -46,11 +46,15 @@ public class MemberServiceImpl implements MemberService {
 	public int updateMember(MemberVO member) {
 		return MemberMapper.updateUser(member);
 	}
+	
+	@Override
+	public int updateMemberInfo(MemberVO member) {
+		return MemberMapper.updateMemberInfo(member);
+	}
 
 	@Override
 	public MemberVO getMember(Integer midx) {
-		// TODO Auto-generated method stub
-		return null;
+		return MemberMapper.getMember(midx);
 	}
 
 	@Override
@@ -124,6 +128,25 @@ public class MemberServiceImpl implements MemberService {
 	public int updatePassword(MemberVO vo) {
 		
 		return MemberMapper.updatePassword(vo);
+	}
+
+	@Override
+	public int updateGrade(MemberVO vo) {
+		String grade="";
+		int mil=vo.getMileage();
+		if(mil < 5000) {
+			grade="씨앗회원";
+		}else if(mil >= 5000 && mil < 15000) {
+			grade="새싹회원";
+		}else if(mil >= 15000 && mil < 25000) {
+			grade="꽃잎회원";
+		}else if(mil >= 25000 && mil < 40000) {
+			grade="나무회원";
+		}else {
+			grade="열매회원";
+		}
+		vo.setGrade(grade);
+		return this.MemberMapper.updateGrade(vo);
 	}
 
 

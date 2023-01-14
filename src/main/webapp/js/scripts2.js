@@ -27,7 +27,7 @@ function member_check(){
 		return;
 	}
 	if(!isMobile(mf.mhp1, mf.mhp2, mf.mhp3)){
-		alert('핸드폰 형식에 맞지 않아요. (010|011)-(숫자3~4자리)-(숫자4자리)');
+		alert('핸드폰 형식에 맞지 않아요. (010|011)-(숫자4자리)-(숫자4자리)');
 		mf.mhp1.select();
 		return;
 	}
@@ -78,7 +78,7 @@ function isDate(input){
 function isMobile(input1,input2, input3){
 	let val=input1.value+"-"+input2.value+"-"+input3.value;
 	//alert(val);
-	let pattern=/\b(010|011)[-]\d{3,4}[-]\d{4}\b/;
+	let pattern=/\b(010|011)[-]\d{4}[-]\d{4}\b/;
 	let b=pattern.test(val);
 	//alert('hp '+b);
 	return b;
