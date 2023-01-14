@@ -165,6 +165,7 @@ const insertCart = function(){
 </div>
 
 <c:import url="/QNA/${prod.pidx}"/>
+<c:import url="/review/${prod.pidx}"/>
 
 
 <%@ include file="/WEB-INF/views/foot.jsp"%>

@@ -16,6 +16,10 @@
 		where pidx=#{value}
 	</select>
 	
+	<select id="getMyQNAList" parameterType="int" resultType="QNA">
+		select * from board_qna where midx=#{value}
+	</select>
+	
 	<delete id="deleteQNA" parameterType="int">
 		delete from board_qna where qidx=#{value}
 	</delete>
