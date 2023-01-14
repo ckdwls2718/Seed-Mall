@@ -38,7 +38,7 @@ padding-bottom: 12px;
 		<table class="table">
 			<tr>
 				<td width="26%" class="m1"><b>이름</b></td>
-				<td width="74%" class="m2"><input type="text" name="Mname"
+				<td width="74%" class="m2"><input type="text" name="mname"
 					id="Mname" placeholder="이름" class="form-control" style="width: 67%; height: 35px;">
 					
 				<span class='ck' style="font-size: 14px;">* 이름은 한글로 입력해 주세요.</span></td>
@@ -56,43 +56,43 @@ padding-bottom: 12px;
 			</tr>
 			<tr>
 				<td width="26%" class="m1"><b>비밀번호</b></td>
-				<td width="74%" class="m2"><input type="password" name="Pwd"
+				<td width="74%" class="m2"><input type="password" name="pwd"
 					id="Pwd" placeholder="비밀번호" class="form-control" style="width:67%; height: 35px;">
 					
 				<span class='ck' style="font-size: 14px;">* 비밀번호는 문자,숫자,!,. 포함해서 4~8자리 이내</span></td>
 			</tr>
 			<tr>
 				<td width="26%" class="m1"><b>비밀번호 확인</b></td>
-				<td width="74%" class="m2"><input type="password" name="Pwd2"
+				<td width="74%" class="m2"><input type="password" name="pwd2"
 					id="Pwd2" placeholder="비밀번호 확인" class="form-control"
 					style="width: 67%; height: 35px;"></td>
 			</tr>
 			<tr>
 				<td width="26%" class="m1"><b>연락처</b></td>
-				<td width="74%" class="m2"><input type="text" name="Mhp1"
+				<td width="74%" class="m2"><input type="text" name="mhp1"
 					id="Mhp1" placeholder=" HP1" maxlength="3" style="width:19.5%; height: 35px; border-radius: 5px; border: 1px solid #ced4da;"> - <input
-					type="text" name="Mhp2" id="Mhp2" placeholder=" HP2" maxlength="4" style="width:19.5%; height: 35px; border-radius: 5px; border: 1px solid #ced4da;"> -
-					<input type="text" name="Mhp3" id="Mhp3" placeholder=" HP3"
+					type="text" name="mhp2" id="Mhp2" placeholder=" HP2" maxlength="4" style="width:19.5%; height: 35px; border-radius: 5px; border: 1px solid #ced4da;"> -
+					<input type="text" name="mhp3" id="Mhp3" placeholder=" HP3"
 					maxlength="4" style="width:19.5%; height: 35px; border-radius: 5px; border: 1px solid #ced4da;"> <br>
 				<!-- <span class='ck' style="font-size: 14px;">* 앞자리(010|011)중에 하나-(숫자3~4자리)-(숫자4자리) 가능해요</span> -->
 				</td>
 			</tr>
 			<tr>
 				<td width="26%" class="m1"><b>주소</b></td>
-				<td width="74%" class="m2"><input type="text" name="Mpost"
+				<td width="74%" class="m2"><input type="text" name="mpost"
 					id="Mpost" placeholder="우편번호" maxlength="5" class="form-control"
 					style="width:95px; height: 35px; margin-bottom: 10px; display: inline;">
 					<button type="button" class="btn btn-outline-success"
 						style="width: 22%; height: 35px; vertical-align: top; font-size: 15px;
-						font-weight: bold; float:right; margin-right: 33%;">주소 찾기</button>
+						font-weight: bold; float:right; margin-right:33%" onclick="execPostCode()">주소 찾기</button>
 					<!-- <button type="button" class="btn btn-outline-success"
 						style="width: 27%; height: 35px; vertical-align: top; font-size: 15px;
 						font-weight: bold; float:right; margin-right: 3.5%;">주소 찾기</button> -->
-				<input type="text" name="Maddr1"
+				<input type="text" name="maddr1"
 					id="Maddr1" placeholder="도로명주소" class="form-control"
 					style="width: 67%;height: 35px; float:left; margin-bottom: 10px;" >
 					<input type="text"
-					name="Maddr2" id="Maddr2" placeholder="상세주소" class="form-control"
+					name="maddr2" id="Maddr2" placeholder="상세주소" class="form-control"
 					style="width: 67%; height: 35px;"></td>
 			</tr>
 			
