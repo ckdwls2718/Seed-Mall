@@ -243,8 +243,6 @@ public class AdminProductServiceImpl implements AdminProductService {
 		productMapper.deleteImage(pidx);
 		return x;
 	}
-<<<<<<< HEAD
-=======
 
 	@Override
 	public int insertUpcg(CategoryVO cvo) {
@@ -256,5 +254,4 @@ public class AdminProductServiceImpl implements AdminProductService {
 		return this.productMapper.insertDowncg(cvo);
 	}
 
->>>>>>> develop
 }

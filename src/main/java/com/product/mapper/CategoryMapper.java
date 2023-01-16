@@ -16,6 +16,8 @@ public interface CategoryMapper {
 	public int categoryAdd(CategoryVO cvo);
 	public int categoryDelete(int cg_code);
 
+	public List<CategoryVO> getAllCgDetail();
+
 
 
 }

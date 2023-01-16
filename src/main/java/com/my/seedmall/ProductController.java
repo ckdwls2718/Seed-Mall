@@ -55,13 +55,15 @@ public class ProductController {
 		String pageNavi = page.getPageNavi(myctx, loc);
 		
 		List<CategoryVO> categoryArr = categoryMapper.getAllDowncategory();
+		List<CategoryVO> cgdetailArr = categoryMapper.getAllCgDetail();
 		List<CategoryVO> upcategoryArr = categoryMapper.getUpcategory();
 		
-		
+		log.info("######"+cgdetailArr);
 		List<ProductVO> prodArr = productService.getProdListPaging(page);
 		m.addAttribute("prodArr", prodArr);
 		m.addAttribute("paging", page);
 		m.addAttribute("downcategory",categoryArr);
+		m.addAttribute("cgdetail",cgdetailArr);
 		m.addAttribute("upcategory",upcategoryArr);
 		
 		m.addAttribute("pageNavi", pageNavi);
