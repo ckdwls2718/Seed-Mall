@@ -56,8 +56,8 @@ const deleteQna = function(qidx){
 										
 										<tr>
 										<td>
-											<c:if test="${qna.qna_ReList eq null or empty qna.qna_ReList}">미답변</c:if>
-											<c:if test="${qna.qna_ReList ne null and not empty qna.qna_ReList}">답변완료</c:if>
+											<c:if test="${qna.isCom ne 'Y'}">미답변</c:if>
+											<c:if test="${qna.isCom eq 'Y'}">답변완료</c:if>
 										</td>
 										<td><a href="${myctx}/prod/${qna.product.pidx}">
 											<img style="width: 100px; margin: auto" class="img-fluid"
@@ -84,8 +84,17 @@ const deleteQna = function(qidx){
 										</div>
 										</td>
 										<td>${qna.qdate}</td>
-										<td><button type="button">수정</button><button type="button" onclick="deleteQna('${qna.qidx}')">삭제</button></td>
+										<td><button type="button" onclick="deleteQna('${qna.qidx}')">삭제</button></td>
 										</tr>
+										<c:if test="${qna.isCom eq 'Y'}">
+										<c:forEach var="reply" items="${qna.qna_ReList}">
+											<tr>
+												<td>답변</td>
+												<td colspan="2">${reply.re_qcontent}</td>
+												<td>${reply.re_qdate}</td>
+											</tr>
+										</c:forEach>
+										</c:if>
 										
 
 								</c:forEach>

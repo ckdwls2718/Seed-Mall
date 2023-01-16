@@ -16,15 +16,16 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.user.model.PagingVO;
+import com.board.model.QNADTO;
+import com.board.service.QNAService;
 import com.myplant.model.MyPlantVO;
 import com.myplant.model.PlantForm;
 import com.myplant.model.PlantImageVO;
 import com.myplant.service.MyPlantService;
-import com.order.model.OrderProductVO;
 import com.order.model.OrderVO;
 import com.order.service.OrderService;
 import com.user.model.MemberVO;
-import com.user.model.PagingVO;
 import com.user.service.MemberService;
 
 import lombok.extern.log4j.Log4j;
@@ -42,6 +43,9 @@ public class AdminPageController {
 
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private QNAService qnaService;
 
 	// 어드민페이지 메인
 	@GetMapping("/adminPage")
@@ -194,7 +198,23 @@ public class AdminPageController {
 	
 	// Q&A 관리
 	@GetMapping("/qnaManagement")
-	public String qnaManagement() {
+	public String qnaManagement(Model m, @ModelAttribute com.board.model.PagingVO page, HttpServletRequest req,
+			@RequestHeader("user-Agent")String userAgent) {
+		
+		String myctx=req.getContextPath();
+		HttpSession ses=req.getSession();
+		
+		int qnaTotal = qnaService.getQNACount(page);
+		page.setTotalCount(qnaTotal);
+		page.init(ses);
+		
+		String loc = "admin/qnaManagement";
+		String pageNavi = page.getPageNavi(myctx, loc , userAgent);
+		
+		List<QNADTO> qArr = qnaService.getQNAList(page);
+		
+		m.addAttribute("qArr", qArr);
+		m.addAttribute("pageNavi", pageNavi);
 		
 		return "admin/qnaManagement";
 	}
