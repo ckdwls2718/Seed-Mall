@@ -17,5 +17,8 @@
 	select * from downCategory
 </select>
 
+<select id="getAllCgDetail" resultType="Category" >
+	select * from CG_DETAIL
+</select>
 
 </mapper>

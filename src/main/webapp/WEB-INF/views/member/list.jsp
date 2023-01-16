@@ -6,7 +6,7 @@
 <%@ include file="/WEB-INF/views/top.jsp"%>
 
 <style>
-h2 {
+h2 {/*  */
 	margin: 40px 40px 40px 0px;
 	font-weight: bolder;
 	color: #133337;
@@ -83,6 +83,21 @@ button {
 		}
 		return true;
 	}
+	function userDel(vidx) {
+		$('#midx').val(vidx);
+		$('#df').prop('action', 'userDel');
+		$('#df').submit();
+	}
+	function userEdit(vidx, i) {
+		//alert(vidx+"//"+i)
+		let status = $('#status' + i + " option:selected").val();
+		//alert(status);
+		$('#midx2').val(vidx);
+		$('#status').val(status);
+
+		$('#ef').prop('action', 'userEdit');
+		$('#ef').submit();
+	}
 </script>
 
 <div class="container mt-3" style="overflow: auto;">
@@ -142,7 +157,6 @@ button {
 			<div>전체 회원수: 
 				<b><c:out value="${paging.totalCount}"/></b>
 			</div>
-			<%-- <c:out value="${paging.mpage}" /> / <c:out value="${paging.pageCount}" />:page --%>
 		</div>
 	</div>
 	<!-- 회원 리스트 -->
@@ -212,23 +226,5 @@ button {
 	<input type="hidden" name="midx" id="midx2"> 
 	<input type="hidden" name="status" id="status">
 </form>
-
-<script>
-	function userDel(vidx) {
-		$('#midx').val(vidx);
-		$('#df').prop('action', 'userDel');
-		$('#df').submit();
-	}
-	function userEdit(vidx, i) {
-		//alert(vidx+"//"+i)
-		let status = $('#status' + i + " option:selected").val();
-		//alert(status);
-		$('#midx2').val(vidx);
-		$('#status').val(status);
-
-		$('#ef').prop('action', 'userEdit');
-		$('#ef').submit();
-	}
-</script>
 
 <%@ include file="/WEB-INF/views/foot.jsp"%>
