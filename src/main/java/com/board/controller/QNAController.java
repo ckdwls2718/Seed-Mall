@@ -8,17 +8,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.board.model.QNADTO;
+import com.board.model.QNA_ReDTO;
 import com.board.service.QNAService;
 
 import lombok.extern.log4j.Log4j;
 
 @Controller
-@RequestMapping("/QNA")
 @Log4j
 public class QNAController {
 	
@@ -26,14 +25,14 @@ public class QNAController {
 	QNAService qnaService;
 	
 	//상품에 관한 QNA 출력
-	@GetMapping("/{pidx}")
+	@GetMapping("/QNA/{pidx}")
 	public String getQNA(Model m, @PathVariable("pidx") int pidx) {
-		List<QNADTO> qArr = qnaService.getQNAList(pidx);
+		List<QNADTO> qArr = qnaService.getQNAListByPidx(pidx);
 		m.addAttribute("qArr", qArr);
 		return "board/QNAList";
 	}
 	
-	@PostMapping(value="", produces = "application/json")
+	@PostMapping(value="/QNA", produces = "application/json")
 	@ResponseBody
 	public int insertQNA(QNADTO qna) {
 		
@@ -43,7 +42,7 @@ public class QNAController {
 		return result;
 	}
 	
-	@PostMapping(value="/del", produces = "application/json")
+	@PostMapping(value="/QNA/del", produces = "application/json")
 	@ResponseBody
 	public int deleteQNA(@RequestParam int qidx) {
 		
@@ -52,6 +51,26 @@ public class QNAController {
 		
 		return result;
 	}
+	
+	//qna답변달기
+	@PostMapping(value="admin/QNA", produces = "application/json")
+	@ResponseBody
+	public int insertQNA_Re(QNA_ReDTO re) {
+		log.info("reply = "+re);
+		int result = qnaService.insertQNA_Re(re);
+		
+		return result;
+	}
+	
+	//qna답변달기
+		@PostMapping(value="admin/QNA/del", produces = "application/json")
+		@ResponseBody
+		public int deleteQNA_Re(@RequestParam int re_qidx) {
+			log.info("reply = "+re_qidx);
+			int result = qnaService.deleteQNARe(re_qidx);
+			
+			return result;
+		}
 	
 	
 }

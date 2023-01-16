@@ -15,6 +15,7 @@ public class QNADTO {
 	private String qtitle; //제목
 	private String qcontent; //내용
 	private String secret="N"; //비밀글 여부
+	private String isCom="N"; // 답변 여부
 	private Date qdate; //작성일
 	
 	private ProductVO product; // 문의한 상품 객체
