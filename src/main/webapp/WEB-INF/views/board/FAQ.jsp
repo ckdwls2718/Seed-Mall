@@ -105,20 +105,11 @@ h2 {
 	font-weight: bold;
 }
 /* answer end */
-/* button{
-	resize: none;
-	border: none;
-	overflow: hidden;
-	background: white;
-}
-button:focus {
-	//outline: none;
-} */
 .menu{
 	position: relative;
 	color: #e0e0e0;
 	display: inline-block;
-	margin: 8px 7px 20px 30px;
+	margin: 30px 7px 20px 30px;
 	font-weight: 900;
 	/*padding: top right bottom left*/
 	cursor: pointer;
@@ -190,7 +181,7 @@ button:focus {
 		<a href="FAQ" style="text-decoration: none; color: #2B7539;">FAQ <span
 			style="font-size: 17.5px;"> 자주 묻는 질문</span></a>
 	</h2>
-	<hr>
+	<!-- <hr> -->
 	<!-- 카테고리 영역 -->
 	<nav class="FAQNavigation" style="width:800px; display:flex;  justify-content:flex-start;">
 	<%--<div class="menu <c:if test='${menuIndex eq 0}'>clicked_menu</c:if>" onclick="getFaq">전체보기</div> --%>
@@ -213,11 +204,12 @@ button:focus {
 		</div>
 		<!-- 답변이 들어간다 -->
 		<div class="a_off" id="ans${FAQ.fidx}">
-			<span>
+			<div>
 				<p class="category">답변</p>
-			</span> <span>
+			</div>
+			<div>
 				<p class="question">${FAQ.fanswer}</p>
-			</span>
+			</div>
 		</div>
 	</c:forEach>
 	<div style="height: 100px"></div>

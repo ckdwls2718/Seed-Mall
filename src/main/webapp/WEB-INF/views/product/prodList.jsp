@@ -10,7 +10,7 @@
 @import
 	url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800&display=swap')
 	;
-
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css); 
 .container .product-item {
 	min-height: 450px;
 	border: none;
@@ -120,6 +120,62 @@
 div#upCategory button {
 	
 }
+/* 설명 */
+.tip {
+  position: relative;
+  display: #555;
+}
+
+.tip .tiptext {
+  visibility: hidden;       /* 이벤트가 없으면 툴팁 영역을 숨김 */
+ /*  width: 120px;      */
+ width: 350px;				        /* 툴팁 영역의 넓이를 설정 */
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;       /* 절대 위치를 사용 */
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tip:hover .tiptext {
+  visibility: visible;
+  opacity: 1;    			/* hover 이벤트 발생시 영역을 보여줌 */
+}
+.tip .tiptext::after {
+  content: " ";             /* 정사각형 영역 사용 */
+  position: absolute;       /* 절대 위치 사용 */
+  border-style: solid;
+  border-width: 5px;        /* 테두리 넓이를 5px 로 설정 */
+}
+
+.tip .tip-bottom {
+  width: 350px;
+  top: 150%;
+  right: 0;
+  margin-left: -60px;         /* 말풍선 위치*/
+}
+
+.tip .tip-bottom::after {
+  bottom: 100%;                 /* 사각형 영역이 중앙에 오도록 위치 */
+  right: 15%;               /* 왼쪽에서 100% 위치에 오도록 위치 */
+  margin-left: -5px;
+
+  /* 사각형의 테두리에서 왼쪽만 노출 */
+  border-color: transparent transparent #555 transparent ;
+}
+
+h2{
+font-family: 'Noto Sans KR', sans-serif;
+font-weight: 700;
+}
+.tip{
+text-decoration: underline;
+text-underline-position:under;
+}
 </style>
 <script type='text/javascript' src=''></script>
 <script type='text/javascript'
@@ -158,15 +214,15 @@ div#upCategory button {
 	<div class="container bg-white">
 		<div id="upCategory" class='container row'>
 			<div class="col-md-5">
-				<a class="btn btn-outline-info" href="${myctx}/prod">전체 상품보기</a>
+				<a class="btn btn-outline-info" href="${myctx}/prod">전체 상품</a>
 				<button class="btn btn-outline-success m-3" type="button"
 					data-bs-toggle="collapse" data-bs-target="#multiCollapseExample1"
-					aria-expanded="false" aria-controls="multiCollapseExample1">전체카테고리보기</button>
+					aria-expanded="false" aria-controls="multiCollapseExample1">카테고리</button>
 				<div class="text-right">
 			<c:if test="${not empty paging.upcg and not empty prodArr}">
 				${prodArr[0].upCg_name}
 					<c:if test="${not empty paging.downcg and not empty prodArr}">
-						> ${prodArr[0].downCg_name}
+						${prodArr[0].downCg_name}
 					</c:if>
 			</c:if>
 			<c:if test="${not empty paging.findKeyword}">
@@ -182,7 +238,7 @@ div#upCategory button {
 					<div class="card card-body">
 						<ul class="list-group list-group-flush">
 							<!-- db에서 카테고리 목록 가져오기  -->
-							<li class="list-group-item list-group-item-success">초보</li>
+							<li class="list-group-item list-group-item-success">초심자</li>
 							<li class="list-group-item <c:if test='${paging.upcg eq 1 and empty paging.downcg }'>active</c:if>"><a class="btn btn-default"
 										href="${myctx}/prod?upcg=1">전체보기</a></li>
 							<c:forEach var="downcategory" items="${downcategory}">
@@ -201,7 +257,7 @@ div#upCategory button {
 					<div class="card card-body">
 						<ul class="list-group list-group-flush">
 							<!-- db에서 카테고리 목록 가져오기  -->
-							<li class="list-group-item list-group-item-info">중급</li>
+							<li class="list-group-item list-group-item-info">중급자</li>
 							<li class="list-group-item <c:if test='${paging.upcg eq 2 and empty paging.downcg }'>active</c:if>"><a class="btn btn-default"
 										href="${myctx}/prod?upcg=2">전체보기</a></li>
 							<c:forEach var="downcategory" items="${downcategory}">
@@ -233,14 +289,43 @@ div#upCategory button {
 				</div>
 			</div>
 		</div>
+		<!-- 카테고리 -->
+		<div>
+			<c:forEach var="upcategory" items="${upcategory}">
+				<c:if test='${upcategory.upCg_code eq paging.upcg}' >
+					<h4 style="text-align: center; color: green; font-weight: 600; ">- ${upcategory.upCg_name} -</h4>
+					
+				</c:if>
+			</c:forEach>
+			<c:forEach var="downcategory" items="${downcategory}">
+				<c:if test='${downcategory.upCg_code eq paging.upcg and downcategory.downCg_code eq paging.downcg}' >
+					<h2 style="text-align: center; color: #39b559;  padding: 0px 0px 80px;">${downcategory.downCg_name}</h2>
+				</c:if>
+			</c:forEach>
+		</div>
+		<!-- 설명 -->
+		
+		<c:forEach var="cg_detail" items="${cgdetail}">
+			<c:if test='${cg_detail.downCg_code eq paging.downcg}' >
+				<div class="tip" style="text-align: right; display: inline-block; float: right;">${cg_detail.comment_name}
+ 	 				<span class="tiptext tip-bottom">${cg_detail.comments}</span>
+				</div>
+			</c:if>
+		</c:forEach>
+<!-- ----------------------------------- -->
+	
+		
+		
+		
+		
 		<!-- 정렬 방식 -->
-		<div class="row mt-3 ml-3 mb-3 mr-0">
-			<form name="sortF" id="sortF">
+		<div class="row mt-3 ml-3 mb-3 mr-0"  style="display: inline;">
+			<form name="sortF" id="sortF"style="padding: 0;">
 				<input type="hidden" name="findKeyword"> 
 				<input type="hidden" name="upcg"> 
 				<input type="hidden" name="downcg"> 
 				<select
-					class="form-select" style="width: 15%; margin-left: auto"
+					class="form-select" style="width: 15%; margin-left: auto; " 
 					name="sort" onchange="changeSort(this.value)">
 					<option value="1" <c:if test="${paging.sort eq 1}">selected</c:if>>최신순</option>
 					<option value="2" <c:if test="${paging.sort eq 2}">selected</c:if>>추천순</option>
@@ -249,6 +334,7 @@ div#upCategory button {
 				</select>
 			</form>
 		</div>
+	
 		
 		
 		
