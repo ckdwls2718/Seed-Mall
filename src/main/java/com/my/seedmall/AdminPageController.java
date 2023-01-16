@@ -185,6 +185,20 @@ public class AdminPageController {
 		return "redirect:plantManagement";
 	}
 
+	// 환불 내역
+	@GetMapping("/refundManagement")
+	public String refundManagement() {
+		
+		return "admin/refundManagement";
+	}
+	
+	// Q&A 관리
+	@GetMapping("/qnaManagement")
+	public String qnaManagement() {
+		
+		return "admin/qnaManagement";
+	}
+	
 	// 히스토리
 	@GetMapping("/history")
 	public String history(Model m, HttpSession ses) {
