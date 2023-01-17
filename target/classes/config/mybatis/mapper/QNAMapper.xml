@@ -6,8 +6,8 @@
 	<selectKey keyProperty="qidx" order="BEFORE" resultType="int" >
 		select board_qna_seq.nextval from dual
 	</selectKey>
-	insert into board_qna(qidx, pidx, midx, qtitle, qcontent, secret, qdate)
-	values(#{qidx},#{pidx},#{midx},#{qtitle},#{qcontent},#{secret}, sysdate)
+	insert into board_qna(qidx, pidx, midx, qcontent, secret, qdate)
+	values(#{qidx},#{pidx},#{midx},#{qcontent},#{secret}, sysdate)
 	</insert>
 	
 	<insert id="insertQNA_Re" parameterType="QNARe">
