@@ -181,7 +181,7 @@ public class MypageController {
 	public String getQnAList(Model m, HttpSession ses) {
 		MemberVO loginUser = (MemberVO)ses.getAttribute("loginUser");
 		
-		List<QNADTO> qArr = qnaService.getMyQNAList(loginUser.getMidx());
+		List<QNADTO> qArr = qnaService.getQNAListByMidx(loginUser.getMidx());
 		
 		m.addAttribute("qArr", qArr);
 		

@@ -49,10 +49,6 @@ public class OrderController {
 	public String order(Model m, @RequestParam("pidx") int pidxs[], @RequestParam("oqty") int oqtys[],
 			@RequestParam(value = "growCheck", defaultValue = "N") String growCheck, HttpSession session,
 			@ModelAttribute OrderProductVO opvo) {
-		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
-		if (loginUser == null) {
-			return "redirect:index";
-		}
 
 		int total = 0, totalPayment = 0;
 		List<ProductVO> orderArr = new ArrayList<>();
@@ -86,7 +82,6 @@ public class OrderController {
 		// List를 세션에 저장해둔다
 		session.setAttribute("orderArr", orderArr);
 
-		m.addAttribute("loginUser", loginUser);
 		m.addAttribute("oqty", opvo.getOqty());
 		m.addAttribute("total", total);
 		m.addAttribute("totalPayment", totalPayment);
@@ -103,7 +98,9 @@ public class OrderController {
 			@RequestParam(value = "growCheck", defaultValue = "N") String growCheck, HttpSession session) {
 		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
 		int midx_fk = loginUser.getMidx();
-
+		
+		log.info("ovo = "+ovo);
+		
 		// 세션에 로그인한 사람 정보로 회원번호 셋팅
 		ovo.setMidx(midx_fk);
 
@@ -125,7 +122,6 @@ public class OrderController {
 				opvo.setOqty(pd.getPqty()); // 선택한 상품 수량
 				opvo.setOsalePrice(pd.getPsaleprice());
 				opvo.setOpoint(pd.getPpoint());
-				ovo.setStatusStr("상품준비중");
 
 				int n3 = orderMapper.createOrderProductList(opvo);
 
@@ -135,10 +131,10 @@ public class OrderController {
 						MyPlantVO mpvo = new MyPlantVO();
 						mpvo.setMidx(ovo.getMidx());
 						mpvo.setOidx(opvo.getOidx());
-						mpvo.setNickname("애칭");
-						mpvo.setPcomment("피드백");
+						mpvo.setNickname("이름을 정해주세요");
+						mpvo.setPcomment("관리자 코멘트");
 						mpvo.setPercent(0);
-						mpvo.setPlantImage("noImage");
+						mpvo.setPlantImage("noimage.png");
 
 						int n4 = myPlantService.insertMyPlant(mpvo);
 					}
