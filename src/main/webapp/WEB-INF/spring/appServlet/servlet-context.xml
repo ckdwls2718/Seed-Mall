@@ -42,6 +42,14 @@
 				class="com.my.interceptor.AdminCheckInterceptor" />
 		</interceptor>
 	</interceptors>
+	
+	<interceptors>		
+		<interceptor>
+			<mapping path="/user/**" />
+			<beans:bean
+				class="com.my.interceptor.UserCheckInterceptor" />
+		</interceptor>
+	</interceptors>
 
 
 	<!-- 파일 업로드 위한 MultipartResolver 설정 ============================== -->
