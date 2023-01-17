@@ -6,13 +6,21 @@
 <%@ include file="/WEB-INF/views/top.jsp"%>
 
 <style>
-h2 {/*  */
+h2 {/* 머릿말 */
 	margin: 40px 40px 40px 0px;
-	font-weight: bolder;
-	color: #133337;
+	padding: 0 20px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 700;
+	color: #39b559;
 	font-size: calc(1.325rem + .9vw);
 }
-
+.List{ /* 머릿말 a링크  */
+	text-decoration: none;
+	color: #39b559;
+}
+.List:hover{/* 머릿말 a링크  */
+	color: #39b559;
+}
 tr>th {
 	text-align: center;
 	font-size: 14px;
@@ -70,6 +78,19 @@ button {
   background-color: #198754;
   border-color: #198754;
 }
+.total{
+	width:16%;
+	text-align:right;
+	padding-right:15px;
+	padding-top: 10px;
+}
+.findType{
+	padding-bottom: 15px;
+	padding: 6px;
+}
+.pageSize{
+	padding: 1px;
+}
 
 </style>
 <!-- 검색 오류 알림 -->
@@ -101,20 +122,22 @@ button {
 </script>
 
 <div class="container mt-3" style="overflow: auto;">
-	<h2 class="text-left" style="padding: 0 20px;"><a href="memberList" style="text-decoration: none; color:#2B7539;">회원리스트</a></h2>
-	<hr>
+	<h2 class="text-left">
+		<a class="List" href="memberList">회원리스트</a>
+	</h2>
 	<c:if test="${paging.findType ne null and paging.findType ne ''}">
 		<h4 class="text-center" style="margin: 30px 0px;">
 			- <b><c:out value="${paging.findKeyword}"/></b> -
 			로 검색한 결과입니다.
 		</h4>
 	</c:if>
+	
 	<div class="row py-1" style="margin-left: 2px;">
 		<!-- 페이지 사이즈 처리 -->
 		<div class="col-md-4 text-left " style="padding-top: 12px;">
 			<form name="pagingSizeF" action="memberList">
 				Show&nbsp;
-				<select name="pageSize" style="padding: 1px;" onchange="submit()">
+				<select name="pageSize" class="pageSize" onchange="submit()">
 					<!-- <option value=''>항목 노출 선택</option> -->
 					<c:forEach var="ps" begin="5" end="20" step="5">
 						<option value='${ps}'
@@ -129,14 +152,16 @@ button {
 				<!-- ------------------------------------------------------- -->
 			</form>
 		</div>
+		
+		
 		<!-- 검색창  -->
-		<div class="col-md-6" style="padding-bottom: 15px;">
+		<div class="col-md-6">
 			<form name="searchF" action="memberList" onsubmit="return check()">
 				<!-- ---hidden data------------------------------------------ -->
 				<%-- <input type="hidden" name="pageSize" value="${pageSize}"> --%>
 				<%-- <input type="hidden" name="mpage" value="${searchF.mpage}"> --%>
 				<!-- ------------------------------------------------------- -->
-				<select name="findType" style="padding: 6px;">
+				<select name="findType" class="findType">
 					<option value="1"
 						<c:if test="${paging.findType eq 1}">selected</c:if>>이름</option>
 					<option value="2"
@@ -153,7 +178,7 @@ button {
 			</form>
 		</div>
 		<!-- 전체 회원 수 표시-->
-		<div style="width:16%; text-align:right; padding-right:15px; padding-top: 10px;">
+		<div class="total">
 			<div>전체 회원수: 
 				<b><c:out value="${paging.totalCount}"/></b>
 			</div>
@@ -187,8 +212,7 @@ button {
 						</td>
 						<td>${user.mdate}</td>
 						<td><c:if test="${user.status ne 9}">
-								<select id="status${st.index}" name="status"
-									style="padding: 1px;">
+								<select id="status${st.index}" name="status" style="padding: 1px;">
 									<option value="0"
 										<c:if test="${user.status eq 0}">selected</c:if>>일반회원</option>
 									<option value="1"

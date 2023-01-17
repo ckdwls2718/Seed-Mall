@@ -48,6 +48,12 @@
 		values(#{upCg_code},#{downCg_code},#{downCg_name})
 
 	</insert>
+	
+	<insert id="addDetail" parameterType="Category">
+		insert into cg_detail(upCg_code,downCg_code,comment_name,comments)
+		values(#{upCg_code},#{downCg_code},#{comment_name},#{comments})
+
+	</insert>
 
 
 	<select id="getProducts" resultType="Product" parameterType="ProdPaging">
