@@ -11,10 +11,10 @@
 		</selectKey>
 		insert into order_desc(desc_oidx, midx, desc_oTotalPrice,
 		deliveryState,
-		payment, gradePoint, gradeDiscount, ocomment,
+		payment, gradePoint, gradeDiscount, ocomment, merchant_uid,
 		desc_odate)
 		values(#{desc_oidx}, #{midx}, #{desc_oTotalPrice}, '0',
-		#{payment}, #{gradePoint}, #{gradeDiscount}, #{ocomment:VARCHAR},
+		#{payment}, #{gradePoint}, #{gradeDiscount}, #{ocomment:VARCHAR}, #{merchant_uid},
 		sysdate)
 	</insert>
 
