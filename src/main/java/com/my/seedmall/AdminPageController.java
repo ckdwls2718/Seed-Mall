@@ -105,47 +105,46 @@ public class AdminPageController {
 		return "msg";
 	}
 
-	// 주문/취소 관리
+	// 주문 관리
 	@GetMapping("/orderManagement")
-	public String orderManagement(Model m, @ModelAttribute("page") PagingVO page,
-			HttpServletRequest req, @RequestHeader("user-Agent") String userAgent) {
+	public String orderManagement(Model m, @ModelAttribute("page") PagingVO page, HttpServletRequest req,
+			@RequestHeader("user-Agent") String userAgent) {
 		String myctx = req.getContextPath();
-        HttpSession ses = req.getSession();
-        
-        int totalCount = orderService.getOrderCount(page);
-        
-        page.setTotalCount(totalCount);
-        page.setPagingBlock(5);
-        page.init(ses);
-        
-        String loc = "admin/orderManagement";
-        String pageNavi = page.getPageNavi(myctx, loc, userAgent);
-        
-        List<OrderVO> orderArr = orderService.getOrderList_paging(page);
-        
-        m.addAttribute("pageNavi", pageNavi);
-        m.addAttribute("paging", page);
-        m.addAttribute("orderArr", orderArr);
-        
+		HttpSession ses = req.getSession();
+
+		int totalCount = orderService.getOrderCount(page);
+
+		page.setTotalCount(totalCount);
+		page.setPagingBlock(5);
+		page.init(ses);
+
+		String loc = "admin/orderManagement";
+		String pageNavi = page.getPageNavi(myctx, loc, userAgent);
+
+		List<OrderVO> orderArr = orderService.getOrderList_paging(page);
+
+		m.addAttribute("pageNavi", pageNavi);
+		m.addAttribute("paging", page);
+		m.addAttribute("orderArr", orderArr);
+
 		return "admin/orderManagement";
 	}
-	
+
 	// 배송상태 설정완료 시
 	@PostMapping("/deliveryStatus")
-	public String deliveryStatus(Model m, @ModelAttribute OrderVO ovo) {
-		
+	public String deliveryStatus(@ModelAttribute OrderVO ovo) {
+
 		int n = orderService.updateDeliveryStatus(ovo);
-		
+
 		return "redirect:orderManagement";
 	}
-	
 
 	// 키워주세요 식물관리
 	@GetMapping("/plantManagement")
 	public String plantManagement(Model m) {
-		
+
 		List<MyPlantVO> plantArr = myPlantService.selectAllMyPlant(null);
-		
+
 		m.addAttribute("plantArr", plantArr);
 
 		return "admin/plantList";
@@ -155,31 +154,30 @@ public class AdminPageController {
 	@PostMapping("/plantManagementDetail")
 	public String plantManagementDetail(Model m, @RequestParam("pidx") int pidx) {
 		MyPlantVO plant = myPlantService.getMyPlantDetail(pidx);
-		
+
 		m.addAttribute("plant", plant);
-		
+
 		return "admin/plantManagement";
 	}
-	
-	@PostMapping(value="/plantManagementUpdate", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+
+	@PostMapping(value = "/plantManagementUpdate", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public String plantManagementUpdate(Model m, @ModelAttribute PlantForm plantForm, HttpServletRequest req) {
-		
-		
-		log.info("plantForm = "+plantForm);
-		
-		//local에 이미지 저장 
+
+		log.info("plantForm = " + plantForm);
+
+		// local에 이미지 저장
 		PlantImageVO piVo = myPlantService.uploadImage(plantForm.getPlantImage(), req);
-		
-		//myplant 외래키 저장
+
+		// myplant 외래키 저장
 		piVo.setPlant_idx(plantForm.getPlant_idx());
-		
-		//local 이미지 이름 
+
+		// local 이미지 이름
 		plantForm.setPlantImageStr(piVo.getPimage());
-		
-		//myplant 정보 업데이트
+
+		// myplant 정보 업데이트
 		myPlantService.updateMyPlant(plantForm);
-		
-		//이미지 db에 저장
+
+		// 이미지 db에 저장
 		myPlantService.insertImage(piVo);
 
 		return "redirect:plantManagement";
@@ -187,18 +185,44 @@ public class AdminPageController {
 
 	// 환불 내역
 	@GetMapping("/refundManagement")
-	public String refundManagement() {
-		
+	public String refundManagement(Model m, @ModelAttribute("page") PagingVO page, HttpServletRequest req,
+			@RequestHeader("user-Agent") String userAgent) {
+		String myctx = req.getContextPath();
+		HttpSession ses = req.getSession();
+
+		int totalCount = orderService.getOrderCount(page);
+
+		page.setTotalCount(totalCount);
+		page.setPagingBlock(5);
+		page.init(ses);
+
+		String loc = "admin/orderManagement";
+		String pageNavi = page.getPageNavi(myctx, loc, userAgent);
+
+		List<OrderVO> orderArr = orderService.getRefundList_paging(page);
+
+		m.addAttribute("pageNavi", pageNavi);
+		m.addAttribute("paging", page);
+		m.addAttribute("orderArr", orderArr);
+
 		return "admin/refundManagement";
 	}
 	
+	// 환불 수정
+	@PostMapping("/refundEdit")
+	public String refundEdit(@ModelAttribute("ovo") OrderVO ovo) {
+		int n = orderService.updateDeliveryStatus(ovo);
+		
+		return "redirect:refundManagement";
+	}
+
 	// Q&A 관리
 	@GetMapping("/qnaManagement")
-	public String qnaManagement() {
-		
+	public String qnaManagement(Model m, @ModelAttribute OrderVO ovo) {
+
 		return "admin/qnaManagement";
 	}
-	
+
 	// 히스토리
 	@GetMapping("/history")
 	public String history(Model m, HttpSession ses) {

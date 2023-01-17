@@ -68,9 +68,9 @@
 		o.*, (select statusStr from deliverystatus where statusNumber =
 		o.deliverystate) statusStr from order_desc o)
 
-				<![CDATA[
-				where rn > #{start} and rn < #{end}
-				]]>
+		<![CDATA[
+		where rn > #{start} and rn < #{end}
+		]]>
 	</select>
 	<select id="getOrderMemberList_paging" parameterType="Paging"
 		resultType="Order">
@@ -80,6 +80,18 @@
 		resultType="Order">
 		select * from product p join orders o on p.pidx=o.oidx
 
+	</select>
+	<!-- 환불건만 가져오는 것 -->
+	<select id="getRefundList_paging" parameterType="Paging"
+		resultType="Order">
+		select * from(
+		select row_number() over(order by desc_oidx desc, desc_odate asc) rn,
+		o.*, (select statusStr from deliverystatus where statusNumber =
+		o.deliverystate) statusStr from order_desc o where DELIVERYSTATE in(6,7))
+
+		<![CDATA[
+		where rn > #{start} and rn < #{end}
+		]]>
 	</select>
 	<!-- -->
 

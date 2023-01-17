@@ -141,10 +141,7 @@ padding-bottom: 12px;
 						<b>연락처</b>
 					</td>
 					<td class="m2">
-					<select id="mhp1">
-							<option value="1">010</option>
-							<option value="2">011</option>
-					</select>
+					<input type="text" name="mhp1" id="Mhp1" maxlength="3">
 					- <input type="text" name="mhp2" id="Mhp2" maxlength="4">
 					- <input type="text" name="mhp3" id="Mhp3" maxlength="4">
 					<br>
