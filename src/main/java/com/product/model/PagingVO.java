@@ -35,7 +35,6 @@ public class PagingVO {
 	private String upcg; // 상위 카테고리
 	private String downcg; // 하위 카테고리
 	
-	
 	// 정렬 관련 프로퍼티
 	private int sort=1; // 정렬 유형
 

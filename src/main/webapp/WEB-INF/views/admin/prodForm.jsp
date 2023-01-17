@@ -4,9 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ include file="/WEB-INF/views/top.jsp"%>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-	rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
 
 <script>
 function setThumbnail(event) {
@@ -24,7 +22,7 @@ function setThumbnail(event) {
       console.log(image);
       reader.readAsDataURL(image);
     }
-  }
+  }//------------
 
 	function selectDownCategory(upCode) {
 		//alert(upCode);
@@ -51,7 +49,6 @@ function setThumbnail(event) {
 				}).fail(function(err) {
 			alert('err');
 		})
-
 	}//----------------------------
 
 	function check() {
@@ -94,16 +91,14 @@ function setThumbnail(event) {
 			return false;
 		}
 		return true;
-	}
+	}//---------
 </script>
 
 <div>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h2
-					style="text-align: left; margin: 40px 40px 0 0; font-weight: bolder">상품
-					등록</h2>
+				<h2 style="text-align: left; margin: 40px 40px 0 0; font-weight: bolder">상품 등록</h2>
 				<br>
 				<hr>
 
