@@ -81,6 +81,15 @@ const insertCart = function(){
 	prodF.submit();
 }
 
+const qQtyCheck = function(){
+	let pqty = ${prod.pqty};
+	if(pqty<=0){
+		alert('재고가 없습니다.');
+		return false;
+	}
+	return true;
+}
+
 </script>
 <div class='container d-flex'>
 	<div id="leftDetail" class="m-3" style="width: 60%">
@@ -103,7 +112,7 @@ const insertCart = function(){
 	</div>
 	
 	<div id="rightDetail" class="m-3" style="width: 40%">
-	<form id="prodF" action="${myctx}/user/order" method="post">
+	<form id="prodF" action="${myctx}/user/order" method="post" onsubmit="return qQtyCheck()">
 		<p>${prod.upCg_name} > ${prod.downCg_name}</p>
 		<!--right information-->
 		<div id="prodName">
@@ -153,7 +162,12 @@ const insertCart = function(){
 			<div class="halfCell text-center">
 				<input type="hidden" name="pidx" value="${prod.pidx}">
 				<input type="hidden" name="pqty" >
+				<c:if test="${prod.pqty <= 0}">
+					<button class="btn btn-outline-success btn-lg" type="submit" disabled>품절</button>
+				</c:if>
+				<c:if test="${prod.pqty > 0}">
 				<button class="btn btn-outline-success btn-lg" type="submit">주문하기</button>
+				</c:if>
 				<button class="btn btn-outline-info btn-lg" type="button" onclick="insertCart()">장바구니</button>
 			</div>
 		</div>
@@ -163,7 +177,7 @@ const insertCart = function(){
 	<!--right-->
 </div>
 
-<div class="container mb-5" id="content">
+<div class="container mb-5" id="content" style="height: 500px">
 <ul class="nav nav-tabs">
   <li class="nav-item">
     <a class="nav-link active" aria-current="page" href="#">상품상세</a>
@@ -189,8 +203,10 @@ const insertCart = function(){
 
 </div>
 
-<c:import url="/QNA/${prod.pidx}"/>
+
 <c:import url="/review/${prod.pidx}"/>
+<c:import url="/QNA/${prod.pidx}"/>
+
 
 
 <%@ include file="/WEB-INF/views/foot.jsp"%>

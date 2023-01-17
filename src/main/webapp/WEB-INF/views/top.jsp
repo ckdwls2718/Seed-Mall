@@ -42,7 +42,7 @@
                 </a>
                 
                 <ul class="dropdown-menu text-small shadow" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; margin-top:5px;  transform: translate3d(0.5px, 34px, 0px);">
-                  <li><span class="dropdown-item">등급</span></li>
+                  <li><span class="dropdown-item">${loginUser.grade}</span></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="${myctx}/user/mypage">마이페이지</a></li>
                   <li><a class="dropdown-item" href="#">설정</a></li>

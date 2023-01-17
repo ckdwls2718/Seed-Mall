@@ -90,9 +90,22 @@ const chageTotal = function(cidx){
 
 const submitCheck = function(){
 	let sum = $('input:checkbox[name=cidx]:checked').length;
+	let checkPqty = 1;
+	$('input:checkbox[name=cidx]:checked').each(function(){
+		let cidx = $(this).val();
+		let pQty = $('#checkPqty'+cidx).text();
+		if(pQty<=0) {
+			checkPqty = 0;
+			alert('장바구니 상품 중 품절된 상품이 있습니다.');
+			return false;
+		}
+	})
+	
+	if(checkPqty == 0) return false;
+	
 	if(sum>0){
 		return true;
-	}
+	} 
 	
 	alert('상품을 선택해주세요');
 	return false;
@@ -123,14 +136,23 @@ const submitCheck = function(){
 					<!-- ------------------------ -->
 					<c:if test="${cartArr eq null or empty cartArr}">
 						<tr>
-							<td colspan="8">장바구니에 담긴 상품이 없습니다</td>
+							<td colspan="8">
+								장바구니에 담긴 상품이 없습니다<br>
+								<a href="${myctx}/prod" class="btn btn-info">쇼핑하러가기</a>
+							</td>
 						</tr>
 					</c:if>
 					
 					<c:if test="${cartArr ne null and not empty cartArr}">
 						<c:forEach var="cart" items="${cartArr}" varStatus="status">
+							<div id="checkPqty${cart.cart_idx}" style="display: none;">${cart.product.pqty}</div>
 							<tr>
-								<td><input type="checkbox" id="cidx${cart.cart_idx}" name="cidx" value="${cart.cart_idx}" onclick="chageTotal('${cart.cart_idx}')"> ${cart.product.pidx}</td>
+								<td>
+									<c:if test="${cart.product.pqty <= 0}">품절</c:if>
+									<c:if test="${cart.product.pqty > 0}">
+									<input type="checkbox" id="cidx${cart.cart_idx}" name="cidx" value="${cart.cart_idx}" onclick="chageTotal('${cart.cart_idx}')"> ${cart.product.pidx}
+									</c:if>
+								</td>
 								<td>${cart.product.upCg_name}>${cart.product.downCg_name}</td>
 								<td>${cart.product.pname}</td>
 								

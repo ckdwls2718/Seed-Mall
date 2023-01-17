@@ -37,4 +37,7 @@ public interface ProductMapper {
 	int insertUpcg(CategoryVO cvo);
 
 	int insertDowncg(CategoryVO cvo);
+
+	int addDetail(CategoryVO cvo);
+
 }

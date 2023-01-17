@@ -12,6 +12,7 @@ public class OrderVO {
 	
 	// 주문명세서(order_desc)
 	private int desc_oidx; // 주문개요번호
+	private String merchant_uid; // 주문번호
 	private int midx; // 회원번호
 
 	private int desc_oTotalPrice; // 전체가격
