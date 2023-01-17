@@ -10,17 +10,50 @@
 	values(#{qidx},#{pidx},#{midx},#{qtitle},#{qcontent},#{secret}, sysdate)
 	</insert>
 	
-	<select id="getQNAList" parameterType="int" resultType="QNA">
+	<insert id="insertQNA_Re" parameterType="QNARe">
+	<selectKey keyProperty="re_qidx" order="BEFORE" resultType="int" >
+		select board_qna_comment_seq.nextval from dual
+	</selectKey>
+	insert into board_qna_comment(re_qidx, qidx, midx, re_qcontent, re_qdate)
+	values(#{re_qidx}, #{qidx}, #{midx}, #{re_qcontent}, sysdate)
+	</insert>
+	
+	<select id="getQNAListByMidx" parameterType="int" resultType="QNA">
 		select b.*, m.email 
 		from board_qna b join member m on b.midx=m.midx 
+		where b.midx=#{value}
+	</select>
+	
+	<select id="getQNAReListByQidx" parameterType="int" resultType="QNARe">
+		select * 
+		from board_qna_comment 
+		where qidx=#{value}
+	</select>
+	
+	<select id="getQNAListByPidx" parameterType="int" resultType="QNA">
+		select * 
+		from board_qna
 		where pidx=#{value}
 	</select>
 	
-	<select id="getMyQNAList" parameterType="int" resultType="QNA">
-		select * from board_qna where midx=#{value}
+	<select id="getQNAList" parameterType="BoardPaging" resultType="QNA">
+		select * from(
+				select row_number() over(order by qidx desc, qdate asc) rn, b.*, m.email 
+				from board_qna b join member m on b.midx=m.midx)
+				<![CDATA[
+				where rn > #{start} and rn < #{end}
+				]]>
+	</select>
+	
+	<select id="getQNACount" parameterType="BoardPaging" resultType="int">
+		select count(qidx) from board_qna
 	</select>
 	
 	<delete id="deleteQNA" parameterType="int">
 		delete from board_qna where qidx=#{value}
+	</delete>
+	
+	<delete id="deleteQNARe" parameterType="int">
+		delete from board_qna_comment where re_qidx=#{value}
 	</delete>
 </mapper>

@@ -133,7 +133,7 @@
 	
 
 	<sql id="selectProd">
-		select p.*,decode(c.upcg_code,1,'초보',2,'중급',3,'전문가')
+		select p.*,decode(c.upcg_code,1,'초심자',2,'중급자',3,'전문가')
 		upcg_name,c.downCg_name
 		from product p join downcategory c
 		on

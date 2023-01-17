@@ -2,7 +2,9 @@ package com.board.service;
 
 import java.util.List;
 
+import com.board.model.PagingVO;
 import com.board.model.QNADTO;
+import com.board.model.QNA_ReDTO;
 
 public interface QNAService {
 	
@@ -10,7 +12,7 @@ public interface QNAService {
 	public int insertQNA(QNADTO qna);
 	
 	// 상품번호를 이용한 QNA리스트 가져오기
-	public List<QNADTO> getQNAList(int pidx);
+	public List<QNADTO> getQNAListByPidx(int pidx);
 	
 	// QNA 수정
 	public int updateQNA(QNADTO qna);
@@ -19,5 +21,15 @@ public interface QNAService {
 	public int deleteQNA(int qidx);
 	
 	// 내가 작성한 QNA 보기
-	public List<QNADTO> getMyQNAList(int midx);
+	public List<QNADTO> getQNAListByMidx(int midx);
+	
+	// QNA 답변 삭제
+	public int deleteQNARe(int re_qidx);
+	
+	// 관리자 - 모든 qna리스트 가져오기
+	public List<QNADTO> getQNAList(PagingVO page);
+	
+	public int getQNACount(PagingVO page);
+	
+	public int insertQNA_Re(QNA_ReDTO re);
 }

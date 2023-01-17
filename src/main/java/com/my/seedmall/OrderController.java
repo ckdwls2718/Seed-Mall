@@ -49,10 +49,6 @@ public class OrderController {
 	public String order(Model m, @RequestParam("pidx") int pidxs[], @RequestParam("oqty") int oqtys[],
 			@RequestParam(value = "growCheck", defaultValue = "N") String growCheck, HttpSession session,
 			@ModelAttribute OrderProductVO opvo) {
-		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
-		if (loginUser == null) {
-			return "redirect:index";
-		}
 
 		int total = 0, totalPayment = 0;
 		List<ProductVO> orderArr = new ArrayList<>();
@@ -86,7 +82,6 @@ public class OrderController {
 		// List를 세션에 저장해둔다
 		session.setAttribute("orderArr", orderArr);
 
-		m.addAttribute("loginUser", loginUser);
 		m.addAttribute("oqty", opvo.getOqty());
 		m.addAttribute("total", total);
 		m.addAttribute("totalPayment", totalPayment);

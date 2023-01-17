@@ -3,11 +3,34 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="/resources/js/addressapi.js"></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <%@ include file="/WEB-INF/views/top.jsp"%>
 
 <script>
-	//배송메시지 200자 이내로 작성하도록 처리하는 스크립트
+	
 	$(document).ready(function() {
+		
+		// Date 객체 포멧
+		Date.prototype.YYYYMMDDHHMMSS = function () {
+			  var yyyy = this.getFullYear().toString();
+			  var MM = pad(this.getMonth() + 1,2);
+			  var dd = pad(this.getDate(), 2);
+			  var hh = pad(this.getHours(), 2);
+			  var mm = pad(this.getMinutes(), 2)
+			  var ss = pad(this.getSeconds(), 2)
+
+			  return yyyy +  MM + dd+  hh + mm + ss;
+			};
+			function pad(number, length) {
+				  var str = '' + number;
+				  while (str.length < length) {
+				    str = '0' + str;
+				  }
+				  return str;
+				}
+		
+			//배송메시지 200자 이내로 작성하도록 처리하는 스크립트
 		$('#ocomment').on('keyup', function() {
 			$('#ocomment_cnt').html("(" + $(this).val().length + " / 200)");
 
@@ -121,6 +144,42 @@
 			$('#omaddr2').val("");
 		}
 	}
+	
+	function iamport(){
+		let nowDate = new Date();
+		let uid = "order_${loginUser.midx}_"+nowDate.YYYYMMDDHHMMSS();
+		let prodName = "시드몰 : ${orderArr[0].pname}";
+		let total = ${total};
+		let email = '${loginUser.email}' 
+		let name = $('#omname').val(); 
+		let tel = $('#omhp1').val()+'-'+$('#omhp2').val()+'-'+$('#omhp3').val();
+		let addr = $('#omaddr1').val()+' '+$('#omaddr2').val();
+		let postcode = $('#ompost').val();
+		
+		IMP.init('imp71863270'); //가맹점 식별코드
+		 
+		IMP.request_pay({
+			pg : 'html5_inicis',
+		    pay_method : 'card', //생략 가능
+		    merchant_uid: uid, // 상점에서 관리하는 주문 번호
+		    name : prodName, //상품명 입력해야할듯
+		    amount : 100,
+		    buyer_email : email,
+		    buyer_name : name,
+		    buyer_tel : tel,
+		    buyer_addr : addr,
+		    buyer_postcode : postcode,
+		}, function(response) {
+			//결제 후 호출되는 callback함수
+			if ( response.success ) { //결제 성공
+				console.log(response);
+				// 실제 서비스 시 결제된 금액과 주문금액이 일치하는지 확인해야 한다.
+				orderF.submit();
+			} else {
+				alert('결제실패 : ' + response.error_msg);
+			}
+		})
+	}
 </script>
 <!-- 결제정보 출력해주는 페이지 -->
 <div class="container" style="height: 2300px; overflow: y:hidden;">
@@ -179,7 +238,6 @@
 						<th>상품정보</th>
 						<th>판매가</th>
 						<th>수량</th>
-						<th>배송비</th>
 						<th>총액</th>
 					</tr>
 				</thead>
@@ -191,9 +249,8 @@
 						</td>
 						<td><fmt:formatNumber value="${pvo.product.psaleprice}"
 								pattern="###,###,###" /> 원<br> <span
-							class="badge badge-danger">${pvo.product.ppoint}</span>POINT</td>
+							class="badge badge-danger" style="color:green">${pvo.product.ppoint}</span>POINT</td>
 						<td>${pvo.pqty}개</td>
-						<td>4,000원</td>
 						<td><fmt:formatNumber value="${pvo.ctotalprice}" pattern="###,###,###" />
 							원</td>
 					</tr>
@@ -234,16 +291,22 @@
 				</tr>
 				<tr>
 					<td width="20%" class="m2">할인금액</td>
-					<td width="80%" class="m2">10원</td>
+					<td width="80%" class="m2"><fmt:formatNumber value=""
+							pattern="###,###" />원</td>
+				</tr>
+				<tr>
+					<td width="20%" class="m2">배송비</td>
+					<td width="80%" class="m2">4,000원</td>
 				</tr>
 				<tr>
 					<td width="20%" class="m2">최종 결제금액</td>
-					<td width="80%" class="m2">${total}원</td>
+					<td width="80%" class="m2"><fmt:formatNumber value="${total}"
+							pattern="###,###" /> 원</td>
 				</tr>
 			</table>
 		</div>
 		<div class="text-center">
-			<button class="btn btn-success mb-5">결제하기</button>
+			<button type="button" class="btn btn-success mb-5" onclick="iamport()">결제하기</button>
 		</div>
 	</form>
 </div>

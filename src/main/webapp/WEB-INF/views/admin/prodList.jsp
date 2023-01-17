@@ -9,9 +9,13 @@
 	rel="stylesheet" />
 <style>
 h2 {
+	font-size: calc(1.325rem + .9vw);
 	margin: 40px 40px 40px 0px;
-	font-weight: bolder;
-	color: #133337;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 700;
+	color: #39b559;
+	text-align: left;
+	padding: 0 20px;
 }
 
 tr>th {
@@ -35,80 +39,85 @@ input {
 	padding: 0 10px;
 	height: 38px;
 }
-</style>
-<div class="container" style="text-align: center">
 
+#searchbar {
+	position: absolute;
+	top: 0;
+	right: 0px;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+</style>
+
+<div class="container mt-3" style="overflow: auto;">
 	<div class="row">
-		<div class="col-md-12">
-			<h2
-				style="text-align: left; margin: 40px 40px 0 0; font-weight: bolder">상품
-				목록</h2>
-			<div style="text-align: right">
-			<button class="btn btn-outline-warning"
-					onclick="location.href='${myctx}/admin/categoryForm'">카테고리등록/삭제</button>
-				<button class="btn btn-outline-success"
-					onclick="location.href='${myctx}/admin/prodForm'">상품등록</button>
-			</div>
-			<hr>
+		<div class="text-left">
+			<h2>상품 목록</h2>
 			<!-- 검색폼  -->
-			<c:if test="${paging.findType ne null and paging.findType ne ''}">
-				<h3 class="text-center">
-					<c:out value="${paging.findKeyword}" />
-					로 검색한 결과
-				</h3>
+			<c:if test="${paging.findKeyword ne null and paging.findKeyword ne ''}">
+				<h4 class="text-center" style="margin: 30px 0px;">
+					- <b><c:out value="${paging.findKeyword}" /></b> - 로 검색한 결과입니다.
+				</h4>
 			</c:if>
-			<div class="row py-3">
-				<div class="col-md-8 text-center">
-					<form name="searchF" action="list" onsubmit="return check()">
-						<!-- ---hidden data------------------------------------------ -->
-						<input type="hidden" name="pageSize" value="${pageSize}">
-						<input type="hidden" name="cpage" value="${paging.cpage}">
-						<!-- ------------------------------------------------------- -->
-						<select name="findType" style="padding: 6px;">
-							<option value="1"
-								<c:if test="${paging.findType eq 1}">selected</c:if>>상품번호</option>
-							<option value="2"
-								<c:if test="${paging.findType eq 2}">selected</c:if>>카테고리</option>
-							<option value="3"
-								<c:if test="${paging.findType eq 3}">selected</c:if>>상품명</option>
-						</select> <label> <input type="text" name="findKeyword"
-							placeholder="검색어를 입력하세요" autofocus="autofocus"
-							style='width: 300px;'>
-							<button class="btn btn-outline-success"
-								style="position: absolute; top: 0; right: 0px;">검 색</button>
-						</label>
-					</form>
-				</div>
-				<div class="col-md-4 text-right">
-					<form name="pagingSizeF" action="list">
-						<!-- ---hidden data------------------------------------------ -->
-						<input type="hidden" name="findType" value="${paging.findType}">
-						<input type="hidden" name="findKeyword"
-							value="${paging.findKeyword}"> <input type="hidden"
-							name="cpage" value="${paging.cpage}">
-						<!-- ------------------------------------------------------- -->
-						<select name="pageSize" style="padding: 6px; margin-top: 2px"
+
+
+
+			<div class="row py-1" style="margin-left: 2px;">
+
+				<div class="col-md-4 text-left " style="padding-top: 12px;">
+					<form name="pagingSizeF" action="prodList">
+						&nbsp; <select name="pageSize" class="pageSize"
 							onchange="submit()">
 							<!-- <option value=''>항목 노출 선택</option> -->
 							<c:forEach var="ps" begin="5" end="20" step="5">
 								<option value='${ps}'
 									<c:if test="${pageSize eq ps}">selected</c:if>>${ps}</option>
 							</c:forEach>
-						</select>
+						</select> &nbsp;개씩 보기
+						<!-- ---hidden data------------------------------------------ -->
+						<input type="hidden" name="findKeyword"
+							value="${paging.findKeyword}"> <input type="hidden"
+							name="cpage" value="${paging.cpage}">
+						<!-- ------------------------------------------------------- -->
 					</form>
 				</div>
+				<!-- 검색창  -->
+				<div class="col-md-6" style="width: 620px;">
+					<form name="searchF" action="prodList" onsubmit="return check()">
+						<!-- ---hidden data------------------------------------------ -->
+						<input type="hidden" name="pageSize" value="${pageSize}">
+						<input type="hidden" name="cpage" value="${paging.cpage}">
+						<!-- ------------------------------------------------------- -->
+						<label> <input type="text" name="findKeyword"
+							placeholder="검색어를 입력하세요" autofocus="autofocus"
+							style='width: 300px;'>
+							<button class="btn btn-outline-success" id="searchbar">검
+								색</button>
+						</label>
+					</form>
+				</div>
+				<div style="display: contents;">
+					<button class="btn btn-outline-warning"
+						style="margin: 0px 4px 0px 7px;"
+						onclick="location.href='${myctx}/admin/categoryForm'">카테고리등록</button>
+					<button class="btn btn-outline-success" style="margin: 0px 7px;"
+						onclick="location.href='${myctx}/admin/prodForm'">상품등록</button>
+				</div>
 			</div>
+
 			<!-- --------------------------------검색폼 -->
-			<hr style="margin-bottom:0">
 			<table class="table table-striped " id="products">
-				<thead class="table-success">
-					<tr>
+				<thead>
+					<tr class="table-success">
 						<th>상품번호</th>
 						<th>카테고리</th>
 						<th data-sort="string">상품명</th>
 						<th>이미지</th>
 						<th data-sort="string">가 격</th>
-						<th>수정|삭제</th>
+						<th>수정&nbsp;|&nbsp;삭제</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -135,15 +144,25 @@ input {
 										원
 									</del> <br> <b class="text-primary">판매가 : <fmt:formatNumber
 											value="${prod.psaleprice}" pattern="###,###" /> 원
-								</b><br> <span class="badge bg-danger">${prod.percent}
-										%할인</span></td>
-								<td><a href="prodEdit?pidx=${prod.pidx}">수정</a>| <a
+								</b><br> <span class="badge bg-danger">${prod.percent}%
+								</span></td>
+								<td><a href="prodEdit?pidx=${prod.pidx}">수정</a>&nbsp;| <a
 									href="prodDel?pidx=${prod.pidx}">삭제</a></td>
 							</tr>
 						</c:forEach>
 					</c:if>
 					<!-- ------------------------ -->
 				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="4" class="text-center">${pageNavi}</td>
+						<td colspan="3" class="text-right">총 상품 수:<b><c:out
+									value="${paging.totalCount}" /></b> <br> <span
+							class="text-danger"><c:out value="${paging.cpage}" /></span> / <c:out
+								value="${paging.pageCount}" />
+						</td>
+					</tr>
+				</tfoot>
 
 			</table>
 		</div>

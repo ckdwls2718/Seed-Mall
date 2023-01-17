@@ -13,6 +13,7 @@ public class CategoryVO {
 	
 	private String comment_name;//설명 이름 (~~란?)
 	private String comments;//설명 내용
+
 	
 
 }

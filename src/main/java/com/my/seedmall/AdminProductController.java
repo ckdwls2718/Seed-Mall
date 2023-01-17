@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,6 +55,7 @@ public class AdminProductController {
 		return cgDeatilList;
 	}
 
+
 	@PostMapping("/prodInsert")
 	public String productRegister(Model m, @ModelAttribute ProductForm prod, HttpServletRequest req) {
 		log.info("inprod="+prod);
@@ -68,10 +69,21 @@ public class AdminProductController {
 	}// ------------------------------------------
 
 	@GetMapping("/prodList")
-	public String productList(Model m, PagingVO page) {
-		// 상품을 가져온다
+	public String productList(Model m, PagingVO page, HttpServletRequest req) {
+		String myctx = req.getContextPath();// 컨텍스트명 "/seedmall"
+		HttpSession ses = req.getSession();
+		
+		int totalCount = this.adminProductService.getProdTotal(page);
+		page.setTotalCount(totalCount);
+		page.setPagingBlock(5);// 페이징 블럭 단위값: 5
+		////////////////////
+		page.init(ses); // 페이징 관련 연산을 수행하는 메서드 호출
 		List<ProductVO> prodArr = adminProductService.productList(page);
+		String loc = "admin/prodList";
+		String pageNavi = page.getPageNavi(myctx, loc);
 		m.addAttribute("prodArr", prodArr);
+		m.addAttribute("paging", page);
+		m.addAttribute("pageNavi", pageNavi);
 
 		return "admin/prodList";
 	}

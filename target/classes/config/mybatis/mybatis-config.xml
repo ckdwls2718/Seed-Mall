@@ -3,6 +3,11 @@
 PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+<!-- 	<settings>
+
+        <setting name="jdbcTypeForNull" value="NULL"/>
+
+    </settings> -->
 	<!-- typeAlias 타입 별칭 설정 =============================== -->
 	<typeAliases>
 		<typeAlias type="com.board.model.BoardVO" alias="Board"/>
@@ -21,6 +26,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.product.model.CartVO" alias="Cart"/>
 		<typeAlias type="com.order.model.OrderVO" alias="Order"/>
 		<typeAlias type="com.board.model.QNADTO" alias="QNA"/>
+		<typeAlias type="com.board.model.QNA_ReDTO" alias="QNARe"/>
 		<typeAlias type="com.myplant.model.MyPlantVO" alias="MyPlant"/>
 		<typeAlias type="com.myplant.model.PlantImageVO" alias="MyPlantI"/>
 		<typeAlias type="com.myplant.model.PlantForm" alias="PlantForm"/>
@@ -41,4 +47,11 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="config/mybatis/mapper/QNAMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/MyPlantMapper.xml"/>
 	</mappers>
+
+
 </configuration>
+
+
+  
+
+

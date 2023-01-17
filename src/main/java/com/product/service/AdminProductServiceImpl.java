@@ -56,6 +56,11 @@ public class AdminProductServiceImpl implements AdminProductService {
 	public int categoryDelete(int cg_code) {
 		return 0;
 	}
+	
+	@Override
+	public int getProdTotal(PagingVO page) {
+		return productMapper.getProdCount(page);
+	}
 
 	@Override
 	public int productInsert(ProductForm prod, HttpServletRequest req) {
@@ -149,7 +154,7 @@ public class AdminProductServiceImpl implements AdminProductService {
 
 	@Override
 	public List<ProductVO> productList(PagingVO page) {
-		List<ProductVO> prodArr = this.productMapper.getProducts(page);
+		List<ProductVO> prodArr = this.productMapper.getProductsPaging(page);
 		for(ProductVO prod : prodArr) {
 			List<ProductImageVO> prodImageArr = productMapper.getProdImages(prod.getPidx());
 			prod.setPimageList(prodImageArr);
@@ -287,5 +292,7 @@ public class AdminProductServiceImpl implements AdminProductService {
 	public int deleteCgDetail(CategoryVO cvo) {
 		return this.categoryMapper.deleteCgDetail(cvo.getDownCg_code());
 	}
+
+
 
 }
