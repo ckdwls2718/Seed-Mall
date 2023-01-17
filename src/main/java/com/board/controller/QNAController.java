@@ -62,15 +62,15 @@ public class QNAController {
 		return result;
 	}
 	
-	//qna답변달기
-		@PostMapping(value="admin/QNA/del", produces = "application/json")
-		@ResponseBody
-		public int deleteQNA_Re(@RequestParam int re_qidx) {
-			log.info("reply = "+re_qidx);
-			int result = qnaService.deleteQNARe(re_qidx);
+	//qna답변삭제
+	@PostMapping(value="admin/QNA/del", produces = "application/json")
+	@ResponseBody
+	public int deleteQNA_Re(@RequestParam int re_qidx) {
+		log.info("reply = "+re_qidx);
+		int result = qnaService.deleteQNARe(re_qidx);
 			
-			return result;
-		}
+		return result;
+	}
 	
 	
 }
