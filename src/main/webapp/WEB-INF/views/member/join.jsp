@@ -3,8 +3,6 @@
 <%@ include file="/WEB-INF/views/top.jsp"%>
 
 <script type="text/javascript" src="./js/scripts2.js"></script>
-<!-- <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> -->
-<!-- <script src="/resources/js/addressapi.js"></script> -->
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -50,7 +48,7 @@ select{
 	border-radius: 5px;
 	border: 1px solid #ced4da;
 }
-#Mhp2, #Mhp3 { /* 연락처 */
+#Mhp1, #Mhp2, #Mhp3 { /* 연락처 */
 	width: 19.5%;
 	height: 35px;
 	border-radius: 5px;
@@ -141,10 +139,7 @@ padding-bottom: 12px;
 						<b>연락처</b>
 					</td>
 					<td class="m2">
-					<select id="mhp1">
-							<option value="1">010</option>
-							<option value="2">011</option>
-					</select>
+					<input type="text" name="mhp1" id="Mhp1" maxlength="3">
 					- <input type="text" name="mhp2" id="Mhp2" maxlength="4">
 					- <input type="text" name="mhp3" id="Mhp3" maxlength="4">
 					<br>
@@ -155,12 +150,6 @@ padding-bottom: 12px;
 						<b>주소</b>
 					</td>
 					<td class="m2">
-			<!-- 		<input type="text" id="Mpost" placeholder="우편번호">
-					<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-					<input type="text" id="Maddr1" placeholder="주소"><br>
-					<input type="text" id="Maddr2" placeholder="상세주소">
-					 -->
-					
 						<input type="text" name="mpost"id="Mpost" placeholder="우편번호" maxlength="5" class="form-control">
 						<button type="button" id="Mpostbtn"class="btn btn-outline-success" onclick="execPostcode()">주소 찾기</button>
 						<input type="text" name="maddr1" id="Maddr1" placeholder="도로명 주소" class="form-control">
