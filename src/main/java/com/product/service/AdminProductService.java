@@ -39,4 +39,12 @@ public interface AdminProductService {
 	public int insertUpcg(CategoryVO cvo);
 	public int insertDowncg(CategoryVO cvo);
 
+	public int addDetail(CategoryVO cvo);
+
+	public List<CategoryVO> getCgDetail(String downCg_code);
+
+	public int deleteCategory(CategoryVO cvo);
+
+	public int deleteCgDetail(CategoryVO cvo);
+
 }

@@ -217,7 +217,12 @@ public class AdminProductServiceImpl implements AdminProductService {
 
 	@Override
 	public int deleteProduct(int pidx) {
+		try {
 		return this.productMapper.deleteProduct(pidx);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return 999;
 	}
 
 	@Override
@@ -252,6 +257,35 @@ public class AdminProductServiceImpl implements AdminProductService {
 	@Override
 	public int insertDowncg(CategoryVO cvo) {
 		return this.productMapper.insertDowncg(cvo);
+	}
+
+	@Override
+	public int addDetail(CategoryVO cvo) {
+		return this.productMapper.addDetail(cvo);
+	}
+
+	@Override
+	public List<CategoryVO> getCgDetail(String downCg_code) {
+		return this.categoryMapper.getCgDetail(downCg_code);
+	}
+
+	@Override
+	public int deleteCategory(CategoryVO cvo) {
+		try {
+			if(cvo.getDownCg_code() == 0) {
+			return this.categoryMapper.deleteUpCategory(cvo.getUpCg_code());
+			}else {
+				return this.categoryMapper.deleteDownCategory(cvo.getDownCg_code());
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 999;
+	}
+
+	@Override
+	public int deleteCgDetail(CategoryVO cvo) {
+		return this.categoryMapper.deleteCgDetail(cvo.getDownCg_code());
 	}
 
 }

@@ -46,6 +46,14 @@ public class AdminProductController {
 		List<CategoryVO> downCgList = adminProductService.getDowncategory(upCg_code);
 		return downCgList;
 	}
+	
+	@ResponseBody
+	@GetMapping(value = "/getCgDetail", produces = "application/json")
+	public List<CategoryVO> getCgDetail(@RequestParam("downCg_code") String downCg_code) {
+		List<CategoryVO> cgDeatilList = adminProductService.getCgDetail(downCg_code);
+		log.info(cgDeatilList);
+		return cgDeatilList;
+	}
 
 	@PostMapping("/prodInsert")
 	public String productRegister(Model m, @ModelAttribute ProductForm prod, HttpServletRequest req) {
@@ -89,16 +97,26 @@ public class AdminProductController {
 		if (pidx == 0) {
 			return "redirect:prodList";
 		}
-		int x = adminProductService.deleteImage(pidx, req);
-
 		int n = adminProductService.deleteProduct(pidx);
-		String str = (n != 0 && x > 0) ? "삭제 성공" : "삭제 실패";
-		String loc = (n != 0 && x > 0) ? "prodList" : "javascript:history.back()";
-
-		m.addAttribute("message", str);
-		m.addAttribute("loc", loc);
-
-		return "msg";
+		if(n==999) {
+			String str="주문내역이 있는 상품입니다";
+			String loc="javascript:history.back()";
+			
+			m.addAttribute("message", str);
+			m.addAttribute("loc", loc);
+			
+			return "msg";
+		}else {
+			int x = adminProductService.deleteImage(pidx, req);
+	
+			String str = (n != 0 && x > 0) ? "삭제 성공" : "삭제 실패";
+			String loc = (n != 0 && x > 0) ? "prodList" : "javascript:history.back()";
+	
+			m.addAttribute("message", str);
+			m.addAttribute("loc", loc);
+	
+			return "msg";
+		}
 	}
 
 	@PostMapping("/updateProd")
@@ -149,6 +167,52 @@ public class AdminProductController {
 		m.addAttribute("message", str);
 		m.addAttribute("loc", loc);
 		return "msg";
+	}
+	
+	@PostMapping("/deleteCategory")
+	public String deleteCategory(Model m, @ModelAttribute CategoryVO cvo) {
+		int n= adminProductService.deleteCategory(cvo);
+		if(n==999) {
+			String str="카테고리내에 상품이 존재 합니다";
+			String loc="javascript:history.back()";
+			
+			m.addAttribute("message", str);
+			m.addAttribute("loc", loc);
+			
+			return "msg";
+		}else {
+			String str = (n > 0 || n == -1) ? "삭제 성공" : "삭제 실패";
+			String loc = (n > 0) ? "prodList" : "javascript:history.back()";
+	
+			m.addAttribute("message", str);
+			m.addAttribute("loc", loc);
+			return "msg";
+		}
+	}
+	
+	@PostMapping("/addCgDetail")
+	public String addCgDetail(Model m, @ModelAttribute CategoryVO cvo) {
+		int n = adminProductService.addDetail(cvo);
+		
+		String str = (n > 0) ? "등록 성공" : "등록 실패";
+		String loc = (n > 0) ? "prodList" : "javascript:history.back()";
+
+		m.addAttribute("message", str);
+		m.addAttribute("loc", loc);
+		return "msg";
+	}
+	
+	@PostMapping("/deleteCgDetail")
+	public String deleteCgDetail(Model m, @ModelAttribute CategoryVO cvo) {
+		int n = adminProductService.deleteCgDetail(cvo);
+		
+		String str = (n > 0) ? "삭제 성공" : "삭제 실패";
+		String loc = (n > 0) ? "prodList" : "javascript:history.back()";
+
+		m.addAttribute("message", str);
+		m.addAttribute("loc", loc);
+		return "msg";
+		
 	}
 
 }

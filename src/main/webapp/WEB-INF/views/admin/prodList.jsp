@@ -45,7 +45,7 @@ input {
 				목록</h2>
 			<div style="text-align: right">
 			<button class="btn btn-outline-warning"
-					onclick="location.href='${myctx}/admin/categoryForm'">카테고리등록</button>
+					onclick="location.href='${myctx}/admin/categoryForm'">카테고리등록/삭제</button>
 				<button class="btn btn-outline-success"
 					onclick="location.href='${myctx}/admin/prodForm'">상품등록</button>
 			</div>

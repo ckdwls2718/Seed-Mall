@@ -15,4 +15,12 @@ public interface CategoryMapper {
 	public int categoryAdd(CategoryVO cvo);
 	public int categoryDelete(int cg_code);
 
+	public List<CategoryVO> getCgDetail(String downCg_code);
+
+	public int deleteUpCategory(int n);
+
+	public int deleteDownCategory(int n);
+
+	public int deleteCgDetail(int n);
+
 }

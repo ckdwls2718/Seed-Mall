@@ -12,10 +12,45 @@
 	order by 1 asc
 </select>
 
+<select id="getCgDetail" resultType="Category" parameterType="string">
+	select * from cg_detail where downCg_code=#{value} 
+	order by 1 asc
+</select>
+
 
 <select id="getAllDowncategory" resultType="Category" >
 	select * from downCategory
 </select>
+
+<delete id="deleteUpCategory" parameterType="int">
+	 {call
+        declare
+        begin
+           <include refid="deleteCgDetail"></include>;
+           delete from downcategory where upCg_code=#{value};
+		   delete from upcategory  where upCg_code=#{value};
+        end
+    }
+</delete>
+
+<delete id="deleteDownCategory" parameterType="int">
+{call
+        declare
+        begin
+           <include refid="deleteCgDetail"></include>;
+		   delete from downcategory where downCg_code=#{value};
+        end
+    }
+
+</delete>
+
+<delete id="deleteCgDetail" parameterType="int">
+	<include refid="deleteCgDetail"></include>
+</delete>
+
+<sql id="deleteCgDetail">
+ 	delete from cg_detail where downCg_code=#{value}
+</sql>
 
 
 </mapper>
