@@ -16,6 +16,11 @@
 <select id="getAllDowncategory" resultType="Category" >
 	select * from downCategory
 </select>
+<select id="getAllCategory"  resultType="Category" >
+select u.*, d.*
+from upcategory u full outer join downcategory d
+on u.upCG_code = d.upCG_code order by 1 asc
+</select>
 
 <select id="getAllCgDetail" resultType="Category" >
 	select * from CG_DETAIL
