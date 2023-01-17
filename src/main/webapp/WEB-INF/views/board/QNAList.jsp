@@ -131,17 +131,11 @@ const insertQNA = function(){
  
  <c:if test="${qArr ne null and not empty qArr}">
  <c:forEach var="qna" items="${qArr}" varStatus="status">
- <c:if test="${qna.secret eq 'Y' and loginUser.email ne qna.email}">
- 	<tr>
- 		<td colspan="5">비밀 글입니다.</td>
- 	</tr>
- </c:if>
- 
- <c:if test="${qna.secret eq 'N' or loginUser.email eq qna.email}">
+ <c:if test="${qna.secret eq 'N' or loginUser.email eq qna.email or loginUser.status eq 9}">
 	 <tr>
 	 <td>
-	 	<c:if test="${qna.qna_ReList eq null or empty qna.qna_ReList}">미답변</c:if>
-	 	<c:if test="${qna.qna_ReList ne null and not empty qna.qna_ReList}">답변완료</c:if>
+	 	<c:if test="${qna.isCom ne 'Y'}">미답변</c:if>
+	 	<c:if test="${qna.isCom eq 'Y'}">답변완료</c:if>
 	 </td>
 	 	<td>
 	 		<div class="accordion accordion-flush" id="accordionFlushExample">
@@ -164,6 +158,20 @@ const insertQNA = function(){
 	 	</c:if>
 	 </tr>
 	 <!-- 댓글 -->
+	 <c:if test="${qna.isCom eq 'Y'}">
+										<c:forEach var="reply" items="${qna.qna_ReList}">
+											<tr>
+												<td>답변</td>
+												<td colspan="2">${reply.re_qcontent}</td>
+												<td>${reply.re_qdate}</td>
+											</tr>
+										</c:forEach>
+										</c:if>
+ </c:if>
+ <c:if test="${qna.secret eq 'Y' and loginUser.email ne qna.email and loginUser.status ne 9}">
+ 	<tr>
+ 		<td colspan="5">비밀 글입니다.</td>
+ 	</tr>
  </c:if>
  </c:forEach>
  </c:if>
