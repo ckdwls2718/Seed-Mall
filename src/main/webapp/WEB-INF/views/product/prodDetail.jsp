@@ -82,7 +82,6 @@ const insertCart = function(){
 }
 
 </script>
-
 <div class='container d-flex'>
 	<div id="leftDetail" class="m-3" style="width: 60%">
 		<div id="prodImage" style="width: 100%">
@@ -162,6 +161,32 @@ const insertCart = function(){
 	</div>
 	
 	<!--right-->
+</div>
+
+<div class="container mb-5" id="content">
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="#">상품상세</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">상품리뷰</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link"  href="#">상품문의</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+  </li>
+</ul>
+<div class="m-3">
+햇빛<i class="fa-solid fa-sun"></i> : ${prod.sun}<br>
+온도<i class="fa-solid fa-temperature-three-quarters"></i> : ${prod.temp}<br>
+토양,물관리<i class="fa-solid fa-droplet"></i> : ${prod.soil}<br>
+</div>
+<div class="m-3">
+	<p>${prod.pcontent}</p>
+</div>
+
 </div>
 
 <c:import url="/QNA/${prod.pidx}"/>
