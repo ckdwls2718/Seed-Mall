@@ -98,4 +98,9 @@ public class OrderServiceImpl implements OrderService {
 		return orderMapper.updateDeliveryStatus(ovo);
 	}
 
+	@Override
+	public List<OrderVO> getRefundList_paging(PagingVO page) {
+		return orderMapper.getRefundList_paging(page);
+	}
+
 }
