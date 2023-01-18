@@ -109,7 +109,7 @@ public class AdminPageController {
 		return "msg";
 	}
 
-	// 주문/취소 관리
+	// 주문 관리
 	@GetMapping("/orderManagement")
 	public String orderManagement(Model m, @ModelAttribute("page") PagingVO page,
 			HttpServletRequest req, @RequestHeader("user-Agent") String userAgent) {
@@ -191,10 +191,36 @@ public class AdminPageController {
 
 	// 환불 내역
 	@GetMapping("/refundManagement")
-	public String refundManagement() {
-		
-		return "admin/refundManagement";
+    public String refundManagement(Model m, @ModelAttribute("page") PagingVO page, HttpServletRequest req,
+            @RequestHeader("user-Agent") String userAgent) {
+        String myctx = req.getContextPath();
+        HttpSession ses = req.getSession();
+
+        int totalCount = orderService.getOrderCount(page);
+
+        page.setTotalCount(totalCount);
+        page.setPagingBlock(5);
+        page.init(ses);
+
+        String loc = "admin/orderManagement";
+        String pageNavi = page.getPageNavi(myctx, loc, userAgent);
+
+        List<OrderVO> orderArr = orderService.getRefundList_paging(page);
+
+        m.addAttribute("pageNavi", pageNavi);
+        m.addAttribute("paging", page);
+        m.addAttribute("orderArr", orderArr);
+        
+        return "admin/refundManagement";
 	}
+	
+    // 환불 수정
+    @PostMapping("/refundEdit")
+    public String refundEdit(@ModelAttribute("ovo") OrderVO ovo) {
+        int n = orderService.updateDeliveryStatus(ovo);
+        
+        return "redirect:refundManagement";
+    }
 	
 	// Q&A 관리
 	@GetMapping("/qnaManagement")
