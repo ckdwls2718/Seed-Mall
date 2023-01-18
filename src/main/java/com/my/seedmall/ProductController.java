@@ -77,12 +77,21 @@ public class ProductController {
 	}//-------------------------------------
 	
 	@GetMapping("/prod/{pidx}")
-	public String productDetail(Model m, @PathVariable("pidx") int pidx) {
+	public String productDetail(Model m, @PathVariable("pidx") int pidx, @ModelAttribute("brvo") BoardReviewVO brvo) {
 		ProductVO prod = productService.selectByIdx(pidx);
 		// 해당 상품의 전체 리뷰 평점 가져오기
 		List<BoardReviewVO> boardReview = boardReviewMapper.getReview(pidx);
 		
+		int total = 0;
+		for(BoardReviewVO reviewVo :boardReview) {
+			total += reviewVo.getScore();
+		}
+		double avg = total / boardReview.size();
+		int review = boardReview.size(); // 전체 리뷰 수
+		
 		m.addAttribute("boardReview", boardReview);
+		m.addAttribute("avg", avg);
+		m.addAttribute("review", review);
 		m.addAttribute("prod", prod);
 		
 		return "product/prodDetail";

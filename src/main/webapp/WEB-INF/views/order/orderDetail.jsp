@@ -316,6 +316,7 @@
 		</div>
 		<div class="text-center">
 			<button type="button" class="btn btn-success mb-5" onclick="iamport()">결제하기</button>
+			<button type="submit" class="btn btn-success mb-5" >결제하기2</button>
 		</div>
 	</form>
 </div>
