@@ -188,5 +188,13 @@ public class MypageController {
 		return "member/QNAList";
 		
 	}
+	
+	// 주문 취소 요청 시
+	@PostMapping("/orderCancel")
+	public String orderCancel(@ModelAttribute OrderVO ovo) {
+		int n = orderService.updateDeliveryStatus(ovo);
+		
+		return "redirect:/user/mypage";
+	}
 		
 }

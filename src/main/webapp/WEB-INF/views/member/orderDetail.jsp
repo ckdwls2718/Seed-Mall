@@ -5,13 +5,23 @@ const reviewForm = function(oidx){
 	$('input[name=oidx]').val(oidx);
 	goReviewF.submit();
 }
+
+const orderCancellation = function(oidx) {
+	$('input[name=desc_oidx]').val(oidx);
+	$('input[name=deliveryState]').val(6);
+	alert('주문 취소가 요청되었습니다')
+	
+	prodF.submit();
+}
 </script>
 <%@ include file="/WEB-INF/views/top.jsp"%>
 <div class="d-flex">
 <%@ include file="/WEB-INF/views/member/mypageSidebar.jsp"%>
 <div class="container" style="height: 1500px; overflow: y:hidden;">
 	<h1 class="text-center mt-5 mb-5">주문 명세서</h1>
-	<form id="prodF" action="${myctx}" method="post">
+	<form id="prodF" action="orderCancel" method="post">
+		<input type="hidden" name="deliveryState">
+		<input type="hidden" name="desc_oidx">
 		<table class="table">
 			<tr>
 				<td width="20%" class="m1">주문번호</td>
@@ -78,7 +88,7 @@ const reviewForm = function(oidx){
 			<button class="btn btn-success" type="button" onclick="javascript:history.back()">뒤로가기</button>
 
 			<c:if test="${order.deliveryState ne '4'}">
-			<button class="btn btn-danger" type="button" >주문취소</button> 
+			<button class="btn btn-danger" type="button" onclick="orderCancellation('${order.desc_oidx}')">주문취소</button> 
 			</c:if>
 		</div>
 	</form>
