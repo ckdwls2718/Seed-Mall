@@ -6,7 +6,23 @@
 		select to_char(desc_odate,'yyyymmdd') toChar , sum(desc_ototalprice) totalPrice 
 		from order_desc 
 		group by to_char(desc_odate,'yyyymmdd')
-		having substr(to_char(desc_odate,'yyyymmdd'),1,4) = '2023'
+		having substr(to_char(desc_odate,'yyyymmdd'),1,4) = #{value}
 		order by 1 asc
+	</select>
+	
+	<select id="getUpcategorySaleRate" parameterType="map" resultType="com.user.model.SalesRateDTO">
+		select (select upcg_name from upcategory where upcg_code = p.upcg_code) categoryName, sum(oqty) oqty
+		from (select pidx,p.upcg_code,p.downcg_code,d.downcg_name 
+		from downCategory d join product p on d.downcg_code = p.downcg_code) p join orders o on o.pidx = p.pidx
+		where substr(to_char(odate,'yyyymmdd'),1,4) = ${year} and substr(to_char(odate,'yyyymmdd'),5,2) = ${month}
+		group by upcg_code
+	</select>
+	
+	<select id="getDowncategorySaleRate" parameterType="map" resultType="com.user.model.SalesRateDTO">
+		select downcg_name as categoryName, sum(oqty) oqty
+		from (select pidx,p.upcg_code,p.downcg_code,d.downcg_name
+		from downCategory d join product p on d.downcg_code = p.downcg_code) p join orders o on o.pidx = p.pidx
+		where substr(to_char(odate,'yyyymmdd'),1,4) = ${year} and substr(to_char(odate,'yyyymmdd'),5,2) = ${month}
+		group by downcg_name
 	</select>
 </mapper>
