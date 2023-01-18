@@ -25,6 +25,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.myplant.model.PlantImageVO" alias="MyPlantI"/>
 		<typeAlias type="com.myplant.model.PlantForm" alias="PlantForm"/>
 		<typeAlias type="com.board.model.BoardReviewVO" alias="Review"/>
+		<typeAlias type="com.board.model.ReviewImageVO" alias="ReviewI"/>
 	</typeAliases>
 	<!-- mapper 정의 ========================================= -->
 	<mappers>
@@ -39,6 +40,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="config/mybatis/mapper/OrderMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/CartMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/QNAMapper.xml"/>
-		<mapper resource="config/mybatis/mapper/MyPlantMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/MyPlantMapper.xml"/>		
 	</mappers>
 </configuration>
