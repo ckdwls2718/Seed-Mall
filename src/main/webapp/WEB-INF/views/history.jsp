@@ -13,8 +13,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>관리자 - History</title>
-
     <!-- Custom fonts for this template-->
     <link href="resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -34,11 +32,11 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">${loginUser.mname}</div>
             </a>
 
             <!-- Divider -->
@@ -48,7 +46,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>사이드 바1</span></a>
+                    <span>전체보기</span></a>
             </li>
 
             <!-- Divider -->
@@ -211,7 +209,7 @@
                         </li> -->
 
                         <!-- Nav Item - Alerts -->
-                       <!--  <li class="nav-item dropdown no-arrow mx-1">
+                       <!-- <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
@@ -416,7 +414,7 @@
 
                         <!-- Earnings (Monthly) Card Example -->
                         <!--  task 필요 유무?? 필요없어보이긴함 --------------------------------------------------- -->
-                       <!--  <div class="col-xl-3 col-md-6 mb-4">
+                       <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-info shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -442,11 +440,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div> 
 
                         <!-- Pending Requests Card Example -->
                         <!--  Pending Requests 필요 유무?? 필요없어보이긴함 --------------------------------------------------- -->
-                      <!--   <div class="col-xl-3 col-md-6 mb-4">
+                      <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -461,7 +459,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div> 
                     </div>
 
                     <!-- Content Row -->

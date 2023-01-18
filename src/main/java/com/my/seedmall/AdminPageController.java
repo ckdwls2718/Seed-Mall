@@ -245,11 +245,5 @@ public class AdminPageController {
 		return "admin/qnaManagement";
 	}
 	
-	// 히스토리
-	@GetMapping("/history")
-	public String history(Model m, HttpSession ses) {
-
-		return "admin/history";
-	}
 
 }

@@ -212,10 +212,10 @@ public class CartController {
 						MyPlantVO mpvo = new MyPlantVO();
 						mpvo.setMidx(order.getMidx());
 						mpvo.setOidx(orderProdVo.getOidx());
-						mpvo.setNickname("애칭");
-						mpvo.setPcomment("피드백");
+						mpvo.setNickname("이름을 정해주세요");
+						mpvo.setPcomment("관리자 코멘트");
 						mpvo.setPercent(0);
-						mpvo.setPlantImage("noImage");
+						mpvo.setPlantImage("noimage.png");
 
 						int n4 = mpService.insertMyPlant(mpvo);
 					}
