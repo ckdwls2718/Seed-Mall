@@ -226,7 +226,7 @@
 			<tr>
 				<td width="20" class="m1">주소</td>
 				<td width="80%" class="m2"><input type="text" name="omaddr1"
-					id="omaddr1"> <input type="text" name="omaddr2"
+					id="omaddr1" style="width:40%;margin-bottom: 5px"><br> <input type="text" name="omaddr2"
 					id="omaddr2"></td>
 			</tr>
 			<tr>
