@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.user.mapper.HistoryMapper">
+	<select id="getSales" parameterType="int" resultType="com.user.model.SalesDTO">
+		select to_char(desc_odate,'yyyymmdd') toChar , sum(desc_ototalprice) totalPrice 
+		from order_desc 
+		group by to_char(desc_odate,'yyyymmdd')
+		having substr(to_char(desc_odate,'yyyymmdd'),1,4) = '2023'
+		order by 1 asc
+	</select>
+</mapper>

@@ -46,6 +46,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="config/mybatis/mapper/CartMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/QNAMapper.xml"/>
 		<mapper resource="config/mybatis/mapper/MyPlantMapper.xml"/>
+		<mapper resource="config/mybatis/mapper/HistoryMapper.xml"/>
 	</mappers>
 
 

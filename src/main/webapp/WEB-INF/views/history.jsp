@@ -23,6 +23,10 @@
     <link href="resources/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
+
+<script>
+
+</script>
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -367,9 +371,9 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">History</h1>
-                        <<!-- a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    <div class="text-center align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">${year}년도</h1>
+                        <!-- a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
                     </div>
 
@@ -383,8 +387,8 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                월 매출</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">40,000원</div>
+                                                ${month}월 매출</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${salesMonth[month-1]}" pattern="###,###,###" />원</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -402,7 +406,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 연 매출</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">215,000원</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${salesYear}" pattern="###,###,###" />원</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -412,54 +416,9 @@
                             </div>
                         </div>
 
-                        <!-- Earnings (Monthly) Card Example -->
-                        <!--  task 필요 유무?? 필요없어보이긴함 --------------------------------------------------- -->
-                       <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-info shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
-                                            </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="progress progress-sm mr-2">
-                                                        <div class="progress-bar bg-info" role="progressbar"
-                                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> 
+                         <p id="salesMonthData" style="display: none"><c:forEach var="sales"  items="${salesMonth}" varStatus="status">${sales}<c:if test="${not status.last}">, </c:if></c:forEach></p>
 
-                        <!-- Pending Requests Card Example -->
-                        <!--  Pending Requests 필요 유무?? 필요없어보이긴함 --------------------------------------------------- -->
-                      <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Pending Requests</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> 
+                        
                     </div>
 
                     <!-- Content Row -->
@@ -472,7 +431,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">월별 판매액</h6>
                                     <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
