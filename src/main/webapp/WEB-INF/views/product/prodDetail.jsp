@@ -113,7 +113,7 @@ const insertCart = function(){
 		<div class="starBox">
 			<!-- <span><img src="/app/layout/web/images/icon_rating.png"></span> -->
 			<span class="point">${avg}
-			</span><span>후기 ${review}</span>
+			</span><span>후기 ${review}개</span>
 		</div>
 		<br>
 		<table class="table">
