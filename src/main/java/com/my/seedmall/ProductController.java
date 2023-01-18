@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 
+import com.board.mapper.BoardReviewMapper;
+import com.board.model.BoardReviewVO;
 import com.product.mapper.CategoryMapper;
 import com.product.model.CategoryVO;
 import com.product.model.PagingVO;
@@ -32,6 +34,9 @@ public class ProductController {
 	
 	@Autowired
 	CategoryMapper categoryMapper;
+	
+	@Autowired
+	BoardReviewMapper boardReviewMapper;
 	
 	@GetMapping("/prod")
 	public String productList(Model m, @ModelAttribute PagingVO page, HttpServletRequest req,
@@ -74,7 +79,12 @@ public class ProductController {
 	@GetMapping("/prod/{pidx}")
 	public String productDetail(Model m, @PathVariable("pidx") int pidx) {
 		ProductVO prod = productService.selectByIdx(pidx);
+		// 해당 상품의 전체 리뷰 평점 가져오기
+		List<BoardReviewVO> boardReview = boardReviewMapper.getReview(pidx);
+		
+		m.addAttribute("boardReview", boardReview);
 		m.addAttribute("prod", prod);
+		
 		return "product/prodDetail";
 	}//-------------------------------------
 }

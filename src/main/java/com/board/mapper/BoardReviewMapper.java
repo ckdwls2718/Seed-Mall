@@ -20,6 +20,4 @@ public interface BoardReviewMapper {
 	BoardReviewVO selectBoardByIdx(Integer ridx);
 	
 	
-	
-	
 }
