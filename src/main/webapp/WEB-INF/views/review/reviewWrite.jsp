@@ -29,12 +29,27 @@
 const reviewCheck = function(){
 		  
 	}
+	
+	function setThumbnail(event) {
+	    for (var image of event.target.files) {
+	      var reader = new FileReader();
+
+	      reader.onload = function(event) {
+	        var img = document.createElement("img");
+	        img.setAttribute("src", event.target.result);
+	        img.setAttribute("width", "35%");
+	        img.setAttribute("height", "35%");
+	        document.querySelector("div#image_container").appendChild(img);
+	      };
+
+	      console.log(image);
+	      reader.readAsDataURL(image);
+	    }
+	  }
 
 
 </script>
-<%
-String ctx = request.getContextPath();
-%>
+
 <div align="center" id="bbs" class="col-md-8 offset-md-2 my-4">
 	<h1>리뷰 작성</h1>
 	<form name="bf" id="bf" role="form" action="reviewEnd" method="POST" 
@@ -67,6 +82,14 @@ String ctx = request.getContextPath();
 			</tr>
 			
 			<tr>
+						<td><b>상품이미지</b></td>
+							<td width="20%"><input type="file" name="rimage"
+									onchange="setThumbnail(event)" multiple></td>
+							<td width="60%"><span style="border: 1px solid black; border-radius: 2px">선택된이미지</span>
+								<div id="image_container"></div> <br></td>
+							</tr>
+			
+			<tr>
 				<td style="width: 20%"><b>글내용</b></td>
 				<td style="width: 80%"><textarea name="rcontent" id="rcontent"
 						rows="10" cols="50" class="form-control"></textarea></td>
@@ -78,7 +101,8 @@ String ctx = request.getContextPath();
 					<button type="reset" id="btnReset" class="btn btn-warning">다시쓰기</button>
 				</td>
 			</tr>
-
+			
+		
 		</table>
 
 

@@ -5,6 +5,7 @@
 <!--  ---------------------------------------------------------- -->
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!-- function taglib------------------------------------------- -->
+<c:set var="myctx" value="${pageContext.request.contextPath}" />
 <script>
 
 $(function(){
@@ -38,7 +39,12 @@ const insertReview = function(){
 }
 	 
 </script>
-
+<style>
+ img:hover{
+ 	transform: scale(2);
+ }
+ 
+</style>
 <div class="container">
 <ul class="nav nav-tabs">
   <li class="nav-item">
@@ -64,18 +70,27 @@ const insertReview = function(){
   	<th>작성자</th>
   	<th>작성일</th>
   	<th>조회수</th>
+  	<th>좋아요</th>
+  	<th>이미지</th>
   	 <c:if test="${rarr ne null and not empty rarr}">
   	<c:forEach var="Review" items="${rarr}">
-					<tr>
+					<tr height="100px">
 						<%-- <td><c:out value="${Review.ridx}" /></td> --%>
-						<td><a href="${pageContext.request.contextPath}/review/ReviewGet?ridx=${Review.ridx}">${Review.rtitle}</a>
+						<td><%-- <a href="${pageContext.request.contextPath}/review/ReviewGet?ridx=${Review.ridx}"> --%>${Review.rtitle}</a>
 						</td>
 						<td><c:out value="${Review.score}" /></td>
 						<td><c:out value="${Review.email}" /></td>
 						<td><c:out value="${Review.rdate}" /></td>
 						<td><c:out value="${Review.rreadnum}" /></td>
+						<td><c:out value="${Review.rlikenum}" /></td>						
+						<td>
+							<c:forEach var="image" items="${Review.boardReviewImageList}">
+								<img src="${myctx}/resources/Review_image/${image.rthumbnail}" class="img-fluid" style="width:100px">
+							</c:forEach>
+						</td>						
 					</tr>
 				</c:forEach>
+				
 			</c:if>
  </tr>
  </table>

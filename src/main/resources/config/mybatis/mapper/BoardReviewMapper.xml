@@ -6,8 +6,8 @@
 	<selectKey keyProperty="ridx" order="BEFORE" resultType="int">
 		select board_review_seq.nextval from dual
 	</selectKey>
-	insert into board_re(ridx,midx,oidx,rtitle,rcontent,rname,rreadnum,rlikenum,score,rdate) 
-	values(#{ridx},#{midx},#{oidx},#{rtitle},#{rcontent:VARCHAR},#{rname:VARCHAR},#{rreadnum},#{rlikenum},#{score},sysdate)	
+	insert into board_re(ridx,midx,oidx,rtitle,rcontent,rname,rreadnum,rlikenum,score,rdate,sentiment) 
+	values(#{ridx},#{midx},#{oidx},#{rtitle},#{rcontent:VARCHAR},#{rname:VARCHAR},#{rreadnum},#{rlikenum},#{score},sysdate,#{sentiment})	
 </insert>
 
 	<select id="getReview" resultType="Review" parameterType="_int">
@@ -33,5 +33,35 @@
 	<delete id="deleteReview" parameterType="int">
 		delete from board_re where ridx=#{value}
 	</delete>
+	
+
+	<!--좋아요  -->
+	
+	<update id="like_check" parameterType="Review">
+    UPDATE Board_Re
+    SET rlikeNum = rlikeNum + 1 
+    WHERE oidx=#{oidx} AND ridx=#{ridx}
+  </update>
+  
+  <update id="like_check_cancel" parameterType="Review">
+    UPDATE Board_Re
+    SET rlikeNum = 0
+    WHERE oidx=#{oidx} AND ridx=#{ridx}
+  </update>
+  
+  <!--이미지 등록 -->
+  <insert id="insertRimage" parameterType="ReviewI">
+		insert into
+		Review_Image(image_ridx, ridx, rthumbnail, rimage, roriginfilename)
+		values(board_reviewi_seq.nextval, #{ridx},#{rthumbnail:VARCHAR},#{rimage},#{roriginfilename})
+	</insert>
+	
+	<select id="getReviewImages" resultType="ReviewI"
+		parameterType="int">
+		select *
+		from Review_Image
+		where ridx=#{value}
+		order by 1 asc
+	</select>
 	
 </mapper>

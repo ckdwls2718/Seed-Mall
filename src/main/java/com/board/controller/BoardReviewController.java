@@ -2,6 +2,8 @@ package com.board.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.board.model.BoardReviewVO;
+import com.board.model.ReviewImageVO;
 import com.board.service.BoardReviewService;
 import com.board.service.NaverAiService;
 
@@ -36,24 +39,17 @@ public class BoardReviewController {
 		
 	}
 	
-	@PostMapping(value="", produces = "application/json")
-	@ResponseBody
-	public int insertReview(BoardReviewVO rv) {
-		log.info("rv=="+rv);
-		//System.out.println("qna =>"+qna);
-		int result = boardReviewService.insertReview(rv);
-		
-		return result;
-	}
 	
 	@GetMapping("/review/ReviewGet")
 	public String reviewDetail(Model m,@RequestParam("ridx") int ridx) {
 		log.info("num==="+ridx);
 		
 		int n=boardReviewService.updateReadnum(ridx);
-		log.info("n==="+n);
+		List<ReviewImageVO> reviewI=boardReviewService.getReviewImages(ridx);
+		log.info("n==="+n+" reviewI=="+reviewI);
 		m.addAttribute("Review",boardReviewService.selectBoardByIdx(ridx));
-		
+		m.addAttribute("ReviewI",reviewI);
+			
 		return "review/reviewDetail";
 		//리뷰 글보기 및 조회수 업데이트
 	}//-------------------------------
@@ -67,7 +63,7 @@ public class BoardReviewController {
 	}
 	
 	@PostMapping("/user/reviewEnd")
-	public String reviewInsert(@ModelAttribute BoardReviewVO rv) throws Exception {
+	public String reviewInsert(Model m,@ModelAttribute BoardReviewVO rv, HttpServletRequest req) throws Exception {
 		log.info("rv = "+rv);
 		int sentiment = aiService.sentimentAnalyze(rv.getRcontent());
 		
@@ -75,7 +71,14 @@ public class BoardReviewController {
 		
 		rv.setSentiment(sentiment);
 		
-		boardReviewService.insertReview(rv);
+		int result = boardReviewService.insertReview(rv, req);
+		
+		String str = (result > 0) ? "상품등록 성공" : "등록 실패";
+		String loc = (result > 0) ? "prodList" : "javascript:history.back()";
+		log.info(result);
+		
+		m.addAttribute("message", str);
+		m.addAttribute("loc", loc);
 
 		return "redirect:../prod/"+rv.getPidx();
 	}// 게시판 글쓰기
@@ -108,6 +111,28 @@ public class BoardReviewController {
 		return result;
 
 	}// 게시판 수정 하기
+	
+	@PostMapping(value="review/reviewLikeNum", produces = "application/json")
+	@ResponseBody
+	public int boardLike(BoardReviewVO rv) {
+		int result = boardReviewService.like_check(rv);
+		
+		log.info("like=="+rv);
+		
+		return result;
+		
+	}
+	
+	@PostMapping(value="review/reviewLikeNumCancel", produces = "application/json")
+	@ResponseBody
+	public int boardLikeCancel(BoardReviewVO rv) {
+		int result = boardReviewService.like_check_cancel(rv);
+		
+		log.info("like=="+rv);
+		
+		return result;
+		
+	}
 	
 	
 	
