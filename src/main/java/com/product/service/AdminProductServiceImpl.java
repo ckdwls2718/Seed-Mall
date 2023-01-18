@@ -56,6 +56,11 @@ public class AdminProductServiceImpl implements AdminProductService {
 	public int categoryDelete(int cg_code) {
 		return 0;
 	}
+	
+	@Override
+	public int getProdTotal(PagingVO page) {
+		return productMapper.getProdCount(page);
+	}
 
 	@Override
 	public int productInsert(ProductForm prod, HttpServletRequest req) {
@@ -149,7 +154,7 @@ public class AdminProductServiceImpl implements AdminProductService {
 
 	@Override
 	public List<ProductVO> productList(PagingVO page) {
-		List<ProductVO> prodArr = this.productMapper.getProducts(page);
+		List<ProductVO> prodArr = this.productMapper.getProductsPaging(page);
 		for(ProductVO prod : prodArr) {
 			List<ProductImageVO> prodImageArr = productMapper.getProdImages(prod.getPidx());
 			prod.setPimageList(prodImageArr);
@@ -217,7 +222,12 @@ public class AdminProductServiceImpl implements AdminProductService {
 
 	@Override
 	public int deleteProduct(int pidx) {
+		try {
 		return this.productMapper.deleteProduct(pidx);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return 999;
 	}
 
 	@Override
@@ -253,5 +263,36 @@ public class AdminProductServiceImpl implements AdminProductService {
 	public int insertDowncg(CategoryVO cvo) {
 		return this.productMapper.insertDowncg(cvo);
 	}
+
+	@Override
+	public int addDetail(CategoryVO cvo) {
+		return this.productMapper.addDetail(cvo);
+	}
+
+	@Override
+	public List<CategoryVO> getCgDetail(String downCg_code) {
+		return this.categoryMapper.getCgDetail(downCg_code);
+	}
+
+	@Override
+	public int deleteCategory(CategoryVO cvo) {
+		try {
+			if(cvo.getDownCg_code() == 0) {
+			return this.categoryMapper.deleteUpCategory(cvo.getUpCg_code());
+			}else {
+				return this.categoryMapper.deleteDownCategory(cvo.getDownCg_code());
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 999;
+	}
+
+	@Override
+	public int deleteCgDetail(CategoryVO cvo) {
+		return this.categoryMapper.deleteCgDetail(cvo.getDownCg_code());
+	}
+
+
 
 }

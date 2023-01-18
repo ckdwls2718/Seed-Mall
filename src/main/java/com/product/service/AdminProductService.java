@@ -15,8 +15,9 @@ import com.product.model.ProductVO;
 public interface AdminProductService {
 	
 	public List<CategoryVO> getUpcategory();
-	
+
 	public List<CategoryVO> getDowncategory(String upCg_code);
+
 	
 	public int categoryAdd(CategoryVO cvo);
 	public int categoryDelete(int cg_code);
@@ -25,6 +26,8 @@ public interface AdminProductService {
 	public int insertImage(ProductImageVO piVo);
 	
 	ProductVO selectByPidx(int pidx);
+	
+	int getProdTotal(PagingVO page);
 
 	/** [관리자 모드]- 상품 정보 등록하기 */
 	public int productInsert(ProductForm prod, HttpServletRequest req);
@@ -38,5 +41,13 @@ public interface AdminProductService {
 	/** 카테고리 등록*/
 	public int insertUpcg(CategoryVO cvo);
 	public int insertDowncg(CategoryVO cvo);
+
+	public int addDetail(CategoryVO cvo);
+
+	public List<CategoryVO> getCgDetail(String downCg_code);
+
+	public int deleteCategory(CategoryVO cvo);
+
+	public int deleteCgDetail(CategoryVO cvo);
 
 }

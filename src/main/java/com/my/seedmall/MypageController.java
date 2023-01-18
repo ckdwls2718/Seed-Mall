@@ -181,12 +181,20 @@ public class MypageController {
 	public String getQnAList(Model m, HttpSession ses) {
 		MemberVO loginUser = (MemberVO)ses.getAttribute("loginUser");
 		
-		List<QNADTO> qArr = qnaService.getMyQNAList(loginUser.getMidx());
+		List<QNADTO> qArr = qnaService.getQNAListByMidx(loginUser.getMidx());
 		
 		m.addAttribute("qArr", qArr);
 		
 		return "member/QNAList";
 		
+	}
+	
+	// 주문 취소 요청 시
+	@PostMapping("/orderCancel")
+	public String orderCancel(@ModelAttribute OrderVO ovo) {
+		int n = orderService.updateDeliveryStatus(ovo);
+		
+		return "redirect:/user/mypage";
 	}
 		
 }

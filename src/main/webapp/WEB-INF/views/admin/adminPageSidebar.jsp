@@ -16,13 +16,25 @@
       <li class="nav-item">
         <a href="${myctx}/admin/orderManagement" class="nav-link link-dark">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-          주문/취소 관리
+          주문 관리
+        </a>
+      </li>
+      <li>
+        <a href="${myctx}/admin/refundManagement" class="nav-link link-dark">
+          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+          환불 내역
         </a>
       </li>
       <li>
         <a href="${myctx}/admin/plantManagement" class="nav-link link-dark">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
           식물 관리
+        </a>
+      </li>
+      <li>
+        <a href="${myctx}/admin/qnaManagement" class="nav-link link-dark">
+          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+          Q&A 답변관리
         </a>
       </li>
       <li>

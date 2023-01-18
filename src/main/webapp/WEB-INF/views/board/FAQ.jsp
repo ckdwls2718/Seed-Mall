@@ -5,11 +5,20 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="/WEB-INF/views/top.jsp"%>
 <style>
+
 h2 {
 	font-size: calc(1.325rem + .9vw);
 	margin: 40px 40px 40px 0px;
-	font-weight: bolder;
-	color: #133337;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 700;
+	color: #39b559;
+}
+.FAQ{
+	text-decoration: none;
+	color: #39b559;
+}
+.FAQ:hover{
+	color: #39b559;
 }
 /* 헤더 start */
 .tableHeader {
@@ -105,20 +114,11 @@ h2 {
 	font-weight: bold;
 }
 /* answer end */
-/* button{
-	resize: none;
-	border: none;
-	overflow: hidden;
-	background: white;
-}
-button:focus {
-	//outline: none;
-} */
 .menu{
 	position: relative;
 	color: #e0e0e0;
 	display: inline-block;
-	margin: 8px 7px 20px 30px;
+	margin: 30px 7px 20px 30px;
 	font-weight: 900;
 	/*padding: top right bottom left*/
 	cursor: pointer;
@@ -187,13 +187,11 @@ button:focus {
 
 <div class="container mt-3" style="overflow: auto; width: 1100px;height: auto;">
 	<h2 class="text-left" style="padding: 0 20px;">
-		<a href="FAQ" style="text-decoration: none; color: #2B7539;">FAQ <span
+		<a class="FAQ" href="/seedmall/FAQ/">FAQ <span
 			style="font-size: 17.5px;"> 자주 묻는 질문</span></a>
 	</h2>
-	<hr>
 	<!-- 카테고리 영역 -->
 	<nav class="FAQNavigation" style="width:800px; display:flex;  justify-content:flex-start;">
-	<%--<div class="menu <c:if test='${menuIndex eq 0}'>clicked_menu</c:if>" onclick="getFaq">전체보기</div> --%>
 		<div class="menu <c:if test='${menuIndex eq 1}'>clicked_menu</c:if>" onclick="getFaq('001',1)">회원정보</div>
 		<div class="menu <c:if test='${menuIndex eq 2}'>clicked_menu</c:if>" onclick="getFaq('002',2)">교환/취소(반품)</div>
 		<div class="menu <c:if test='${menuIndex eq 3}'>clicked_menu</c:if>" onclick="getFaq('003',3)">배송</div>
@@ -213,11 +211,12 @@ button:focus {
 		</div>
 		<!-- 답변이 들어간다 -->
 		<div class="a_off" id="ans${FAQ.fidx}">
-			<span>
+			<div>
 				<p class="category">답변</p>
-			</span> <span>
+			</div>
+			<div>
 				<p class="question">${FAQ.fanswer}</p>
-			</span>
+			</div>
 		</div>
 	</c:forEach>
 	<div style="height: 100px"></div>
