@@ -100,6 +100,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update member set pwd=#{pwd} where email=#{email}
 	</update>
 	
+	<!-- 등급 확인 -->
+	<select id="getGrade" parameterType="_int" resultType="String">
+		<![CDATA[
+		select max(grade) keep(dense_rank first order by gpoint desc) 
+		as max_text from grade where gpoint <=#{mileage}
+		]]> 
+	</select>
+	<!-- 등급 변경 -->
+	<update id="updateGrade" parameterType="Member">
+		update member set grade = #{grade}
+		where midx=#{midx}
+	</update>
+	<!-- 포인트 적립 -->
+	<update id="RewardMileage" parameterType="_int">
+		update member set mileage = mileage + #{point}
+		where midx=#{midx}
+	</update>
+	<!-- 포인트 확인 -->
+	<select id="getMileage" parameterType="_int" resultType="_int">
+		select mileage from member 
+		where midx=#{midx}	
+	</select>
 	
 
 
