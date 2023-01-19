@@ -51,7 +51,7 @@
               	
                
                 <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="${myctx}/assets/몬스테라.jpg" alt="mdo" width="32" height="32" class="rounded-circle" style="margin-top:3px">
+                  <img src="${myctx}/resources/grade_images/${loginUser.grade}.jpg" alt="mdo" width="32" height="32" class="rounded-circle" style="margin-top:3px">
                 </a>
                 
                 <ul class="dropdown-menu text-small shadow" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; margin-top:5px;  transform: translate3d(0.5px, 34px, 0px);">
