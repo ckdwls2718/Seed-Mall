@@ -72,15 +72,15 @@
           </nav>
         <header class="py-3 mb-4 border-bottom ">
             <div class="container d-flex flex-wrap" >
-              <a href="${myctx}"  class="d-flex align-items-center mb-3 mb-lg-2 me-lg-auto text-dark text-decoration-none" style="margin-left:2em">
+              <a href="${myctx}"  class="d-flex align-items-center mb-3 mb-lg-2 text-dark text-decoration-none" style="margin-left:2em">
                 <img src="${myctx}/assets/logo-removebg-preview.png" style="width:100%;height:70px" >
               </a>
-              <div class="align-items-center" style="margin-right: 10%"><a href="${myctx}">
+              <div class="align-items-center" style="margin-left: 36%"><a href="${myctx}">
                 <img src="${myctx}/assets/name-removebg-preview.png" style="width:100%"></a>
               </div>
-                <form class="col-12 col-lg-4 mb-3 mb-lg-0 " role="search" >
+                <!-- <form class="col-12 col-lg-4 mb-3 mb-lg-0 " role="search" >
                     <input type="search" class="form-control mb-lg-0" style="margin-left:auto;margin-top:2em ;width:80%" placeholder="검색..." aria-label="검색">
-				</form>                    
+				</form>  -->                   
               </div>
           </header>
         <nav class="navbar navbar-expand navbar-light bg-white">
@@ -90,11 +90,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="/seedmall">홈</a></li>
+                        <li class="nav-item"><a class="nav-link" href="${myctx}/prod">쇼핑하기</a></li>
                         <li class="nav-item"><a class="nav-link" href="${myctx}/board/notice">공지사항</a></li>
                         <li class="nav-item"><a class="nav-link" href="${myctx}/boardComList">커뮤니티</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Q&A</a></li>
                         <li class="nav-item"><a class="nav-link" href="${myctx}/FAQ">FAQ</a></li>
-                        <li class="nav-item"><a class="nav-link" href="${myctx}/prod">쇼핑하기</a></li>
+                        
                         
                         <%-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">쇼핑</a>
