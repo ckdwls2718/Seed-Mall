@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%@ include file="/WEB-INF/views/top.jsp"%>
-<link
-	href='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css'
-	rel='stylesheet'>
-<link href='https://use.fontawesome.com/releases/v5.8.1/css/all.css'
-	rel='stylesheet'>
+<!-- <link href='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css' rel='stylesheet'> -->
+<!-- <link href='https://use.fontawesome.com/releases/v5.8.1/css/all.css' rel='stylesheet'> -->
+<!-- <script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script> -->
 <style>
 @import
 	url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800&display=swap')
@@ -94,10 +93,12 @@
 	margin-bottom: 10px;
 	font-weight: 600;
 }
-.list-group-item.active{
-    background-color: #dee2e6;
-    border-color: #adb5bd;
+
+.list-group-item.active {
+	background-color: #dee2e6;
+	border-color: #adb5bd;
 }
+
 .fw-800 {
 	font-weight: 800;
 }
@@ -130,6 +131,7 @@ div#upCategory button {
 	position: relative;
 	display: #555;
 }
+
 .tip .tiptext {
 	visibility: hidden; /* 이벤트가 없으면 툴팁 영역을 숨김 */
 	/*  width: 120px;      */
@@ -144,22 +146,26 @@ div#upCategory button {
 	opacity: 0;
 	transition: opacity 0.3s;
 }
+
 .tip:hover .tiptext {
 	visibility: visible;
 	opacity: 1; /* hover 이벤트 발생시 영역을 보여줌 */
 }
+
 .tip .tiptext::after {
 	content: " "; /* 정사각형 영역 사용 */
 	position: absolute; /* 절대 위치 사용 */
 	border-style: solid;
 	border-width: 5px; /* 테두리 넓이를 5px 로 설정 */
 }
+
 .tip .tip-bottom {
 	width: 350px;
 	top: 150%;
 	right: 0;
 	margin-left: -60px; /* 말풍선 위치*/
 }
+
 .tip .tip-bottom::after {
 	bottom: 100%; /* 사각형 영역이 중앙에 오도록 위치 */
 	right: 15%; /* 오른쪽에서 15% 위치에 오도록 위치 */
@@ -167,19 +173,106 @@ div#upCategory button {
 	/* 사각형의 테두리에서 아래만 노출 */
 	border-color: transparent transparent #555 transparent;
 }
+
 .tip {
 	text-decoration: underline;
 	text-underline-position: under;
 }
+
 h2, h4 {
 	font-family: 'Noto Sans KR', sans-serif;
 	font-weight: 700;
 	color: #39b559;
 }
+/* -------------------------------------------- */
+a {
+	text-decoration: none;
+	color: #404040;
+}
+/* #menu1{
+width: 500px;
+height: 50px;
+outline: 1px dotted red;
+} */
+/* @media ( min-width : 1400px) {
+	.main {
+		max-width: 1224;
+		margin-left: 24%;
+	}
+}
+ */
+.wrap { /*  전체 메인메뉴 영역 */
+	background: #98e0ad;
+	height: 50px;
+	/* margin: 0 auto; */
+}
+
+.main { /* 메인 메뉴영역 넓이  */
+/* background: #98e0ad; */
+
+height: 50px;
+	/* max-width: 600px; */
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.menu1>div { /*  메인메뉴 사이즈 초급, 중급, 고급 */
+	float: left;
+	width: 150px;
+	
+	margin: 0 20px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	/* background: #98e0ad; */
+	position: relative;
+}
+
+.menu1>div:hover .sub {
+	display: block;
+	color: black;
+	font-weight: bold;
+}
+
+.menu1>div a { /*  메인메뉴 */
+	display: block;
+	font-weight: bold;
+}
+
+.menu1>div a:hover { /*  메인메뉴 오버 백그라운드컬러 */
+	background: #e2e4e6;
+	color: #1e1e25;
+	font-weight: bold;
+	co
+}
+
+.menu1 .sub { /* 드롭박스 사이즈 카테고리*/ 
+	position: absolute;
+	top: 50px;
+	left: 0;
+	margin: 0;
+	width: 150px;
+	font-size: 12px;
+	display: none;
+	z-index: 1;
+	
+}
+
+.menu1 .sub div { /* 서브메뉴 배경 */
+	background: white;
+	border: 0;
+}
+.menu1 .sub div a{ /* 서브메뉴 배경 */
+	background: #f2f2f5;
+	font-size: 12px;
+	
+}
+
+.menu1 .sub div a:hover { /* 서브메뉴 오버 백그라운드컬러  */
+	background: #93939f;
+	font-size: 12px;
+}
 </style>
-<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>
-<script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js'></script>
-</head>
 
 <script type='text/javascript'>
 	const changeSort = function(sort) {
@@ -201,30 +294,63 @@ h2, h4 {
 		//alert(keyword);
 		sortF.submit();
 	}
+
+	// html dom 이 다 로딩된 후 실행된다.
+	$(document).ready(function() {
+		// memu 클래스 바로 하위에 있는 a 태그를 클릭했을때
+		$(".menu>a").click(function() {
+			// 현재 클릭한 태그가 a 이기 때문에
+			// a 옆의 태그중 ul 태그에 hide 클래스 태그를 넣던지 빼던지 한다.
+			$(this).next("div").toggleClass("hide");
+		});
+	});
 </script>
 
 <body oncontextmenu='return false' class='snippet-body bg-white'>
 	<div class="container bg-white">
+		<div class="main">
+		<!-- 전체 메인메뉴 영역 -->
+		<div class="menu1" style=""> 
+			<!-- 메인 메뉴영역 넓이 -->
+			<c:forEach var="k" begin="1" end="4">
+				<!--  -->
+				<c:forEach var="upcategory" items="${upcategory}">
+					<!--  -->
+					<c:if test="${upcategory.upCg_code eq k }">
+						<div class="menu2"> 
+							<a href="#">${upcategory.upCg_name}</a>
+							<div class="sub">
+								<!-- 드롭박스  -->
+								<div
+									class="list-group-item <c:if test='${paging.upcg eq k and empty paging.downcg }'>active</c:if>">
+									<a class="btn btn-default" href="${myctx}/prod?upcg=${k}">전체보기</a>
+								</div>
+								<c:forEach var="downcategory" items="${downcategory}">
+									<c:if test="${downcategory.upCg_code eq k }">
+										<div
+											class="list-group-item <c:if test='${downcategory.upCg_code eq paging.upcg and downcategory.downCg_code eq paging.downcg}'>active</c:if>">
+											<a class="btn btn-default"
+												href="${myctx}/prod?upcg=${downcategory.upCg_code}&downcg=${downcategory.downCg_code}">
+												${downcategory.downCg_name} </a>
+										</div>
+									</c:if>
+								</c:forEach>
+
+							</div>
+						</div>
+					</c:if>
+				</c:forEach>
+			</c:forEach>
+		</div>
+	</div>
 		<div id="upCategory" class='container row'>
-			<div class="col-md-5">
-				<a class="btn btn-outline-info" href="${myctx}/prod">전체 상품</a>
-				<button class="btn btn-outline-success m-3" type="button"
-					data-bs-toggle="collapse" data-bs-target="#multiCollapseExample1"
-					aria-expanded="false" aria-controls="multiCollapseExample1">카테고리</button>
-				<div class="text-right">
-					<c:if test="${not empty paging.upcg and not empty prodArr}">
-						${prodArr[0].upCg_name}
-					</c:if>
-					<c:if test="${not empty paging.downcg and not empty prodArr}">
-						${prodArr[0].downCg_name}
-					</c:if>
-					<!----위치 수정해야함 --------------------------------------------------->
-					<c:if test="${not empty paging.findKeyword}">
-						검색어 : ${paging.findKeyword}
-					</c:if>
-					<!--------------------------------------------------------------------  -->
-				</div>
+			<!-- 검색 결과 수정전-------------->
+			<div style="text-align: center; font-size: 25px;">
+				<c:if test="${not empty paging.findKeyword}">
+					<b>${paging.findKeyword}</b> 로 검색한 결과
+				</c:if>
 			</div>
+			<!-- ----------------------->
 		</div>
 		<br>
 		<div class="row">
@@ -239,16 +365,17 @@ h2, h4 {
 										<li class="list-group-item list-group-item-success">${upcategory.upCg_name}</li>
 									</c:if>
 								</c:forEach>
-								<li class="list-group-item <c:if test='${paging.upcg eq k and empty paging.downcg }'>active</c:if>">
+								<li
+									class="list-group-item <c:if test='${paging.upcg eq k and empty paging.downcg }'>active</c:if>">
 									<a class="btn btn-default" href="${myctx}/prod?upcg=${k}">전체보기</a>
 								</li>
 								<c:forEach var="downcategory" items="${downcategory}">
 									<c:if test="${downcategory.upCg_code eq k }">
-										<li class="list-group-item 
-										<c:if test='${downcategory.upCg_code eq paging.upcg and downcategory.downCg_code eq paging.downcg}'>active</c:if>">
+										<li
+											class="list-group-item <c:if test='${downcategory.upCg_code eq paging.upcg and downcategory.downCg_code eq paging.downcg}'>active</c:if>">
 											<a class="btn btn-default"
 											href="${myctx}/prod?upcg=${downcategory.upCg_code}&downcg=${downcategory.downCg_code}">
-											${downcategory.downCg_name}</a>
+												${downcategory.downCg_name} </a>
 										</li>
 									</c:if>
 								</c:forEach>
@@ -258,7 +385,7 @@ h2, h4 {
 				</div>
 			</c:forEach>
 		</div>
-			<!-- 카테고리 -->
+		<!-- 카테고리 -->
 		<div>
 			<c:forEach var="upcategory" items="${upcategory}">
 				<c:if test='${upcategory.upCg_code eq paging.upcg}'>
@@ -266,12 +393,14 @@ h2, h4 {
 				</c:if>
 			</c:forEach>
 			<c:forEach var="downcategory" items="${downcategory}">
-				<c:if test='${downcategory.upCg_code eq paging.upcg and downcategory.downCg_code eq paging.downcg}'>
-					<h2 style="text-align: center; color: #39b559; padding: 0px 0px 80px;">${downcategory.downCg_name}</h2>
+				<c:if
+					test='${downcategory.upCg_code eq paging.upcg and downcategory.downCg_code eq paging.downcg}'>
+					<h2
+						style="text-align: center; color: #39b559; padding: 0px 0px 80px;">${downcategory.downCg_name}</h2>
 				</c:if>
 			</c:forEach>
 		</div>
-			<!-- 설명 -->
+		<!-- 설명 -->
 		<div style="margin-bottom: 5px;">
 			<c:forEach var="cg_detail" items="${cgdetail}">
 				<c:if test='${cg_detail.downCg_code eq paging.downcg}'>
@@ -300,9 +429,10 @@ h2, h4 {
 		<div class="row mb-3">
 			<!-- 검색창 -->
 			<form name="searchF" id="searchF" class="d-flex" role="search">
-				<span><b>${paging.totalCount}</b>개의 상품</span> <input name="findKeyword"
-					class="form-control me-2" type="search" placeholder="검색어를 입력하세요"
-					aria-label="Search" style="width: 25%; margin-left: auto">
+				<span><b>${paging.totalCount}</b>개의 상품</span> <input
+					name="findKeyword" class="form-control me-2" type="search"
+					placeholder="검색어를 입력하세요" aria-label="Search"
+					style="width: 25%; margin-left: auto">
 				<button class="btn btn-outline-success" type="submit">검색</button>
 			</form>
 		</div>
@@ -330,7 +460,7 @@ h2, h4 {
 						<h5>${prod.pname}</h5>
 						<span class="badge bg-danger">${prod.percent}%할인</span>
 					</div>
-						<!-- <div class="d-flex align-content-center justify-content-center">
+					<!-- <div class="d-flex align-content-center justify-content-center">
 						별점
 						<span class="fas fa-star"></span> <span class="fas fa-star"></span>
 						<span class="fas fa-star"></span> <span class="fas fa-star"></span>
