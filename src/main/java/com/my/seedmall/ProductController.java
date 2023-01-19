@@ -86,7 +86,11 @@ public class ProductController {
 		for(BoardReviewVO reviewVo :boardReview) {
 			total += reviewVo.getScore();
 		}
-		double avg = total / boardReview.size();
+		double avg = 0;
+		if(boardReview.size() != 0) {
+			avg = total / boardReview.size();
+		}
+		
 		int review = boardReview.size(); // 전체 리뷰 수
 		
 		m.addAttribute("boardReview", boardReview);

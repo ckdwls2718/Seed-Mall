@@ -14,7 +14,7 @@
 	<selectKey keyProperty="re_qidx" order="BEFORE" resultType="int" >
 		select board_qna_comment_seq.nextval from dual
 	</selectKey>
-	insert into board_qna_comment(re_qidx, qidx, midx, re_qcontent, re_qdate)
+	insert into re_board_qna(re_qidx, qidx, midx, re_qcontent, re_qdate)
 	values(#{re_qidx}, #{qidx}, #{midx}, #{re_qcontent}, sysdate)
 	</insert>
 	
@@ -26,7 +26,7 @@
 	
 	<select id="getQNAReListByQidx" parameterType="int" resultType="QNARe">
 		select * 
-		from board_qna_comment 
+		from re_board_qna 
 		where qidx=#{value}
 	</select>
 	
@@ -54,6 +54,6 @@
 	</delete>
 	
 	<delete id="deleteQNARe" parameterType="int">
-		delete from board_qna_comment where re_qidx=#{value}
+		delete from re_board_qna where re_qidx=#{value}
 	</delete>
 </mapper>

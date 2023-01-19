@@ -9,10 +9,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 
 import com.user.mapper.MemberMapper;
+import com.user.model.GradeVO;
 import com.user.model.MemberVO;
 import com.user.model.NotUserException;
 import com.user.model.PagingVO;
 
+import lombok.extern.log4j.Log4j;
+
+@Log4j
 @Service("MemberService")
 public class MemberServiceImpl implements MemberService {
 
@@ -129,24 +133,19 @@ public class MemberServiceImpl implements MemberService {
 		
 		return MemberMapper.updatePassword(vo);
 	}
+	
+	@Override
+	public int RewardMileage(int midx, int point) {
+		return this.MemberMapper.RewardMileage(midx, point);
+	}
 
 	@Override
-	public int updateGrade(MemberVO vo) {
-		String grade="";
-		int mil=vo.getMileage();
-		if(mil < 5000) {
-			grade="씨앗회원";
-		}else if(mil >= 5000 && mil < 15000) {
-			grade="새싹회원";
-		}else if(mil >= 15000 && mil < 25000) {
-			grade="꽃잎회원";
-		}else if(mil >= 25000 && mil < 40000) {
-			grade="나무회원";
-		}else {
-			grade="열매회원";
-		}
-		vo.setGrade(grade);
-		return this.MemberMapper.updateGrade(vo);
+	public int updateGrade(MemberVO mvo) {
+		int mileage= MemberMapper.getMileage(mvo.getMidx());
+		String grade= MemberMapper.getGrade(mileage);
+		mvo.setGrade(grade);
+		log.info("mvo="+mvo);
+		return this.MemberMapper.updateGrade(mvo);
 	}
 
 

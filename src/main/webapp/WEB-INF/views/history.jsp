@@ -13,8 +13,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>관리자 - History</title>
-
     <!-- Custom fonts for this template-->
     <link href="resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -25,6 +23,43 @@
     <link href="resources/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
+<style>
+	.text-1 {
+    color: #4e73df!important;
+	}
+	.text-2 {
+    color: #1cc88a!important;
+	}
+	.text-3 {
+    color: #36b9cc!important;
+	}
+	.text-4 {
+    color: #f6c23e!important;
+	}
+	.text-5 {
+    color: #e74a3b!important;
+	}
+	.text-6 {
+    color: #858796!important;
+	}
+	.text-7 {
+    color: #5a5c69!important;
+	}
+	
+</style>
+<script>
+var upname = '${upnameArr}';
+var upnameList = upname.replace('[','').replace(']','').split(',');
+
+var upoqty = '${upoqtyArr}';
+var upoqtyList = upoqty.replace('[','').replace(']','').split(',');
+
+var downname = '${downnameArr}';
+var downnameList = downname.replace('[','').replace(']','').split(',');
+
+var downoqty = '${downoqtyArr}';
+var downoqtyList = downoqty.replace('[','').replace(']','').split(',');
+</script>
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -34,11 +69,11 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">${loginUser.mname}</div>
             </a>
 
             <!-- Divider -->
@@ -48,7 +83,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>사이드 바1</span></a>
+                    <span>전체보기</span></a>
             </li>
 
             <!-- Divider -->
@@ -211,7 +246,7 @@
                         </li> -->
 
                         <!-- Nav Item - Alerts -->
-                       <!--  <li class="nav-item dropdown no-arrow mx-1">
+                       <!-- <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
@@ -369,9 +404,14 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">History</h1>
-                        <<!-- a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    <div class="align-items-center justify-content-between mb-4">
+                    	<form>
+                        <h1 class="h3 mb-0 text-gray-800">
+                        <input type="number" name="year" value="${year}" style="width:100px" onchange="submit()"> 년도
+                        <input type="number" name="month" value="${month}" min="1" max="12" style="width:100px" onchange="submit()"> 월
+                        </h1>
+                        </form>
+                        <!-- a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
                     </div>
 
@@ -385,8 +425,8 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                월 매출</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">40,000원</div>
+                                                ${month}월 매출</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${salesMonth[month-1]}" pattern="###,###,###" />원</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -404,7 +444,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 연 매출</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">215,000원</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber value="${salesYear}" pattern="###,###,###" />원</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -414,54 +454,9 @@
                             </div>
                         </div>
 
-                        <!-- Earnings (Monthly) Card Example -->
-                        <!--  task 필요 유무?? 필요없어보이긴함 --------------------------------------------------- -->
-                       <!--  <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-info shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
-                                            </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="progress progress-sm mr-2">
-                                                        <div class="progress-bar bg-info" role="progressbar"
-                                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
+                         <p id="salesMonthData" style="display: none"><c:forEach var="sales"  items="${salesMonth}" varStatus="status">${sales}<c:if test="${not status.last}">, </c:if></c:forEach></p>
 
-                        <!-- Pending Requests Card Example -->
-                        <!--  Pending Requests 필요 유무?? 필요없어보이긴함 --------------------------------------------------- -->
-                      <!--   <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Pending Requests</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
+                        
                     </div>
 
                     <!-- Content Row -->
@@ -469,13 +464,13 @@
                     <div class="row">
 
                         <!-- Area Chart -->
-                        <div class="col-xl-8 col-lg-7">
+                        <div class="col-xl-12 col-lg-7">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                                    <div class="dropdown no-arrow">
+                                    <h6 class="m-0 font-weight-bold text-primary">월별 판매액</h6>
+                                    <!-- <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -488,7 +483,7 @@
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">Something else here</a>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
@@ -499,14 +494,19 @@
                             </div>
                         </div>
 
-                        <!-- Pie Chart -->
+                        
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+                    	<!-- Pie Chart -->
                         <div class="col-xl-4 col-lg-5">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                                    <div class="dropdown no-arrow">
+                                    <h6 class="m-0 font-weight-bold text-primary">상위 카테고리 판매량</h6>
+                                    <!-- <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -519,7 +519,7 @@
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">Something else here</a>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
@@ -527,22 +527,56 @@
                                         <canvas id="myPieChart"></canvas>
                                     </div>
                                     <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> Direct
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> Social
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> Referral
-                                        </span>
+                                    	<c:forEach var="upcategory" items="${upcategoryArr}" varStatus="status">
+                                    		<span class="mr-2">
+                                            	<i class="fas fa-circle text-${status.count}"></i> <span class="categoryName">${upcategory.categoryName}</span>
+                                            	<span class="oqty">${upcategory.oqty}</span>
+                                        	</span>
+                                    	</c:forEach>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Pie Chart -->
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">하위 카테고리 판매량</h6>
+                                    <!-- <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">Dropdown Header:</div>
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div> -->
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-pie pt-4 pb-2">
+                                        <canvas id="myPieChart2"></canvas>
+                                    </div>
+                                    <div class="mt-4 text-center small">
+                                        <c:forEach var="downcategory" items="${downcategoryArr}" varStatus="status">
+                                    		<span class="mr-2">
+                                            	<i class="fas fa-circle text-${status.count}"></i> <span class="categoryName">${downcategory.categoryName}</span>
+                                            	<span class="oqty">${downcategory.oqty}</span>
+                                        	</span>
+                                    	</c:forEach>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Content Row -->
+                    
                     <div class="row">
 
                         <!-- Content Column -->
@@ -679,7 +713,7 @@
                             </div>
 
                             <!-- Approach -->
-                            <div class="card shadow mb-4">
+                            <!-- <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
                                 </div>
@@ -690,7 +724,7 @@
                                     <p class="mb-0">Before working with this theme, you should become familiar with the
                                         Bootstrap framework, especially the utility classes.</p>
                                 </div>
-                            </div>
+                            </div> -->
 
                         </div>
                     </div>
@@ -702,13 +736,13 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
+            <!-- <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span>Copyright &copy; Your Website 2021</span>
                     </div>
                 </div>
-            </footer>
+            </footer> -->
             <!-- End of Footer -->
 
         </div>
