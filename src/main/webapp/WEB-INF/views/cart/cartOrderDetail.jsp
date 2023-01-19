@@ -156,6 +156,8 @@
 		let addr = $('#omaddr1').val()+' '+$('#omaddr2').val();
 		let postcode = $('#ompost').val();
 		
+		$('input[name=merchant_uid]').val(uid);
+		
 		IMP.init('imp71863270'); //가맹점 식별코드
 		 
 		IMP.request_pay({
@@ -193,6 +195,7 @@
 	<form name="orderF" id="orderF" action="cartOrderAdd" method="post" onsubmit="return order_check()">
 		<input type="hidden" name="desc_oTotalPrice" value="${total}">
 		<input type="hidden" name="growCheck" value="${growCheck}">
+		<input type="hidden" name="merchant_uid" value="">
 		<table class="table">
 			<tr>
 				<td width="20%" class="m1">받는분</td>
@@ -217,8 +220,8 @@
 			<tr>
 				<td width="20" class="m1">주소</td>
 				<td width="80%" class="m2"><input type="text" name="omaddr1"
-					id="omaddr1"> <input type="text" name="omaddr2" id="omaddr2">
-				</td>
+					id="omaddr1" style="width:40%;margin-bottom: 5px"><br> <input type="text" name="omaddr2"
+					id="omaddr2"></td>
 			</tr>
 			<tr>
 				<td width="20%" class="m1">배송 요청사항</td>
@@ -307,6 +310,7 @@
 		</div>
 		<div class="text-center">
 			<button type="button" class="btn btn-success mb-5" onclick="iamport()">결제하기</button>
+			<button type="submit" class="btn btn-success mb-5" >결제하기2</button>
 		</div>
 	</form>
 </div>

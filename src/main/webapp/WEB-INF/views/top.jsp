@@ -16,6 +16,8 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
+        <!-- font-awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
     <c:set var="myctx" value="${pageContext.request.contextPath}"/>
@@ -23,6 +25,18 @@
         <nav class="py-2 bg-white border-bottom">
             <div class="container d-flex flex-wrap text-end ">
               <ul class="nav me-auto">
+              	<c:if test="${loginUser.status == 9}">   
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">관리자 도구</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="${myctx}/admin/adminPage">어드민페이지</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="${myctx}/admin/prodForm">상품 등록</a></li>
+                                <li><a class="dropdown-item" href="${myctx}/admin/prodList">상품 목록</a></li>
+                                <li><a class="dropdown-item" href="${myctx}/admin/memberList">회원 관리</a></li>
+                            </ul>
+                        </li>
+                </c:if> 
               </ul>
               <ul class="nav">       
               <c:if test="${loginUser == null}">   
@@ -34,13 +48,14 @@
               </ul>
               <c:if test="${loginUser != null}"> 
               <div class="flex-shrink-0 dropdown">
+              	
                
                 <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="${myctx}/assets/몬스테라.jpg" alt="mdo" width="32" height="32" class="rounded-circle" style="margin-top:3px">
+                  <img src="${myctx}/resources/grade_images/${loginUser.grade}.jpg" alt="mdo" width="32" height="32" class="rounded-circle" style="margin-top:3px">
                 </a>
                 
                 <ul class="dropdown-menu text-small shadow" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; margin-top:5px;  transform: translate3d(0.5px, 34px, 0px);">
-                  <li><span class="dropdown-item">등급</span></li>
+                  <li><span class="dropdown-item">${loginUser.grade}</span></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="${myctx}/user/mypage">마이페이지</a></li>
                   <li><a class="dropdown-item" href="#">설정</a></li>
@@ -91,18 +106,7 @@
                             </ul>
                         </li> --%>
                         
-                        <c:if test="${loginUser.status == 9}">   
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">관리자 도구</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="${myctx}/admin/adminPage">어드민페이지</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="${myctx}/admin/prodForm">상품 등록</a></li>
-                                <li><a class="dropdown-item" href="${myctx}/admin/prodList">상품 목록</a></li>
-                                <li><a class="dropdown-item" href="${myctx}/admin/memberList">회원 관리</a></li>
-                            </ul>
-                        </li>
-                        </c:if> 
+                        
                     </ul>
                     
                 </div>
