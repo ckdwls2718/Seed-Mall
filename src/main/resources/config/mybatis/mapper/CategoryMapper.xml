@@ -14,7 +14,7 @@
 
 
 <select id="getAllDowncategory" resultType="Category" >
-	select * from downCategory
+	select * from downCategory order by 1 asc
 </select>
 <select id="getAllCategory"  resultType="Category" >
 select u.*, d.*

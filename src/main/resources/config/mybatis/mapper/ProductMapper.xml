@@ -127,11 +127,11 @@
 	
 
 	<sql id="selectProd">
-		select p.*,decode(c.upcg_code,1,'초심자',2,'중급자',3,'전문가')
-		upcg_name,c.downCg_name
-		from product p join downcategory c
-		on
-		p.downCg_code = c.downCg_code and p.upCg_code =c.upCg_code
+		select p.*, (select upcg_name from upcategory where upcg_code = c.upcg_code) upcg_name
+      , c.downCg_name
+      from product p join downcategory c
+      on
+      p.downCg_code = c.downCg_code and p.upCg_code =c.upCg_code
 	</sql>
 	
 	<sql id="findProdWherePaging">
