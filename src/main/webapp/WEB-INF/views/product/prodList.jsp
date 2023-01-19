@@ -458,7 +458,6 @@ height: 50px;
 					<div class="tag ${prod.pspec}">${prod.pspec}</div>
 					<div class="title pt-4 pb-1">
 						<h5>${prod.pname}</h5>
-						<span class="badge bg-danger">${prod.percent}%할인</span>
 					</div>
 					<!-- <div class="d-flex align-content-center justify-content-center">
 						별점
@@ -466,13 +465,17 @@ height: 50px;
 						<span class="fas fa-star"></span> <span class="fas fa-star"></span>
 						<span class="fas fa-star"></span>
 					</div> -->
-					<div class="price">
+					<div class="price text-center" style="margin: 0">
+						<c:if test="${prod.price ne prod.psaleprice }">
 						<del>
-							<small style="color: gray;"><fmt:formatNumber
-									value="${prod.price}" pattern="###,###,### 원" /></small>
+							<small style="color: gray;"><fmt:formatNumber value="${prod.price}" pattern="###,###,### 원" /></small>
 						</del>
-						<b><fmt:formatNumber value="${prod.psaleprice}"
-								pattern="###,###,### 원" /></b>
+						<b><fmt:formatNumber value="${prod.psaleprice}" pattern="###,###,### 원" /></b><br>
+						<span class="badge bg-danger">${prod.percent}%할인</span>
+						</c:if>
+						<c:if test="${prod.price eq prod.psaleprice }">
+						<b><fmt:formatNumber value="${prod.psaleprice}" pattern="###,###,### 원" /></b>
+						</c:if>
 					</div>
 				</div>
 			</c:forEach>

@@ -128,19 +128,16 @@ const LikeC = function(){
 
  
 </style>
-<div class="container">
+<div class="container" style="height: 300px">
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a class="nav-link" href="#">상품상세</a>
+    <a class="nav-link" href="#1">상품상세</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">상품리뷰</a>
+    <a class="nav-link active" aria-current="page" href="#2" name="2">상품리뷰</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">상품문의</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+    <a class="nav-link" href="#3">상품문의</a>
   </li>
 </ul>
 
