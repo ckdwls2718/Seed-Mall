@@ -29,12 +29,27 @@
 const reviewCheck = function(){
 		  
 	}
+	
+	function setThumbnail(event) {
+	    for (var image of event.target.files) {
+	      var reader = new FileReader();
+
+	      reader.onload = function(event) {
+	        var img = document.createElement("img");
+	        img.setAttribute("src", event.target.result);
+	        img.setAttribute("width", "70%");
+	        img.setAttribute("height", "70%");
+	        document.querySelector("div#image_container").appendChild(img);
+	      };
+
+	      console.log(image);
+	      reader.readAsDataURL(image);
+	    }
+	  }
 
 
 </script>
-<%
-String ctx = request.getContextPath();
-%>
+
 <div align="center" id="bbs" class="col-md-8 offset-md-2 my-4">
 	<h1>리뷰 작성</h1>
 	<form name="bf" id="bf" role="form" action="reviewEnd" method="POST" 
@@ -45,18 +60,18 @@ String ctx = request.getContextPath();
 		<table class="table">
 			<tr>
 				<td style="width: 20%"><b>제목</b></td>
-				<td style="width: 80%"><input type="text" name="rtitle"
+				<td style="width: 50%" colspan='2'><input type="text" name="rtitle"
 					id="rtitle" class="form-control"></td>
 			</tr>
 			
 			<tr>
 				<td style="width: 20%"><b>글쓴이</b></td>
-				<td style="width: 80%"><input type="text" name="email" id="email" class="form-control" readonly value="${loginUser.email}"></td>
+				<td style="width: 50%" colspan='2'><input type="text" name="email" id="email" class="form-control" readonly value="${loginUser.email}"></td>
 			</tr>
 			
 			<tr>
 				<td style="width: 20%"><b>평점</b></td>
-				<td style="width: 80%">
+				<td style="width: 50%" colspan='2'>
         <!-- <input type="hidden" name="score" id="score"> -->
 	    <label for="score1"><input type="radio" name="score" id="score1" value="1" >1점</label>
 		<label for="score2"><input type="radio" name="score" id="score2" value="2">2점</label>
@@ -67,18 +82,29 @@ String ctx = request.getContextPath();
 			</tr>
 			
 			<tr>
+						<td><b>상품이미지</b></td>
+							<td style="width: 50%; height: 80px;" colspan='2'><input type="file" name="rimage"
+									onchange="setThumbnail(event)" multiple></td>
+									
+							<td width="50%"colspan='2'>
+							<span style="border: 1px solid black; border-radius: 2px">선택된이미지</span>
+								<div id="image_container"></div> <br></td>
+							</tr>
+			
+			<tr>
 				<td style="width: 20%"><b>글내용</b></td>
-				<td style="width: 80%"><textarea name="rcontent" id="rcontent"
+				<td style="width: 50%; height: 80px;" colspan='2'><textarea name="rcontent" id="rcontent"
 						rows="10" cols="50" class="form-control"></textarea></td>
 			</tr>
 
 			<tr>
-				<td colspan="2">
+				<td colspan="3">
 					<button type="submit" id="btnWrite" class="btn btn-success">글쓰기</button>
 					<button type="reset" id="btnReset" class="btn btn-warning">다시쓰기</button>
 				</td>
 			</tr>
-
+			
+		
 		</table>
 
 

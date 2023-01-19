@@ -23,6 +23,7 @@ public interface OrderService {
 	List<OrderVO> getOrderList_paging(PagingVO page);
 	List<OrderVO> getOrderMemberList_paging(PagingVO page);
 	List<OrderProductVO> getOrderProductrList_paging(PagingVO page);
+	List<OrderVO> getRefundList_paging(PagingVO page); // 환불건만 조회
 
 	// 상품정보 가져오기
 	OrderProductVO getOrderProduct(int pidx);
