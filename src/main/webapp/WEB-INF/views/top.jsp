@@ -25,6 +25,18 @@
         <nav class="py-2 bg-white border-bottom">
             <div class="container d-flex flex-wrap text-end ">
               <ul class="nav me-auto">
+              	<c:if test="${loginUser.status == 9}">   
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">관리자 도구</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="${myctx}/admin/adminPage">어드민페이지</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="${myctx}/admin/prodForm">상품 등록</a></li>
+                                <li><a class="dropdown-item" href="${myctx}/admin/prodList">상품 목록</a></li>
+                                <li><a class="dropdown-item" href="${myctx}/admin/memberList">회원 관리</a></li>
+                            </ul>
+                        </li>
+                </c:if> 
               </ul>
               <ul class="nav">       
               <c:if test="${loginUser == null}">   
@@ -36,6 +48,7 @@
               </ul>
               <c:if test="${loginUser != null}"> 
               <div class="flex-shrink-0 dropdown">
+              	
                
                 <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                   <img src="${myctx}/assets/몬스테라.jpg" alt="mdo" width="32" height="32" class="rounded-circle" style="margin-top:3px">
@@ -93,18 +106,7 @@
                             </ul>
                         </li> --%>
                         
-                        <c:if test="${loginUser.status == 9}">   
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">관리자 도구</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="${myctx}/admin/adminPage">어드민페이지</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="${myctx}/admin/prodForm">상품 등록</a></li>
-                                <li><a class="dropdown-item" href="${myctx}/admin/prodList">상품 목록</a></li>
-                                <li><a class="dropdown-item" href="${myctx}/admin/memberList">회원 관리</a></li>
-                            </ul>
-                        </li>
-                        </c:if> 
+                        
                     </ul>
                     
                 </div>
