@@ -19,6 +19,7 @@ import com.board.model.BoardReviewVO;
 import com.board.model.ReviewImageVO;
 import com.product.model.ProductForm;
 import com.product.model.ProductImageVO;
+import com.user.model.PagingVO;
 
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnailator;
@@ -186,6 +187,13 @@ public class BoardReviewServiceImpl implements BoardReviewService {
 				}
 				// 0:1
 				return result;		
+	}
+
+
+	@Override
+	public int getReviewCount(PagingVO paging) {
+		
+		return boardReviewMapper.getReviewCount(paging);
 	}
 
 }

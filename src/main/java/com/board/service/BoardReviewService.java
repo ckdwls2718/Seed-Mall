@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.board.model.BoardReviewVO;
 import com.board.model.ReviewImageVO;
+import com.user.model.PagingVO;
 
 public interface BoardReviewService {
 public List<BoardReviewVO> getReview(int pidx);
@@ -15,6 +16,8 @@ public List<BoardReviewVO> getReview(int pidx);
 	public int insertReview(BoardReviewVO review, HttpServletRequest req);
 	
 	BoardReviewVO getReviewVO(BoardReviewVO review);
+	
+	int getReviewCount(PagingVO paging);
 	
 	public int updateReview(BoardReviewVO review);
 	
