@@ -55,4 +55,6 @@ public interface OrderMapper {
 
 	// 배송상태 수정하기
 	int updateDeliveryStatus(OrderVO ovo);
+
+	List<OrderVO> getRefundList_paging(PagingVO page);
 }

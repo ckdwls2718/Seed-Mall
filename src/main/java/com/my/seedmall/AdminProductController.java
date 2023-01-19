@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,6 +46,14 @@ public class AdminProductController {
 		List<CategoryVO> downCgList = adminProductService.getDowncategory(upCg_code);
 		return downCgList;
 	}
+	
+	@ResponseBody
+	@GetMapping(value = "/getCgDetail", produces = "application/json")
+	public List<CategoryVO> getCgDetail(@RequestParam("downCg_code") String downCg_code) {
+		List<CategoryVO> cgDeatilList = adminProductService.getCgDetail(downCg_code);
+		log.info(cgDeatilList);
+		return cgDeatilList;
+	}
 
 
 	@PostMapping("/prodInsert")
@@ -60,10 +69,21 @@ public class AdminProductController {
 	}// ------------------------------------------
 
 	@GetMapping("/prodList")
-	public String productList(Model m, PagingVO page) {
-		// 상품을 가져온다
+	public String productList(Model m, PagingVO page, HttpServletRequest req) {
+		String myctx = req.getContextPath();// 컨텍스트명 "/seedmall"
+		HttpSession ses = req.getSession();
+		
+		int totalCount = this.adminProductService.getProdTotal(page);
+		page.setTotalCount(totalCount);
+		page.setPagingBlock(5);// 페이징 블럭 단위값: 5
+		////////////////////
+		page.init(ses); // 페이징 관련 연산을 수행하는 메서드 호출
 		List<ProductVO> prodArr = adminProductService.productList(page);
+		String loc = "admin/prodList";
+		String pageNavi = page.getPageNavi(myctx, loc);
 		m.addAttribute("prodArr", prodArr);
+		m.addAttribute("paging", page);
+		m.addAttribute("pageNavi", pageNavi);
 
 		return "admin/prodList";
 	}
@@ -89,16 +109,26 @@ public class AdminProductController {
 		if (pidx == 0) {
 			return "redirect:prodList";
 		}
-		int x = adminProductService.deleteImage(pidx, req);
-
 		int n = adminProductService.deleteProduct(pidx);
-		String str = (n != 0 && x > 0) ? "삭제 성공" : "삭제 실패";
-		String loc = (n != 0 && x > 0) ? "prodList" : "javascript:history.back()";
-
-		m.addAttribute("message", str);
-		m.addAttribute("loc", loc);
-
-		return "msg";
+		if(n==999) {
+			String str="주문내역이 있는 상품입니다";
+			String loc="javascript:history.back()";
+			
+			m.addAttribute("message", str);
+			m.addAttribute("loc", loc);
+			
+			return "msg";
+		}else {
+			int x = adminProductService.deleteImage(pidx, req);
+	
+			String str = (n != 0 && x > 0) ? "삭제 성공" : "삭제 실패";
+			String loc = (n != 0 && x > 0) ? "prodList" : "javascript:history.back()";
+	
+			m.addAttribute("message", str);
+			m.addAttribute("loc", loc);
+	
+			return "msg";
+		}
 	}
 
 	@PostMapping("/updateProd")
@@ -149,6 +179,52 @@ public class AdminProductController {
 		m.addAttribute("message", str);
 		m.addAttribute("loc", loc);
 		return "msg";
+	}
+	
+	@PostMapping("/deleteCategory")
+	public String deleteCategory(Model m, @ModelAttribute CategoryVO cvo) {
+		int n= adminProductService.deleteCategory(cvo);
+		if(n==999) {
+			String str="카테고리내에 상품이 존재 합니다";
+			String loc="javascript:history.back()";
+			
+			m.addAttribute("message", str);
+			m.addAttribute("loc", loc);
+			
+			return "msg";
+		}else {
+			String str = (n > 0 || n == -1) ? "삭제 성공" : "삭제 실패";
+			String loc = (n > 0) ? "prodList" : "javascript:history.back()";
+	
+			m.addAttribute("message", str);
+			m.addAttribute("loc", loc);
+			return "msg";
+		}
+	}
+	
+	@PostMapping("/addCgDetail")
+	public String addCgDetail(Model m, @ModelAttribute CategoryVO cvo) {
+		int n = adminProductService.addDetail(cvo);
+		
+		String str = (n > 0) ? "등록 성공" : "등록 실패";
+		String loc = (n > 0) ? "prodList" : "javascript:history.back()";
+
+		m.addAttribute("message", str);
+		m.addAttribute("loc", loc);
+		return "msg";
+	}
+	
+	@PostMapping("/deleteCgDetail")
+	public String deleteCgDetail(Model m, @ModelAttribute CategoryVO cvo) {
+		int n = adminProductService.deleteCgDetail(cvo);
+		
+		String str = (n > 0) ? "삭제 성공" : "삭제 실패";
+		String loc = (n > 0) ? "prodList" : "javascript:history.back()";
+
+		m.addAttribute("message", str);
+		m.addAttribute("loc", loc);
+		return "msg";
+		
 	}
 
 }
