@@ -175,6 +175,13 @@ public class CartController {
 
 		// 세션에 로그인한 사람 정보로 회원번호 셋팅
 		order.setMidx(midx_fk);
+		
+		// 키워주세요 체크 시
+		if(growCheck.equals("Y")) {
+			order.setDeliveryState("5");
+		} else {
+			order.setDeliveryState("0");
+		}
 
 		// 주문 명세서 + 수령자 DB에 생성
 		orderService.createOrderList(order);

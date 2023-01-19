@@ -103,7 +103,14 @@ public class OrderController {
 		
 		// 세션에 로그인한 사람 정보로 회원번호 셋팅
 		ovo.setMidx(midx_fk);
-
+		
+		// 키워주세요 체크 시
+		if(growCheck.equals("Y")) {
+			ovo.setDeliveryState("5");
+		} else {
+			ovo.setDeliveryState("0");
+		}
+		
 		// 주문 명세서 + 수령자 DB에 생성
 		int n = orderService.createOrderList(ovo);
 		int n2 = orderMapper.createOrderMember(ovo); // Mapper에서는 명세서와 수령자를 따로 insert해줬다
