@@ -6,7 +6,7 @@
 <script>
 	$(function() {
 
-		CKEDITOR.replace('content');
+		CKEDITOR.replace('ccontent');
 
 		$('#bf').submit(function() {
 			if ($('#ctitle').val() == '') {

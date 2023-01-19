@@ -14,7 +14,7 @@ public class BoardComServiceImpl implements BoardComService {
 
 	@Autowired
 	BoardComMapper boardComMapper;
-
+ 
 	@Override
 	public List<BoardComVO> getBoardList(PagingVO paging) {
 		// TODO Auto-generated method stub
@@ -62,6 +62,8 @@ public class BoardComServiceImpl implements BoardComService {
 		// TODO Auto-generated method stub
 		return this.boardComMapper.selectBoardByIdx(cidx);
 	}
+
+
 
 
 

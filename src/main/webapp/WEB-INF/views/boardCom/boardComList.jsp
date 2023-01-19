@@ -24,7 +24,7 @@
 		<tbody id="boardBody">
 			<c:if test="${boardComArr eq null or empty boardComArr}">
 				<tr>
-					<td colspan="3"><b>데이터가 없습니다.</b></td>
+					<td colspan="5"><b>데이터가 없습니다.</b></td>
 				</tr>
 			</c:if>
 			<c:if test="${boardComArr ne null and not empty boardComArr}">
