@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import com.user.model.GradeVO;
 import com.user.model.MemberVO;
 import com.user.model.NotUserException;
 import com.user.model.PagingVO;
@@ -48,8 +49,11 @@ public interface MemberService {
 	// 검색목록 가져오기
 	List<MemberVO> findMember(PagingVO pvo);
 	
-	//마일리지 적립
-	int updateGrade(MemberVO vo);
+	//포인트 적립
+	int RewardMileage(int midx,int point);
+	//등급 업데이트
+	int updateGrade(MemberVO mvo);
+
 	
 
 	

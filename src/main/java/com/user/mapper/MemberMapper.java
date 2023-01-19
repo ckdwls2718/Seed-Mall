@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.user.model.MemberVO;
 import com.user.model.NotUserException;
 import com.user.model.PagingVO;
@@ -48,7 +50,13 @@ public interface MemberMapper {
 
 	List<MemberVO> selectMemberAll(Map<String, Integer> map);
 
-	int updateGrade(MemberVO vo);
+	int updateGrade(MemberVO mvo);
+
+	String getGrade(int mileage);
+
+	int RewardMileage(@Param("midx")int midx, @Param("point")int point);
+	
+	int getMileage(int midx);
 
 
 }

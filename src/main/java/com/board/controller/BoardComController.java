@@ -19,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.board.model.BoardComVO;
 import com.board.model.BoardVO;
 import com.board.service.BoardComService;
+import com.user.model.GradeVO;
+import com.user.model.MemberVO;
 import com.user.model.PagingVO;
+import com.user.service.MemberService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -29,6 +32,9 @@ public class BoardComController {
 
 	@Autowired
 	BoardComService boardComService;
+	
+	@Autowired
+	MemberService memberService;
 
 	@GetMapping("/boardComList")
 	public String boardList(Model m, @ModelAttribute("page") PagingVO page, HttpServletRequest req,
@@ -64,9 +70,13 @@ public class BoardComController {
 	}
 
 	@PostMapping("/write")
-	public String boardInsert(@ModelAttribute("boardComVO") BoardComVO boardvo, Model m) {
+	public String boardInsert(@ModelAttribute("boardComVO") BoardComVO boardvo, Model m, MemberVO mvo) {
 		boardComService.insertBoard(boardvo);
-
+		int point= 100;
+		int n=memberService.RewardMileage(boardvo.getMidx(),point);
+		mvo.setMidx(boardvo.getMidx());
+		memberService.updateGrade(mvo);
+		log.info("n="+n);
 		return "redirect:boardComList";
 	}// 게시판 글쓰기
 
