@@ -107,6 +107,10 @@ public class MypageController {
 	public String myOrderList(Model m, HttpSession ses) {
 		MemberVO loginUser = (MemberVO)ses.getAttribute("loginUser");
 		List<OrderVO> orderArr = orderService.getOrderList(loginUser.getMidx());
+		for(OrderVO order : orderArr) {
+			List<OrderProductVO> orderProduct = orderService.getOrderProductList(order.getDesc_oidx());
+			order.setProdList(orderProduct);
+		}
 		
 		m.addAttribute("orderArr", orderArr);
 		
