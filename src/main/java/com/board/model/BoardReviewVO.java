@@ -1,6 +1,9 @@
 package com.board.model;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,7 +28,8 @@ public class BoardReviewVO {
 	private int sentiment; //긍정도: 1(부정), 2(중립), 3(긍정)
 	
 	private String email;
-	private List<BoardReviewVO> boardReviewList;
+	private List<ReviewImageVO> boardReviewImageList = new ArrayList<>();
+	private List<MultipartFile> rimage;
 	
 	
 }

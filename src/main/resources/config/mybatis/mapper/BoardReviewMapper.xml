@@ -6,13 +6,18 @@
 	<selectKey keyProperty="ridx" order="BEFORE" resultType="int">
 		select board_review_seq.nextval from dual
 	</selectKey>
-	insert into board_re(ridx,midx,oidx,rtitle,rcontent,rname,rreadnum,rlikenum,score,rdate) 
-	values(#{ridx},#{midx},#{oidx},#{rtitle},#{rcontent:VARCHAR},#{rname:VARCHAR},#{rreadnum},#{rlikenum},#{score},sysdate)	
+	insert into board_re(ridx,midx,oidx,rtitle,rcontent,rname,rreadnum,rlikenum,score,rdate,sentiment) 
+	values(#{ridx},#{midx},#{oidx},#{rtitle},#{rcontent:VARCHAR},#{rname:VARCHAR},#{rreadnum},#{rlikenum},#{score},sysdate,#{sentiment})	
 </insert>
 
 	<select id="getReview" resultType="Review" parameterType="_int">
        select b.*,(select email from member where midx=b.midx ) email from board_re b join orders o on b.oidx=o.oidx where pidx=#{value}
     </select>
+    
+    <select id="getReviewCount" resultType="int"
+		parameterType="Paging">
+		select count(ridx) from board_re
+	</select>
     
     <select id="getReviewVO" parameterType="Review" resultType="Review">
 		select board_re.*,(select email from member where midx=board_re.midx ) email from  board_re where ridx=#{ridx}
@@ -33,4 +38,35 @@
 	<delete id="deleteReview" parameterType="int">
 		delete from board_re where ridx=#{value}
 	</delete>
+	
+
+	<!--좋아요  -->
+	
+	<update id="like_check" parameterType="Review">
+    UPDATE Board_Re
+    SET rlikeNum = rlikeNum + 1 
+    WHERE ridx=#{ridx}
+  </update>
+  
+  <update id="like_check_cancel" parameterType="Review">
+    UPDATE Board_Re
+    SET rlikeNum = rlikeNum -1
+    WHERE ridx=#{ridx}
+  </update>
+  
+  <!--이미지 등록 -->
+  <insert id="insertRimage" parameterType="ReviewI">
+		insert into
+		Review_Image(image_ridx, ridx, rthumbnail, rimage, roriginfilename)
+		values(board_reviewi_seq.nextval, #{ridx},#{rthumbnail:VARCHAR},#{rimage},#{roriginfilename})
+	</insert>
+	
+	<select id="getReviewImages" resultType="ReviewI"
+		parameterType="int">
+		select *
+		from Review_Image
+		where ridx=#{value}
+		order by 1 asc
+	</select>
+	
 </mapper>
