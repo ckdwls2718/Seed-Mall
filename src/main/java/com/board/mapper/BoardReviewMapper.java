@@ -32,5 +32,4 @@ public interface BoardReviewMapper {
 	
 	int insertRimage(ReviewImageVO riVo);
 	
-	
 }

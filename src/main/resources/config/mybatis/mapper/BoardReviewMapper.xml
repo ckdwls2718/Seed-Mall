@@ -39,6 +39,7 @@
 		delete from board_re where ridx=#{value}
 	</delete>
 	
+
 	<!--좋아요  -->
 	
 	<update id="like_check" parameterType="Review">
