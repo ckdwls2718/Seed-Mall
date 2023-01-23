@@ -1,12 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="/WEB-INF/views/top.jsp"%>
 
 <style>
-h2 {/* 머릿말 */
+h2 { /* 머릿말 */
 	margin: 40px 40px 40px 0px;
 	padding: 0 20px;
 	font-family: 'Noto Sans KR', sans-serif;
@@ -14,13 +13,16 @@ h2 {/* 머릿말 */
 	color: #39b559;
 	font-size: calc(1.325rem + .9vw);
 }
-.List{ /* 머릿말 a링크  */
+
+.List { /* 머릿말 a링크  */
 	text-decoration: none;
 	color: #39b559;
 }
-.List:hover{/* 머릿말 a링크  */
+
+.List:hover { /* 머릿말 a링크  */
 	color: #39b559;
 }
+
 tr>th {
 	text-align: center;
 	font-size: 14px;
@@ -48,50 +50,56 @@ button {
 	top: 0;
 	right: 0px;
 }
+
 .page-link {
-    position: relative;
-    display: block;
-    color: #198754;
-    text-decoration: none;
-    background-color: #fff;
-    border: 1px solid #dee2e6;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+	position: relative;
+	display: block;
+	color: #198754;
+	text-decoration: none;
+	background-color: #fff;
+	border: 1px solid #dee2e6;
+	transition: color .15s ease-in-out, background-color .15s ease-in-out,
+		border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
 .page-link:hover {
-  z-index: 2;
-  color: #198754;
-  background-color: #e9ecef;
-  border-color: #dee2e6;
+	z-index: 2;
+	color: #198754;
+	background-color: #e9ecef;
+	border-color: #dee2e6;
 }
+
 .page-link:focus {
-  z-index: 3;
-  color: #198754;
-  background-color: #e9ecef;
-  outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+	z-index: 3;
+	color: #198754;
+	background-color: #e9ecef;
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
 
 .page-item.active .page-link {
-  z-index: 3;
-  color: #fff;
-  background-color: #198754;
-  border-color: #198754;
-}
-.total{
-	width:16%;
-	text-align:right;
-	padding-right:15px;
-	padding-top: 10px;
-}
-.findType{
-	padding-bottom: 15px;
-	padding: 6px;
-}
-.pageSize{
-	padding: 1px;
+	z-index: 3;
+	color: #fff;
+	background-color: #198754;
+	border-color: #198754;
 }
 
+.total {
+	width: 16%;
+	text-align: right;
+	padding-right: 15px;
+	padding-top: 10px;
+}
+
+.findType {
+	border-radius: 5px;
+	padding-bottom: 15px;
+	padding: 5px;
+}
+
+.pageSize {
+	padding: 1px;
+}
 </style>
 <!-- 검색 오류 알림 -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -127,11 +135,10 @@ button {
 	</h2>
 	<c:if test="${paging.findType ne null and paging.findType ne ''}">
 		<h4 class="text-center" style="margin: 30px 0px;">
-			- <b><c:out value="${paging.findKeyword}"/></b> -
-			로 검색한 결과입니다.
+			- <b><c:out value="${paging.findKeyword}" /></b> - 로 검색한 결과입니다.
 		</h4>
 	</c:if>
-	
+
 	<div class="row py-1" style="margin-left: 2px;">
 		<!-- 페이지 사이즈 처리 -->
 		<div class="col-md-4 text-left " style="padding-top: 12px;">
@@ -140,47 +147,38 @@ button {
 				<select name="pageSize" class="pageSize" onchange="submit()">
 					<!-- <option value=''>항목 노출 선택</option> -->
 					<c:forEach var="ps" begin="5" end="20" step="5">
-						<option value='${ps}'
-							<c:if test="${pageSize eq ps}">selected</c:if>>${ps}개씩</option>
+						<option value='${ps}' <c:if test="${pageSize eq ps}">selected</c:if>>${ps}개씩</option>
 					</c:forEach>
 				</select>
 				&nbsp;entries
 				<!-- ---hidden data------------------------------------------ -->
-				<input type="hidden" name="findType" value="${paging.findType}">
-				<input type="hidden" name="findKeyword" value="${paging.findKeyword}">
-				<input type="hidden" name="mpage" value="${paging.mpage}">
+				<input type="hidden" name="findType" value="${paging.findType}"> <input type="hidden" name="findKeyword" value="${paging.findKeyword}"> <input type="hidden" name="mpage" value="${paging.mpage}">
 				<!-- ------------------------------------------------------- -->
 			</form>
 		</div>
-		
-		
+
+
 		<!-- 검색창  -->
-		<div class="col-md-6">
+		<div class="col-md-5" style="border-radius: 5px; ">
 			<form name="searchF" action="memberList" onsubmit="return check()">
 				<!-- ---hidden data------------------------------------------ -->
 				<%-- <input type="hidden" name="pageSize" value="${pageSize}"> --%>
 				<%-- <input type="hidden" name="mpage" value="${searchF.mpage}"> --%>
 				<!-- ------------------------------------------------------- -->
-				<select name="findType" class="findType">
-					<option value="1"
-						<c:if test="${paging.findType eq 1}">selected</c:if>>이름</option>
-					<option value="2"
-						<c:if test="${paging.findType eq 2}">selected</c:if>>이메일</option>
-					<option value="3"
-						<c:if test="${paging.findType eq 3}">selected</c:if>>등급</option>
+				<select name="findType" class="findType" style="">
+					<option value="1" <c:if test="${paging.findType eq 1}">selected</c:if>>이름</option>
+					<option value="2" <c:if test="${paging.findType eq 2}">selected</c:if>>이메일</option>
+					<option value="3" <c:if test="${paging.findType eq 3}">selected</c:if>>등급</option>
 				</select>
-				<label>
-					<input type="text" name="findKeyword"
-					placeholder="검색어를 입력하세요" autofocus="autofocus"
-					style='width: 300px;'>
+				<label> <input type="text" name="findKeyword" placeholder="검색어를 입력하세요" autofocus="autofocus" style='width: 300px;'>
 					<button class="btn btn-outline-success">검 색</button>
 				</label>
 			</form>
 		</div>
 		<!-- 전체 회원 수 표시-->
 		<div class="total">
-			<div>전체 회원수: 
-				<b><c:out value="${paging.totalCount}"/></b>
+			<div>
+				전체 회원수: <b><c:out value="${paging.totalCount}" /></b>
 			</div>
 		</div>
 	</div>
@@ -208,26 +206,27 @@ button {
 						<td>${user.mname}<br> [${user.grade}]
 						</td>
 						<td>${user.allHp}</td>
-						<td>[${user.mpost}] <br> ${user.allAddr}
+						<td>
+							[${user.mpost}] <br> ${user.allAddr}
 						</td>
 						<td>${user.mdate}</td>
-						<td><c:if test="${user.status ne 9}">
-								<select id="status${st.index}" name="status" style="padding: 1px;">
-									<option value="0"
-										<c:if test="${user.status eq 0}">selected</c:if>>일반회원</option>
-									<option value="1"
-										<c:if test="${user.status eq 1}">selected</c:if>>정지회원</option>
-									<option value="2" style="color: red;"
-										<c:if test="${user.status eq 2}">selected</c:if>>탈퇴회원</option>
-								</select>
-							</c:if> <c:if test="${user.status eq 9}">
-								<c:out value="-관리자-"></c:out>
-							</c:if></td>
 						<td>
-						<c:if test="${user.status ne 9}">
-							<a href="#" onclick="userEdit('${user.midx}','${st.index}')">수정</a>&nbsp;|
+							<c:if test="${user.status ne 9}">
+								<select id="status${st.index}" name="status" style="padding: 1px;">
+									<option value="0" <c:if test="${user.status eq 0}">selected</c:if>>일반회원</option>
+									<option value="1" <c:if test="${user.status eq 1}">selected</c:if>>정지회원</option>
+									<option value="2" style="color: red;" <c:if test="${user.status eq 2}">selected</c:if>>탈퇴회원</option>
+								</select>
+							</c:if>
+							<c:if test="${user.status eq 9}">
+								<c:out value="-관리자-"></c:out>
+							</c:if>
+						</td>
+						<td>
+							<c:if test="${user.status ne 9}">
+								<a href="#" onclick="userEdit('${user.midx}','${st.index}')">수정</a>&nbsp;|
 							<a href="#" onclick="userDel('${user.midx}')">삭제</a>
-						</c:if>
+							</c:if>
 						</td>
 					</tr>
 				</c:forEach>
@@ -247,8 +246,7 @@ button {
 </form>
 <!-- 수정 폼  -->
 <form name="ef" id="ef" action="userEdit" method="post">
-	<input type="hidden" name="midx" id="midx2"> 
-	<input type="hidden" name="status" id="status">
+	<input type="hidden" name="midx" id="midx2"> <input type="hidden" name="status" id="status">
 </form>
 
 <%@ include file="/WEB-INF/views/foot.jsp"%>

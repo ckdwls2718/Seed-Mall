@@ -1,34 +1,37 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/views/top.jsp"%>
-
-<header style="background-color:#d1e7dd">
+<style>
+button {
+	filter: invert(100%);
+}
+</style>
+<header>
 	<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-		<div class="carousel-inner " style="width:60%; margin:auto;">
-		  <div class="carousel-item active">
-			<img src="./assets/template1.jpg" class="d-block w-100" alt="...">
-		  </div>
-		  <div class="carousel-item">
-			<img src="./assets/template2.jpg" class="d-block w-100" alt="...">
-		  </div>
-		  <div class="carousel-item">
-			<img src="./assets/template3.jpg" class="d-block w-100" alt="...">
-		  </div>
+		<div class="carousel-inner">
+			<div class="carousel-item active" style="text-align: center;">
+				<img src="./assets/template1.jpg" class="" alt="..." style="height: 500px; width: auto;">
+			</div>
+			<div class="carousel-item" style="text-align: center;">
+				<img src="./assets/template2.jpg" class="" alt="..." style="height: 500px; width: auto;">
+			</div>
+			<div class="carousel-item" style="text-align: center;">
+				<img src="./assets/template3.jpg" class="" alt="..." style="height: 500px; width: auto;">
+			</div>
 		</div>
+
 		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-		  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		  <span class="visually-hidden">Previous</span>
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
 		</button>
+		
 		<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-		  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-		  <span class="visually-hidden">Next</span>
+			<span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
 		</button>
-	  </div>
-	
+	</div>
+
 </header>
 <!-- Section-->
-<section class="py-5" >
+<section class="py-5">
 	<div class="container px-4 px-lg-5 mt-5 ">
 		<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 			<div class="col mb-5">
@@ -46,7 +49,9 @@
 					</div>
 					<!-- Product actions-->
 					<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-						<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+						<div class="text-center">
+							<a class="btn btn-outline-dark mt-auto" href="#">View options</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -70,13 +75,14 @@
 								<div class="bi-star-fill"></div>
 							</div>
 							<!-- Product price-->
-							<span class="text-muted text-decoration-line-through">$20.00</span>
-							$18.00
+							<span class="text-muted text-decoration-line-through">$20.00</span> $18.00
 						</div>
 					</div>
 					<!-- Product actions-->
 					<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-						<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+						<div class="text-center">
+							<a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -92,13 +98,14 @@
 							<!-- Product name-->
 							<h5 class="fw-bolder">Sale Item</h5>
 							<!-- Product price-->
-							<span class="text-muted text-decoration-line-through">$50.00</span>
-							$25.00
+							<span class="text-muted text-decoration-line-through">$50.00</span> $25.00
 						</div>
 					</div>
 					<!-- Product actions-->
 					<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-						<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+						<div class="text-center">
+							<a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -125,7 +132,9 @@
 					</div>
 					<!-- Product actions-->
 					<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-						<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+						<div class="text-center">
+							<a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -141,13 +150,14 @@
 							<!-- Product name-->
 							<h5 class="fw-bolder">Sale Item</h5>
 							<!-- Product price-->
-							<span class="text-muted text-decoration-line-through">$50.00</span>
-							$25.00
+							<span class="text-muted text-decoration-line-through">$50.00</span> $25.00
 						</div>
 					</div>
 					<!-- Product actions-->
 					<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-						<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+						<div class="text-center">
+							<a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -166,7 +176,9 @@
 					</div>
 					<!-- Product actions-->
 					<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-						<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+						<div class="text-center">
+							<a class="btn btn-outline-dark mt-auto" href="#">View options</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -190,13 +202,14 @@
 								<div class="bi-star-fill"></div>
 							</div>
 							<!-- Product price-->
-							<span class="text-muted text-decoration-line-through">$20.00</span>
-							$18.00
+							<span class="text-muted text-decoration-line-through">$20.00</span> $18.00
 						</div>
 					</div>
 					<!-- Product actions-->
 					<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-						<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+						<div class="text-center">
+							<a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -223,7 +236,9 @@
 					</div>
 					<!-- Product actions-->
 					<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-						<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+						<div class="text-center">
+							<a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+						</div>
 					</div>
 				</div>
 			</div>
