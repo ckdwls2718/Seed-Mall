@@ -13,7 +13,7 @@
 		deliveryState,
 		payment, gradePoint, gradeDiscount, ocomment, merchant_uid,
 		desc_odate)
-		values(#{desc_oidx}, #{midx}, #{desc_oTotalPrice}, '0',
+		values(#{desc_oidx}, #{midx}, #{desc_oTotalPrice}, ${deliveryState},
 		#{payment}, #{gradePoint}, #{gradeDiscount}, #{ocomment:VARCHAR}, #{merchant_uid},
 		sysdate)
 	</insert>

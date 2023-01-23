@@ -130,6 +130,19 @@
 
 	</update>
 	
+	<select id="getProdListTop" parameterType="int" resultType="com.product.model.TopProdDTO">
+		select * 
+		from(
+		select row_number() over(order by opty desc) rn, prod.*
+		from (select p.pidx, sum(oqty) opty
+		from product p join orders o on p.pidx = o.pidx 
+		group by p.pidx
+		) prod) 
+		<![CDATA[
+		where rn>0 and rn<#{value}+1
+		]]>
+	</select>
+	
 	
 
 	<sql id="selectProd">

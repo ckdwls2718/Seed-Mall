@@ -1,5 +1,6 @@
 package com.order.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Data;
@@ -33,4 +34,6 @@ public class OrderVO {
 	private String ompost; // 우편번호
 	private String omaddr1, omaddr2; // 주소
 	private java.sql.Date omdate; // 주문날짜
+	
+	List<OrderProductVO> prodList = new ArrayList<>(); //주문에 대한 상품 정보
 }

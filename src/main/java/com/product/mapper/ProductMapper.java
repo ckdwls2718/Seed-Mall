@@ -7,6 +7,7 @@ import com.product.model.PagingVO;
 import com.product.model.ProductForm;
 import com.product.model.ProductImageVO;
 import com.product.model.ProductVO;
+import com.product.model.TopProdDTO;
 
 public interface ProductMapper {
 
@@ -25,6 +26,8 @@ public interface ProductMapper {
 	List<ProductVO> selectByCategory(CategoryVO cvo);
 
 	ProductVO selectByPidx(int pidx);
+	
+	List<TopProdDTO> getProdListTop(int n);
 
 	int insertPimage(ProductImageVO piVo);
 

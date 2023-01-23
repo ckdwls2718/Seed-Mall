@@ -379,11 +379,7 @@ a {
 					<!-- 서치바 -->
 					</span> <input name="findKeyword" class="form-control me-2" type="search" placeholder="검색어를 입력하세요" aria-label="Search" style="width: 25%; margin-left: auto">
 					<button class="btn btn-outline-success" type="submit">검색</button>
-				</form>
-		
-		
-		
-			
+				</form>		
 		</div>
 		<!-- 식물 목록 출력 -->
 		<div class="row">
@@ -403,7 +399,6 @@ a {
 					<div class="tag ${prod.pspec}">${prod.pspec}</div>
 					<div class="title pt-4 pb-1">
 						<h5>${prod.pname}</h5>
-						<span class="badge bg-danger">${prod.percent}%할인</span>
 					</div>
 					<!-- <div class="d-flex align-content-center justify-content-center">
 						별점
@@ -411,11 +406,17 @@ a {
 						<span class="fas fa-star"></span> <span class="fas fa-star"></span>
 						<span class="fas fa-star"></span>
 					</div> -->
-					<div class="price">
+					<div class="price text-center" style="margin: 0">
+						<c:if test="${prod.price ne prod.psaleprice }">
 						<del>
 							<small style="color: gray;"><fmt:formatNumber value="${prod.price}" pattern="###,###,### 원" /></small>
 						</del>
+						<b><fmt:formatNumber value="${prod.psaleprice}" pattern="###,###,### 원" /></b><br>
+						<span class="badge bg-danger">${prod.percent}%할인</span>
+						</c:if>
+						<c:if test="${prod.price eq prod.psaleprice }">
 						<b><fmt:formatNumber value="${prod.psaleprice}" pattern="###,###,### 원" /></b>
+						</c:if>
 					</div>
 				</div>
 			</c:forEach>

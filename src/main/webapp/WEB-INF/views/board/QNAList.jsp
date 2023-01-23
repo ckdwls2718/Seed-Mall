@@ -77,24 +77,21 @@ const insertQNA = function(){
 }
 
 </script>
-<div class="container">
+<div class="container" >
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a class="nav-link" href="#">상품상세</a>
+    <a class="nav-link" href="#1">상품상세</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">상품리뷰</a>
+    <a class="nav-link" href="#2">상품리뷰</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">상품문의</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+    <a class="nav-link active" aria-current="page" href="#3" name="3">상품문의</a>
   </li>
 </ul>
 <br>
 <h4>상품 문의</h4>
-<ul style="font-size: 0.7rem; padding-left: 20px">
+<ul style="font-size: 0.8rem; padding-left: 20px">
 	<li>구매한 상품의 취소/반품은 마이페이지에서 신청 가능합니다.</li>
 	<li>상품문의 및 후기게시판을 통해 취소나 환불, 반품 등은 처리되지 않습니다.</li>
 	<li>가격, 판매자, 교환/환불 및 배송 등 해당 상품 자체와 관련 없는 문의는 고객센터 내 1:1 문의하기를 이용해주세요.</li>

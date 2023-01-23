@@ -52,6 +52,8 @@ a {
 }
 </style>
 
+<div class="d-flex">
+<%@ include file="/WEB-INF/views/admin/adminPageSidebar.jsp"%>
 <div class="container mt-3" style="overflow: auto;">
 	<div class="row">
 		<div class="text-left">
@@ -67,7 +69,7 @@ a {
 
 			<div class="row py-1" style="margin-left: 2px;">
 
-				<div class="col-md-4 text-left " style="padding-top: 12px;">
+				<div class="col-md-3 text-left " style="padding-top: 12px;">
 					<form name="pagingSizeF" action="prodList">
 						&nbsp; <select name="pageSize" class="pageSize"
 							onchange="submit()">
@@ -85,7 +87,7 @@ a {
 					</form>
 				</div>
 				<!-- 검색창  -->
-				<div class="col-md-6" style="width: 620px;">
+				<div class="col-md-6" style="width: 500px;">
 					<form name="searchF" action="prodList" onsubmit="return check()">
 						<!-- ---hidden data------------------------------------------ -->
 						<input type="hidden" name="pageSize" value="${pageSize}">
@@ -99,7 +101,7 @@ a {
 						</label>
 					</form>
 				</div>
-				<div style="display: contents;">
+				<div class="col-md-3" >
 					<button class="btn btn-outline-warning"
 						style="margin: 0px 4px 0px 7px;"
 						onclick="location.href='${myctx}/admin/categoryForm'">카테고리등록</button>
@@ -167,7 +169,7 @@ a {
 			</table>
 		</div>
 	</div>
-
+</div>
 </div>
 
 <%@ include file="/WEB-INF/views/foot.jsp"%>

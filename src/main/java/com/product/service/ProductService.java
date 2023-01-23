@@ -19,4 +19,6 @@ public interface ProductService {
 	List<ProductVO> selectByCategory(CategoryVO cvo);
 	
 	ProductVO selectByIdx(int pidx);
+	
+	List<ProductVO> getProdListTop(int n);
 }

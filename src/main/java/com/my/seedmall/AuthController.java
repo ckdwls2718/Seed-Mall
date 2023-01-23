@@ -32,6 +32,11 @@ public class AuthController {
 //회원가입
 	@Resource(name = "MemberService")
 	private MemberService memberService;
+	
+	@GetMapping("/login")
+	public String loginForm() {
+		return "member/login";
+	}
 
 	@GetMapping("/join")
 	public String joinForm() {

@@ -3,7 +3,7 @@
 <%@ include file="/WEB-INF/views/top.jsp"%>
 <style>
 	a.thumbnail>img:hover{
-		border:5px solid black;
+		border:3px solid black;
 	}
 </style>
 <script>
@@ -32,7 +32,7 @@ const changePrice = function(qty){
 	let totalPrice = qty*price;
 	//alert(price);
 	
-	$('#priceSum').html(totalPrice);
+	$('#priceSum').html(totalPrice.toLocaleString('ko-KR'));
 }
 
 const plusQty = function(){
@@ -120,7 +120,7 @@ const qQtyCheck = function(){
 		</div>
 		<div class="starBox">
 			<!-- <span><img src="/app/layout/web/images/icon_rating.png"></span> -->
-			<span class="point">${avg}
+			<span class="point"><span class="fas fa-star" style="color:orange;"></span>${avg}
 			</span><span>후기 ${review}개</span>
 		</div>
 		<br>
@@ -128,9 +128,16 @@ const qQtyCheck = function(){
 			<tbody>
 				<tr>
 					<th>상품가격</th>
-					<td><del><fmt:formatNumber value="${prod.price}" pattern="###,###,### 원" /></del> <span class="badge bg-danger">${prod.percent}%할인</span>
+					<td>
+						<c:if test="${prod.price ne prod.psaleprice}">
+						<del style="color: gray;"><fmt:formatNumber value="${prod.price}" pattern="###,###,### 원" /></del> <span class="badge bg-danger">${prod.percent}%할인</span>
 						<br>
 						<b><fmt:formatNumber value="${prod.psaleprice}" pattern="###,###,### 원" /></b> <span class="badge bg-success">${prod.ppoint}P적립</span>
+						</c:if>
+						<c:if test="${prod.price eq prod.psaleprice}">
+						<fmt:formatNumber value="${prod.price}" pattern="###,###,### 원" />
+						<b><fmt:formatNumber value="${prod.psaleprice}" pattern="###,###,### 원" /></b> <span class="badge bg-success">${prod.ppoint}P적립</span>
+						</c:if>
 						<!-- 등급할인 추가 --></td>
 				</tr>
 				<tr>
@@ -143,7 +150,7 @@ const qQtyCheck = function(){
 				</tr>
 				<tr>
 					<th>수량선택</th>
-					<td>
+					<td class="btn-group">
 						<input id="prodQty"  name="oqty" type="number" value="1" min="1" max="99" onchange="changePrice(this.value)" autocomplete="off">
 						<button id="plusBtn" type="button" onclick="plusQty()" >▲</button>
 						<button id="minusBtn" type="button" onclick="minusQty()" disabled>▼</button>
@@ -151,11 +158,15 @@ const qQtyCheck = function(){
 				</tr>
 				<tr>
 					<th>옵션</th>
-					<td><input type="checkbox" name="growCheck" value="Y"> 키워주세요</td>
+					<td>
+						<div class="form-check form-switch">
+						  <input class="form-check-input" type="checkbox" id="growCheck" name="growCheck" value="Y">
+						  <label class="form-check-label" for="growCheck">키워주세요</label>
+						</div>
 				</tr>
 				<tr>
 					<th>주문금액</th>
-					<td><div id="total"><span id="priceSum"> ${prod.psaleprice}</span> <span>원</span></div></td>
+					<td><div id="total"><span id="priceSum"><fmt:formatNumber value="${prod.psaleprice}" pattern="###,###,###" /> </span> <span>원</span></div></td>
 				</tr>
 			</tbody>
 		</table>
@@ -175,37 +186,52 @@ const qQtyCheck = function(){
 		</form>
 	</div>
 	
-	<!--right-->
+	
 </div>
-
+<div class="container">
+	<hr size="10px">
+</div>
 <div class="container mb-5" id="content" style="height: 500px">
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">상품상세</a>
+    <a class="nav-link active" aria-current="page" href="#1" name="1">상품상세</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">상품리뷰</a>
+    <a class="nav-link" href="#2" >상품리뷰</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link"  href="#">상품문의</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+    <a class="nav-link"  href="#3">상품문의</a>
   </li>
 </ul>
 <div class="m-3">
-햇빛<i class="fa-solid fa-sun"></i> : ${prod.sun}<br>
-온도<i class="fa-solid fa-temperature-three-quarters"></i> : ${prod.temp}<br>
-토양,물관리<i class="fa-solid fa-droplet"></i> : ${prod.soil}<br>
+<table class="table">
+	<tr>
+		<th width="10%">햇빛 <i class="fa-solid fa-sun"></i></th>
+		<td>${prod.sun}</td>
+	</tr>
+	<tr>
+		<th width="10%">온도 <i class="fa-solid fa-temperature-three-quarters"></i></th>
+		<td>${prod.temp}</td>
+	</tr>
+	<tr>
+		<th width="10%">토양,물관리 <i class="fa-solid fa-droplet"></i></th>
+		<td>${prod.soil}</td>
+	</tr>
+</table>
 </div>
 <div class="m-3">
-	<p>${prod.pcontent}</p>
+	<p class="lead">${prod.pcontent}</p>
 </div>
 
 </div>
 
-
+<div class="container">
+	<hr size="10px">
+</div>
 <c:import url="/review/${prod.pidx}"/>
+<div class="container">
+	<hr size="10px">
+</div>
 <c:import url="/QNA/${prod.pidx}"/>
 
 

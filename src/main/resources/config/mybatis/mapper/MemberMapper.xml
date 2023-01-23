@@ -123,7 +123,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where midx=#{midx}	
 	</select>
 	
-
+	<select id="getDrate" parameterType="Member" resultType="com.user.model.GradeVO">
+		select g.* from member m join grade g on m.grade = g.grade
+		where midx=#{midx}
+	</select>
 
 
 
