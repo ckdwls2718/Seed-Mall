@@ -17,13 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.myplant.model.MyPlantVO;
 import com.myplant.service.MyPlantService;
 import com.order.mapper.OrderMapper;
-import com.order.model.DeliveryStatusVO;
 import com.order.model.OrderProductVO;
 import com.order.model.OrderVO;
 import com.order.service.OrderService;
 import com.product.model.ProductVO;
 import com.product.service.ProductService;
+import com.user.model.GradeVO;
 import com.user.model.MemberVO;
+import com.user.service.MemberService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -43,13 +44,19 @@ public class OrderController {
 
 	@Autowired
 	private MyPlantService myPlantService;
+	
+	@Autowired
+	private MemberService memberService;
 
 	// 결제 전, 결제정보 출력
 	@PostMapping("/order")
 	public String order(Model m, @RequestParam("pidx") int pidxs[], @RequestParam("oqty") int oqtys[],
 			@RequestParam(value = "growCheck", defaultValue = "N") String growCheck, HttpSession session,
 			@ModelAttribute OrderProductVO opvo) {
-
+		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+		
+		GradeVO grade = memberService.getDrate(loginUser);
+		
 		int total = 0, totalPayment = 0;
 		List<ProductVO> orderArr = new ArrayList<>();
 		if (pidxs != null) {
@@ -73,12 +80,17 @@ public class OrderController {
 				// 주문상품 총액(등급할인 전)
 				total += (pvo.getPsaleprice() * opvo.getOqty());
 
-				// 총 주문금액(등급할인 후)
-				totalPayment += orderService.totalPayment();
+				
 			}
 		}
-		total += 4000; // 배송비
-
+		// 총 주문금액(등급할인 후)
+		totalPayment = (int) (total * (1-(grade.getDrate()*0.01)));
+		
+		log.info("totalPayment = "+totalPayment);
+		
+		totalPayment += 4000; // 배송비
+		
+		
 		// List를 세션에 저장해둔다
 		session.setAttribute("orderArr", orderArr);
 
@@ -88,6 +100,8 @@ public class OrderController {
 		m.addAttribute("orderArr", orderArr);
 		m.addAttribute("opvo", opvo);
 		m.addAttribute("growCheck", growCheck);
+		m.addAttribute("grade", grade);
+		
 
 		return "order/orderDetail";
 	}
@@ -111,12 +125,19 @@ public class OrderController {
 			ovo.setDeliveryState("0");
 		}
 		
+		// 세션에서 아까 저장해둔 List를 가져온다
+		List<ProductVO> orderProdArr = (List<ProductVO>) session.getAttribute("orderArr");
+		int totalPoint = 0;
+		for(ProductVO prod : orderProdArr) {
+			totalPoint += prod.getPpoint();
+		}
+		ovo.setGradePoint(totalPoint);
+		
 		// 주문 명세서 + 수령자 DB에 생성
 		int n = orderService.createOrderList(ovo);
 		int n2 = orderMapper.createOrderMember(ovo); // Mapper에서는 명세서와 수령자를 따로 insert해줬다
 
-		// 세션에서 아까 저장해둔 List를 가져온다
-		List<ProductVO> orderProdArr = (List<ProductVO>) session.getAttribute("orderArr");
+		
 
 		// 주문개요 DB에 생성
 		if (orderProdArr != null) {

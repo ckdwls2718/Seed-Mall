@@ -199,9 +199,9 @@
 		<input type="hidden" name="oqty" value="${opvo.oqty}"> <input
 			type="hidden" name="pidx" value="${opvo.pidx}"> <input
 			type="hidden" name="osalePrice" value="${opvo.osalePrice}"> <input
-			type="hidden" name="desc_oTotalPrice" value="${total}">
+			type="hidden" name="desc_oTotalPrice" value="${totalPayment}">
 		<input type="hidden" name="merchant_uid" value="">
-			<input type="hidden" name="growCheck" value="${growCheck}">
+		<input type="hidden" name="growCheck" value="${growCheck}">
 		<table class="table">
 			<tr>
 				<td width="20%" class="m1">받는분</td>
@@ -267,26 +267,13 @@
 			</table>
 		</div>
 
-		<div style="height: 350px; overflow: auto;">
-			<h1 class="text-center mt-5 mb-5">등급할인 정보</h1>
-			<table class="table">
-				<tr class="info text-left">
-					<th>어쩌구님의 회원 등급 :</th>
-				</tr>
-				<tr>
-					<td width="50%" class="m1">할인율</td>
-				</tr>
-				<tr>
-					<td width="50%" class="m2">할인된가격</td>
-				</tr>
-			</table>
-		</div>
-
-		<div style="height: 400px; overflow: auto;">
+		<div style="height: 300px; overflow: auto;">
 			<h1 class="text-center mt-5 mb-5">결제수단 선택</h1>
-			<input type="radio" name="payment" value="1" checked>신용카드<br>
-			<br> <input type="radio" name="payment" value="2">무통장입금<br>
-			<br> <input type="radio" name="payment" value="3">휴대폰결제
+			<ul class="list-group list-group-horizontal">
+			  <li class="list-group-item"><input type="radio" name="payment" value="1" checked>신용카드</li>
+			  <li class="list-group-item"><input type="radio" name="payment" value="2">무통장입금</li>
+			  <li class="list-group-item"><input type="radio" name="payment" value="3">휴대폰결제</li>
+			</ul> 
 		</div>
 
 		<div style="height: 400px; overflow: auto;">
@@ -294,13 +281,18 @@
 			<table class="table">
 				<tr>
 					<td width="20%" class="m1">총 상품금액</td>
-					<td width="80%" class="m1"><fmt:formatNumber value="${total-4000}"
+					<td width="80%" class="m1"><fmt:formatNumber value="${total}"
 							pattern="###,###" /> 원</td>
 				</tr>
 				<tr>
-					<td width="20%" class="m2">할인금액</td>
-					<td width="80%" class="m2"><fmt:formatNumber value=""
-							pattern="###,###" />원</td>
+					<td width="20%" class="m2">등급 할인금액</td>
+					<td width="80%" class="m2" style="color: red"><fmt:formatNumber value="${totalPayment-4000-total}"
+							pattern="###,###" /> 원</td>
+				</tr>
+				<tr>
+					<td width="20%" class="m2">등급 할인된 가격</td>
+					<td width="80%" class="m2"><fmt:formatNumber value="${totalPayment-4000}"
+							pattern="###,###" /> 원</td>
 				</tr>
 				<tr>
 					<td width="20%" class="m2">배송비</td>
@@ -309,8 +301,8 @@
 				</tr>
 				<tr>
 					<td width="20%" class="m2">최종 결제금액</td>
-					<td width="80%" class="m2"><fmt:formatNumber value="${total}"
-							pattern="###,###" />원</td>
+					<td width="80%" class="m2"><b><fmt:formatNumber value="${totalPayment}"
+							pattern="###,###" />원</b></td>
 				</tr>
 			</table>
 		</div>

@@ -154,7 +154,7 @@ const orderCancellation = function(oidx) {
 				<td><a href="${myctx}/prod/${product.pidx}" class="btn btn-default">${product.pname}</a></td>
 				<td><fmt:formatNumber pattern="###,###,###" value="${product.osalePrice}"/>원</td>
 				<td>${product.oqty}</td>
-				<td><fmt:formatNumber pattern="###,###,###" value="${product.opoint}"/>p</td>
+				<td><fmt:formatNumber pattern="###,###,###" value="${product.opoint}"/>P</td>
 				<td><fmt:formatNumber pattern="###,###,###" value="${product.osalePrice*product.oqty}"/>원</td>
 				<c:if test="${order.deliveryState eq 4}">
 				<td><button type="button" onclick="reviewForm('${product.oidx}')">리뷰 작성</button></td>
@@ -164,7 +164,7 @@ const orderCancellation = function(oidx) {
 			<!-- 결제, 배송비, 총가격, 등등 상세정보 출력 -->
 			<tr>
 				<th colspan="3">합계 포인트</th>
-				<td>${order.gradePoint}</td>
+				<td><fmt:formatNumber pattern="###,###,###" value="${order.gradePoint}"/>P</td>
 				<td></td>
 			</tr>
 			<tr>

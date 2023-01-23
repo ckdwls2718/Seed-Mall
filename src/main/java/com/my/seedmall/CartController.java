@@ -26,7 +26,9 @@ import com.product.model.CartVO;
 import com.product.model.ProductVO;
 import com.product.service.CartService;
 import com.product.service.ProductService;
+import com.user.model.GradeVO;
 import com.user.model.MemberVO;
+import com.user.service.MemberService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -49,6 +51,9 @@ public class CartController {
 	
 	@Autowired
 	MyPlantService mpService;
+	
+	@Autowired
+	MemberService memberService;
 
 	@GetMapping("/cart")
 	public String cartList(Model m, HttpServletRequest req) {
@@ -128,9 +133,8 @@ public class CartController {
 	@PostMapping("/cartOrder")
 	public String order(Model m, @RequestParam("cidx") int[] cidxs, @RequestParam(value="growCheck", defaultValue="N") String growCheck, HttpSession session) {
 		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
-		if (loginUser == null) {
-			return "redirect:index";
-		}
+		
+		GradeVO grade = memberService.getDrate(loginUser);
 		
 		log.info("growCheck = "+growCheck);
 
@@ -149,12 +153,14 @@ public class CartController {
 
 			cart.setCtotalprice(prodTotal);
 
-			totalPayment += prodTotal;
+			total += prodTotal;
 		}
+		
+		
+		// 총 주문금액(등급할인 후)
+		totalPayment = (int) (total * (1-(grade.getDrate()*0.01)));
 
-		total = totalPayment;
-
-		total += 4000; // 배송비
+		totalPayment += 4000; // 배송비
 
 		// List를 세션에 저장해둔다
 		session.setAttribute("cartArr", cartArr);
@@ -163,6 +169,7 @@ public class CartController {
 		m.addAttribute("totalPayment", totalPayment);
 		m.addAttribute("cartArr", cartArr);
 		m.addAttribute("growCheck", growCheck);
+		m.addAttribute("grade", grade);
 
 		return "cart/cartOrderDetail";
 	}
@@ -182,13 +189,18 @@ public class CartController {
 		} else {
 			order.setDeliveryState("0");
 		}
-
+		
+		// 세션에서 아까 저장해둔 List를 가져온다
+		List<CartVO> cartArr = (List<CartVO>) session.getAttribute("cartArr");
+		int totalPoint = 0;
+		for(CartVO cart : cartArr) {
+			totalPoint += cart.getProduct().getPpoint();
+		}
+		order.setGradePoint(totalPoint);
+		
 		// 주문 명세서 + 수령자 DB에 생성
 		orderService.createOrderList(order);
 		orderMapper.createOrderMember(order); // Mapper에서는 명세서와 수령자를 따로 insert해줬다.
-
-		// 세션에서 아까 저장해둔 List를 가져온다
-		List<CartVO> cartArr = (List<CartVO>) session.getAttribute("cartArr");
 
 		// 주문개요 DB에 생성
 		if (cartArr != null) {

@@ -51,8 +51,12 @@ public interface MemberService {
 	
 	//포인트 적립
 	int RewardMileage(int midx,int point);
+	
 	//등급 업데이트
 	int updateGrade(MemberVO mvo);
+	
+	//등급 할인률 가져오기
+	GradeVO getDrate(MemberVO mvo);
 
 	
 
