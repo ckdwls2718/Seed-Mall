@@ -128,7 +128,7 @@ const LikeC = function(){
 
  
 </style>
-<div class="container" style="height: 300px">
+<div class="container" style="min-height: 300px">
 <ul class="nav nav-tabs">
   <li class="nav-item">
     <a class="nav-link" href="#1">상품상세</a>

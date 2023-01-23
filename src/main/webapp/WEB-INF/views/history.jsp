@@ -14,13 +14,13 @@
     <meta name="author" content="">
 
     <!-- Custom fonts for this template-->
-    <link href="resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="${myctx}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="resources/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="${myctx}/resources/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 <style>
@@ -81,9 +81,9 @@ var downoqtyList = downoqty.replace('[','').replace(']','').split(',');
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="${myctx}/history">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>전체보기</span></a>
+                    <span>히스토리</span></a>
             </li>
 
             <!-- Divider -->
@@ -91,21 +91,22 @@ var downoqtyList = downoqty.replace('[','').replace(']','').split(',');
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                기능
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
+                    <i class="fa-solid fa-store"></i>
+                    <span>주문관리</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
+                        <h6 class="collapse-header">주문 상태</h6>
+                        <a class="collapse-item" href="${myctx}/admin/orderManagement">상품 준비</a>
+                        <a class="collapse-item" href="cards.html">배송 중</a>
+                        <a class="collapse-item" href="${myctx}/admin/refundManagement">환불 내역</a>
                     </div>
                 </div>
             </li>
@@ -114,19 +115,26 @@ var downoqtyList = downoqty.replace('[','').replace(']','').split(',');
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
+                    <i class="fa-solid fa-seedling"></i>
+                    <span>식물 관리</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
+                        <a class="collapse-item" href="${myctx}/admin/plantManagement">신규 등록</a>
                         <a class="collapse-item" href="utilities-border.html">Borders</a>
                         <a class="collapse-item" href="utilities-animation.html">Animations</a>
                         <a class="collapse-item" href="utilities-other.html">Other</a>
                     </div>
                 </div>
+            </li>
+            
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="${myctx}/admin/qnaManagement">
+                    <i class="fa-solid fa-q"></i>
+                    <span>QNA 관리</span></a>
             </li>
 
             <!-- Divider -->
@@ -134,7 +142,7 @@ var downoqtyList = downoqty.replace('[','').replace(']','').split(',');
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Addons
+                등록
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -142,34 +150,21 @@ var downoqtyList = downoqty.replace('[','').replace(']','').split(',');
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
+                    <span>상품 관리</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
+                        <a class="collapse-item" href="${myctx}/admin/prodForm">상품 등록</a>
+                        <a class="collapse-item" href="${myctx}/admin/prodList">상품 목록</a>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
+                <a class="nav-link" href="${myctx}/admin/memberList">
+                    <i class="fa-solid fa-users"></i>
+                    <span>회원 목록</span></a>
             </li>
 
             <!-- Divider -->
@@ -577,12 +572,12 @@ var downoqtyList = downoqty.replace('[','').replace(']','').split(',');
                         </div>
                     </div>
                     
-                    <div class="row">
+                    <!-- <div class="row">
 
-                        <!-- Content Column -->
+                        Content Column
                         <div class="col-lg-6 mb-4">
 
-                            <!-- Project Card Example -->
+                            Project Card Example
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
@@ -621,7 +616,7 @@ var downoqtyList = downoqty.replace('[','').replace(']','').split(',');
                                 </div>
                             </div>
 
-                            <!-- Color System -->
+                            Color System
                             <div class="row">
                                 <div class="col-lg-6 mb-4">
                                     <div class="card bg-primary text-white shadow">
@@ -693,7 +688,7 @@ var downoqtyList = downoqty.replace('[','').replace(']','').split(',');
 
                         <div class="col-lg-6 mb-4">
 
-                            <!-- Illustrations -->
+                            Illustrations
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
@@ -712,8 +707,8 @@ var downoqtyList = downoqty.replace('[','').replace(']','').split(',');
                                 </div>
                             </div>
 
-                            <!-- Approach -->
-                            <!-- <div class="card shadow mb-4">
+                            Approach
+                            <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
                                 </div>
@@ -724,10 +719,10 @@ var downoqtyList = downoqty.replace('[','').replace(']','').split(',');
                                     <p class="mb-0">Before working with this theme, you should become familiar with the
                                         Bootstrap framework, especially the utility classes.</p>
                                 </div>
-                            </div> -->
+                            </div>
 
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
                 <!-- /.container-fluid -->
@@ -777,21 +772,21 @@ var downoqtyList = downoqty.replace('[','').replace(']','').split(',');
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="resources/vendor/jquery/jquery.min.js"></script>
-    <script src="resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="${myctx}/resources/vendor/jquery/jquery.min.js"></script>
+    <script src="${myctx}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="${myctx}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="resources/js/sb-admin-2.min.js"></script>
+    <script src="${myctx}/resources/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="resources/vendor/chart.js/Chart.min.js"></script>
+    <script src="${myctx}/resources/vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="resources/js/demo/chart-area-demo.js"></script>
-    <script src="resources/js/demo/chart-pie-demo.js"></script>
+    <script src="${myctx}/resources/js/demo/chart-area-demo.js"></script>
+    <script src="${myctx}/resources/js/demo/chart-pie-demo.js"></script>
 
 </body>
 </html>
