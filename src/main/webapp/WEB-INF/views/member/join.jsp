@@ -7,10 +7,11 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <style>
-h3 { /* 상단 회원가입 표시*/
+h3 { /* 상단 로그인 표시*/
 	margin: 40px 0 60px;
 	font-weight: bolder;
-	color: #2B7539;
+	/* color: #2B7539; */
+	color: #39b559;
 	font-size: calc(1.325rem + .9vw);
 }
 span {/* 설명 크기 */
@@ -49,7 +50,7 @@ select{
 	border: 1px solid #ced4da;
 }
 #Mhp1, #Mhp2, #Mhp3 { /* 연락처 */
-	width: 19.5%;
+	width: 20.3%;
 	height: 35px;
 	border-radius: 5px;
 	border: 1px solid #ced4da;
@@ -87,6 +88,9 @@ select{
 }
 label{
 padding-bottom: 12px;
+}
+.ck{
+	color: #0000008c;
 }
 </style>
 

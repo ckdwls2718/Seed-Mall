@@ -10,7 +10,7 @@ h2 {
 	font-size: calc(1.325rem + .9vw);
 	margin: 40px 40px 40px 0px;
 	font-family: 'Noto Sans KR', sans-serif;
-	font-weight: 700;
+	font-weight: bold;
 	color: #39b559;
 }
 .FAQ{
@@ -38,7 +38,7 @@ h2 {
 	text-align: center;
 	margin: 0;
 	font-size: 15px;
-	font-weight: bold;
+	font-weight: 400;
 }
 
 .title {
@@ -46,7 +46,7 @@ h2 {
 	flex: 1;
 	margin: 0;
 	font-size: 15px;
-	font-weight: bold;
+	font-weight: 400;
 }
 /* 헤더 end */
 /* question */
@@ -64,7 +64,7 @@ h2 {
 	text-align: center;
 	margin: 0;
 	font-size: 14px;
-	font-weight: bold;
+	font-weight: 400;
 }
 
 .question {
@@ -72,7 +72,7 @@ h2 {
 	flex: 1;
 	margin: 0;
 	font-size: 14px;
-	font-weight: bold;
+	font-weight: 400;
 }
 
 .a_on {
@@ -104,14 +104,14 @@ h2 {
 	vertical-align: middle;
 	margin: 0;
 	font-size: 14px;
-	font-weight: bold;
+	font-weight: 400;
 }
 
 .a_off.question { /* 내용 */
 	flex: 1;
 	margin: 0;
 	font-size: 14px;
-	font-weight: bold;
+	font-weight: 400;
 }
 /* answer end */
 .menu{
@@ -119,13 +119,13 @@ h2 {
 	color: #e0e0e0;
 	display: inline-block;
 	margin: 30px 7px 20px 30px;
-	font-weight: 900;
+	font-weight: 400;
 	/*padding: top right bottom left*/
 	cursor: pointer;
 	}
 .clicked_menu{ /*클릭 시 적용되는 style 속성*/
 	color: black;
-	font-weight: 900;
+	font-weight: 500;
 	}
 </style>
 <script>
