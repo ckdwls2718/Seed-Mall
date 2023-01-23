@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/views/top.jsp"%>
 <!-- <link href='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css' rel='stylesheet'> -->
@@ -99,6 +98,12 @@
 	border-color: #adb5bd;
 }
 
+.list-group-item {
+	position: relative;
+	display: block;
+	padding: 0.3rem .5rem;
+}
+
 .fw-800 {
 	font-weight: 800;
 }
@@ -150,6 +155,7 @@ div#upCategory button {
 .tip:hover .tiptext {
 	visibility: visible;
 	opacity: 1; /* hover 이벤트 발생시 영역을 보여줌 */
+	color: #d1d1d1;
 }
 
 .tip .tiptext::after {
@@ -189,88 +195,68 @@ a {
 	text-decoration: none;
 	color: #404040;
 }
-/* #menu1{
-width: 500px;
-height: 50px;
-outline: 1px dotted red;
-} */
-/* @media ( min-width : 1400px) {
-	.main {
-		max-width: 1224;
-		margin-left: 24%;
-	}
-}
- */
+
 .wrap { /*  전체 메인메뉴 영역 */
 	background: #98e0ad;
 	height: 50px;
-	/* margin: 0 auto; */
-}
-
-.main { /* 메인 메뉴영역 넓이  */
-/* background: #98e0ad; */
-
-height: 50px;
-	/* max-width: 600px; */
-	margin-left: 0;
-	margin-right: 0;
 }
 
 .menu1>div { /*  메인메뉴 사이즈 초급, 중급, 고급 */
 	float: left;
-	width: 150px;
-	
-	margin: 0 20px;
+	width: 130px;
 	height: 50px;
 	line-height: 50px;
 	text-align: center;
-	/* background: #98e0ad; */
 	position: relative;
+	font-weight: 600;
+}
+
+.menu1>div:first-child { /*  메인메뉴 사이즈 초급, 중급, 고급 */
+	margin-left: 7.6em;
 }
 
 .menu1>div:hover .sub {
 	display: block;
 	color: black;
-	font-weight: bold;
+	font-weight: 600;
 }
 
 .menu1>div a { /*  메인메뉴 */
 	display: block;
-	font-weight: bold;
+	font-weight: 500;
+	font-size: 15px;
+	color: #0000008c;
 }
 
 .menu1>div a:hover { /*  메인메뉴 오버 백그라운드컬러 */
 	background: #e2e4e6;
 	color: #1e1e25;
-	font-weight: bold;
-	co
+	font-weight: 600;
+	font-size: 16px;
 }
 
-.menu1 .sub { /* 드롭박스 사이즈 카테고리*/ 
+.menu1 .sub { /* 드롭박스 사이즈 카테고리*/
 	position: absolute;
 	top: 50px;
-	left: 0;
-	margin: 0;
-	width: 150px;
-	font-size: 12px;
+	width: 130px;
 	display: none;
 	z-index: 1;
-	
 }
 
 .menu1 .sub div { /* 서브메뉴 배경 */
-	background: white;
+	background: none;
 	border: 0;
 }
-.menu1 .sub div a{ /* 서브메뉴 배경 */
+
+.menu1 .sub div a { /* 서브메뉴 배경 */
 	background: #f2f2f5;
 	font-size: 12px;
-	
 }
 
 .menu1 .sub div a:hover { /* 서브메뉴 오버 백그라운드컬러  */
 	background: #93939f;
 	font-size: 12px;
+	font-weight: 700;
 }
 </style>
 
@@ -306,86 +292,39 @@ height: 50px;
 	});
 </script>
 
-<body oncontextmenu='return false' class='snippet-body bg-white'>
-	<div class="container bg-white">
+<body oncontextmenu='return false' class='snippet-body'>
+	<div class="container">
 		<div class="main">
-		<!-- 전체 메인메뉴 영역 -->
-		<div class="menu1" style=""> 
-			<!-- 메인 메뉴영역 넓이 -->
-			<c:forEach var="k" begin="1" end="4">
-				<!--  -->
-				<c:forEach var="upcategory" items="${upcategory}">
-					<!--  -->
-					<c:if test="${upcategory.upCg_code eq k }">
-						<div class="menu2"> 
-							<a href="#">${upcategory.upCg_name}</a>
-							<div class="sub">
-								<!-- 드롭박스  -->
-								<div
-									class="list-group-item <c:if test='${paging.upcg eq k and empty paging.downcg }'>active</c:if>">
-									<a class="btn btn-default" href="${myctx}/prod?upcg=${k}">전체보기</a>
-								</div>
-								<c:forEach var="downcategory" items="${downcategory}">
-									<c:if test="${downcategory.upCg_code eq k }">
-										<div
-											class="list-group-item <c:if test='${downcategory.upCg_code eq paging.upcg and downcategory.downCg_code eq paging.downcg}'>active</c:if>">
-											<a class="btn btn-default"
-												href="${myctx}/prod?upcg=${downcategory.upCg_code}&downcg=${downcategory.downCg_code}">
-												${downcategory.downCg_name} </a>
-										</div>
-									</c:if>
-								</c:forEach>
+			<!-- 전체 메인메뉴 영역 -->
+			<div class="menu1" style="">
+				<!-- 메인 메뉴영역 넓이 -->
+				<c:forEach var="k" begin="1" end="4">
+					<c:forEach var="upcategory" items="${upcategory}">
+						<c:if test="${upcategory.upCg_code eq k }">
+							<div class="menu2">
+								<a href="#">${upcategory.upCg_name}</a>
+								<div class="sub">
+									<!-- 드롭박스  -->
+									<div class="list-group-item <c:if test='${paging.upcg eq k and empty paging.downcg }'>active</c:if>">
+										<a class="btn btn-default" href="${myctx}/prod?upcg=${k}">전체보기</a>
+									</div>
+									<c:forEach var="downcategory" items="${downcategory}">
+										<c:if test="${downcategory.upCg_code eq k }">
+											<div class="list-group-item <c:if test='${downcategory.upCg_code eq paging.upcg and downcategory.downCg_code eq paging.downcg}'>active</c:if>">
+												<a class="btn btn-default" href="${myctx}/prod?upcg=${downcategory.upCg_code}&downcg=${downcategory.downCg_code}"> ${downcategory.downCg_name} </a>
+											</div>
+										</c:if>
+									</c:forEach>
 
+								</div>
 							</div>
-						</div>
-					</c:if>
+						</c:if>
+					</c:forEach>
 				</c:forEach>
-			</c:forEach>
-		</div>
-	</div>
-		<div id="upCategory" class='container row'>
-			<!-- 검색 결과 수정전-------------->
-			<div style="text-align: center; font-size: 25px;">
-				<c:if test="${not empty paging.findKeyword}">
-					<b>${paging.findKeyword}</b> 로 검색한 결과
-				</c:if>
 			</div>
-			<!-- ----------------------->
 		</div>
-		<br>
-		<div class="row">
-			<c:forEach var="k" begin="1" end="4">
-				<div class="col">
-					<div class="collapse multi-collapse" id="multiCollapseExample1">
-						<div class="card card-body">
-							<ul class="list-group list-group-flush">
-								<!-- db에서 카테고리 목록 가져오기  -->
-								<c:forEach var="upcategory" items="${upcategory}">
-									<c:if test="${upcategory.upCg_code eq k }">
-										<li class="list-group-item list-group-item-success">${upcategory.upCg_name}</li>
-									</c:if>
-								</c:forEach>
-								<li
-									class="list-group-item <c:if test='${paging.upcg eq k and empty paging.downcg }'>active</c:if>">
-									<a class="btn btn-default" href="${myctx}/prod?upcg=${k}">전체보기</a>
-								</li>
-								<c:forEach var="downcategory" items="${downcategory}">
-									<c:if test="${downcategory.upCg_code eq k }">
-										<li
-											class="list-group-item <c:if test='${downcategory.upCg_code eq paging.upcg and downcategory.downCg_code eq paging.downcg}'>active</c:if>">
-											<a class="btn btn-default"
-											href="${myctx}/prod?upcg=${downcategory.upCg_code}&downcg=${downcategory.downCg_code}">
-												${downcategory.downCg_name} </a>
-										</li>
-									</c:if>
-								</c:forEach>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</c:forEach>
-		</div>
-		<!-- 카테고리 -->
+		<div style="height: 50px; padding-top: 6em;"></div>
+		<!-- 메뉴 카테고리 -->
 		<div>
 			<c:forEach var="upcategory" items="${upcategory}">
 				<c:if test='${upcategory.upCg_code eq paging.upcg}'>
@@ -393,48 +332,54 @@ height: 50px;
 				</c:if>
 			</c:forEach>
 			<c:forEach var="downcategory" items="${downcategory}">
-				<c:if
-					test='${downcategory.upCg_code eq paging.upcg and downcategory.downCg_code eq paging.downcg}'>
-					<h2
-						style="text-align: center; color: #39b559; padding: 0px 0px 80px;">${downcategory.downCg_name}</h2>
+				<c:if test='${downcategory.upCg_code eq paging.upcg and downcategory.downCg_code eq paging.downcg}'>
+					<h2 style="text-align: center; color: #39b559; padding: 0px 0px 80px;">${downcategory.downCg_name}</h2>
 				</c:if>
 			</c:forEach>
 		</div>
+		<div id="upCategory" class='container row'>
+			<!-- 검색 결과 출력-->
+			<div style="text-align: center; font-size: 25px;">
+				<c:if test="${not empty paging.findKeyword}">
+					<b>${paging.findKeyword}</b> 로 검색한 결과
+				</c:if>
+			</div>
+		</div>
+		<br>
+		<div style="height: 50px;"></div>
 		<!-- 설명 -->
 		<div style="margin-bottom: 5px;">
 			<c:forEach var="cg_detail" items="${cgdetail}">
 				<c:if test='${cg_detail.downCg_code eq paging.downcg}'>
-					<div class="tip"
-						style="text-align: right; display: inline-block; float: right; font-weight: bold;">${cg_detail.comment_name}
+					<div class="tip" style="text-align: right; display: inline-block; float: right; font-weight: 500; color: #00000082">${cg_detail.comment_name}
 						<span class="tiptext tip-bottom">${cg_detail.comments}</span>
 					</div>
 				</c:if>
 			</c:forEach>
 		</div>
-		<!-- 정렬 방식 -->
-		<div class="row mt-3 ml-3 mb-3 mr-0" style="display: inline;">
-			<form name="sortF" id="sortF" style="padding: 0; margin: 6px 0px;">
-				<input type="hidden" name="findKeyword"> <input
-					type="hidden" name="upcg"> <input type="hidden"
-					name="downcg"> <select class="form-select"
-					style="width: 15%; margin-left: auto;" name="sort"
-					onchange="changeSort(this.value)">
+		
+			<!-- 분류 카테고리  -->
+			<div class="row">
+				<form name="sortF" id="sortF" style="padding: 0; margin: 6px 0px; float: right;">
+				<input type="hidden" name="findKeyword"> <input type="hidden" name="upcg"> <input type="hidden" name="downcg">
+				<select class="form-select" style="width: 124px; margin-left: auto;" name="sort" onchange="changeSort(this.value)">
 					<option value="1" <c:if test="${paging.sort eq 1}">selected</c:if>>최신순</option>
 					<option value="2" <c:if test="${paging.sort eq 2}">selected</c:if>>추천순</option>
 					<option value="3" <c:if test="${paging.sort eq 3}">selected</c:if>>높은가격순</option>
 					<option value="4" <c:if test="${paging.sort eq 4}">selected</c:if>>낮은가격순</option>
 				</select>
 			</form>
-		</div>
-		<div class="row mb-3">
-			<!-- 검색창 -->
-			<form name="searchF" id="searchF" class="d-flex" role="search">
-				<span><b>${paging.totalCount}</b>개의 상품</span> <input
-					name="findKeyword" class="form-control me-2" type="search"
-					placeholder="검색어를 입력하세요" aria-label="Search"
-					style="width: 25%; margin-left: auto">
-				<button class="btn btn-outline-success" type="submit">검색</button>
-			</form>
+			</div>
+		<!-- 정렬 방식 -->
+		<div class="row ml-3 mb-3 mr-0" style="display: inline;">
+				<form name="searchF" id="searchF" class="d-flex" role="search">
+					<!-- 상품 카운팅 -->
+					<span style="margin-left: 2em;">총 <b>${paging.totalCount}</b>개의 상품
+					
+					<!-- 서치바 -->
+					</span> <input name="findKeyword" class="form-control me-2" type="search" placeholder="검색어를 입력하세요" aria-label="Search" style="width: 25%; margin-left: auto">
+					<button class="btn btn-outline-success" type="submit">검색</button>
+				</form>		
 		</div>
 		<!-- 식물 목록 출력 -->
 		<div class="row">
@@ -442,14 +387,10 @@ height: 50px;
 				<h1>상품이 없습니다</h1>
 			</c:if>
 			<c:forEach var="prod" items="${prodArr}">
-				<div
-					class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">
+				<div class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">
 					<div class="product">
-						<a href="prod/${prod.pidx}"><img
-							src="${myctx}/resources/product_images/${prod.pimageList[0].pimage}"
-							alt=""> </a>
-						<ul
-							class="d-flex align-items-center justify-content-center list-unstyled icons">
+						<a href="prod/${prod.pidx}"><img src="${myctx}/resources/product_images/${prod.pimageList[0].pimage}" alt=""> </a>
+						<ul class="d-flex align-items-center justify-content-center list-unstyled icons">
 							<li class="icon"><span class="fas fa-expand-arrows-alt"></span></li>
 							<li class="icon mx-3"><span class="far fa-heart"></span></li>
 							<li class="icon"><span class="fas fa-shopping-bag"></span></li>
