@@ -57,6 +57,7 @@ const updateNick = function(){
 		</table>
 		</form>
 		</div>
+		<hr style="color: green;" size="10">
 		<div id="image_history" class="text-center">
 		<h1>식물 히스토리</h1>
 		<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" style="width:50%;margin:auto">

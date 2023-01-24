@@ -72,8 +72,9 @@ function setThumbnail(event) {
 	<button class="btn btn-outline-info" type="reset">다시 쓰기</button>
 	</div>
 </form>
-
-식물 기록
+<hr color="green">
+<div class="text-center">
+<h2>식물 기록</h2>
 <div id="carouselExampleDark" class="carousel slide" data-bs-ride="carousel" style="width:50%">
   <div class="carousel-indicators">
   <c:forEach var="image" items="${plant.plantImageList}" varStatus="status">
@@ -98,6 +99,7 @@ function setThumbnail(event) {
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
+</div>
 </div>
 </div>
 

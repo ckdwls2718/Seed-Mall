@@ -43,6 +43,12 @@
           나의 QNA
         </a>
       </li>
+      <li>
+        <a href="${myctx}/user/mypage/quit" class="nav-link link-dark">
+          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+          회원 탈퇴
+        </a>
+      </li>
     </ul>
     <hr>
   </div>

@@ -7,9 +7,8 @@
 
 <%@ include file="/WEB-INF/views/top.jsp"%>
 <style>
-a{
-	text-decoration: none;
-	color: black;
+td{
+	vertical-align: middle;
 }
 </style>
 <div class="container mt-3" style="height: 600px; overflow: auto;">
@@ -42,7 +41,7 @@ a{
 							<c:out value="${board.cidx}" />
 						</td>
 						<td>
-							<a href="${myctx}/boardGet?cidx=${board.cidx}">${board.ctitle}</a>
+							<a class="btn btn-default" href="${myctx}/boardGet?cidx=${board.cidx}">${board.ctitle}</a>
 						</td>
 						<td>
 							<c:out value="${board.email}" />

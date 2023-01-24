@@ -15,19 +15,6 @@ const detailPlant = function(pidx){
 <%@ include file="/WEB-INF/views/admin/adminPageSidebar.jsp"%>
 
 <main class="m-3" style="width:70%">
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">나의 소중한 식물</h1>
-        <p class="lead text-muted">식물의 상태를 확인해보세요</p>
-        <p>
-          <a href="#" class="btn btn-primary my-2">쇼핑하러 가기</a>
-          <a href="#" class="btn btn-secondary my-2">장바구니 가기</a>
-        </p>
-      </div>
-    </div>
-  </section>
-
   <div class="album py-5 bg-light">
     <div class="container">
     	
