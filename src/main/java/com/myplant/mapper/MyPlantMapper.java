@@ -29,6 +29,9 @@ public interface MyPlantMapper {
 	// (관리자) 주문한 모든 키워주세요 식물 출력
 	List<MyPlantVO> selectAllMyPlant(PagingVO page);
 	
+	//
+	int getMyplantTotal(PagingVO page);
+	
 	//db에 식물 이미지 저장
 	int insertImage(PlantImageVO piVo);
 	

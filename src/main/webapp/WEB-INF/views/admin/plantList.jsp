@@ -14,7 +14,27 @@ const detailPlant = function(pidx){
 <div class="d-flex">
 <%@ include file="/WEB-INF/views/admin/adminPageSidebar.jsp"%>
 
-<main class="m-3" style="width:70%">
+<main class="container m-3" style="width:70%">
+	<div>
+		<form>
+		<div class="form-row">
+			<div class="col-8">
+			<input class="form-control" type="text" name="findKeyword" placeholder="주문자 이메일을 입력해주세요" value="${page.findKeyword}">
+			</div>
+			<div class="col-2">
+			<button class="btn btn-info">검색</button>
+			</div>
+			<div class="col-2">
+			<select class="form-control" name="findType" style="width:150px" onchange="submit()">
+				<option value="1" <c:if test="${page.findType eq 1}">selected</c:if>>최신순</option>
+				<option value="2" <c:if test="${page.findType eq 2}">selected</c:if>>오래된순</option>
+				<option value="3" <c:if test="${page.findType eq 3}">selected</c:if>>성장률 높은순</option>
+				<option value="4" <c:if test="${page.findType eq 4}">selected</c:if>>성장률 낮은순</option>
+			</select>
+			</div>
+		</div>
+		</form>
+	</div>
   <div class="album py-5 bg-light">
     <div class="container">
     	
@@ -48,8 +68,12 @@ const detailPlant = function(pidx){
       </div>
     </div>
   </div>
+    <div class="mt-2">
+	 ${pageNavi}
+	</div>
 
 </main>
+
 </div>
 <form id="pdF" action="plantManagementDetail" method="post"> 
       <input type="hidden" name="pidx" id="pidx">
