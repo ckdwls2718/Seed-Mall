@@ -127,6 +127,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select g.* from member m join grade g on m.grade = g.grade
 		where midx=#{midx}
 	</select>
+	
+	<select id="getNextGrade" parameterType="Member" resultType="com.user.model.GradeVO">
+		select * from grade 
+		where gpoint>${mileage} and rownum=1 
+		order by gpoint asc
+	</select>
 
 
 

@@ -81,5 +81,12 @@ public class ProductServiceImpl implements ProductService {
 		}
 		return prodArr;
 	}
-
+	
+	@Override
+	public ProductVO selectByOidx(int oidx) {
+		ProductVO prod = productMapper.selectByOidx(oidx);
+		List<ProductImageVO> prodImageArr = productMapper.getProdImages(prod.getPidx());
+		prod.setPimageList(prodImageArr);
+		return prod;
+	}
 }

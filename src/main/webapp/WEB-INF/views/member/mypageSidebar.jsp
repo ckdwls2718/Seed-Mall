@@ -26,7 +26,7 @@
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link link-dark">
+        <a href="${myctx}/user/mypage/reviewList" class="nav-link link-dark">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
           내가 작성한 리뷰
         </a>

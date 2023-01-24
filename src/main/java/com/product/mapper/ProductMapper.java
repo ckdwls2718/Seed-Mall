@@ -42,5 +42,8 @@ public interface ProductMapper {
 	int insertDowncg(CategoryVO cvo);
 
 	int addDetail(CategoryVO cvo);
+	
+	//주문 상품 번호를 이용해서 상품 가져오기
+	ProductVO selectByOidx(int oidx);
 
 }
