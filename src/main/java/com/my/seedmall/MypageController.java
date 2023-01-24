@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.board.model.BoardComVO;
 import com.board.model.BoardReviewVO;
 import com.board.model.QNADTO;
+import com.board.service.BoardComService;
 import com.board.service.BoardReviewService;
 import com.board.service.QNAService;
 import com.myplant.model.MyPlantVO;
@@ -49,6 +51,9 @@ public class MypageController {
 	
 	@Autowired
 	BoardReviewService reviewService;
+	
+	@Autowired
+	BoardComService boardComService;
 	
 	@GetMapping()
 	public String mypage(Model m, HttpSession ses) {
@@ -226,15 +231,14 @@ public class MypageController {
 		
 	}
 	
-	//내가 작성한 리뷰 상세
-	@PostMapping("/review")
-	public String getReivewDetail(Model m,@RequestParam("ridx") Integer ridx ) {
+	//내가 작성한 글 리스트
+	@GetMapping("/communityList")
+	public String getComList(Model m, HttpSession ses) {
+		MemberVO loginUser = (MemberVO)ses.getAttribute("loginUser");
+		List<BoardComVO> boardComArr = boardComService.selectComByMidx(loginUser.getMidx());
+		m.addAttribute("boardComArr", boardComArr);
 		
-		BoardReviewVO review = reviewService.selectBoardByIdx(ridx);
-		
-		m.addAttribute("review", review);
-		
-		return "member/reviewDetail";
+		return "member/communityList";
 	}
 		
 }

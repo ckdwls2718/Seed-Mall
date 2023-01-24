@@ -1,28 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <script>
-const deleteQna = function(qidx){
+$(function(){
 	
-	let myctx = "${pageContext.request.contextPath}";
-	url= myctx+"/QNA/del";
-	
-	$.ajax({
-		url:url,
-		type:'post',
-		dataType:'json',
-		data:'qidx='+qidx,
-		cache:false,
-		success:function(res){
-			//alert(res);
-			if(res>0){
-				location.reload();
-			}
-		},
-		error:function(err){
-			alert('err : '+err.status);
-		}
-	})
-}
+})
 
 const reviewDetail = function(ridx){
 	$('input[name=ridx]').val(ridx);
@@ -70,7 +51,7 @@ const reviewDetail = function(ridx){
 										</div>
 										<div >
 											<c:forEach  var="image" items="${review.boardReviewImageList}">
-											<img style="width:100px" src="src=${myctx}/resources/Review_image/${image.rimage}">
+												<img style="width:200px" src="${myctx}/resources/Review_image/${image.rimage}">
 											</c:forEach>
 										</div>
 										</td>
