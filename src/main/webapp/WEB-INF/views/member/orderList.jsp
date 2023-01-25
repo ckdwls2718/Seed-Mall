@@ -34,25 +34,18 @@
 #deliveryInfo div {
 	margin: 13px;
 }
-h2 {
-	font-size: calc(1.325rem + .9vw);
-	margin: 20px 0px 40px 0px;
-	font-family: 'Noto Sans KR', sans-serif;
-	font-weight: bold;
-	/* color: #39b559; */
-	text-align: center;
-}
+
 </style>
 <%@ include file="/WEB-INF/views/top.jsp"%>
 
 <div class="d-flex">
 	<%@ include file="/WEB-INF/views/member/mypageSidebar.jsp"%>
-	<div class="container" style="text-align: center">
+	<div class="container" style="text-align: center; width: 1000px;">
 		<div style="text-align: center">
-			<div class="col-md-12" style=" margin:auto;">
-				<h2 style="	font-size: calc(1.325rem + .9vw); margin: 70px 0px 40px 0px;font-family: 'Noto Sans KR', sans-serif; font-weight: bold; /* color: #39b559; */text-align: center;">주문 목록</h2>
+			<div class="col-md-12" style="margin: auto;">
+				<h2 style="font-size: calc(1.325rem + .9vw); margin: 70px 0px 40px 0px; font-family: 'Noto Sans KR', sans-serif; font-weight: bold; /* color: #39b559; */ text-align: center;">주문 목록</h2>
 
-				<div id="deliveryInfo" class="d-flex container" style="justify-content: center; width:800px;">
+				<div id="deliveryInfo" class="d-flex container" style="justify-content: center; width: 800px;">
 					<div id="status0">
 						상품준비중<br> <img src="${myctx}/resources/img/status0.png" width="74px">
 						<!-- <p>결제가 완료되어<br> 상품을 준비하는 중</p> -->
@@ -104,17 +97,16 @@ h2 {
 						<!-- <p>고객님의 주문<br> 환불 완료</p> -->
 					</div>
 				</div>
-				<br>
-				<br>
+				<br> <br>
 				<table class="table table-striped" id="products" style="text-align: center;">
 					<thead>
 						<tr>
-							<th style="width:13%">주문번호</th>
-							<th style="width:46%">주문상품</th>
-							<th style="width:10%">주문날짜</th>
-							<th style="width:10%">배송상태</th>
-							<th style="width:11%">총 주문가격</th>
-							<th style="width:10%">상세보기</th>
+							<th style="width: 10%">주문번호</th>
+							<th style="width: 41%">주문상품</th>
+							<th style="width: 13%">주문날짜</th>
+							<th style="width: 10%">배송상태</th>
+							<th style="width: 11%">총 주문가격</th>
+							<th style="width: 15%">상세보기</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -158,7 +150,7 @@ h2 {
 				</table>
 			</div>
 		</div>
-				</div>
-	<div style="width:230px;"></div>
+	</div>
+	<div style="width: 230px;"></div>
 </div>
 <%@ include file="/WEB-INF/views/foot.jsp"%>

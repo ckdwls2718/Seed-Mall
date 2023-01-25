@@ -372,8 +372,8 @@ a {
 		<div style="margin-bottom: 5px;">
 			<c:forEach var="cg_detail" items="${cgdetail}">
 				<c:if test='${cg_detail.downCg_code eq paging.downcg}'>
-					<div class="tip" style="text-align: right; display: inline-block; float: right; font-weight: 500; color: #00000082">${cg_detail.comment_name}
-						<span class="tiptext tip-bottom">${cg_detail.comments}</span>
+					<div class="tip" style="text-align: right;  font-weight: 500; margin:0 7px 25px; color: #00000082">${cg_detail.comment_name}
+						<div class="tiptext tip-bottom" style="margin-right:0;">${cg_detail.comments}</div>
 					</div>
 				</c:if>
 			</c:forEach>
