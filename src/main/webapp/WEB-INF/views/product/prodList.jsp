@@ -290,6 +290,27 @@ a {
 			$(this).next("div").toggleClass("hide");
 		});
 	});
+	
+	const prodRead = function(pidx){
+		let url = "prod/read";
+		
+		$.ajax({
+			url: url,
+			type:'post',
+			data:'pidx='+pidx,
+			dataType:'json',
+			cache:false,
+			success:function(res){
+				//alert(res);
+				if(res>0){
+					location.href="prod/"+pidx;
+				}
+			},
+			error:function(err){
+				alert("err:"+err.status);
+			}
+		})
+	}
 </script>
 
 <body oncontextmenu='return false' class='snippet-body'>
@@ -357,10 +378,10 @@ a {
 				</c:if>
 			</c:forEach>
 		</div>
-		
-			<!-- 분류 카테고리  -->
-			<div class="row">
-				<form name="sortF" id="sortF" style="padding: 0; margin: 6px 0px; float: right;">
+
+		<!-- 분류 카테고리  -->
+		<div class="row">
+			<form name="sortF" id="sortF" style="padding: 0; margin: 6px 0px; float: right;">
 				<input type="hidden" name="findKeyword"> <input type="hidden" name="upcg"> <input type="hidden" name="downcg">
 				<select class="form-select" style="width: 124px; margin-left: auto;" name="sort" onchange="changeSort(this.value)">
 					<option value="1" <c:if test="${paging.sort eq 1}">selected</c:if>>최신순</option>
@@ -369,17 +390,15 @@ a {
 					<option value="4" <c:if test="${paging.sort eq 4}">selected</c:if>>낮은가격순</option>
 				</select>
 			</form>
-			</div>
+		</div>
 		<!-- 정렬 방식 -->
 		<div class="row ml-3 mb-3 mr-0" style="display: inline;">
-				<form name="searchF" id="searchF" class="d-flex" role="search">
-					<!-- 상품 카운팅 -->
-					<span style="margin-left: 2em;">총 <b>${paging.totalCount}</b>개의 상품
-					
-					<!-- 서치바 -->
-					</span> <input name="findKeyword" class="form-control me-2" type="search" placeholder="검색어를 입력하세요" aria-label="Search" style="width: 25%; margin-left: auto">
-					<button class="btn btn-outline-success" type="submit">검색</button>
-				</form>		
+			<form name="searchF" id="searchF" class="d-flex" role="search">
+				<!-- 상품 카운팅 -->
+				<span style="margin-left: 2em;">총 <b>${paging.totalCount}</b>개의 상품 <!-- 서치바 -->
+				</span> <input name="findKeyword" class="form-control me-2" type="search" placeholder="검색어를 입력하세요" aria-label="Search" style="width: 25%; margin-left: auto">
+				<button class="btn btn-outline-success" type="submit">검색</button>
+			</form>
 		</div>
 		<!-- 식물 목록 출력 -->
 		<div class="row">
@@ -389,12 +408,12 @@ a {
 			<c:forEach var="prod" items="${prodArr}">
 				<div class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">
 					<div class="product">
-						<a href="prod/${prod.pidx}"><img src="${myctx}/resources/product_images/${prod.pimageList[0].pimage}" alt=""> </a>
-						<ul class="d-flex align-items-center justify-content-center list-unstyled icons">
+						<a onclick="prodRead('${prod.pidx}')"><img src="${myctx}/resources/product_images/${prod.pimageList[0].pimage}"></a>
+						<!-- <ul class="d-flex align-items-center justify-content-center list-unstyled icons">
 							<li class="icon"><span class="fas fa-expand-arrows-alt"></span></li>
 							<li class="icon mx-3"><span class="far fa-heart"></span></li>
 							<li class="icon"><span class="fas fa-shopping-bag"></span></li>
-						</ul>
+						</ul> -->
 					</div>
 					<div class="tag ${prod.pspec}">${prod.pspec}</div>
 					<div class="title pt-4 pb-1">
@@ -408,15 +427,20 @@ a {
 					</div> -->
 					<div class="price text-center" style="margin: 0">
 						<c:if test="${prod.price ne prod.psaleprice }">
-						<del>
-							<small style="color: gray;"><fmt:formatNumber value="${prod.price}" pattern="###,###,### 원" /></small>
-						</del>
-						<b><fmt:formatNumber value="${prod.psaleprice}" pattern="###,###,### 원" /></b><br>
-						<span class="badge bg-danger">${prod.percent}%할인</span>
+							<del>
+								<small style="color: gray;"><fmt:formatNumber value="${prod.price}" pattern="###,###,### 원" /></small>
+							</del>
+							<b><fmt:formatNumber value="${prod.psaleprice}" pattern="###,###,### 원" /></b>
+							<br>
+							<span class="badge bg-danger" style="width:40px; font-weight: 400; font-size: 13px;">${prod.percent}%</span>
 						</c:if>
 						<c:if test="${prod.price eq prod.psaleprice }">
-						<b><fmt:formatNumber value="${prod.psaleprice}" pattern="###,###,### 원" /></b>
+							<b><fmt:formatNumber value="${prod.psaleprice}" pattern="###,###,### 원" /></b>
 						</c:if>
+						
+						<div style="height:60px;">
+						</div>
+
 					</div>
 				</div>
 			</c:forEach>

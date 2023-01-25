@@ -11,18 +11,18 @@ td{
 	vertical-align: middle;
 }
 </style>
-<div class="container mt-3" style="height: 600px; overflow: auto;">
+<div class="container mt-3" style="width: 1100px; height:60em;overflow: auto;">
 
 	<div style="text-align: center;">
-		<img src="${myctx}/assets/Cbanner3.jpg" style="width: 550px; margin: 20px 0;">
+		<img src="${myctx}/assets/Cbanner3.jpg" style="width: 550px;   margin: 20px 0;">
 	</div>
-	<table class="table table-condensed " style="background:#f7f9fa; text-align: center; border: 1px solid #cccccc">
+	<table class="table table-condensed " style="background:#f7f9fa; text-align: center; border: 1px solid #cccccc;">
 		<thead>
 			<tr>
 				<th style="width: 7%"></th>
-				<th style="width: 61%">제목</th>
+				<th style="width: 59%">제목</th>
 				<th style="width: 16%">아이디</th>
-				<th style="width: 8%">날짜</th>
+				<th style="width: 10%">날짜</th>
 				<th style="width: 8%">조회수</th>
 			</tr>
 		</thead>

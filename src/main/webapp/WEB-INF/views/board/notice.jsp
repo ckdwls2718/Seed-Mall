@@ -16,33 +16,33 @@ td{
 </style>
 
 
-<div class="container mt-3" style="height: 600px; overflow: auto;">
+<div class="container mt-3" style="width: 1100px; height: 600px; overflow: auto;">
 	<h2 class="text-center">공지사항</h2>
 
 	<!-- 검색 폼 시작----------------------------- -->
 
 	<div class="row py-3">
 		<div class="col-md-9 text-center">
-			<form name="searchF" action="notice" onsubmit="return check()">
+			<form name="searchF" action="notice" onsubmit="return check()"style="padding-left:275px;">
 				<!-- hidden data -------------------------------------- -->
 				<input type="hidden" name="pageSize" value="${pageSize}"> <input type="hidden" name="bpage" value="${paging.bpage}">
 				<!-- -------------------------------------------------- -->
-				<select name="findType" style="padding: 6px;">
-					<option value="">검색유형</option>
+				<select name="findType" style="padding: 6px; height: 38px; border-radius: 5px;">
+					<!-- <option value="">검색유형</option> -->
 					<option value="1" <c:if test="${paging.findType eq 1}">selected</c:if>>제목</option>
 					<option value="2" <c:if test="${paging.findType eq 2}">selected</c:if>>내용</option>
 				</select>
-				<input type="text" name="findKeyword" placeholder="검색어를 입력하세요" autofocus="autofocus" style='width: 50%; padding: 5px;'>
-				<button class='btn btn-outline-primary'>검 색</button>
+				<input type="text" name="findKeyword" placeholder="검색어를 입력하세요" autofocus="autofocus" style='width: 300px; margin-bottom: 5px;   height: 38px; border-radius: 5px;'>
+				<button class='btn btn-outline-success' style="margin-bottom: 6px;">검 색</button>
 			</form>
 		</div>
 		<div class="col-md-3 text-right">
-			<form name="pageSizeF" action="notice">
+			<form name="pageSizeF" action="notice" style="float: right; margin-right: 10px; height: 25px;">
 				<!-- hidden data -------------------------------------- -->
 				<input type="hidden" name="findType" value="${paging.findType}"> <input type="hidden" name="findKeyword" value="${paging.findKeyword}"> <input type="hidden" name="bpage" value="${paging.bpage}">
 				<!-- -------------------------------------------------- -->
-				<select name="pageSize" style="padding: 6px;" onchange="submit()">
-					<option value=''>페이지 사이즈</option>
+				<select name="pageSize" style="padding: 6px;  height: 38px; border-radius: 5px;" onchange="submit()"  >
+					<!-- <option value=''>페이지 사이즈</option> -->
 					<c:forEach var="ps" begin="5" end="20" step="5">
 						<option value='${ps}' <c:if test="${pageSize eq ps}">selected</c:if>>${ps}</option>
 					</c:forEach>
@@ -52,13 +52,13 @@ td{
 	</div>
 
 	<!-- -------------------------------------- -->
-	<table class="table table-striped">
+	<table class="table table-striped" style="text-align: center;">
 		<thead style="background-color: #d1e7dd">
 			<tr>
-				<th>글번호</th>
-				<th>제목</th>
-				<th>날짜</th>
-				<th>조회수</th>
+				<th style="width: 5%">번호</th>
+				<th style="width: 65%">제목</th>
+				<th style="width: 15%">날짜</th>
+				<th style="width: 15%">조회수</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -97,15 +97,15 @@ td{
 		</tbody>
 		<tfoot>
 			<tr>
-				<td colspan="3" class="text-center">${pageNavi}</td>
-				<td colspan="2" class="text-right">
+				<td colspan="3" class="text-center"style="border-bottom: 0; padding: 0 0 0 141px;">${pageNavi}</td>
+				<td  class="text-right"  style="border-bottom: 0;">
 					총 게시글수:<b><c:out value="${paging.totalCount}" /></b> <br> <span class="text-danger"><c:out value="${paging.bpage}" /></span> /
 					<c:out value="${paging.pageCount}" />
 				</td>
 			</tr>
 		</tfoot>
 	</table>
-	<p class="text-center my-4">
+	<p class="text-center my-4" style="border-top: 0;">
 		<input type="button" class="btn btn-success btn-sm" value="글쓰기" onclick="location.href='noticeWriteForm'" style="width: 80px;">
 	</p>
 </div>

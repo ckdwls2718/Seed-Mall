@@ -89,4 +89,14 @@ public class ProductServiceImpl implements ProductService {
 		prod.setPimageList(prodImageArr);
 		return prod;
 	}
+	
+	@Override
+	public int prodLike(int pidx) {
+		return productMapper.prodLike(pidx);
+	}
+	
+	@Override
+	public int prodRead(int pidx) {
+		return productMapper.prodRead(pidx);
+	}
 }

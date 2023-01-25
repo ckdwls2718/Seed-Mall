@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+
 <script>
+
 function setThumbnail(event) {
     for (var image of event.target.files) {
       var reader = new FileReader();
@@ -22,7 +24,12 @@ function setThumbnail(event) {
 </script>
 <%@ include file="/WEB-INF/views/top.jsp"%>
 
+<style>
+
+</style>
+
 <div class="d-flex">
+
 <%@ include file="/WEB-INF/views/admin/adminPageSidebar.jsp"%>
 <div class="container">
 <form action="plantManagementUpdate" method="post" enctype="multipart/form-data">
@@ -58,7 +65,7 @@ function setThumbnail(event) {
 		<tr>		
 			<td>퍼센트</td>
 			<td>${plant.percent}%</td>
-			<td><input type="number" name="percent" value="" required></td>
+			<td><input type="number" name="percent" value="" max="100" required></td>
 		</tr>
 		<tr>		
 			<td>이미지</td>

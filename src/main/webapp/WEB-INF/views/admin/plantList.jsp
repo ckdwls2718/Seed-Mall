@@ -1,22 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <script>
-
-const detailPlant = function(pidx){
-	$('input[name=pidx]').val(pidx);
-	pdF.submit();
-}
-
+	const detailPlant = function(pidx) {
+		$('input[name=pidx]').val(pidx);
+		pdF.submit();
+	}
 </script>
 <%@ include file="/WEB-INF/views/top.jsp"%>
 
 <div class="d-flex">
-<%@ include file="/WEB-INF/views/admin/adminPageSidebar.jsp"%>
+	<%@ include file="/WEB-INF/views/admin/adminPageSidebar.jsp"%>
 
 <main class="container m-3" style="width:70%">
+	<div class="row"><h2>${stateStr}</h2> <p>검색된 식물 : ${page.totalCount}건</p></div>
 	<div>
 		<form>
+		<input type="hidden" name="findState" value="${page.findState}">
 		<div class="form-row">
 			<div class="col-8">
 			<input class="form-control" type="text" name="findKeyword" placeholder="주문자 이메일을 입력해주세요" value="${page.findKeyword}">
@@ -75,8 +74,8 @@ const detailPlant = function(pidx){
 </main>
 
 </div>
-<form id="pdF" action="plantManagementDetail" method="post"> 
-      <input type="hidden" name="pidx" id="pidx">
+<form id="pdF" action="plantManagementDetail" method="post">
+	<input type="hidden" name="pidx" id="pidx">
 </form>
 
 <%@ include file="/WEB-INF/views/foot.jsp"%>
