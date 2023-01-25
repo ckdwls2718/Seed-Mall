@@ -10,9 +10,10 @@ th {
 }
 </style>
 <script>
-/* $.(function(){
+$(function(){
 	
-})//---window */
+	
+})//---window 
 
 const changeImage = function(idx){
 	let url = $('#thumbnailImage'+idx).attr('src');
@@ -93,6 +94,35 @@ const qQtyCheck = function(){
 	return true;
 }
 
+const prodLike = function(){
+	let pidx = ${prod.pidx};
+	let url = "${myctx}/user/prod/like";
+	
+	$.ajax({
+		url: url,
+		type:'post',
+		data:'pidx='+pidx,
+		dataType:'json',
+		cache:false,
+		success:function(res){
+			//alert(res);
+			if(res>0){
+				location.reload();
+			}
+		},
+		error:function(err){
+			if(err.status == 200){
+				alert('로그인 후 이용해주세요');
+				location.href='${myctx}/login';
+				return;
+			}
+			alert("err:"+err.status);
+		}
+	})
+}
+
+
+
 </script>
 <div class='container d-flex' style="width:1200px;">
 	<div id="leftDetail" class="m-3" style="width: 60%;">
@@ -115,9 +145,10 @@ const qQtyCheck = function(){
 	<div id="rightDetail" class="m-3" style="width: 40%;">
 		<form id="prodF" action="${myctx}/user/order" method="post" onsubmit="return qQtyCheck()">
 			<p>${prod.upCg_name}> ${prod.downCg_name}</p>
+			<p>조회수 ${prod.preadnum }</p>
 			<!--right information-->
-			<div id="prodName">
-				<h2>${prod.pname}</h2>
+			<div id="prodName" class="d-flex" >
+				<h2 style="margin-right:auto;">${prod.pname}</h2><button class="btn btn-danger" type="button" onclick="prodLike()">Like ${prod.plikenum}</button>
 			</div>
 			<div class="starBox">
 				<!-- <span><img src="/app/layout/web/images/icon_rating.png"></span> -->

@@ -149,6 +149,13 @@
 		where o.oidx=#{value}
 	</select>
 	
+	<update id="prodLike" parameterType="int">
+		update product set plikenum = plikenum+1 where pidx=#{value}
+	</update>
+	
+	<update id="prodRead" parameterType="int">
+		update product set preadnum = preadnum+1 where pidx=#{value}
+	</update>
 	
 
 	<sql id="selectProd">

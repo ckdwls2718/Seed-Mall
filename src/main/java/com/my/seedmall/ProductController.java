@@ -12,7 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.board.mapper.BoardReviewMapper;
 import com.board.model.BoardReviewVO;
@@ -100,4 +103,20 @@ public class ProductController {
 		
 		return "product/prodDetail";
 	}//-------------------------------------
+	
+	@PostMapping(value="/user/prod/like", produces = "application/json")
+	@ResponseBody
+	public int prodLike(@RequestParam("pidx") int pidx) {
+		log.info("pidx = "+pidx);
+		int n = productService.prodLike(pidx);
+		return n;
+	}
+	
+	@PostMapping(value="/prod/read", produces = "application/json")
+	@ResponseBody
+	public int prodRead(@RequestParam("pidx") int pidx) {
+		log.info("pidx = "+pidx);
+		int n = productService.prodRead(pidx);
+		return n;
+	}
 }
