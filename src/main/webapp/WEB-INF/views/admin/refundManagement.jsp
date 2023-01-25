@@ -17,13 +17,14 @@
 </script>
 <div class="d-flex">
 	<%@ include file="/WEB-INF/views/admin/adminPageSidebar.jsp"%>
-	<div class="container">
+	<div class="container mt-4">
 		<div>
 			<table class="table table-condensed">
 				<thead>
-					<tr class="table-success">
+					<tr>
 						<th>주문번호</th>
 						<th>주문상품</th>
+						<th></th>
 						<th>주문상태</th>
 						<th>주문날짜</th>
 						<th>지불형태</th>
@@ -39,6 +40,7 @@
 							<td>${order.prodList[0].pname} <c:if
 									test="${fn:length(order.prodList) > 1}">외 ${fn:length(order.prodList)-1} 건 </c:if>
 							</td>
+							<td><button class="btn btn-outline-danger" type="button" onclick="detailOrder('${order.desc_oidx}')" >상세보기</button></td>
 							<td>${order.statusStr}</td>
 							<td>${order.desc_odate}</td>
 							<td><c:if test="${order.payment eq 1}">
