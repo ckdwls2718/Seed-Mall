@@ -152,11 +152,18 @@ public class MypageController {
       return "member/orderDetail";
    }
    
+   //주문 확정
    @PostMapping(value="/orderEnd", produces = "application/json")
    @ResponseBody
-   public int orderConfirmed(int oidx) {
+   public int orderConfirmed(int oidx, HttpSession ses) {
       log.info("oidx = "+oidx);
       int result = orderService.orderConfirmed(oidx);
+      
+      if(result>0) {
+    	  MemberVO loginUser = (MemberVO)ses.getAttribute("loginUser");
+    	  MemberVO findUser = memberService.getMember(loginUser.getMidx());
+    	  ses.setAttribute("loginUser", findUser);
+      }
       
       return result;
    }

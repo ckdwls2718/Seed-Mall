@@ -82,6 +82,9 @@ public class MemberServiceImpl implements MemberService {
 		if (!member.getPwd().equals(pwd)) {
 			throw new NotUserException("비밀번호가 일치하지 않습니다.");
 		}
+		if(member.getStatus()==1 || member.getStatus()==2) {
+			throw new NotUserException("정지 또는 탈퇴한 회원입니다.");
+		}
 
 		return member;
 
