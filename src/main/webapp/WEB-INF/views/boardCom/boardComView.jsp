@@ -79,7 +79,6 @@ td{
           </td>
        </tr>
 
-   	  	
       </table>
       <div class="row" style="min-height: 300px">${boardCom.ccontent}</div>
       <c:if test="${loginUser.midx eq boardCom.midx}">
