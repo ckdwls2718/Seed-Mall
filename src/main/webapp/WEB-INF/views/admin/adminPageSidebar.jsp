@@ -42,7 +42,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="${myctx}/history">
+                <a class="nav-link" href="${myctx}/admin/history">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>히스토리</span></a>
             </li>

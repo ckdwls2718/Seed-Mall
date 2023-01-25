@@ -79,7 +79,7 @@ body, h1, h2, h3, h4, h5, h6, input, textarea, select {
 						<!-- <li><a class="dropdown-item" href="#">설정</a></li> -->
 						<c:if test="${loginUser.status == 9}">
 							<li><hr class="dropdown-divider" /></li>
-							<li><a class="dropdown-item" href="${myctx}/admin/adminPage">관리자페이지</a></li>
+							<li><a class="dropdown-item" href="${myctx}/admin/history">관리자페이지</a></li>
 							<li><hr class="dropdown-divider" /></li>
 							<li><a class="dropdown-item" href="${myctx}/admin/prodForm">상품 등록</a></li>
 							<li><a class="dropdown-item" href="${myctx}/admin/prodList">상품 목록</a></li>

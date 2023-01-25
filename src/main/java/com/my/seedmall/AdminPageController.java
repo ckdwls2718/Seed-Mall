@@ -191,7 +191,7 @@ public class AdminPageController {
 		
 		int totalCount = myPlantService.getMyplantTotal(page);
 		page.setTotalCount(totalCount);
-		page.setPageSize(2);
+		page.setPageSize(12);
 		page.setPagingBlock(5);// 페이징 블럭 단위값: 5
 		////////////////////
 		page.init(ses); // 페이징 관련 연산을 수행하는 메서드 호출

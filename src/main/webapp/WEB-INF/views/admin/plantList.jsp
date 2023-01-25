@@ -12,7 +12,7 @@
 	<%@ include file="/WEB-INF/views/admin/adminPageSidebar.jsp"%>
 
 <main class="container m-3" style="width:70%">
-	<div class="row"><h2>${stateStr}</h2> 검색된 식물 : ${page.totalCount}</div>
+	<div class="row"><h2>${stateStr}</h2> <p>검색된 식물 : ${page.totalCount}건</p></div>
 	<div>
 		<form>
 		<input type="hidden" name="findState" value="${page.findState}">
