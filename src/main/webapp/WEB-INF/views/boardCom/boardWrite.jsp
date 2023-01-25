@@ -63,10 +63,10 @@ String ctx = request.getContextPath();
 
 			<tr>
 				<td style="width: 10%">
-					<b>아이디</b>
+					<b>작성자</b>
 				</td>
 				<td style="width: 80%">
-					<input type="text" name="email" id="email" class="form-control" readonly>
+					<input type="text" name="email" id="email" class="form-control" readonly value="${loginUser.email}">
 				</td>
 			</tr>
 

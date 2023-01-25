@@ -66,7 +66,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">주문 상태</h6>
                         <a class="collapse-item" href="${myctx}/admin/orderManagement">상품 준비</a>
-                        <a class="collapse-item" href="${myctx}/admin/deliveryManagement">배송 중</a>
+                        <a class="collapse-item" href="cards.html">배송 중</a>
                         <a class="collapse-item" href="${myctx}/admin/refundManagement">환불 내역</a>
                     </div>
                 </div>

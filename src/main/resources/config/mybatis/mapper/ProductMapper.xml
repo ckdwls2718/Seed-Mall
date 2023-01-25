@@ -143,6 +143,12 @@
 		]]>
 	</select>
 	
+	<select id="selectByOidx" parameterType="int" resultType="Product">
+		select p.* 
+		from orders o join product p on o.pidx = p.pidx 
+		where o.oidx=#{value}
+	</select>
+	
 	
 
 	<sql id="selectProd">

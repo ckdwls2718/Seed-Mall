@@ -152,6 +152,11 @@ public class MemberServiceImpl implements MemberService {
 	public GradeVO getDrate(MemberVO mvo) {
 		return MemberMapper.getDrate(mvo);
 	}
+	
+	@Override
+	public GradeVO getNextGrade(MemberVO mvo) {
+		return MemberMapper.getNextGrade(mvo);
+	}
 
 
 }

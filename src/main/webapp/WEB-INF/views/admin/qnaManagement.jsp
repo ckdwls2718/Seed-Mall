@@ -59,7 +59,7 @@ const deleteRe = function(re_qidx){
 <div class="container">
 	<div class="row">
 			<div class="col-md-12">
-				<h2 class="text-center m-4" style="margin: 1em">:::나의 QNA 목록:::</h2>
+				<h2 class="text-center m-4" style="margin: 1em">:::관리자 QNA 목록:::</h2>
 				<table class="table" id="products">
 					<thead>
 						<tr>
@@ -94,8 +94,8 @@ const deleteRe = function(re_qidx){
 										</td>
 										
 										<td width="60%" >
-										<div style="width:100%; background-color:#494e5270">
-											<div style="background-color: #494e5270;">
+										<div style="width:100%;">
+											<div >
 												<div style="display:inline-block ;width:70%">
 													${qna.email} <br>
 													${qna.product.pname}
@@ -116,12 +116,12 @@ const deleteRe = function(re_qidx){
 										<c:if test="${qna.isCom eq 'Y'}">
 										<c:forEach var="reply" items="${qna.qna_ReList}">
 										<tr>
-											<td>└답변</td>
+											<td><img src="${myctx}/resources/img/answer.png"></td>
 											<td colspan="2">
-											<div style="width:100%; background-color:#494e5270">
-												<div style="background-color: #494e5270;">
+											<div style="width:100%;">
+												<div >
 													<div style="display:inline-block ;width:70%">
-														관리자 <br>
+														관리자
 														<div style="display:inline-block ;font-size: 0.7rem">
 														 ${reply.re_qdate}
 														</div>

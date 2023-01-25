@@ -24,20 +24,25 @@ const deleteQna = function(qidx){
 	})
 }
 </script>
+<style>
+	td{
+		vertical-align: middle;
+	}
+</style>
 <%@ include file="/WEB-INF/views/top.jsp"%>
 <div class="d-flex">
 	<%@ include file="/WEB-INF/views/member/mypageSidebar.jsp"%>
 	<div class="container" style="text-align: center">
 		<div class="row">
 			<div class="col-md-12">
-				<h2 style="	font-size: calc(1.325rem + .9vw); margin: 70px 0px 40px 0px;font-family: 'Noto Sans KR', sans-serif; font-weight: bold; /* color: #39b559; */text-align: center;">내가 쓴 문의글</h2>
-				<table class="table table-striped" id="products"style="text-align: center;"style="text-align: center;">
-					<thead >
+				<h2 class="text-center m-4" style="margin: 1em">:::나의 QNA 목록:::</h2>
+				<table class="table table-striped" id="products">
+					<thead>
 						<tr>
-							<th style="width:10%">상태</th>
-							<th style="width:25%">상품</th>
-							<th style="width:50%">제목</th>
-							<th style="width:15%">작성일</th>
+							<th>상태</th>
+							<th>상품</th>
+							<th>내용</th>
+							<th>작성일</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -66,22 +71,7 @@ const deleteQna = function(qidx){
 										</td>
 										
 										<td width="60%">
-										<div class="accordion-item">
-											<h2 class="accordion-header" id="flush-heading${status.index}">
-												<button class="accordion-button collapsed" type="button"
-													data-bs-toggle="collapse"
-													data-bs-target="#flush-collapse${status.index}"
-													aria-expanded="false"
-													aria-controls="flush-collapse${status.index}">
-													${qna.qtitle}</button>
-											</h2>
-											<div id="flush-collapse${status.index}"
-												class="accordion-collapse collapse"
-												aria-labelledby="flush-heading${status.index}"
-												data-bs-parent="#accordionFlushExample">
-												<div class="accordion-body">${qna.qcontent}</div>
-											</div>
-										</div>
+										${qna.qcontent }
 										</td>
 										<td>${qna.qdate}</td>
 										<td><button type="button" onclick="deleteQna('${qna.qidx}')">삭제</button></td>
@@ -89,9 +79,9 @@ const deleteQna = function(qidx){
 										<c:if test="${qna.isCom eq 'Y'}">
 										<c:forEach var="reply" items="${qna.qna_ReList}">
 											<tr>
-												<td>답변</td>
+												<td><img src="${myctx}/resources/img/answer.png"></td>
 												<td colspan="2">${reply.re_qcontent}</td>
-												<td>${reply.re_qdate}</td>
+												<td colspan="2">${reply.re_qdate}</td>
 											</tr>
 										</c:forEach>
 										</c:if>
@@ -107,6 +97,5 @@ const deleteQna = function(qidx){
 			</div>
 		</div>
 	</div>
-		<div style="width:230px;"></div>
 </div>
 <%@ include file="/WEB-INF/views/foot.jsp"%>

@@ -23,7 +23,7 @@
 				<thead>
 					<tr class="table-success">
 						<th>주문번호</th>
-						<th>회원번호</th>
+						<th>주문상품</th>
 						<th>주문상태</th>
 						<th>주문날짜</th>
 						<th>지불형태</th>
@@ -36,7 +36,9 @@
 					<c:forEach var="order" items="${orderArr}" varStatus="st">
 						<tr>
 							<td>${order.desc_oidx}</td>
-							<td>${order.midx}</td>
+							<td>${order.prodList[0].pname} <c:if
+									test="${fn:length(order.prodList) > 1}">외 ${fn:length(order.prodList)-1} 건 </c:if>
+							</td>
 							<td>${order.statusStr}</td>
 							<td>${order.desc_odate}</td>
 							<td><c:if test="${order.payment eq 1}">
@@ -47,8 +49,8 @@
 									<c:out value="휴대폰결제"></c:out>
 								</c:if></td>
 							<td>${order.desc_oTotalPrice}</td>
-							<td><select id="deliveryState${st.index}" name="deliveryState"
-								style="padding: 1px;">
+							<td><select id="deliveryState${st.index}"
+								name="deliveryState" style="padding: 1px;">
 									<option value="6"
 										<c:if test="${order.deliveryState eq 6}">selected</c:if>>환불처리중</option>
 									<option value="7"
@@ -70,7 +72,7 @@
 </div>
 <!-- 수정 폼  -->
 <form name="oefrm" id="oefrm" action="refundEdit" method="post">
-	<input type="hidden" name="desc_oidx" id="desc_oidx"> <input type="hidden"
-		name="deliveryState" id="deliveryState">
+	<input type="hidden" name="desc_oidx" id="desc_oidx"> <input
+		type="hidden" name="deliveryState" id="deliveryState">
 </form>
 <%@ include file="/WEB-INF/views/foot.jsp"%>

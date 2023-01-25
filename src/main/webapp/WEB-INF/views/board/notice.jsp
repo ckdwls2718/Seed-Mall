@@ -9,6 +9,10 @@ h2 {
 	font-weight: bold;
 	color: #39b559;
 }
+
+td{
+	vertical-align: middle;
+}
 </style>
 
 
@@ -73,7 +77,7 @@ h2 {
 						</td>
 						<td width="50%">
 							<!-- 글제목 ---------------- -->
-							<a href="view/<c:out value="${notice.nidx}"/>"> <c:if test="${fn:length(notice.ntitle)>20}">
+							<a class="btn btn-default" href="view/<c:out value="${notice.nidx}"/>"> <c:if test="${fn:length(notice.ntitle)>20}">
 									<c:out value="${fn:substring(notice.ntitle,0,20)}" /> ...
 						</c:if> <c:if test="${fn:length(notice.ntitle)<=20}">
 									<c:out value="${notice.ntitle}" />

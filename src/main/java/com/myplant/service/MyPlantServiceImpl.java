@@ -67,6 +67,11 @@ public class MyPlantServiceImpl implements MyPlantService {
 	}
 	
 	@Override
+	public int getMyplantTotal(PagingVO page) {
+		return myPlantMapper.getMyplantTotal(page);
+	}
+	
+	@Override
 	public PlantImageVO uploadImage(MultipartFile mf, HttpServletRequest req) {
 		PlantImageVO piVo = new PlantImageVO();
 
