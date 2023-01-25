@@ -64,8 +64,9 @@
 	
 	<select id="getProductsPaging" resultType="Product" parameterType="ProdPaging">
 		select * from(
-		select row_number() over(<include refid="prodSort"/>) rn, product.*
-		from product
+		select row_number() over(<include refid="prodSort"/>) rn, p.*, d.downcg_name, u.upcg_name,
+		nvl((select round(avg(sentiment),1) from board_re b join orders o on b.oidx = o.oidx where pidx= p.pidx),0) sentiment
+		from product p join downcategory d on p.downcg_code=d.downcg_code join upcategory u on p.upcg_code=u.upcg_code
 		<include refid="findProdWherePaging"/>
 		)
 		<![CDATA[
@@ -169,15 +170,15 @@
 	<sql id="findProdWherePaging">
 		<if test="upcg!=null and upcg!=''">
 			<where>
-				upcg_code = #{upcg}
+				p.upcg_code = #{upcg}
 			</where>
 		</if>
 		<if test="downcg!=null and downcg!=''">
-			and downcg_code = #{downcg}
+			and p.downcg_code = #{downcg}
 		</if>
 		<if test="findKeyword!=null and findKeyword!=''">
 			<where>
-				pname like '%'||#{findKeyword}||'%'
+				p.pname like '%'||#{findKeyword}||'%'
 			</where>
 		</if>
 	</sql>
