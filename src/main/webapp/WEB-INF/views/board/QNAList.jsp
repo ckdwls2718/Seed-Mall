@@ -33,11 +33,6 @@ const deleteQna = function(qidx){
 
 const qnaCheck = function(){
 	
-	if(!$('#qtitle').val()){
-		alert('제목을 입력해주세요');
-		return false;
-	}
-	
 	if(!$('#qcontent').val()){
 		alert('내용을 입력해주세요');
 		return false;
@@ -77,6 +72,12 @@ const insertQNA = function(){
 }
 
 </script>
+
+<style>
+	td{
+		vertical-align: middle;
+	}
+</style>
 <div class="container" >
 <ul class="nav nav-tabs">
   <li class="nav-item">
@@ -130,7 +131,7 @@ const insertQNA = function(){
 <table class="table">
  <tr>
  	<th>상태</th>
-  	<th>제목</th>
+  	<th>내용</th>
   	<th>작성자</th>
   	<th>작성일</th>
  </tr>
@@ -149,20 +150,7 @@ const insertQNA = function(){
 	 	<c:if test="${qna.isCom ne 'Y'}">미답변</c:if>
 	 	<c:if test="${qna.isCom eq 'Y'}">답변완료</c:if>
 	 </td>
-	 	<td>
-	 		<div class="accordion accordion-flush" id="accordionFlushExample">
-  				<div class="accordion-item">
-    			<h2 class="accordion-header" id="flush-heading${status.index}">
-      				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse${status.index}" aria-expanded="false" aria-controls="flush-collapse${status.index}">
-      				${qna.qtitle}
-      				</button>
-    				</h2>
-		    <div id="flush-collapse${status.index}" class="accordion-collapse collapse" aria-labelledby="flush-heading${status.index}" data-bs-parent="#accordionFlushExample">
-		      <div class="accordion-body">${qna.qcontent}</div>
-		    </div>
-		  </div>
-		</div>
-	 	</td>
+	 	<td>${qna.qcontent}</td>
 	 	<td>${qna.email}</td>
 	 	<td>${qna.qdate }</td>
 	 	<c:if test="${loginUser.email eq qna.email}">
@@ -173,7 +161,7 @@ const insertQNA = function(){
 	 <c:if test="${qna.isCom eq 'Y'}">
 										<c:forEach var="reply" items="${qna.qna_ReList}">
 											<tr>
-												<td>답변</td>
+												<td><img src="${myctx}/resources/img/answer.png"></td>
 												<td colspan="2">${reply.re_qcontent}</td>
 												<td>${reply.re_qdate}</td>
 											</tr>

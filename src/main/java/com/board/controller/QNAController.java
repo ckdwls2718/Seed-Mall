@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.board.model.QNADTO;
 import com.board.model.QNA_ReDTO;
 import com.board.service.QNAService;
+import com.common.service.CommonService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -24,10 +25,19 @@ public class QNAController {
 	@Autowired
 	QNAService qnaService;
 	
+	@Autowired
+	CommonService commonService;
+	
 	//상품에 관한 QNA 출력
 	@GetMapping("/QNA/{pidx}")
 	public String getQNA(Model m, @PathVariable("pidx") int pidx) {
 		List<QNADTO> qArr = qnaService.getQNAListByPidx(pidx);
+		
+		for(QNADTO qna : qArr) {
+			String pEmail = commonService.emailPrivate(qna.getEmail());
+			qna.setEmail(pEmail);
+		}
+		
 		m.addAttribute("qArr", qArr);
 		return "board/QNAList";
 	}

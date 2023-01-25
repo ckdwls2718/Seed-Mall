@@ -18,23 +18,24 @@ const delete1 = function(){
 
 
 </script>
+<div class="container mt-3" >
 <form name="bf" id="bf" role="form" method="POST" >
    <input type="hidden" name="midx" value="${loginUser.midx}">
    <input type="hidden" name="cidx" value="${boardCom.cidx}">     
     <table class="table">
        <tr>
-          <td style="width:20%"><b>제목</b></td>
-          <td style="width:80%">
+          <td style="width:10%"><b>제목</b></td>
+          <td style="width:40%">
            ${boardCom.ctitle }
           </td>
        </tr>
        <tr>
-          <td style="width:20%"><b>글쓴이</b></td>
+          <td style="width:20%"><b>작성자</b></td>
           <td style="width:80%">
           ${boardCom.email}
           </td>
        </tr>       
-       <tr>
+       <tr style="min-height: 300px">
           <td style="width:20%"><b>글내용</b></td>
           <td style="width:80%">
           ${boardCom.ccontent} 
@@ -43,7 +44,7 @@ const delete1 = function(){
       
       <c:if test="${loginUser.midx eq boardCom.midx}">
       <tr>
-         <td colspan="2">
+         <td colspan="2" class="text-center">
          
             <button type="button" type="button" class="btn btn-success" onclick="edit()">글수정</button>
             <button type="button" type="button" class="btn btn-danger" onclick="delete1()">글삭제</button>
@@ -53,5 +54,5 @@ const delete1 = function(){
    	  </c:if>	
       </table>
 </form>  
-
+</div>
 <%@ include file="/WEB-INF/views/foot.jsp"%>

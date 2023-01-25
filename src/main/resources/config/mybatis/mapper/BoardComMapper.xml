@@ -41,4 +41,8 @@
 	<select id="selectBoardByIdx" resultType="BoardCom" parameterType="int">
 		select board_com.*,(select email from member where midx=board_com.midx ) email from  Board_Com where cidx=#{cidx}
 	</select>
+	
+	<select id="selectComByMidx" parameterType="int" resultType="BoardCom">
+		select * from board_com where midx=#{value}
+	</select>
 </mapper>

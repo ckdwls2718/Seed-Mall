@@ -151,8 +151,8 @@ const LikeC = function(){
 
 
 <div class='re2'>작성자: <c:out value="${Review.email}" /></div>
-<div class='re23'><img src="${myctx}/resources/Review_image/star.jpg" width="20">:<c:out value="${Review.score}"/></div>
 <div class='re2'>작성일: <c:out value="${Review.rdate}" /></div>
+<div class='re23'><c:forEach begin="1" end="${Review.score}"><img src="${myctx}/resources/Review_image/star.png" width="20"></c:forEach></div>
 
 <div>
 <c:forEach var="image" items="${Review.boardReviewImageList}">

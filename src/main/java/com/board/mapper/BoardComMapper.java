@@ -22,4 +22,7 @@ public interface BoardComMapper {
 	int updateReadnum(Integer cidx);
 	
 	BoardComVO selectBoardByIdx(Integer cidx);
+	
+	//내가 작성한 커뮤니티 글 가져오기
+	List<BoardComVO> selectComByMidx(int midx);
 }

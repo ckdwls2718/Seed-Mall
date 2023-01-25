@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.user.model.PagingVO;
 import com.board.model.QNADTO;
 import com.board.service.QNAService;
 import com.myplant.model.MyPlantVO;
@@ -27,6 +26,7 @@ import com.order.model.OrderProductVO;
 import com.order.model.OrderVO;
 import com.order.service.OrderService;
 import com.user.model.MemberVO;
+import com.user.model.PagingVO;
 import com.user.service.MemberService;
 
 import lombok.extern.log4j.Log4j;
@@ -179,11 +179,30 @@ public class AdminPageController {
 
 	// 키워주세요 식물관리
 	@GetMapping("/plantManagement")
-	public String plantManagement(Model m) {
 
-		List<MyPlantVO> plantArr = myPlantService.selectAllMyPlant(null);
-
+	public String plantManagement(Model m, @ModelAttribute com.user.model.PagingVO page, HttpServletRequest req
+			,@RequestHeader("user-Agent")String userAgent) {
+		log.info("page = "+page);
+		
+		String myctx = req.getContextPath();// 컨텍스트명 "/seedmall"
+		HttpSession ses = req.getSession();
+		
+		int totalCount = myPlantService.getMyplantTotal(page);
+		page.setTotalCount(totalCount);
+		page.setPageSize(12);
+		page.setPagingBlock(5);// 페이징 블럭 단위값: 5
+		////////////////////
+		page.init(ses); // 페이징 관련 연산을 수행하는 메서드 호출
+		
+		String loc = "admin/plantManagement";
+		
+		String pageNavi = page.getPageNavi(myctx, loc, userAgent);
+		
+		List<MyPlantVO> plantArr = myPlantService.selectAllMyPlant(page);
+		
 		m.addAttribute("plantArr", plantArr);
+		m.addAttribute("page", page);
+		m.addAttribute("pageNavi", pageNavi);
 
 		return "admin/plantList";
 	}

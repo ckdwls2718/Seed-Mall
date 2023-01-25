@@ -1,27 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!--  ---------------------------------------------------------- -->
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!-- function taglib------------------------------------------- -->
-
 <%@ include file="/WEB-INF/views/top.jsp"%>
 <style>
-td{
-	vertical-align: middle;
+a{
+	text-decoration: none;
+	color: black;
 }
 </style>
+<div class="d-flex">
+<%@ include file="/WEB-INF/views/member/mypageSidebar.jsp"%>
 <div class="container mt-3" style="height: 600px; overflow: auto;">
-
-	<div style="text-align: center;">
-		<img src="${myctx}/assets/Cbanner3.jpg" style="width: 550px; margin: 20px 0;">
-	</div>
 	<table class="table table-condensed " style="background:#f7f9fa; text-align: center; border: 1px solid #cccccc">
 		<thead>
 			<tr>
-				<th style="width: 7%"></th>
+				<th style="width: 7%">글번호</th>
 				<th style="width: 61%">제목</th>
-				<th style="width: 16%">아이디</th>
 				<th style="width: 8%">날짜</th>
 				<th style="width: 8%">조회수</th>
 			</tr>
@@ -41,10 +33,7 @@ td{
 							<c:out value="${board.cidx}" />
 						</td>
 						<td>
-							<a class="btn btn-default" href="${myctx}/boardGet?cidx=${board.cidx}">${board.ctitle}</a>
-						</td>
-						<td>
-							<c:out value="${board.email}" />
+							<a href="${myctx}/boardGet?cidx=${board.cidx}">${board.ctitle}</a>
 						</td>
 						<td>
 							<c:out value="${board.cdate}" />
@@ -57,17 +46,8 @@ td{
 			</c:if>
 		</tbody>
 	</table>
-	<div style="text-align: center; margin-top:3em;">
-	<c:if test="${loginUser.status == 0}">
-		<button type="button" class="btn btn-success" onclick="location.href='write'">글쓰기</button>
-	</c:if>
-	<c:if test="${loginUser.status == 9}">
-		<button type="button" class="btn btn-success" onclick="location.href='write'">글쓰기(Admin)</button>
-	</c:if>
-	</div>
-
 </div>
-
+</div>
 
 
 <%@ include file="/WEB-INF/views/foot.jsp"%>

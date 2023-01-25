@@ -53,17 +53,17 @@ function setThumbnail(event) {
 		<tr>		
 			<td>멘트</td>
 			<td>${plant.pcomment }</td>
-			<td><input type="text" name="pcomment" value=""></td>
+			<td><input type="text" name="pcomment" value="" required></td>
 		</tr>
 		<tr>		
 			<td>퍼센트</td>
 			<td>${plant.percent}%</td>
-			<td><input type="number" name="percent" value=""></td>
+			<td><input type="number" name="percent" value="" required></td>
 		</tr>
 		<tr>		
 			<td>이미지</td>
-			<td><img src="${myctx}/resources/plant_images/${plant.plantImage}" width="300px"></td>
-			<td><input type="file" name="plantImage" onchange="setThumbnail(event)"><div id="image_container"></div></td>
+			<td><img src="${myctx}/resources/plant_images/${plant.plantImage}" width="300px" ></td>
+			<td><input type="file" name="plantImage" onchange="setThumbnail(event)" required><div id="image_container" ></div></td>
 		</tr>
 	
 	</table>
@@ -72,8 +72,9 @@ function setThumbnail(event) {
 	<button class="btn btn-outline-info" type="reset">다시 쓰기</button>
 	</div>
 </form>
-
-식물 기록
+<hr color="green">
+<div class="text-center">
+<h2>식물 기록</h2>
 <div id="carouselExampleDark" class="carousel slide" data-bs-ride="carousel" style="width:50%">
   <div class="carousel-indicators">
   <c:forEach var="image" items="${plant.plantImageList}" varStatus="status">
@@ -98,6 +99,7 @@ function setThumbnail(event) {
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
+</div>
 </div>
 </div>
 
