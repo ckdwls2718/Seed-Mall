@@ -24,6 +24,7 @@ import com.myplant.model.MyPlantVO;
 import com.myplant.model.PlantForm;
 import com.myplant.model.PlantImageVO;
 import com.myplant.service.MyPlantService;
+import com.order.mapper.OrderMapper;
 import com.order.model.OrderProductVO;
 import com.order.model.OrderVO;
 import com.order.service.OrderService;
@@ -46,6 +47,9 @@ public class AdminPageController {
 
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private OrderMapper orderMapper;
 
 	@Autowired
 	private QNAService qnaService;
@@ -103,6 +107,7 @@ public class AdminPageController {
 		} else {
 			n = 0;
 		}
+		
 		String str = (n > 0) ? "패스워드가 변경되었습니다" : "패스워드가 일치하지 않습니다";
 		String loc = (n > 0) ? "adminPage" : "javascript:history.back()";
 
@@ -134,11 +139,23 @@ public class AdminPageController {
 			order.setProdList(orderProduct);
 		}
 
+		m.addAttribute("myctx", myctx);
 		m.addAttribute("pageNavi", pageNavi);
 		m.addAttribute("paging", page);
 		m.addAttribute("orderArr", orderArr);
 
 		return "admin/orderManagement";
+	}
+	
+	// 주문 상세 보기
+	@GetMapping("/orderManagementDetail/{desc_oidx}")
+	public String orderManagementDetail(Model m, @PathVariable("desc_oidx") int desc_oidx) {
+		// 수령자 정보, 배송 요청사항 출력
+		OrderVO order = orderService.getOrderMember(desc_oidx);
+		
+		m.addAttribute("order", order);
+		
+		return "admin/orderManagementDetail";
 	}
 
 	// 배송상태 설정완료 시
@@ -157,13 +174,13 @@ public class AdminPageController {
 		String myctx = req.getContextPath();
 		HttpSession ses = req.getSession();
 
-		int totalCount = orderService.getOrderCount(page);
+		int totalCount = orderMapper.getDeliveryCount(page);
 
 		page.setTotalCount(totalCount);
 		page.setPagingBlock(5);
 		page.init(ses);
 
-		String loc = "admin/orderManagement";
+		String loc = "admin/deliveryManagement";
 		String pageNavi = page.getPageNavi(myctx, loc, userAgent);
 
 		List<OrderVO> orderArr = orderService.getDeliveryList_paging(page);
@@ -259,13 +276,13 @@ public class AdminPageController {
 		String myctx = req.getContextPath();
 		HttpSession ses = req.getSession();
 
-		int totalCount = orderService.getOrderCount(page);
+		int totalCount = orderMapper.getRefundCount(page);
 
 		page.setTotalCount(totalCount);
 		page.setPagingBlock(5);
 		page.init(ses);
 
-		String loc = "admin/orderManagement";
+		String loc = "admin/refundManagement";
 		String pageNavi = page.getPageNavi(myctx, loc, userAgent);
 
 		List<OrderVO> orderArr = orderService.getRefundList_paging(page);
