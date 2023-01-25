@@ -72,6 +72,10 @@ public class BoardComServiceImpl implements BoardComService {
 	public List<BoardComVO> getBoardComListTop(int top) {
 		return boardComMapper.getBoardComListTop(top);
 	}
+	@Override
+	public int BoardComLike(int cidx) {
+		return boardComMapper.BoardComLike(cidx);
+	}
 
 	
 

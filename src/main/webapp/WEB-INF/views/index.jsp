@@ -102,11 +102,7 @@ button {
 	<div class="container px-4 px-lg-5 mt-5" style="width: 70%">
 	<div><img src="${myctx}/resources/img/retop3.png" ><hr></div>
 	<table class="table table-striped" id="products">
-					<thead>
-						<tr>
-							<th>내용</th>
-						</tr>
-					</thead>
+					
 					<tbody>
 						<!-- ------------------------ -->
 						<c:if test="${reviewArr eq null or empty reviewArr}">

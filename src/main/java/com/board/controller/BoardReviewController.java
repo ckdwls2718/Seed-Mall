@@ -18,6 +18,7 @@ import com.board.model.BoardReviewVO;
 import com.board.model.ReviewImageVO;
 import com.board.service.BoardReviewService;
 import com.board.service.NaverAiService;
+import com.common.service.CommonService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -31,9 +32,16 @@ public class BoardReviewController {
 	@Autowired
 	NaverAiService aiService;
 	
+	@Autowired
+	CommonService commonService;
+	
 	@GetMapping("/review/{pidx}")
 	public String getreview(Model m, @PathVariable("pidx") int pidx) {
 		List<BoardReviewVO> rarr= boardReviewService.getReview(pidx);
+		for(BoardReviewVO review: rarr) {
+			String email = commonService.emailPrivate(review.getEmail());
+			review.setEmail(email);
+		}
 		m.addAttribute("rarr", rarr);
 		return "review/review";
 		

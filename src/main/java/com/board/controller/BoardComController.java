@@ -2,7 +2,6 @@ package com.board.controller;
 
 import java.util.List;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -11,16 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.board.model.BoardComVO;
-import com.board.model.BoardVO;
 import com.board.service.BoardComService;
-import com.user.model.GradeVO;
+import com.common.service.CommonService;
 import com.user.model.MemberVO;
 import com.user.model.PagingVO;
 import com.user.service.MemberService;
@@ -37,24 +34,33 @@ public class BoardComController {
 	
 	@Autowired
 	MemberService memberService;
+	
+	@Autowired
+	CommonService commonService;
 
 	@GetMapping("/boardComList")
 	public String boardList(Model m, @ModelAttribute("page") PagingVO page, HttpServletRequest req,
 			@RequestHeader("user-Agent") String userAgent) {
 		String myctx = req.getContextPath();
 		HttpSession ses = req.getSession();
-
+		
+		page.setPageSize(10);
 		int totalCount = boardComService.getBoardCount(page);
 
 		// 2. 이거 추가
 		page.setTotalCount(totalCount);
 		page.setPagingBlock(5);
 		page.init(ses);
-
+		
+		
 		List<BoardComVO> boardComArr = boardComService.getBoardList(page);
+		for(BoardComVO com : boardComArr) {
+			String email = commonService.emailPrivate(com.getEmail());
+			com.setEmail(email);
+		}
 		log.info(boardComArr);
 
-		String loc = "boardCom/boardComList";
+		String loc = "boardComList";
 		String pageNavi = page.getPageNavi(myctx, loc, userAgent);
 
 		m.addAttribute("pageNavi", pageNavi);
@@ -112,10 +118,22 @@ public class BoardComController {
 		
 		int n=boardComService.updateReadnum(cidx);
 		log.info("n==="+n);
-		m.addAttribute("boardCom",boardComService.selectBoardByIdx(cidx));
+		BoardComVO boardCom = boardComService.selectBoardByIdx(cidx);
+		String email = commonService.emailPrivate(boardCom.getEmail());
+		boardCom.setEmail(email);
+		m.addAttribute("boardCom",boardCom);
 		
 		return "boardCom/boardComView";
 		//게시판 글보기 및 조회수 업데이트
 	}//-------------------------------
-
+	
+	@PostMapping(value="/user/boardCom/like",produces = "application/json")
+	@ResponseBody
+	public int boardComLike(@RequestParam("cidx")int cidx) {
+		log.info("cidx =="+cidx);
+		
+		int n = boardComService.BoardComLike(cidx);
+		return n;
+	}
+	
 }

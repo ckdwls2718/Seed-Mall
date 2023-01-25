@@ -5,7 +5,13 @@
 <mapper namespace="com.board.mapper.BoardComMapper">
 	<select id="getBoardList" resultType="BoardCom"
 		parameterType="Paging">
-		select board_com.*,(select email from member  where midx=board_com.midx ) email from board_com order by cidx desc
+		select * 
+		from
+		(select row_number() over(order by cidx desc) rn, board_com.*,(select email from member  where midx=board_com.midx ) email 
+		from board_com )
+		<![CDATA[
+			 where rn > #{start} and rn < #{end}
+		]]>
 	</select>
 
 	<select id="getBoardCount" resultType="int"
@@ -53,4 +59,8 @@
 		]]>
 		ORDER by clikenum desc, creadnum desc
 	</select>
+	
+	<update id="BoardComLike" parameterType="int">
+		update board_com set clikenum = clikenum+1 where cidx=#{value}
+	</update>
 </mapper>

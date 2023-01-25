@@ -28,4 +28,7 @@ public interface BoardComService {
 	
 	//커뮤니티 좋아요 top가져오기
 	List<BoardComVO> getBoardComListTop(int top);
+	
+	//커뮤니티 좋아요
+	int BoardComLike(int cidx);
 }
