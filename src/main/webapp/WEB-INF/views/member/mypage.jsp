@@ -20,7 +20,8 @@ h2 {
 	<%@ include file="/WEB-INF/views/member/mypageSidebar.jsp"%>
 	<div class="container" style="width: 600px; margin-top: 50px; height: 50.7em;">
 		<h2>마이페이지</h2>
-		<table class="table" style="">
+		<table class="table">
+			<c:if test="${loginUser.grade ne '열매회원' }">
 			<tr>
 				<td width="80px;" class="m1">
 					<b>등급</b>
@@ -40,6 +41,17 @@ h2 {
 					</div>
 				</td>
 			</tr>
+			</c:if>
+			<c:if test="${loginUser.grade eq '열매회원' }">
+			<tr>
+				<td width="80px;" class="m1">
+					<b>등급</b>
+				</td>
+				<td class="m2">
+					<img width="30px" src="${myctx}/resources/grade_images/${loginUser.grade}.png"> ${loginUser.grade}
+				</td>
+			</tr>
+			</c:if>
 			<tr>
 				<td width="80px;" class="m1">
 					<b>이름</b>

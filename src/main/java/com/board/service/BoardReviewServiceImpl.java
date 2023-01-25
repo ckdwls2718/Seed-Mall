@@ -190,10 +190,10 @@ public class BoardReviewServiceImpl implements BoardReviewService {
 
 				if (result == 0)
 					return 0;
-
+		
 				// 이미지 업로드
 				List<MultipartFile> imageList = review.getRimage();
-				if (imageList != null && !imageList.isEmpty()) {
+				if (imageList != null && !imageList.get(0).isEmpty()) {
 					for (MultipartFile mf : imageList) {
 
 						// 원본 이미지 저장
@@ -205,9 +205,7 @@ public class BoardReviewServiceImpl implements BoardReviewService {
 
 						if (result2 == 0) {
 							log.info(mf.getOriginalFilename() + " DB 저장 실패");
-
 						}
-
 					}
 				}
 				// 0:1

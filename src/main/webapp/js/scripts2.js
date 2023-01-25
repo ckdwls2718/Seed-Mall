@@ -43,6 +43,11 @@ function member_check(){
 	    mf.email.select();
 	    return false;
 	}
+	
+	if(!$('#check_all').is(":checked")){
+		alert('약관에 동의해야 회원가입이 가능합니다.');
+		return false;
+	}
 	mf.submit();
 }//-----------------------
 

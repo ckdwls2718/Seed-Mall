@@ -161,8 +161,28 @@ padding-bottom: 12px;
 					</td>
 				</tr>
 				<tr>
+				<td width="26%" class="m1"><b>약관 확인</b></td>
+
+				<td width="97%" class="m2"><div class="checkbox_group" >
+
+				<label for="check_all" >전체 동의</label>
+  				<input type="checkbox" id="check_all" ><br>
+
+  				<label for="check_1" >개인정보 처리방침 동의(필수)</label>
+  				<input type="checkbox" id="check_1" class="normal" ><br>
+
+  				<label for="check_2">서비스 이용약관 동의(필수)</label>
+  				<input type="checkbox" id="check_2" class="normal" ><br>
+
+  				<a href="javascript:popup()">약관 상세보기</a>
+
+
+				</div>
+					</td>
+			</tr>
+				<tr>
 					<td colspan="2" class="text-center" id="last">
-						<button class="btn btn-success" type="button" id="joinbtn"onclick="member_check()">회원가입</button>
+						<button class="btn btn-success" type="button" id="joinbtn" onclick="member_check()">회원가입</button>
 						<button class="btn btn-outline-danger" type="reset">다시쓰기</button>
 					</td>
 				</tr>
@@ -191,7 +211,7 @@ $(".checkbox_group").on("click", ".normal", function() {
 
 function popup(){
     var url="check";
-    var option="width=1000, height=700, top=600";
+    var option="width=600, height=500, top=600";
     window.open(url,"check", option);
 }
 </script>
