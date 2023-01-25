@@ -38,15 +38,15 @@
 	
 	<select id="getQNAList" parameterType="BoardPaging" resultType="QNA">
 		select * from(
-				select row_number() over(order by qidx desc, qdate asc) rn, b.*, m.email 
-				from board_qna b join member m on b.midx=m.midx)
-				<![CDATA[
-				where rn > #{start} and rn < #{end}
-				]]>
+		<include refid="getQnaQuery"/>
+		)
+		<![CDATA[
+		where rn > #{start} and rn < #{end}
+		]]>
 	</select>
 	
 	<select id="getQNACount" parameterType="BoardPaging" resultType="int">
-		select count(qidx) from board_qna
+		<include refid="getQnaCountQuery"/>
 	</select>
 	
 	<delete id="deleteQNA" parameterType="int">
@@ -56,4 +56,31 @@
 	<delete id="deleteQNARe" parameterType="int">
 		delete from re_board_qna where re_qidx=#{value}
 	</delete>
+	
+	<sql id="getQnaQuery">
+		<if test="findState!=1 &amp;&amp; findState!=2">
+		select row_number() over(order by b.qdate desc) rn, b.*, m.email 
+		from board_qna b join member m on b.midx=m.midx
+		</if>
+		<if test="findState==1">
+		select row_number() over(order by b.qdate desc) rn, b.*, (select email from member m where m.midx=b.midx) email
+		from board_qna b left outer join re_board_qna r on b.qidx=r.qidx where r.re_qidx is null
+		</if>
+		<if test="findState==2">
+		select row_number() over(order by b.qdate desc) rn, b.*, (select email from member m where m.midx=b.midx) email
+		from board_qna b join re_board_qna r on b.qidx=r.qidx
+		</if>
+	</sql>
+	
+	<sql id="getQnaCountQuery">
+		<if test="findState!=1 &amp;&amp; findState!=2">
+			select count(qidx) from board_qna
+		</if>
+		<if test="findState==1">
+			select count(b.qidx) from board_qna b left outer join re_board_qna r on b.qidx=r.qidx where r.re_qidx is null
+		</if>
+		<if test="findState==2">
+			select count(b.qidx) from board_qna b join re_board_qna r on b.qidx=r.qidx
+		</if>
+	</sql>
 </mapper>
