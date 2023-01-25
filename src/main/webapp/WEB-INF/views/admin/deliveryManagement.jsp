@@ -20,6 +20,7 @@
 							<th>주문개요번호</th>
 							<th>주문상품</th>
 							<th>주문날짜</th>
+							<th>배송메모</th>
 							<th>총 주문가격</th>
 							<th>배송상태</th>
 						</tr>
@@ -27,7 +28,7 @@
 					<tbody>
 						<c:if test="${orderArr eq null or empty orderArr}">
 							<tr>
-								<td colspan="5"><b>데이터가 없습니다.</b></td>
+								<td colspan="6"><b>데이터가 없습니다.</b></td>
 							</tr>
 						</c:if>
 						<c:if test="${orderArr ne null and not empty orderArr}">
@@ -38,6 +39,7 @@
 											test="${fn:length(order.prodList) > 1}">외 ${fn:length(order.prodList)-1} 건 </c:if>
 									</td>
 									<td>${order.desc_odate}</td>
+									<td><c:out value="${order.ocomment}"/></td>
 									<td><fmt:formatNumber value="${order.desc_oTotalPrice}"
 											pattern="###,###" /> 원</td>
 									<td>${order.statusStr}</td>

@@ -35,6 +35,10 @@ public interface OrderMapper {
 
 	// (어드민페이지 - 페이징 처리)몇 개 주문했는지
 	int getOrderCount(PagingVO pvo);
+	// (어드민페이지 - 페이징 처리)배송 중인 식물 목록
+	int getDeliveryCount(PagingVO pvo);
+	// (어드민페이지 - 페이징 처리)환불 처리 중인 식물 목록
+	int getRefundCount(PagingVO pvo);
 
 	// 주문정보 수정
 	int updateOrder(OrderVO ovo);
