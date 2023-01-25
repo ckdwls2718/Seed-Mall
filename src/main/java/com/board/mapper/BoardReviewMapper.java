@@ -27,6 +27,9 @@ public interface BoardReviewMapper {
 	//내가 작성한 리뷰 가져오기
 	List<BoardReviewVO> selectReviewByMidx(Integer midx);
 	
+	//사진리뷰 top 가져오기
+	List<BoardReviewVO> getReviewListTop(int top);
+	
 	int like_check(BoardReviewVO review);
 	
 	int like_check_cancel(BoardReviewVO review);

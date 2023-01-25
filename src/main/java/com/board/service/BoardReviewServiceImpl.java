@@ -83,6 +83,16 @@ public class BoardReviewServiceImpl implements BoardReviewService {
 		}
 		return reviewArr;
 	}
+	
+	@Override
+	public List<BoardReviewVO> getReviewListTop(int top) {
+		List<BoardReviewVO> reviewArr = boardReviewMapper.getReviewListTop(top);
+		for(BoardReviewVO review : reviewArr) {
+			List<ReviewImageVO> imageArr = getReviewImages(review.getRidx());
+			review.setBoardReviewImageList(imageArr);
+		}
+		return reviewArr;
+	}
 
 	@Override
 	public BoardReviewVO getReviewVO(BoardReviewVO review) {

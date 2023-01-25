@@ -25,4 +25,7 @@ public interface BoardComMapper {
 	
 	//내가 작성한 커뮤니티 글 가져오기
 	List<BoardComVO> selectComByMidx(int midx);
+	
+	//커뮤니티 좋아요 top가져오기
+	List<BoardComVO> getBoardComListTop(int top);
 }

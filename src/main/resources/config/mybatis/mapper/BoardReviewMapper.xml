@@ -26,6 +26,16 @@
 	<select id="selectReviewByMidx" parameterType="int" resultType="Review">
 		select * from board_re where midx=#{value}
 	</select>
+	
+	<select id="getReviewListTop" parameterType="int" resultType="Review"> 
+		select DISTINCT b.*,(select email from member where midx=b.midx ) email,
+		(select pidx from orders o where o.oidx=b.oidx) pidx
+		from board_re b join review_image r on b.ridx=r.ridx
+		<![CDATA[
+			 where rownum<#{value}+1 
+		]]>
+		order by rlikenum desc
+	</select>
     
 	<update id="updateReadnum" parameterType="int">
 		update board_re set rreadnum=rreadnum+1 where ridx=#{value}

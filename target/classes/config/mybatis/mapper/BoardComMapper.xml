@@ -17,8 +17,8 @@
 		<selectKey keyProperty="cidx" resultType="int" order="BEFORE">
 			select board_community_seq.nextval from dual
 		</selectKey>
-		insert into board_com(cidx,midx,ctitle,ccontent,cdate,creadnum)
-		values(#{cidx},#{midx},#{ctitle},#{ccontent:VARCHAR},SYSDATE,#{creadnum}
+		insert into board_com(cidx,midx,ctitle,ccontent,cdate,creadnum, clikenum)
+		values(#{cidx},#{midx},#{ctitle},#{ccontent:VARCHAR},SYSDATE,#{creadnum},0
 		)	
 	</insert>
 	
@@ -44,5 +44,13 @@
 	
 	<select id="selectComByMidx" parameterType="int" resultType="BoardCom">
 		select * from board_com where midx=#{value}
+	</select>
+	
+	<select id="getBoardComListTop" parameterType="int" resultType="BoardCom">
+		select board_com.*, (select email from member where midx=board_com.midx ) email from board_com 
+		<![CDATA[
+			 where rownum<#{value}+1 
+		]]>
+		ORDER by clikenum desc, creadnum desc
 	</select>
 </mapper>

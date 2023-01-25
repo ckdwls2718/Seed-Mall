@@ -68,7 +68,10 @@ public class BoardComServiceImpl implements BoardComService {
 		return boardComMapper.selectComByMidx(midx);
 	}
 
-
+	@Override
+	public List<BoardComVO> getBoardComListTop(int top) {
+		return boardComMapper.getBoardComListTop(top);
+	}
 
 	
 
