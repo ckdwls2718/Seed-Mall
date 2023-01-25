@@ -11,7 +11,8 @@ public class CommonService {
 		
 		String[] strArr = email.split("@");
 		String star = "";
-		for(int i = 0; i<strArr[0].substring(5).length();i++) {
+		int index = strArr[0].length()/2;
+		for(int i = 0; i<strArr[0].substring(index).length();i++) {
 			star+="*";
 		}
 		
