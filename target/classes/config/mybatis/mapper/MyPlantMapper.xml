@@ -24,10 +24,12 @@
 		select * 
 		from(
 		select row_number() over(order by pdate desc) rn, m.*, (select email from member where midx = m.midx) email from myplant m
+		<include refid="findPlantTypeWhere"/>
 		)
 		<![CDATA[
 		where rn>#{start} and rn<#{end}
 		]]>
+		
 		<include refid="findPlantWhere"/>
 		<include refid="myplantSort" />
 	</select>
@@ -35,11 +37,8 @@
 	<select id="getMyplantTotal" resultType="int" parameterType="Paging">
 		select count(*)
 		from myplant p join member m on p.midx = m.midx
-		<if test="findKeyword!=null and findKeyword!=''">
-			<where>
-			 	email like '%'||#{findKeyword}||'%'
-			</where>
-		</if>
+		<include refid="findPlantTypeWhere"/>
+		<include refid="findPlantWhere"/>
 	</select>
 	
 	<select id="getPlantImages" parameterType="int" resultType="MyPlantI">
@@ -68,11 +67,33 @@
 		where plant_idx=#{value}
 	</select>
 	
+	<sql id="findPlantTypeWhere">
+		<if test="findState==1">
+			<where>
+			<![CDATA[
+			percent<=0
+			]]>
+			</where>
+		</if>
+		<if test="findState==2">
+			<where>
+			<![CDATA[
+			percent>0 and percent<100
+			]]>
+			</where>
+		</if>
+		<if test="findState==3">
+			<where>
+			<![CDATA[
+			percent=100
+			]]>
+			</where>
+		</if>
+	</sql>
+	
 	<sql id="findPlantWhere">
-		<if test="findKeyword!=null and findKeyword!=''">
-			
+		<if test="findKeyword!=null and findKeyword!=''">	
 			and email like '%'||#{findKeyword}||'%'
-			
 		</if>
 	</sql>
 	

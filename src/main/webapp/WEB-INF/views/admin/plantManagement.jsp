@@ -65,7 +65,7 @@ function setThumbnail(event) {
 		<tr>		
 			<td>퍼센트</td>
 			<td>${plant.percent}%</td>
-			<td><input type="number" name="percent" value="" required></td>
+			<td><input type="number" name="percent" value="" max="100" required></td>
 		</tr>
 		<tr>		
 			<td>이미지</td>

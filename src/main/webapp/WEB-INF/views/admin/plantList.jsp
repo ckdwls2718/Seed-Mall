@@ -13,8 +13,10 @@
 	<%@ include file="/WEB-INF/views/admin/adminPageSidebar.jsp"%>
 
 <main class="container m-3" style="width:70%">
+	<div class="row"><h2>${stateStr}</h2> <p>검색된 식물 : ${page.totalCount}건</p></div>
 	<div>
 		<form>
+		<input type="hidden" name="findState" value="${page.findState}">
 		<div class="form-row">
 			<div class="col-8">
 			<input class="form-control" type="text" name="findKeyword" placeholder="주문자 이메일을 입력해주세요" value="${page.findKeyword}">

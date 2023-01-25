@@ -290,6 +290,27 @@ a {
 			$(this).next("div").toggleClass("hide");
 		});
 	});
+	
+	const prodRead = function(pidx){
+		let url = "prod/read";
+		
+		$.ajax({
+			url: url,
+			type:'post',
+			data:'pidx='+pidx,
+			dataType:'json',
+			cache:false,
+			success:function(res){
+				//alert(res);
+				if(res>0){
+					location.href="prod/"+pidx;
+				}
+			},
+			error:function(err){
+				alert("err:"+err.status);
+			}
+		})
+	}
 </script>
 
 <body oncontextmenu='return false' class='snippet-body'>
@@ -387,12 +408,12 @@ a {
 			<c:forEach var="prod" items="${prodArr}">
 				<div class="col-lg-3 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3">
 					<div class="product">
-						<a href="prod/${prod.pidx}"><img src="${myctx}/resources/product_images/${prod.pimageList[0].pimage}" alt=""> </a>
-						<ul class="d-flex align-items-center justify-content-center list-unstyled icons">
+						<a onclick="prodRead('${prod.pidx}')"><img src="${myctx}/resources/product_images/${prod.pimageList[0].pimage}"></a>
+						<!-- <ul class="d-flex align-items-center justify-content-center list-unstyled icons">
 							<li class="icon"><span class="fas fa-expand-arrows-alt"></span></li>
 							<li class="icon mx-3"><span class="far fa-heart"></span></li>
 							<li class="icon"><span class="fas fa-shopping-bag"></span></li>
-						</ul>
+						</ul> -->
 					</div>
 					<div class="tag ${prod.pspec}">${prod.pspec}</div>
 					<div class="title pt-4 pb-1">
