@@ -28,13 +28,14 @@
 	</select>
 	
 	<select id="getReviewListTop" parameterType="int" resultType="Review"> 
+		select * from(
 		select DISTINCT b.*,(select email from member where midx=b.midx ) email,
 		(select pidx from orders o where o.oidx=b.oidx) pidx
 		from board_re b join review_image r on b.ridx=r.ridx
+		order by rlikenum desc)
 		<![CDATA[
 			 where rownum<#{value}+1 
 		]]>
-		order by rlikenum desc
 	</select>
     
 	<update id="updateReadnum" parameterType="int">

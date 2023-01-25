@@ -87,7 +87,7 @@ td{
             <button type="button" type="button" class="btn btn-danger" onclick="delete1()">글삭제</button>
             </div>
       </c:if>
-
+      
 </form>  
 </div>
 <%@ include file="/WEB-INF/views/foot.jsp"%>

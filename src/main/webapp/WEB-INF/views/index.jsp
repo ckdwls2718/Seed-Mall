@@ -10,10 +10,10 @@ button {
 	<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
 		<div class="carousel-inner">
 			<div class="carousel-item active" style="text-align: center;">
-				<img src="./assets/template1.jpg" class="" alt="..." style="height: 500px; width: auto;">
+				<img src="./assets/template3.png" class="" alt="..." style="height: 500px; width: auto;">
 			</div>
 			<div class="carousel-item" style="text-align: center;">
-				<img src="./assets/template2.jpg" class="" alt="..." style="height: 500px; width: auto;">
+				<img src="./assets/template4.jpg" class="" alt="..." style="height: 500px; width: auto;">
 			</div>
 			<div class="carousel-item" style="text-align: center;">
 				<img src="./assets/template3.jpg" class="" alt="..." style="height: 500px; width: auto;">

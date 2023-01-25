@@ -16,7 +16,7 @@ public class CommonService {
 			star+="*";
 		}
 		
-		String word =  strArr[0].substring(0, 5);
+		String word =  strArr[0].substring(0, index);
 		result = word+star+"@"+strArr[1];
 		
 		return result;

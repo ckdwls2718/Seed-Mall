@@ -56,6 +56,9 @@ public class AdminHistoryController {
 		
 		//월매출
 		Map<Integer, Long> map = new TreeMap<>();
+		for(int i=1;i<=12;i++) {
+			map.put(i, 0L);
+		}
 
 		for(SalesDTO sales :salesArr) {
 			Integer month2 = Integer.valueOf(sales.getToChar().substring(4,6));
