@@ -11,8 +11,9 @@ $(function(){
 	//alert(src);
 	$('#status'+status+' img').attr('src',src);
 })
-const reviewForm = function(oidx){
+const reviewForm = function(oidx,pidx){
 	$('input[name=oidx]').val(oidx);
+	$('input[name=pidx]').val(pidx);
 	goReviewF.submit();
 }
 
@@ -157,7 +158,7 @@ const orderCancellation = function(oidx) {
 				<td><fmt:formatNumber pattern="###,###,###" value="${product.opoint}"/>P</td>
 				<td><fmt:formatNumber pattern="###,###,###" value="${product.osalePrice*product.oqty}"/>원</td>
 				<c:if test="${order.deliveryState eq 4}">
-				<td><button type="button" onclick="reviewForm('${product.oidx}')">리뷰 작성</button></td>
+				<td><button type="button" onclick="reviewForm('${product.oidx}','${product.pidx}')">리뷰 작성</button></td>
 				</c:if>
 			</tr>
 			</c:forEach>
@@ -189,6 +190,6 @@ const orderCancellation = function(oidx) {
 </div>
 <form id="goReviewF" action="../review" method="post">
 <input type="hidden" name="oidx">
-<input type="hidden" name="pidx" value="${pidx}">
+<input type="hidden" name="pidx">
 </form>
 <%@ include file="/WEB-INF/views/foot.jsp"%>

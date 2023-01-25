@@ -58,7 +58,8 @@ public interface MemberService {
 	//등급 할인률 가져오기
 	GradeVO getDrate(MemberVO mvo);
 
-	
+	//자신의 다음 등급 가져오기
+	GradeVO getNextGrade(MemberVO mvo);
 
 	
 

@@ -17,8 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.board.mapper.BoardReviewMapper;
 import com.board.model.BoardReviewVO;
 import com.board.model.ReviewImageVO;
-import com.product.model.ProductForm;
-import com.product.model.ProductImageVO;
+import com.product.model.ProductVO;
+import com.product.service.ProductService;
 import com.user.model.PagingVO;
 
 import lombok.extern.log4j.Log4j;
@@ -29,6 +29,9 @@ import net.coobird.thumbnailator.Thumbnailator;
 public class BoardReviewServiceImpl implements BoardReviewService {
 	@Autowired
 	BoardReviewMapper boardReviewMapper;
+	
+	@Autowired
+	ProductService prodService;
 	
 	@Override
 	public List<BoardReviewVO> getReview(int pidx) {
@@ -67,6 +70,19 @@ public class BoardReviewServiceImpl implements BoardReviewService {
 
 		return boardReviewMapper.selectBoardByIdx(ridx);
 	}
+	
+	@Override
+	public List<BoardReviewVO> selectReviewByMidx(Integer midx) {
+		List<BoardReviewVO> reviewArr = boardReviewMapper.selectReviewByMidx(midx);
+		for(BoardReviewVO review : reviewArr) {
+			List<ReviewImageVO> imageArr = getReviewImages(review.getRidx());
+			review.setBoardReviewImageList(imageArr);
+			ProductVO prod = prodService.selectByOidx(review.getOidx());
+			review.setProd(prod);
+			
+		}
+		return reviewArr;
+	}
 
 	@Override
 	public BoardReviewVO getReviewVO(BoardReviewVO review) {
@@ -90,7 +106,6 @@ public class BoardReviewServiceImpl implements BoardReviewService {
 	
 	@Override
 	public List<ReviewImageVO> getReviewImages(Integer ridx) {
-		// TODO Auto-generated method stub
 		return boardReviewMapper.getReviewImages(ridx);
 	}
 

@@ -69,7 +69,7 @@ a {
 
 			<div class="row py-1" style="margin-left: 2px;">
 
-				<div class="col-md-3 text-left " style="padding-top: 12px;">
+				<div class="col-md-2 text-left " style="padding-top: 12px;">
 					<form name="pagingSizeF" action="prodList">
 						&nbsp; <select name="pageSize" class="pageSize"
 							onchange="submit()">
@@ -87,18 +87,17 @@ a {
 					</form>
 				</div>
 				<!-- 검색창  -->
-				<div class="col-md-6" style="width: 500px;">
+				<div class="col-md-7" >
 					<form name="searchF" action="prodList" onsubmit="return check()">
 						<!-- ---hidden data------------------------------------------ -->
 						<input type="hidden" name="pageSize" value="${pageSize}">
 						<input type="hidden" name="cpage" value="${paging.cpage}">
 						<!-- ------------------------------------------------------- -->
-						<label> <input type="text" name="findKeyword"
-							placeholder="검색어를 입력하세요" autofocus="autofocus"
-							style='width: 300px;'>
-							<button class="btn btn-outline-success" id="searchbar">검
-								색</button>
-						</label>
+						
+						<input type="text" name="findKeyword" class="form-control"
+							placeholder="검색어를 입력하세요" autofocus="autofocus" style="width:80%">
+							<button class="btn btn-outline-success" id="searchbar">검색</button>
+						
 					</form>
 				</div>
 				<div class="col-md-3" >

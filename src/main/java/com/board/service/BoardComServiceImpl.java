@@ -63,7 +63,10 @@ public class BoardComServiceImpl implements BoardComService {
 		return this.boardComMapper.selectBoardByIdx(cidx);
 	}
 
-
+	@Override
+	public List<BoardComVO> selectComByMidx(int midx) {
+		return boardComMapper.selectComByMidx(midx);
+	}
 
 
 

@@ -20,8 +20,26 @@
 		values(#{image_pidx},#{pimage},sysdate,#{plant_idx})
 	</insert>
 	
-	<select id="selectAllMyPlant" resultType="MyPlant">
-		select * from myplant
+	<select id="selectAllMyPlant" resultType="MyPlant" parameterType="Paging">
+		select * 
+		from(
+		select row_number() over(order by pdate desc) rn, m.*, (select email from member where midx = m.midx) email from myplant m
+		)
+		<![CDATA[
+		where rn>#{start} and rn<#{end}
+		]]>
+		<include refid="findPlantWhere"/>
+		<include refid="myplantSort" />
+	</select>
+	
+	<select id="getMyplantTotal" resultType="int" parameterType="Paging">
+		select count(*)
+		from myplant p join member m on p.midx = m.midx
+		<if test="findKeyword!=null and findKeyword!=''">
+			<where>
+			 	email like '%'||#{findKeyword}||'%'
+			</where>
+		</if>
 	</select>
 	
 	<select id="getPlantImages" parameterType="int" resultType="MyPlantI">
@@ -49,5 +67,29 @@
 		from myplant mp join member m on mp.midx=m.midx 
 		where plant_idx=#{value}
 	</select>
-
+	
+	<sql id="findPlantWhere">
+		<if test="findKeyword!=null and findKeyword!=''">
+			
+			and email like '%'||#{findKeyword}||'%'
+			
+		</if>
+	</sql>
+	
+	<sql id="myplantSort">
+		<if test="findType!=null and findType!=''">
+			<if test="findType==1">
+				order by pdate desc
+			</if>
+			<if test="findType==2">
+				order by pdate asc
+			</if>
+			<if test="findType==3">
+				order by percent desc
+			</if>
+			<if test="findType==4">
+				order by percent asc
+			</if>
+		</if>
+	</sql>
 </mapper>

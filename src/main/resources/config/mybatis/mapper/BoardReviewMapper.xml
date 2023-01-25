@@ -22,6 +22,10 @@
     <select id="getReviewVO" parameterType="Review" resultType="Review">
 		select board_re.*,(select email from member where midx=board_re.midx ) email from  board_re where ridx=#{ridx}
 	</select>
+	
+	<select id="selectReviewByMidx" parameterType="int" resultType="Review">
+		select * from board_re where midx=#{value}
+	</select>
     
 	<update id="updateReadnum" parameterType="int">
 		update board_re set rreadnum=rreadnum+1 where ridx=#{value}

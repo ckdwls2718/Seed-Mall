@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.product.model.ProductVO;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,6 +32,7 @@ public class BoardReviewVO {
 	private String email;
 	private List<ReviewImageVO> boardReviewImageList = new ArrayList<>();
 	private List<MultipartFile> rimage;
+	private ProductVO prod;
 	
 	
 }
