@@ -27,6 +27,7 @@ public class PagingVO {
 	//검색 관련 프로퍼티
 	private String findType; //검색 유형
 	private String findKeyword;//검색 키워드
+	private int findState; //검색 상태 1:신규 2:관리중 3:완료 4:전체보기
 	
 	//페이징 처리 연산을 수행하는 메서드
 	public void init(HttpSession ses) {
@@ -65,7 +66,7 @@ public class PagingVO {
 			}
 		}
 		String link=myctx+"/"+loc;
-		String qStr="?pageSize="+pageSize+"&findType="+findType+"&findKeyword="+findKeyword;
+		String qStr="?pageSize="+pageSize+"&findType="+findType+"&findKeyword="+findKeyword+"&findState="+findState;
 		link+=qStr;
 		String str="";
 		StringBuilder buf=new StringBuilder();

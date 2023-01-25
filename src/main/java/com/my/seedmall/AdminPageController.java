@@ -1,5 +1,6 @@
 package com.my.seedmall;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -179,17 +181,17 @@ public class AdminPageController {
 
 	// 키워주세요 식물관리
 	@GetMapping("/plantManagement")
-
 	public String plantManagement(Model m, @ModelAttribute com.user.model.PagingVO page, HttpServletRequest req
 			,@RequestHeader("user-Agent")String userAgent) {
 		log.info("page = "+page);
+		
 		
 		String myctx = req.getContextPath();// 컨텍스트명 "/seedmall"
 		HttpSession ses = req.getSession();
 		
 		int totalCount = myPlantService.getMyplantTotal(page);
 		page.setTotalCount(totalCount);
-		page.setPageSize(12);
+		page.setPageSize(2);
 		page.setPagingBlock(5);// 페이징 블럭 단위값: 5
 		////////////////////
 		page.init(ses); // 페이징 관련 연산을 수행하는 메서드 호출
@@ -200,7 +202,17 @@ public class AdminPageController {
 		
 		List<MyPlantVO> plantArr = myPlantService.selectAllMyPlant(page);
 		
+		String stateStr = "";
+		switch(page.getFindState()) {
+		case 1: stateStr = "신규";break;
+		case 2: stateStr = "관리중";break;
+		case 3: stateStr = "완료";break;
+		default: stateStr = "전체보기";break;
+		
+		}
+		
 		m.addAttribute("plantArr", plantArr);
+		m.addAttribute("stateStr", stateStr);
 		m.addAttribute("page", page);
 		m.addAttribute("pageNavi", pageNavi);
 
