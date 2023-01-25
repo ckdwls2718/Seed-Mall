@@ -1,10 +1,18 @@
 package com.board.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +22,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.board.model.BoardComVO;
 import com.board.service.BoardComService;
 import com.common.service.CommonService;
+import com.google.gson.JsonObject;
 import com.user.model.MemberVO;
 import com.user.model.PagingVO;
 import com.user.service.MemberService;
@@ -127,6 +138,7 @@ public class BoardComController {
 		//게시판 글보기 및 조회수 업데이트
 	}//-------------------------------
 	
+
 	@PostMapping(value="/user/boardCom/like",produces = "application/json")
 	@ResponseBody
 	public int boardComLike(@RequestParam("cidx")int cidx) {
@@ -136,4 +148,61 @@ public class BoardComController {
 		return n;
 	}
 	
+
+	@ResponseBody
+	@PostMapping(value = "fileupload.do")
+	public void noticeImageUpload(HttpServletRequest req, HttpServletResponse resp,
+			MultipartHttpServletRequest multiFile) throws Exception {
+		PrintWriter printWriter = null;
+		OutputStream out = null;
+		MultipartFile file = multiFile.getFile("upload");
+
+		if (file != null) {
+			if (file.getSize() > 0 && StringUtils.isNotBlank(file.getName())) {
+				if (file.getContentType().toLowerCase().startsWith("image/")) {
+					try {
+
+						String fileName = file.getOriginalFilename();
+						byte[] bytes = file.getBytes();
+
+						String uploadPath = req.getSession().getServletContext().getRealPath("/resources/Comimg"); // 저장경로
+						System.out.println("uploadPath:" + uploadPath);
+
+						File uploadFile = new File(uploadPath);
+						if (!uploadFile.exists()) {
+							uploadFile.mkdir();
+						}
+						String fileName2 = UUID.randomUUID().toString();
+						uploadPath = uploadPath + "/" + fileName2 + fileName;
+
+						out = new FileOutputStream(new File(uploadPath));
+						out.write(bytes);
+
+						printWriter = resp.getWriter();
+						String fileUrl = req.getContextPath() + "/resources/Comimg/" + fileName2 + fileName; // url경로
+						JsonObject json = new JsonObject();
+						json.addProperty("uploaded", 1);
+						json.addProperty("fileName", fileName);
+						json.addProperty("url", fileUrl);
+						printWriter.print(json);
+						System.out.println(json);
+
+					} catch (IOException e) {
+						e.printStackTrace();
+					} finally {
+						if (out != null) {
+							out.close();
+						}
+						if (printWriter != null) {
+							printWriter.close();
+						}
+					}
+				}
+
+			}
+
+		}
+	}//-----------
+	
+
 }

@@ -51,7 +51,7 @@ td{
 <div class="container mt-3" >
 <form name="bf" id="bf" role="form" method="POST" >
    <input type="hidden" name="midx" value="${loginUser.midx}">
-   <input type="hidden" name="cidx" value="${boardCom.cidx}">     
+   <input type="hidden" name="cidx" value="${boardCom.cidx}">      
     <table class="table">
        <tr>
           <td style="width:10%"><b>제목</b></td>
@@ -83,11 +83,12 @@ td{
       </table>
       <div class="row" style="min-height: 300px">${boardCom.ccontent}</div>
       <c:if test="${loginUser.midx eq boardCom.midx}">
-      <div class="row">
+      <div class="text-center m-3">
       		<button type="button" type="button" class="btn btn-success" onclick="edit()">글수정</button>
             <button type="button" type="button" class="btn btn-danger" onclick="delete1()">글삭제</button>
             </div>
       </c:if>
+
 </form>  
 </div>
 <%@ include file="/WEB-INF/views/foot.jsp"%>

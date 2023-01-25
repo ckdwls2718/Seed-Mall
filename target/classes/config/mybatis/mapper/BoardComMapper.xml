@@ -63,4 +63,5 @@
 	<update id="BoardComLike" parameterType="int">
 		update board_com set clikenum = clikenum+1 where cidx=#{value}
 	</update>
+	
 </mapper>

@@ -77,8 +77,4 @@ public class BoardComServiceImpl implements BoardComService {
 		return boardComMapper.BoardComLike(cidx);
 	}
 
-	
-
-	
-
 }

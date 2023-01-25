@@ -3,7 +3,6 @@ package com.board.service;
 import java.util.List;
 
 import com.board.model.BoardComVO;
-import com.board.model.BoardVO;
 import com.user.model.PagingVO;
 
 public interface BoardComService {

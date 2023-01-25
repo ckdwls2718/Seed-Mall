@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.board.model.BoardReviewVO;
 import com.board.model.ReviewImageVO;
-import com.product.model.ProductImageVO;
 import com.user.model.PagingVO;
 
 public interface BoardReviewMapper {

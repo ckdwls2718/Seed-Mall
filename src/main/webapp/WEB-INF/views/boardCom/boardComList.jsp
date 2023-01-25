@@ -34,6 +34,7 @@ td{
 				<th style="width: 10%">날짜</th>
 				<th style="width: 8%">추천수</th>
 				<th style="width: 8%">조회수</th>
+
 			</tr>
 		</thead>
 		<tbody id="boardBody">
@@ -64,7 +65,7 @@ td{
 						</td>
 						<td>
 							<c:out value="${board.creadnum}" />
-						</td>
+						</td>					
 					</tr>
 				</c:forEach>
 			</c:if>

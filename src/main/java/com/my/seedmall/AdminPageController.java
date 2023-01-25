@@ -139,11 +139,23 @@ public class AdminPageController {
 			order.setProdList(orderProduct);
 		}
 
+		m.addAttribute("myctx", myctx);
 		m.addAttribute("pageNavi", pageNavi);
 		m.addAttribute("paging", page);
 		m.addAttribute("orderArr", orderArr);
 
 		return "admin/orderManagement";
+	}
+	
+	// 주문 상세 보기
+	@GetMapping("/orderManagementDetail/{desc_oidx}")
+	public String orderManagementDetail(Model m, @PathVariable("desc_oidx") int desc_oidx) {
+		// 수령자 정보, 배송 요청사항 출력
+		OrderVO order = orderService.getOrderMember(desc_oidx);
+		
+		m.addAttribute("order", order);
+		
+		return "admin/orderManagementDetail";
 	}
 
 	// 배송상태 설정완료 시

@@ -25,7 +25,7 @@
 			</tr>
 			<tr>
 				<td width="20%" class="m1">연락처</td>
-				<td width="80%" class="m2">${orderMember.omhp1}- ${orderMember.omhp2}- ${orderMember.omhp3}</td>
+				<td width="80%" class="m2">${orderMember.omhp1} - ${orderMember.omhp2} - ${orderMember.omhp3}</td>
 			</tr>
 			<tr>
 				<td width="20%" class="m1">우편번호</td>
