@@ -4,34 +4,31 @@
 <%@ include file="/WEB-INF/views/top.jsp"%>
 <script src="https://cdn.ckeditor.com/4.17.2/standard/ckeditor.js"></script>
 <script>
-$(function(){
-	
-	CKEDITOR.replace('content');
-	
-	$('#bf').submit(function(){
-		if($('#ctitle').val()==''){
-			alert('제목을 입력하세요');
-			$('#ctitle').focus();
-			return false;
-		}
-		/* if($('#email').val()==''){
-			alert('글쓴이를 입력하세요');
-			$('#email').focus();
-			return false;
-		} */
-		if(CKEDITOR.instances.content.getData()==''){
-			alert('글내용을 입력하세요');
-			CKEDITOR.instances.content.focus();
-			return false;
-		}
-				
-		return true;
-	})
-})//$() end-----------------	
+	$(function() {
+		CKEDITOR.replace('ccontent', {//해당 이름으로 된 textarea에 에디터를 적용
+			width : '100%',
+			height : '400px',
+			filebrowserUploadUrl : "fileupload.do"
+		});
+		$('#bf').submit(function() {
+			var regExp = /^[0-9]{1,3}$/;
 
-const edit = function(){
-	alert('수정되었습니다');
-}
+			if ($('#ctitle').val() == '') {
+				alert('제목을 입력하세요');
+				$('#ctitle').focus();
+				return false;
+			}
+			
+			if (CKEDITOR.instances.content.getData() == '') {
+				alert('글내용을 입력하세요');
+				CKEDITOR.instances.content.focus();
+				return false;
+			}
+
+			return edit();
+		})
+	})//$() end-----------------
+
 
 
 	

@@ -21,7 +21,7 @@ const delete1 = function(){
 <div class="container mt-3" >
 <form name="bf" id="bf" role="form" method="POST" >
    <input type="hidden" name="midx" value="${loginUser.midx}">
-   <input type="hidden" name="cidx" value="${boardCom.cidx}">     
+   <input type="hidden" name="cidx" value="${boardCom.cidx}">      
     <table class="table">
        <tr>
           <td style="width:10%"><b>제목</b></td>
@@ -44,14 +44,14 @@ const delete1 = function(){
       
       <c:if test="${loginUser.midx eq boardCom.midx}">
       <tr>
-         <td colspan="2" class="text-center">
-         
+         <td colspan="3" class="text-center">  
             <button type="button" type="button" class="btn btn-success" onclick="edit()">글수정</button>
-            <button type="button" type="button" class="btn btn-danger" onclick="delete1()">글삭제</button>
-                       
+            <button type="button" type="button" class="btn btn-danger" onclick="delete1()">글삭제</button>                   
          </td>
       </tr>
-   	  </c:if>	
+   	  </c:if>
+
+   	  	
       </table>
 </form>  
 </div>
