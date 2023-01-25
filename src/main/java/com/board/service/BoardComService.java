@@ -25,4 +25,5 @@ public interface BoardComService {
 	
 	//내가 작성한 커뮤니티 글 가져오기
 	List<BoardComVO> selectComByMidx(int midx);
+	
 }

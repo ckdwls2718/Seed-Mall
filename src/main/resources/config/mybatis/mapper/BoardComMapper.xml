@@ -45,4 +45,5 @@
 	<select id="selectComByMidx" parameterType="int" resultType="BoardCom">
 		select * from board_com where midx=#{value}
 	</select>
+	
 </mapper>

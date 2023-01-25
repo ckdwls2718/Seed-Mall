@@ -69,9 +69,4 @@ public class BoardComServiceImpl implements BoardComService {
 	}
 
 
-
-	
-
-	
-
 }
