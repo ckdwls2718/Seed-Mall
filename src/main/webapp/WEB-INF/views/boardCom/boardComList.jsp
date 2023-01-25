@@ -11,7 +11,7 @@ td{
 	vertical-align: middle;
 }
 </style>
-<div class="container mt-3" style="width: 1100px; height:60em;overflow: auto;">
+<div class="container mt-3" style="width: 1100px; height:56.2em;overflow: auto;">
 
 	<div style="text-align: center;">
 		<img src="${myctx}/assets/Cbanner3.jpg" style="width: 550px;   margin: 20px 0;">
