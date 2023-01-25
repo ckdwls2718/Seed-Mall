@@ -22,7 +22,7 @@
 
 # 프로젝트 구조 🏗]
 프로젝트 ERD 
-<img src = "https://user-images.githubusercontent.com/84952669/214562428-25230c91-5534-4cef-ba78-6bb1ed91ba1e.png">
+<img src = "https://user-images.githubusercontent.com/84952669/214593479-b3658c0b-a009-4cfb-afc7-c72ceb28d80d.png">
 
 # 프로젝트 기술 스택 🏛
 
