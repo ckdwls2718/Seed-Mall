@@ -73,7 +73,12 @@ body, h1, h2, h3, h4, h5, h6, input, textarea, select {
 					</a>
 
 					<ul class="dropdown-menu text-small shadow" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; margin-top: 5px; transform: translate3d(0.5px, 34px, 0px);">
+						<c:if test="${loginUser.status != 9}">
 						<li><span class="dropdown-item" id="grade">${loginUser.grade} <img src="${myctx}/resources/grade_images/${loginUser.grade}.png" alt="mdo" width="auto" height="26px;" class=""></span></li>
+						</c:if>
+						<c:if test="${loginUser.status == 9}">
+						<li><span class="dropdown-item" id="grade">- 관리자 -</span></li>
+						</c:if>
 						<li><hr class="dropdown-divider"></li>
 						<li><a class="dropdown-item" href="${myctx}/user/mypage">마이페이지</a></li>
 						<!-- <li><a class="dropdown-item" href="#">설정</a></li> -->
