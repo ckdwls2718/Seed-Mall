@@ -14,13 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.board.model.BoardComVO;
+import com.board.model.BoardReviewVO;
 import com.board.model.QNADTO;
+import com.board.service.BoardComService;
+import com.board.service.BoardReviewService;
 import com.board.service.QNAService;
 import com.myplant.model.MyPlantVO;
 import com.myplant.service.MyPlantService;
 import com.order.model.OrderProductVO;
 import com.order.model.OrderVO;
 import com.order.service.OrderService;
+import com.user.model.GradeVO;
 import com.user.model.MemberVO;
 import com.user.model.NotUserException;
 import com.user.service.MemberService;
@@ -44,8 +49,21 @@ public class MypageController {
 	@Autowired
 	QNAService qnaService;
 	
+	@Autowired
+	BoardReviewService reviewService;
+	
+	@Autowired
+	BoardComService boardComService;
+	
 	@GetMapping()
-	public String mypage() {
+	public String mypage(Model m, HttpSession ses) {
+		
+		MemberVO loginUser = (MemberVO) ses.getAttribute("loginUser");
+		
+		GradeVO nextGrade = memberService.getNextGrade(loginUser);
+		
+		m.addAttribute("nextGrade", nextGrade);
+		
 		return "member/mypage";
 	}
 	
@@ -107,6 +125,10 @@ public class MypageController {
 	public String myOrderList(Model m, HttpSession ses) {
 		MemberVO loginUser = (MemberVO)ses.getAttribute("loginUser");
 		List<OrderVO> orderArr = orderService.getOrderList(loginUser.getMidx());
+		for(OrderVO order : orderArr) {
+			List<OrderProductVO> orderProduct = orderService.getOrderProductList(order.getDesc_oidx());
+			order.setProdList(orderProduct);
+		}
 		
 		m.addAttribute("orderArr", orderArr);
 		
@@ -166,7 +188,7 @@ public class MypageController {
 	}
 	
 	//식물 애칭 변경
-	@PostMapping("updateNick")
+	@PostMapping("/updateNick")
 	@ResponseBody
 	public int updateNickname(MyPlantVO plant) {
 		
@@ -177,7 +199,7 @@ public class MypageController {
 	}
 	
 	//QNA 리스트
-	@GetMapping("QNA")
+	@GetMapping("/QNA")
 	public String getQnAList(Model m, HttpSession ses) {
 		MemberVO loginUser = (MemberVO)ses.getAttribute("loginUser");
 		
@@ -192,9 +214,31 @@ public class MypageController {
 	// 주문 취소 요청 시
 	@PostMapping("/orderCancel")
 	public String orderCancel(@ModelAttribute OrderVO ovo) {
-		int n = orderService.updateDeliveryStatus(ovo);
+		int n = orderService.updatedeliverystate(ovo);
 		
 		return "redirect:/user/mypage";
+	}
+	
+	//내가 작성한 리뷰 리스트
+	@GetMapping("/reviewList")
+	public String getReviewList(Model m, HttpSession ses) {
+		MemberVO loginUser = (MemberVO)ses.getAttribute("loginUser");
+		List<BoardReviewVO> reviewArr = reviewService.selectReviewByMidx(loginUser.getMidx());
+		
+		m.addAttribute("reviewArr", reviewArr);
+		
+		return "member/reviewList";
+		
+	}
+	
+	//내가 작성한 글 리스트
+	@GetMapping("/communityList")
+	public String getComList(Model m, HttpSession ses) {
+		MemberVO loginUser = (MemberVO)ses.getAttribute("loginUser");
+		List<BoardComVO> boardComArr = boardComService.selectComByMidx(loginUser.getMidx());
+		m.addAttribute("boardComArr", boardComArr);
+		
+		return "member/communityList";
 	}
 		
 }

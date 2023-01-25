@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.user.model.GradeVO;
 import com.user.model.MemberVO;
 import com.user.model.NotUserException;
 import com.user.model.PagingVO;
@@ -57,6 +58,13 @@ public interface MemberMapper {
 	int RewardMileage(@Param("midx")int midx, @Param("point")int point);
 	
 	int getMileage(int midx);
-
+	
+	//등급 할인률 가져오기
+	GradeVO getDrate(MemberVO mvo);
+	
+	//자신의 다음 등급 가져오기
+	GradeVO getNextGrade(MemberVO mvo);
+	
+	
 
 }

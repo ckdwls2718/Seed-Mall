@@ -1,5 +1,6 @@
 package com.product.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import com.product.model.CategoryVO;
 import com.product.model.PagingVO;
 import com.product.model.ProductImageVO;
 import com.product.model.ProductVO;
+import com.product.model.TopProdDTO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -66,5 +68,25 @@ public class ProductServiceImpl implements ProductService {
 		prod.setPimageList(prodImageArr);
 		return prod;
 	}
-
+	
+	@Override
+	public List<ProductVO> getProdListTop(int n) {
+		List<TopProdDTO> topArr = productMapper.getProdListTop(n);
+		
+		List<ProductVO> prodArr = new ArrayList<>();
+		
+		for(TopProdDTO dto:topArr) {
+			ProductVO prod = selectByIdx(dto.getPidx());
+			prodArr.add(prod);
+		}
+		return prodArr;
+	}
+	
+	@Override
+	public ProductVO selectByOidx(int oidx) {
+		ProductVO prod = productMapper.selectByOidx(oidx);
+		List<ProductImageVO> prodImageArr = productMapper.getProdImages(prod.getPidx());
+		prod.setPimageList(prodImageArr);
+		return prod;
+	}
 }

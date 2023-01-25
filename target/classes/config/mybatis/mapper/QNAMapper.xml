@@ -25,14 +25,14 @@
 	</select>
 	
 	<select id="getQNAReListByQidx" parameterType="int" resultType="QNARe">
-		select * 
+		select *
 		from re_board_qna 
 		where qidx=#{value}
 	</select>
 	
 	<select id="getQNAListByPidx" parameterType="int" resultType="QNA">
-		select * 
-		from board_qna
+		select b.* ,(select email from member where midx = b.midx) email
+		from board_qna b
 		where pidx=#{value}
 	</select>
 	

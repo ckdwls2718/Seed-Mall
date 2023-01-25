@@ -1,33 +1,37 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <script>
-
-const detailPlant = function(pidx){
-	$('input[name=pidx]').val(pidx);
-	pdF.submit();
-}
-
+	const detailPlant = function(pidx) {
+		$('input[name=pidx]').val(pidx);
+		pdF.submit();
+	}
 </script>
 <%@ include file="/WEB-INF/views/top.jsp"%>
 
 <div class="d-flex">
-<%@ include file="/WEB-INF/views/admin/adminPageSidebar.jsp"%>
+	<%@ include file="/WEB-INF/views/admin/adminPageSidebar.jsp"%>
 
-<main class="m-3" style="width:70%">
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">나의 소중한 식물</h1>
-        <p class="lead text-muted">식물의 상태를 확인해보세요</p>
-        <p>
-          <a href="#" class="btn btn-primary my-2">쇼핑하러 가기</a>
-          <a href="#" class="btn btn-secondary my-2">장바구니 가기</a>
-        </p>
-      </div>
-    </div>
-  </section>
-
+<main class="container m-3" style="width:70%">
+	<div>
+		<form>
+		<div class="form-row">
+			<div class="col-8">
+			<input class="form-control" type="text" name="findKeyword" placeholder="주문자 이메일을 입력해주세요" value="${page.findKeyword}">
+			</div>
+			<div class="col-2">
+			<button class="btn btn-info">검색</button>
+			</div>
+			<div class="col-2">
+			<select class="form-control" name="findType" style="width:150px" onchange="submit()">
+				<option value="1" <c:if test="${page.findType eq 1}">selected</c:if>>최신순</option>
+				<option value="2" <c:if test="${page.findType eq 2}">selected</c:if>>오래된순</option>
+				<option value="3" <c:if test="${page.findType eq 3}">selected</c:if>>성장률 높은순</option>
+				<option value="4" <c:if test="${page.findType eq 4}">selected</c:if>>성장률 낮은순</option>
+			</select>
+			</div>
+		</div>
+		</form>
+	</div>
   <div class="album py-5 bg-light">
     <div class="container">
     	
@@ -61,11 +65,15 @@ const detailPlant = function(pidx){
       </div>
     </div>
   </div>
+    <div class="mt-2">
+	 ${pageNavi}
+	</div>
 
 </main>
+
 </div>
-<form id="pdF" action="plantManagementDetail" method="post"> 
-      <input type="hidden" name="pidx" id="pidx">
+<form id="pdF" action="plantManagementDetail" method="post">
+	<input type="hidden" name="pidx" id="pidx">
 </form>
 
 <%@ include file="/WEB-INF/views/foot.jsp"%>

@@ -7,6 +7,7 @@ import com.product.model.PagingVO;
 import com.product.model.ProductForm;
 import com.product.model.ProductImageVO;
 import com.product.model.ProductVO;
+import com.product.model.TopProdDTO;
 
 public interface ProductMapper {
 
@@ -25,6 +26,8 @@ public interface ProductMapper {
 	List<ProductVO> selectByCategory(CategoryVO cvo);
 
 	ProductVO selectByPidx(int pidx);
+	
+	List<TopProdDTO> getProdListTop(int n);
 
 	int insertPimage(ProductImageVO piVo);
 
@@ -39,5 +42,8 @@ public interface ProductMapper {
 	int insertDowncg(CategoryVO cvo);
 
 	int addDetail(CategoryVO cvo);
+	
+	//주문 상품 번호를 이용해서 상품 가져오기
+	ProductVO selectByOidx(int oidx);
 
 }

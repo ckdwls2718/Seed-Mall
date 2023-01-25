@@ -8,13 +8,18 @@ import org.springframework.stereotype.Service;
 import com.order.mapper.OrderMapper;
 import com.order.model.OrderProductVO;
 import com.order.model.OrderVO;
+import com.user.model.MemberVO;
 import com.user.model.PagingVO;
+import com.user.service.MemberService;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private OrderMapper orderMapper;
+	
+	@Autowired
+	private MemberService memberService;
 
 	@Override
 	public int createOrderList(OrderVO ovo) {
@@ -49,6 +54,11 @@ public class OrderServiceImpl implements OrderService {
 	
 	@Override
 	public int orderConfirmed(int oidx) {
+		OrderVO order = getOrderDesc(oidx);
+		memberService.RewardMileage(order.getMidx(), order.getGradePoint());
+		MemberVO member = new MemberVO();
+		member.setMidx(order.getMidx());
+		memberService.updateGrade(member);
 		return orderMapper.orderConfirmed(oidx);
 	}
 	
@@ -94,13 +104,18 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int updateDeliveryStatus(OrderVO ovo) {
-		return orderMapper.updateDeliveryStatus(ovo);
+	public int updatedeliverystate(OrderVO ovo) {
+		return orderMapper.updatedeliverystate(ovo);
 	}
 
 	@Override
 	public List<OrderVO> getRefundList_paging(PagingVO page) {
 		return orderMapper.getRefundList_paging(page);
+	}
+
+	@Override
+	public List<OrderVO> getDeliveryList_paging(PagingVO page) {
+		return orderMapper.getDeliveryList_paging(page);
 	}
 
 }

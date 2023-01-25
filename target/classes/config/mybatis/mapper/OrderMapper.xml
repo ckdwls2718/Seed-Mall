@@ -13,7 +13,7 @@
 		deliveryState,
 		payment, gradePoint, gradeDiscount, ocomment, merchant_uid,
 		desc_odate)
-		values(#{desc_oidx}, #{midx}, #{desc_oTotalPrice}, '0',
+		values(#{desc_oidx}, #{midx}, #{desc_oTotalPrice}, ${deliveryState},
 		#{payment}, #{gradePoint}, #{gradeDiscount}, #{ocomment:VARCHAR}, #{merchant_uid},
 		sysdate)
 	</insert>
@@ -54,7 +54,7 @@
 	<select id="getOrderList" parameterType="int" resultType="Order">
 		select
 		*
-		from order_desc o join deliveryStatus d on
+		from order_desc o join deliverystate d on
 		o.deliveryState=d.statusNumber
 		where midx =#{value} order by desc_oidx
 		desc
@@ -65,7 +65,7 @@
 		resultType="Order">
 		select * from(
 		select row_number() over(order by desc_oidx desc, desc_odate asc) rn,
-		o.*, (select statusStr from deliverystatus where statusNumber =
+		o.*, (select statusStr from deliverystate where statusNumber =
 		o.deliverystate) statusStr from order_desc o)
 
 		<![CDATA[
@@ -86,14 +86,26 @@
 		resultType="Order">
 		select * from(
 		select row_number() over(order by desc_oidx desc, desc_odate asc) rn,
-		o.*, (select statusStr from deliverystatus where statusNumber =
+		o.*, (select statusStr from deliverystate where statusNumber =
 		o.deliverystate) statusStr from order_desc o where DELIVERYSTATE in(6,7))
 
 		<![CDATA[
 		where rn > #{start} and rn < #{end}
 		]]>
 	</select>
-	<!-- -->
+	
+	<!-- 배송중건만 가져오는 것 -->
+	<select id="getDeliveryList_paging" parameterType="Paging"
+		resultType="Order">
+		select * from(
+		select row_number() over(order by desc_oidx desc, desc_odate asc) rn,
+		o.*, (select statusStr from deliverystate where statusNumber =
+		o.deliverystate) statusStr from order_desc o where DELIVERYSTATE=2)
+
+		<![CDATA[
+		where rn > #{start} and rn < #{end}
+		]]>
+	</select>
 
 	<select id="getOrderProduct" parameterType="int"
 		resultType="OrderProduct">
@@ -124,7 +136,7 @@
 		deliveryState='4' where desc_oidx=#{value}
 	</update>
 
-	<update id="updateDeliveryStatus" parameterType="Order">
+	<update id="updatedeliverystate" parameterType="Order">
 		update
 		order_desc set
 		deliveryState=#{deliveryState} where

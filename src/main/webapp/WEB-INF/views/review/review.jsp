@@ -128,19 +128,16 @@ const LikeC = function(){
 
  
 </style>
-<div class="container">
+<div class="container" style="min-height: 300px">
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a class="nav-link" href="#">상품상세</a>
+    <a class="nav-link" href="#1">상품상세</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">상품리뷰</a>
+    <a class="nav-link active" aria-current="page" href="#2" name="2">상품리뷰</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">상품문의</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+    <a class="nav-link" href="#3">상품문의</a>
   </li>
 </ul>
 
@@ -154,8 +151,8 @@ const LikeC = function(){
 
 
 <div class='re2'>작성자: <c:out value="${Review.email}" /></div>
-<div class='re23'><img src="${myctx}/resources/Review_image/star.jpg" width="20">:<c:out value="${Review.score}"/></div>
 <div class='re2'>작성일: <c:out value="${Review.rdate}" /></div>
+<div class='re23'><c:forEach begin="1" end="${Review.score}"><img src="${myctx}/resources/Review_image/star.png" width="20"></c:forEach></div>
 
 <div>
 <c:forEach var="image" items="${Review.boardReviewImageList}">
