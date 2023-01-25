@@ -168,6 +168,23 @@ public class AuthController {
 
 		return "redirect:/";
 	}
+	
+	@GetMapping("/user/mypage/quit")
+	public String memberQuit() {
+		return "member/quit";
+	}
+	
+	@PostMapping(value="/user/mypage/quit",produces = "application/json")
+	@ResponseBody
+	public int memberQuitEnd(HttpSession ses,@RequestParam("midx") int midx) {
+		MemberVO quitMember = new MemberVO();
+		quitMember.setStatus(2);
+		quitMember.setMidx(midx);
+		
+		int n = memberService.updateMember(quitMember);
+		if(n>0) ses.invalidate();
+		return n;
+	}
 
 	// 예외처리하는 메서드앞에 @ExceptionHandler를 붙이고 구체적인 예외 클래스를 지정한다
 	@ExceptionHandler(NotUserException.class)

@@ -34,11 +34,11 @@ h3 { /* 상단 회원가입 표시*/
 			<div class="form-floating">
 				<input type="password" class="form-control" id="floatingPassword" name="pwd" placeholder="Password"> <label for="floatingPassword">비밀번호</label>
 			</div>
-			<div class="checkbox mb-3" style="text-align: left;">
+			<!-- <div class="checkbox mb-3" style="text-align: left;">
 				<label> <input type="checkbox" value="remember-me"> 아이디 저장
 				</label>
-			</div>
-			<div>
+			</div> -->
+			<div class="mt-3">
 				<a href="join">회원가입</a> | <a href="findemail">이메일 찾기</a> | <a href="findPassword">비밀번호 찾기</a>
 			</div>
 			<br>
