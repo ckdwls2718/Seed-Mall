@@ -14,6 +14,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.board.model.BoardNoticeVO" alias="BoardN"/>
 		<typeAlias type="com.board.model.PagingVO" alias="BoardPaging"/>
 		<typeAlias type="com.board.model.BoardComVO" alias="BoardCom"/>
+		<typeAlias type="com.board.model.BoardComReVO" alias="BoardComRe"/>
 		<typeAlias type="com.board.model.FAQVO" alias="FAQ"/>
 		<typeAlias type="com.user.model.MemberVO" alias="Member"/>
 		<typeAlias type="com.user.model.GradeVO" alias="Grade"/>

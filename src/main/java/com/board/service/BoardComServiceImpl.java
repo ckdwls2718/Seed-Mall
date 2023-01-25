@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.board.mapper.BoardComMapper;
+import com.board.model.BoardComReVO;
 import com.board.model.BoardComVO;
 import com.user.model.PagingVO;
 
@@ -35,8 +36,8 @@ public class BoardComServiceImpl implements BoardComService {
 
 	@Override
 	public BoardComVO getBoardCom(BoardComVO board) {
-		// TODO Auto-generated method stub
-		return this.boardComMapper.getBoardCom(board);
+		BoardComVO boardCom = boardComMapper.getBoardCom(board);
+		return boardCom;
 	}
 
 	@Override
@@ -59,8 +60,10 @@ public class BoardComServiceImpl implements BoardComService {
 
 	@Override
 	public BoardComVO selectBoardByIdx(Integer cidx) {
-		// TODO Auto-generated method stub
-		return this.boardComMapper.selectBoardByIdx(cidx);
+		BoardComVO boardCom = boardComMapper.selectBoardByIdx(cidx);
+		List<BoardComReVO> comReArr = boardComMapper.getBoardComReListByCidx(boardCom.getCidx());
+		boardCom.setComReArr(comReArr);
+		return boardCom;
 	}
 
 	@Override
@@ -75,6 +78,22 @@ public class BoardComServiceImpl implements BoardComService {
 	@Override
 	public int BoardComLike(int cidx) {
 		return boardComMapper.BoardComLike(cidx);
+	}
+	
+	@Override
+	public List<BoardComReVO> getBoardComReListByCidx(int cidx) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public int insertBoardComRe(BoardComReVO comRe) {
+		return boardComMapper.insertBoardComRe(comRe);
+	}
+	
+	@Override
+	public int deleteBoardComRe(int re_cidx) {
+		return boardComMapper.deleteBoardComRe(re_cidx);
 	}
 
 }
