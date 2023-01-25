@@ -104,13 +104,18 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int updateDeliveryStatus(OrderVO ovo) {
-		return orderMapper.updateDeliveryStatus(ovo);
+	public int updatedeliverystate(OrderVO ovo) {
+		return orderMapper.updatedeliverystate(ovo);
 	}
 
 	@Override
 	public List<OrderVO> getRefundList_paging(PagingVO page) {
 		return orderMapper.getRefundList_paging(page);
+	}
+
+	@Override
+	public List<OrderVO> getDeliveryList_paging(PagingVO page) {
+		return orderMapper.getDeliveryList_paging(page);
 	}
 
 }

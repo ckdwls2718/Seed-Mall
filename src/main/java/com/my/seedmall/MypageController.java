@@ -214,7 +214,7 @@ public class MypageController {
 	// 주문 취소 요청 시
 	@PostMapping("/orderCancel")
 	public String orderCancel(@ModelAttribute OrderVO ovo) {
-		int n = orderService.updateDeliveryStatus(ovo);
+		int n = orderService.updatedeliverystate(ovo);
 		
 		return "redirect:/user/mypage";
 	}

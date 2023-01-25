@@ -24,6 +24,7 @@ public interface OrderService {
 	List<OrderVO> getOrderMemberList_paging(PagingVO page);
 	List<OrderProductVO> getOrderProductrList_paging(PagingVO page);
 	List<OrderVO> getRefundList_paging(PagingVO page); // 환불건만 조회
+	List<OrderVO> getDeliveryList_paging(PagingVO page); // 배송중건만 조회
 
 	// 상품정보 가져오기
 	OrderProductVO getOrderProduct(int pidx);
@@ -51,7 +52,7 @@ public interface OrderService {
 	OrderVO getOrderMember(int desc_oidx);
 
 	// 배송상태 수정하기
-	int updateDeliveryStatus(OrderVO ovo);
+	int updatedeliverystate(OrderVO ovo);
 
 
 }

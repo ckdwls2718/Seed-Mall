@@ -22,6 +22,7 @@ import com.myplant.model.MyPlantVO;
 import com.myplant.model.PlantForm;
 import com.myplant.model.PlantImageVO;
 import com.myplant.service.MyPlantService;
+import com.order.model.OrderProductVO;
 import com.order.model.OrderVO;
 import com.order.service.OrderService;
 import com.user.model.MemberVO;
@@ -43,7 +44,7 @@ public class AdminPageController {
 
 	@Autowired
 	private OrderService orderService;
-	
+
 	@Autowired
 	private QNAService qnaService;
 
@@ -111,41 +112,74 @@ public class AdminPageController {
 
 	// 주문 관리
 	@GetMapping("/orderManagement")
-	public String orderManagement(Model m, @ModelAttribute("page") PagingVO page,
-			HttpServletRequest req, @RequestHeader("user-Agent") String userAgent) {
+	public String orderManagement(Model m, @ModelAttribute("page") PagingVO page, HttpServletRequest req,
+			@RequestHeader("user-Agent") String userAgent) {
 		String myctx = req.getContextPath();
-        HttpSession ses = req.getSession();
-        
-        int totalCount = orderService.getOrderCount(page);
-        
-        page.setTotalCount(totalCount);
-        page.setPagingBlock(5);
-        page.init(ses);
-        
-        String loc = "admin/orderManagement";
-        String pageNavi = page.getPageNavi(myctx, loc, userAgent);
-        
-        List<OrderVO> orderArr = orderService.getOrderList_paging(page);
-        
-        m.addAttribute("pageNavi", pageNavi);
-        m.addAttribute("paging", page);
-        m.addAttribute("orderArr", orderArr);
-        
+		HttpSession ses = req.getSession();
+
+		int totalCount = orderService.getOrderCount(page);
+
+		page.setTotalCount(totalCount);
+		page.setPagingBlock(5);
+		page.init(ses);
+
+		String loc = "admin/orderManagement";
+		String pageNavi = page.getPageNavi(myctx, loc, userAgent);
+
+		List<OrderVO> orderArr = orderService.getOrderList_paging(page);
+		for (OrderVO order : orderArr) {
+			List<OrderProductVO> orderProduct = orderService.getOrderProductList(order.getDesc_oidx());
+			order.setProdList(orderProduct);
+		}
+
+		m.addAttribute("pageNavi", pageNavi);
+		m.addAttribute("paging", page);
+		m.addAttribute("orderArr", orderArr);
+
 		return "admin/orderManagement";
 	}
-	
+
 	// 배송상태 설정완료 시
 	@PostMapping("/deliveryStatus")
 	public String deliveryStatus(Model m, @ModelAttribute OrderVO ovo) {
-		
-		int n = orderService.updateDeliveryStatus(ovo);
-		
+
+		int n = orderService.updatedeliverystate(ovo);
+
 		return "redirect:orderManagement";
 	}
-	
+
+	// 배송 중인 식물 목록
+	@GetMapping("deliveryManagement")
+	public String deliveryManagement(Model m, @ModelAttribute("page") PagingVO page, HttpServletRequest req,
+			@RequestHeader("user-Agent") String userAgent) {
+		String myctx = req.getContextPath();
+		HttpSession ses = req.getSession();
+
+		int totalCount = orderService.getOrderCount(page);
+
+		page.setTotalCount(totalCount);
+		page.setPagingBlock(5);
+		page.init(ses);
+
+		String loc = "admin/orderManagement";
+		String pageNavi = page.getPageNavi(myctx, loc, userAgent);
+
+		List<OrderVO> orderArr = orderService.getDeliveryList_paging(page);
+		for (OrderVO order : orderArr) {
+			List<OrderProductVO> orderProduct = orderService.getOrderProductList(order.getDesc_oidx());
+			order.setProdList(orderProduct);
+		}
+
+		m.addAttribute("pageNavi", pageNavi);
+		m.addAttribute("paging", page);
+		m.addAttribute("orderArr", orderArr);
+
+		return "admin/deliveryManagement";
+	}
 
 	// 키워주세요 식물관리
 	@GetMapping("/plantManagement")
+
 	public String plantManagement(Model m, @ModelAttribute com.user.model.PagingVO page, HttpServletRequest req
 			,@RequestHeader("user-Agent")String userAgent) {
 		log.info("page = "+page);
@@ -177,31 +211,30 @@ public class AdminPageController {
 	@PostMapping("/plantManagementDetail")
 	public String plantManagementDetail(Model m, @RequestParam("pidx") int pidx) {
 		MyPlantVO plant = myPlantService.getMyPlantDetail(pidx);
-		
+
 		m.addAttribute("plant", plant);
-		
+
 		return "admin/plantManagement";
 	}
-	
-	@PostMapping(value="/plantManagementUpdate", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+
+	@PostMapping(value = "/plantManagementUpdate", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public String plantManagementUpdate(Model m, @ModelAttribute PlantForm plantForm, HttpServletRequest req) {
-		
-		
-		log.info("plantForm = "+plantForm);
-		
-		//local에 이미지 저장 
+
+		log.info("plantForm = " + plantForm);
+
+		// local에 이미지 저장
 		PlantImageVO piVo = myPlantService.uploadImage(plantForm.getPlantImage(), req);
-		
-		//myplant 외래키 저장
+
+		// myplant 외래키 저장
 		piVo.setPlant_idx(plantForm.getPlant_idx());
-		
-		//local 이미지 이름 
+
+		// local 이미지 이름
 		plantForm.setPlantImageStr(piVo.getPimage());
-		
-		//myplant 정보 업데이트
+
+		// myplant 정보 업데이트
 		myPlantService.updateMyPlant(plantForm);
-		
-		//이미지 db에 저장
+
+		// 이미지 db에 저장
 		myPlantService.insertImage(piVo);
 
 		return "redirect:plantManagement";
@@ -209,59 +242,62 @@ public class AdminPageController {
 
 	// 환불 내역
 	@GetMapping("/refundManagement")
-    public String refundManagement(Model m, @ModelAttribute("page") PagingVO page, HttpServletRequest req,
-            @RequestHeader("user-Agent") String userAgent) {
-        String myctx = req.getContextPath();
-        HttpSession ses = req.getSession();
+	public String refundManagement(Model m, @ModelAttribute("page") PagingVO page, HttpServletRequest req,
+			@RequestHeader("user-Agent") String userAgent) {
+		String myctx = req.getContextPath();
+		HttpSession ses = req.getSession();
 
-        int totalCount = orderService.getOrderCount(page);
+		int totalCount = orderService.getOrderCount(page);
 
-        page.setTotalCount(totalCount);
-        page.setPagingBlock(5);
-        page.init(ses);
+		page.setTotalCount(totalCount);
+		page.setPagingBlock(5);
+		page.init(ses);
 
-        String loc = "admin/orderManagement";
-        String pageNavi = page.getPageNavi(myctx, loc, userAgent);
+		String loc = "admin/orderManagement";
+		String pageNavi = page.getPageNavi(myctx, loc, userAgent);
 
-        List<OrderVO> orderArr = orderService.getRefundList_paging(page);
+		List<OrderVO> orderArr = orderService.getRefundList_paging(page);
+		for (OrderVO order : orderArr) {
+			List<OrderProductVO> orderProduct = orderService.getOrderProductList(order.getDesc_oidx());
+			order.setProdList(orderProduct);
+		}
 
-        m.addAttribute("pageNavi", pageNavi);
-        m.addAttribute("paging", page);
-        m.addAttribute("orderArr", orderArr);
-        
-        return "admin/refundManagement";
+		m.addAttribute("pageNavi", pageNavi);
+		m.addAttribute("paging", page);
+		m.addAttribute("orderArr", orderArr);
+
+		return "admin/refundManagement";
 	}
-	
-    // 환불 수정
-    @PostMapping("/refundEdit")
-    public String refundEdit(@ModelAttribute("ovo") OrderVO ovo) {
-        int n = orderService.updateDeliveryStatus(ovo);
-        
-        return "redirect:refundManagement";
-    }
-	
+
+	// 환불 수정
+	@PostMapping("/refundEdit")
+	public String refundEdit(@ModelAttribute("ovo") OrderVO ovo) {
+		int n = orderService.updatedeliverystate(ovo);
+
+		return "redirect:refundManagement";
+	}
+
 	// Q&A 관리
 	@GetMapping("/qnaManagement")
 	public String qnaManagement(Model m, @ModelAttribute com.board.model.PagingVO page, HttpServletRequest req,
-			@RequestHeader("user-Agent")String userAgent) {
-		
-		String myctx=req.getContextPath();
-		HttpSession ses=req.getSession();
-		
+			@RequestHeader("user-Agent") String userAgent) {
+
+		String myctx = req.getContextPath();
+		HttpSession ses = req.getSession();
+
 		int qnaTotal = qnaService.getQNACount(page);
 		page.setTotalCount(qnaTotal);
 		page.init(ses);
-		
+
 		String loc = "admin/qnaManagement";
-		String pageNavi = page.getPageNavi(myctx, loc , userAgent);
-		
+		String pageNavi = page.getPageNavi(myctx, loc, userAgent);
+
 		List<QNADTO> qArr = qnaService.getQNAList(page);
-		
+
 		m.addAttribute("qArr", qArr);
 		m.addAttribute("pageNavi", pageNavi);
-		
+
 		return "admin/qnaManagement";
 	}
-	
 
 }
