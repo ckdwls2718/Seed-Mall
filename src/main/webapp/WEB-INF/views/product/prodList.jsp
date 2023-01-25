@@ -323,7 +323,7 @@ a {
 				</c:forEach>
 			</div>
 		</div>
-		<div style="height: 50px; padding-top: 6em;"></div>
+		<div style="height: 60px; padding-top: 6em;"></div>
 		<!-- 메뉴 카테고리 -->
 		<div>
 			<c:forEach var="upcategory" items="${upcategory}">
@@ -346,7 +346,7 @@ a {
 			</div>
 		</div>
 		<br>
-		<div style="height: 50px;"></div>
+		<div style="height: 70px;"></div>
 		<!-- 설명 -->
 		<div style="margin-bottom: 5px;">
 			<c:forEach var="cg_detail" items="${cgdetail}">
@@ -360,7 +360,7 @@ a {
 
 		<!-- 분류 카테고리  -->
 		<div class="row">
-			<form name="sortF" id="sortF" style="padding: 0; margin: 6px 0px; float: right;">
+			<form name="sortF" id="sortF" style="margin: -12px;float: right;">
 				<input type="hidden" name="findKeyword"> <input type="hidden" name="upcg"> <input type="hidden" name="downcg">
 				<select class="form-select" style="width: 124px; margin-left: auto;" name="sort" onchange="changeSort(this.value)">
 					<option value="1" <c:if test="${paging.sort eq 1}">selected</c:if>>최신순</option>

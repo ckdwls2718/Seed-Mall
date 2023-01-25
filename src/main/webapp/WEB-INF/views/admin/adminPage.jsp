@@ -5,11 +5,7 @@
 
 <%@ include file="/WEB-INF/views/top.jsp"%>
 
-<style>
-body{
-	color:black;
-}
-</style>
+
 	
 
 <script>

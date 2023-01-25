@@ -12,7 +12,7 @@ h2 {
 </style>
 
 
-<div class="container mt-3" style="width: 1100px; height: 600px; overflow: auto;">
+<div class="container mt-3" style="width: 1100px; height:56.2em;overflow: auto;">
 	<h2 class="text-center">공지사항</h2>
 
 	<!-- 검색 폼 시작----------------------------- -->
@@ -23,13 +23,13 @@ h2 {
 				<!-- hidden data -------------------------------------- -->
 				<input type="hidden" name="pageSize" value="${pageSize}"> <input type="hidden" name="bpage" value="${paging.bpage}">
 				<!-- -------------------------------------------------- -->
-				<select name="findType" style="padding: 6px; height: 38px; border-radius: 5px;">
+				<select name="findType" style="margin-top:2px; padding: 0 4px; height: 36px; border-radius: 5px; display:inline-block;" >
 					<!-- <option value="">검색유형</option> -->
 					<option value="1" <c:if test="${paging.findType eq 1}">selected</c:if>>제목</option>
 					<option value="2" <c:if test="${paging.findType eq 2}">selected</c:if>>내용</option>
 				</select>
-				<input type="text" name="findKeyword" placeholder="검색어를 입력하세요" autofocus="autofocus" style='width: 300px; margin-bottom: 5px;   height: 38px; border-radius: 5px;'>
-				<button class='btn btn-outline-success' style="margin-bottom: 6px;">검 색</button>
+				<input type="text" name="findKeyword" placeholder="검색어를 입력하세요" class="form-control" autofocus="autofocus" style='width: 300px; margin-bottom: 5px; height: 38px; border-radius: 5px; display:inline-block;'>
+				<button class='btn btn-outline-success' style="margin-bottom: 6px; display:inline-block;">검 색</button>
 			</form>
 		</div>
 		<div class="col-md-3 text-right">

@@ -30,14 +30,14 @@ const deleteQna = function(qidx){
 	<div class="container" style="text-align: center">
 		<div class="row">
 			<div class="col-md-12">
-				<h2 class="text-center m-4" style="margin: 1em">:::나의 QNA 목록:::</h2>
-				<table class="table table-striped" id="products">
-					<thead>
+				<h2 style="	font-size: calc(1.325rem + .9vw); margin: 70px 0px 40px 0px;font-family: 'Noto Sans KR', sans-serif; font-weight: bold; /* color: #39b559; */text-align: center;">내가 쓴 문의글</h2>
+				<table class="table table-striped" id="products"style="text-align: center;"style="text-align: center;">
+					<thead >
 						<tr>
-							<th>상태</th>
-							<th>상품</th>
-							<th>제목</th>
-							<th>작성일</th>
+							<th style="width:10%">상태</th>
+							<th style="width:25%">상품</th>
+							<th style="width:50%">제목</th>
+							<th style="width:15%">작성일</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -107,5 +107,6 @@ const deleteQna = function(qidx){
 			</div>
 		</div>
 	</div>
+		<div style="width:230px;"></div>
 </div>
 <%@ include file="/WEB-INF/views/foot.jsp"%>
