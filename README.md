@@ -44,5 +44,5 @@
 
 | BE | BE | BE  | BE | BE |
 | :-----: | :-----: | :-----:  | :-----: | :-----:  |
-| <img src="https://avatars.githubusercontent.com/u/84952669?v=4" width=400px alt="지니"/>  | <img src="https://avatars.githubusercontent.com/u/116619068?v=4" width=400px alt="오바마"/>  | <img src="https://avatars.githubusercontent.com/u/116619026?v=4" width=400px alt="다앵"/>   | <img src="https://avatars.githubusercontent.com/u/114588372?v=4" width=400px alt="호야"/>  | <img src="https://avatars.githubusercontent.com/u/98315924?v=4" width=400px alt="양세바리"/>  |
-| [지니](https://github.com/ckdwls2718) | [오바마](https://github.com/xoxobama)  | [다앵](https://github.com/pveh55)   | [호야](https://github.com/ukju73) | [양세바리](https://github.com/potatooman) |
+| <img src="https://avatars.githubusercontent.com/u/84952669?v=4" width=400px alt="독고창진"/>  | <img src="https://avatars.githubusercontent.com/u/116619068?v=4" width=400px alt="오바마"/>  | <img src="https://avatars.githubusercontent.com/u/116619026?v=4" width=400px alt="다앵"/>   | <img src="https://avatars.githubusercontent.com/u/114588372?v=4" width=400px alt="호야"/>  | <img src="https://avatars.githubusercontent.com/u/98315924?v=4" width=400px alt="양세바리"/>  |
+| [독고창진](https://github.com/ckdwls2718) | [오바마](https://github.com/xoxobama)  | [다앵](https://github.com/pveh55)   | [호야](https://github.com/ukju73) | [양세바리](https://github.com/potatooman) |
