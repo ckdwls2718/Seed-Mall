@@ -9,16 +9,17 @@
 
 <div class="d-flex">
 	<%@ include file="/WEB-INF/views/admin/adminPageSidebar.jsp"%>
-	<form name="omfrm" id="omfrm" action="deliveryStatus" method="post">
+	<form name="dmfrm" id="dmfrm" action="deliveryStatus" method="post">
 		<input type="hidden" name="desc_oidx"> <input type="hidden"
 			name="deliveryState">
-		<div class="container" style="width: 1200px">
+		<div class="container mt-4" style="width: 1200px">
 			<div>
 				<table class="table table-condensed">
 					<thead>
 						<tr>
 							<th>주문개요번호</th>
 							<th>주문상품</th>
+							<th></th>
 							<th>주문날짜</th>
 							<th>배송메모</th>
 							<th>총 주문가격</th>
@@ -28,7 +29,7 @@
 					<tbody>
 						<c:if test="${orderArr eq null or empty orderArr}">
 							<tr>
-								<td colspan="6"><b>데이터가 없습니다.</b></td>
+								<td colspan="7"><b>데이터가 없습니다.</b></td>
 							</tr>
 						</c:if>
 						<c:if test="${orderArr ne null and not empty orderArr}">
@@ -38,8 +39,10 @@
 									<td>${order.prodList[0].pname}<c:if
 											test="${fn:length(order.prodList) > 1}">외 ${fn:length(order.prodList)-1} 건 </c:if>
 									</td>
+									<td><button class="btn btn-outline-danger" type="button"
+											onclick="detailOrder('${order.desc_oidx}')">상세보기</button></td>
 									<td>${order.desc_odate}</td>
-									<td><c:out value="${order.ocomment}"/></td>
+									<td><c:out value="${order.ocomment}" /></td>
 									<td><fmt:formatNumber value="${order.desc_oTotalPrice}"
 											pattern="###,###" /> 원</td>
 									<td>${order.statusStr}</td>
