@@ -50,6 +50,16 @@
 		resultType="_int">
 		select count(*) from order_desc
 	</select>
+	
+	<select id="getDeliveryCount" parameterType="Paging"
+		resultType="_int">
+		select count(*) from order_desc where deliverystate=2 or deliverystate=3
+	</select>
+	
+	<select id="getRefundCount" parameterType="Paging"
+		resultType="_int">
+		select count(*) from order_desc where deliverystate=6 or deliverystate=7
+	</select>
 
 	<select id="getOrderList" parameterType="int" resultType="Order">
 		select
