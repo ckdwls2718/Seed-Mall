@@ -3,7 +3,6 @@ package com.board.service;
 import java.util.List;
 
 import com.board.model.BoardComVO;
-import com.board.model.BoardVO;
 import com.user.model.PagingVO;
 
 public interface BoardComService {
@@ -26,4 +25,9 @@ public interface BoardComService {
 	//내가 작성한 커뮤니티 글 가져오기
 	List<BoardComVO> selectComByMidx(int midx);
 	
+	//커뮤니티 좋아요 top가져오기
+	List<BoardComVO> getBoardComListTop(int top);
+	
+	//커뮤니티 좋아요
+	int BoardComLike(int cidx);
 }

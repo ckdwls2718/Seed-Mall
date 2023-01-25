@@ -60,6 +60,7 @@ const deleteRe = function(re_qidx){
 	<div class="row">
 			<div class="col-md-12">
 				<h2 class="text-center m-4" style="margin: 1em">:::관리자 QNA 목록:::</h2>
+				<p>총 검색 ${page.totalCount}건</p>
 				<table class="table" id="products">
 					<thead>
 						<tr>

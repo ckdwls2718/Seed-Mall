@@ -16,14 +16,25 @@ td{
 	<div style="text-align: center;">
 		<img src="${myctx}/assets/Cbanner3.jpg" style="width: 550px;   margin: 20px 0;">
 	</div>
+	
+	<div style="text-align: right; margin-top:3em;">
+	<span>총 게시글 : ${paging.totalCount}건 </span><br>
+	<c:if test="${loginUser.status == 0}">
+		<button type="button" class="btn btn-success" onclick="location.href='write'">글쓰기</button>
+	</c:if>
+	<c:if test="${loginUser.status == 9}">
+		<button type="button" class="btn btn-success" onclick="location.href='write'">글쓰기(Admin)</button>
+	</c:if>
 	<table class="table table-condensed " style="background:#f7f9fa; text-align: center; border: 1px solid #cccccc;">
 		<thead>
 			<tr>
 				<th style="width: 7%"></th>
-				<th style="width: 59%">제목</th>
+				<th style="width: 51%">제목</th>
 				<th style="width: 16%">아이디</th>
 				<th style="width: 10%">날짜</th>
-				<th style="width: 8%">조회수</th>			
+				<th style="width: 8%">추천수</th>
+				<th style="width: 8%">조회수</th>
+
 			</tr>
 		</thead>
 		<tbody id="boardBody">
@@ -50,6 +61,9 @@ td{
 							<c:out value="${board.cdate}" />
 						</td>
 						<td>
+							<c:out value="${board.clikenum}" />
+						</td>
+						<td>
 							<c:out value="${board.creadnum}" />
 						</td>					
 					</tr>
@@ -57,15 +71,11 @@ td{
 			</c:if>
 		</tbody>
 	</table>
-	<div style="text-align: center; margin-top:3em;">
-	<c:if test="${loginUser.status == 0}">
-		<button type="button" class="btn btn-success" onclick="location.href='write'">글쓰기</button>
-	</c:if>
-	<c:if test="${loginUser.status == 9}">
-		<button type="button" class="btn btn-success" onclick="location.href='write'">글쓰기(Admin)</button>
-	</c:if>
+	
 	</div>
-
+	<div>
+	${pageNavi}
+	</div>
 </div>
 
 

@@ -6,7 +6,7 @@
 
 <%@ include file="/WEB-INF/views/top.jsp"%>
 
-<div class="container mt-3" style="height: 600px; overflow: auto;">
+<div class="container mt-3" style="min-height: 600px; overflow: auto;">
 	<h2 class="text-center">공지 내용</h2>
 
 	<c:if test="${notice eq null}">

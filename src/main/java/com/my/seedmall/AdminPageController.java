@@ -325,6 +325,7 @@ public class AdminPageController {
 
 		m.addAttribute("qArr", qArr);
 		m.addAttribute("pageNavi", pageNavi);
+		m.addAttribute("page", page);
 
 		return "admin/qnaManagement";
 	}

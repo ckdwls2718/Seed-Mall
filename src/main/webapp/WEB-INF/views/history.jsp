@@ -122,19 +122,29 @@ var downoqtyList = downoqty.replace('[','').replace(']','').split(',');
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="${myctx}/admin/plantManagement">신규 등록</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
+                        <a class="collapse-item" href="${myctx}/admin/plantManagement?findState=4">전체보기</a>
+                        <a class="collapse-item" href="${myctx}/admin/plantManagement?findState=1">신규</a>
+                        <a class="collapse-item" href="${myctx}/admin/plantManagement?findState=2">관리 중</a>
+                        <a class="collapse-item" href="${myctx}/admin/plantManagement?findState=3">완료</a>
                     </div>
                 </div>
             </li>
             
-            <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="${myctx}/admin/qnaManagement">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities2"
+                    aria-expanded="true" aria-controls="collapseUtilities2">
                     <i class="fa-solid fa-q"></i>
-                    <span>QNA 관리</span></a>
+                    <span>QNA 관리</span>
+                </a>
+                <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Utilities:</h6>
+                        <a class="collapse-item" href="${myctx}/admin/qnaManagement">전체보기</a>
+                        <a class="collapse-item" href="${myctx}/admin/qnaManagement?findState=1">미답변</a>
+                        <a class="collapse-item" href="${myctx}/admin/qnaManagement?findState=2">답변 완료</a>
+                    </div>
+                </div>
             </li>
 
             <!-- Divider -->

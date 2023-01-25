@@ -3,8 +3,6 @@ package com.board.mapper;
 import java.util.List;
 
 import com.board.model.BoardComVO;
-import com.board.model.BoardReviewVO;
-import com.board.model.BoardVO;
 import com.user.model.PagingVO;
 
 public interface BoardComMapper {
@@ -26,6 +24,12 @@ public interface BoardComMapper {
 	
 	//내가 작성한 커뮤니티 글 가져오기
 	List<BoardComVO> selectComByMidx(int midx);
+	
+	//커뮤니티 좋아요 top가져오기
+	List<BoardComVO> getBoardComListTop(int top);
+	
+	//커뮤니티 좋아요
+	int BoardComLike(int cidx);
 	
 	int Clike_check(BoardComVO board);
 	

@@ -118,6 +118,7 @@ a {
 						<th data-sort="string">상품명</th>
 						<th>이미지</th>
 						<th data-sort="string">가 격</th>
+						<th>긍정도 평점</th>
 						<th>수정&nbsp;|&nbsp;삭제</th>
 					</tr>
 				</thead>
@@ -147,6 +148,7 @@ a {
 											value="${prod.psaleprice}" pattern="###,###" /> 원
 								</b><br> <span class="badge bg-danger">${prod.percent}%
 								</span></td>
+								<td>${prod.sentiment}</td>
 								<td><a href="prodEdit?pidx=${prod.pidx}">수정</a>&nbsp;| <a
 									href="prodDel?pidx=${prod.pidx}">삭제</a></td>
 							</tr>

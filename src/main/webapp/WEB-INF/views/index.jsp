@@ -59,5 +59,91 @@ button {
 		</c:forEach>
 		</div>
 	</div>
+	
+	<div class="container d-flex">
+	
+	<div class="container px-4 px-lg-5 mt-5">
+	<div><img src="${myctx}/resources/img/comtop5.png" ><hr></div>
+	<table class="table table-condensed " style="background:#f7f9fa; text-align: center; border: 1px solid #cccccc;">
+		<thead>
+			<tr>
+				<th style="width: 7%"></th>
+				<th style="width: 59%">제목</th>
+				<th style="width: 16%">작성자</th>
+			</tr>
+		</thead>
+		<tbody id="boardBody">
+			<c:if test="${comArr eq null or empty comArr}">
+				<tr>
+					<td colspan="5">
+						<b>데이터가 없습니다.</b>
+					</td>
+				</tr>
+			</c:if>
+			<c:if test="${comArr ne null and not empty comArr}">
+				<c:forEach var="board" items="${comArr}" varStatus="status">
+					<tr>
+						<td>
+							<c:out value="${status.count}위" />
+						</td>
+						<td>
+							<a class="btn btn-default" href="${myctx}/boardGet?cidx=${board.cidx}">${board.ctitle}</a>
+						</td>
+						<td>
+							<c:out value="${board.email}" />
+						</td>
+					</tr>
+				</c:forEach>
+			</c:if>
+		</tbody>
+	</table>
+	</div>
+	
+	<div class="container px-4 px-lg-5 mt-5" style="width: 70%">
+	<div><img src="${myctx}/resources/img/retop3.png" ><hr></div>
+	<table class="table table-striped" id="products">
+					
+					<tbody>
+						<!-- ------------------------ -->
+						<c:if test="${reviewArr eq null or empty reviewArr}">
+							<tr>
+								<td colspan="1">작성한 리뷰가 없습니다</td>
+							</tr>
+						</c:if>
+
+						<c:if test="${reviewArr ne null and not empty reviewArr}">
+							<form id="reF" action="review" method="post">
+								<input type="hidden" name="ridx">
+								
+								<c:forEach var="review" items="${reviewArr}" varStatus="status">	
+										<tr>
+										<td><a href="${myctx}/prod/${review.pidx}" style="color: black; text-decoration: none;">
+										<div class="mb-2">
+											<div>
+											<c:forEach begin="1" end="${review.score}"><img src="${myctx}/resources/Review_image/star.png" width="20"></c:forEach>
+											<small >추천 ${review.rlikenum}</small> <span style="margin-left: auto" >${review.email}</span><br>
+											</div>
+											<b>${review.rtitle}</b> <small>${review.rdate}</small><br>
+											${review.rcontent}
+										</div>
+										<div>
+											<c:forEach  var="image" items="${review.boardReviewImageList}">
+												<img style="width:100px" src="${myctx}/resources/Review_image/${image.rimage}">
+											</c:forEach>
+										</div>
+										</a>
+										</td>
+
+										</tr>
+									</c:forEach>		
+							</form>
+						</c:if>
+						<!-- ------------------------ -->
+					</tbody>
+				</table>
+	
+	</div>
+	</div>
+	
 </section>
 <%@ include file="/WEB-INF/views/foot.jsp"%>

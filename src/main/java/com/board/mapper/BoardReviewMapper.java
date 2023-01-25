@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.board.model.BoardReviewVO;
 import com.board.model.ReviewImageVO;
-import com.product.model.ProductImageVO;
 import com.user.model.PagingVO;
 
 public interface BoardReviewMapper {
@@ -26,6 +25,9 @@ public interface BoardReviewMapper {
 	
 	//내가 작성한 리뷰 가져오기
 	List<BoardReviewVO> selectReviewByMidx(Integer midx);
+	
+	//사진리뷰 top 가져오기
+	List<BoardReviewVO> getReviewListTop(int top);
 	
 	int like_check(BoardReviewVO review);
 	

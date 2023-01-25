@@ -144,7 +144,7 @@ const insertQNA = function(){
  
  <c:if test="${qArr ne null and not empty qArr}">
  <c:forEach var="qna" items="${qArr}" varStatus="status">
- <c:if test="${qna.secret eq 'N' or loginUser.email eq qna.email or loginUser.status eq 9}">
+ <c:if test="${qna.secret eq 'N' or loginUser.midx eq qna.midx or loginUser.status eq 9}">
 	 <tr>
 	 <td>
 	 	<c:if test="${qna.isCom ne 'Y'}">미답변</c:if>
@@ -153,8 +153,8 @@ const insertQNA = function(){
 	 	<td>${qna.qcontent}</td>
 	 	<td>${qna.email}</td>
 	 	<td>${qna.qdate }</td>
-	 	<c:if test="${loginUser.email eq qna.email}">
-	 	<td><button type="button">수정</button><button type="button" onclick="deleteQna('${qna.qidx}')">삭제</button></td>
+	 	<c:if test="${loginUser.midx eq qna.midx}">
+	 	<td><button class="btn btn-info" type="button" onclick="deleteQna('${qna.qidx}')">삭제</button></td>
 	 	</c:if>
 	 </tr>
 	 <!-- 댓글 -->
@@ -168,7 +168,7 @@ const insertQNA = function(){
 										</c:forEach>
 										</c:if>
  </c:if>
- <c:if test="${qna.secret eq 'Y' and loginUser.email ne qna.email and loginUser.status ne 9}">
+ <c:if test="${qna.secret eq 'Y' and loginUser.midx ne qna.midx and loginUser.status ne 9}">
  	<tr>
  		<td colspan="5">비밀 글입니다.</td>
  	</tr>
