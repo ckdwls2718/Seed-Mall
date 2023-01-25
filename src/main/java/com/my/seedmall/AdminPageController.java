@@ -101,6 +101,7 @@ public class AdminPageController {
 		} else {
 			n = 0;
 		}
+		
 		String str = (n > 0) ? "패스워드가 변경되었습니다" : "패스워드가 일치하지 않습니다";
 		String loc = (n > 0) ? "adminPage" : "javascript:history.back()";
 
