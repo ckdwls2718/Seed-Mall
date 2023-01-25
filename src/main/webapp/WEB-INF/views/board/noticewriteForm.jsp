@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/views/top.jsp"%>
 
@@ -12,6 +11,14 @@
 
 .ck-editor__editable {
 	min-height: 300px;
+}
+
+h2 {
+	font-size: calc(1.325rem + .9vw);
+	margin: 40px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: bold;
+	color: #39b559;
 }
 </style>
 <script>
@@ -54,55 +61,58 @@
 		})
 	})//$() end-----------------
 </script>
+
 <c:set var="myctx" value="${pageContext.request.contextPath}" />
-<div align="center" id="bbs" class="col-md-8 offset-md-2 my-4">
+<div align="center" id="bbs" class="col-md-8 my-4" style="width: 1100px; margin: auto;">
 	<h2 class="text-center">공지 작성</h2>
 	<p class="text-center my-4">
-		<input type="button" class="btn btn-success btn-sm" value="공지 목록"
-			onclick="location.href='notice'">
+		<input type="button" class="btn btn-success btn-sm" value="공지 목록" onclick="location.href='notice'">
 	<p>
 		<!--파일 업로드시
    method: POST
    enctype: multipart/form-data 
     
     -->
-	<form name="bf" id="bf" role="form"
-		action="/seedmall/board/noticeWrite" method="POST"
-		enctype="multipart/form-data" >
+	<form name="bf" id="bf" role="form" action="/seedmall/board/noticeWrite" method="POST" enctype="multipart/form-data">
 		<table class="table">
 			<tr>
-				<td style="width: 20%"><b>제목</b></td>
-				<td style="width: 80%"><input type="text" name="ntitle"
-					id="subject" class="form-control"></td>
+				<td style="width: 8%">
+					<b>제목</b>
+				</td>
+				<td style="width: 92%">
+					<input type="text" name="ntitle" id="subject" class="form-control">
+				</td>
 			</tr>
 			<tr>
-				<td style="width: 20%"><b>글쓴이</b></td>
-				<td style="width: 80%"><input type="text" name="name" id="name"
-					class="form-control" readonly value="${loginUser.getMname()}">
-					<input type="hidden" name="midx" id="midx"
-					value="${loginUser.getMidx()}"></td>
+				<td style="width: 8%">
+					<b>글쓴이</b>
+				</td>
+				<td style="width: 92%">
+					<input type="text" name="name" id="name" class="form-control" readonly value="${loginUser.getMname()}"> <input type="hidden" name="midx" id="midx" value="${loginUser.getMidx()}">
+				</td>
 			</tr>
 			<tr>
-				<td style="width: 20%"><b>글내용</b></td>
-				<td style="width: 80%"><textarea name="ncontent" id="ncontent"
-						rows="10" cols="50" class="form-control"></textarea>
+				<td style="width: 8%">
+					<b>글내용</b>
+				</td>
+				<td style="width: 92%">
+					<textarea name="ncontent" id="ncontent" rows="10" cols="50" class="form-control"></textarea>
 			</tr>
 			<tr>
-				<td style="width: 20%"><b>중요도</b></td>
-				<td style="width: 80%"><input type="text" name="priority"
-					id="priority" class="form-control"></td>
+				<td style="width: 8%; border:0;">
+					<b>중요도</b>
+				</td>
+				<td style="width: 92%; border:0;">
+					<input type="text" name="priority" id="priority" class="form-control">
+				</td>
 			</tr>
 			<tr>
-				<td class="text-center" colspan="2">
+				<td class="text-center" colspan="2" style="border-bottom: 0;">
 					<button type="submit" id="btnWrite" class="btn btn-success btn-sm">글쓰기</button>
 				</td>
 			</tr>
-
 		</table>
-
-
 	</form>
-
 </div>
 
 

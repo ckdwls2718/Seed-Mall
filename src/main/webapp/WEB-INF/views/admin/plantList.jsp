@@ -1,18 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <script>
-
-const detailPlant = function(pidx){
-	$('input[name=pidx]').val(pidx);
-	pdF.submit();
-}
-
+	const detailPlant = function(pidx) {
+		$('input[name=pidx]').val(pidx);
+		pdF.submit();
+	}
 </script>
 <%@ include file="/WEB-INF/views/top.jsp"%>
 
 <div class="d-flex">
-<%@ include file="/WEB-INF/views/admin/adminPageSidebar.jsp"%>
+	<%@ include file="/WEB-INF/views/admin/adminPageSidebar.jsp"%>
 
 <main class="container m-3" style="width:70%">
 	<div>
@@ -75,8 +72,8 @@ const detailPlant = function(pidx){
 </main>
 
 </div>
-<form id="pdF" action="plantManagementDetail" method="post"> 
-      <input type="hidden" name="pidx" id="pidx">
+<form id="pdF" action="plantManagementDetail" method="post">
+	<input type="hidden" name="pidx" id="pidx">
 </form>
 
 <%@ include file="/WEB-INF/views/foot.jsp"%>
