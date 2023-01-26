@@ -37,8 +37,8 @@ public class HomeController {
 		// top 5
 		List<ProductVO> prodArr = prodService.getProdListTop(5);
 		
-		// 커뮤니티 좋아요 top5
-		List<BoardComVO> comArr = comService.getBoardComListTop(5);
+		// 커뮤니티 좋아요 top
+		List<BoardComVO> comArr = comService.getBoardComListTop(9);
 		for(BoardComVO com : comArr) {
 			String email = commonService.emailPrivate(com.getEmail());
 			com.setEmail(email);

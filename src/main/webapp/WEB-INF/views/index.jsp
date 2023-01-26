@@ -139,20 +139,20 @@ button {
 								<tr>
 									<td>
 										<a href="${myctx}/prod/${review.pidx}" style="color: black; text-decoration: none;">
+										<div class="d-flex">
 											<div class="mb-2">
-												<div>
+													<img style="width: 100px" src="${myctx}/resources/Review_image/${review.boardReviewImageList[0].rimage}">
+											</div>
+											<div style="margin: auto">
 													<c:forEach begin="1" end="${review.score}">
 														<img src="${myctx}/resources/Review_image/star.png" width="20">
 													</c:forEach>
-													<small>추천 ${review.rlikenum}</small> <span style="margin-left: auto">${review.email}</span><br>
+												<div>
+													<span style="margin-left: auto">${review.email}</span> <small><b>추천 ${review.rlikenum}</b></small> <br>
 												</div>
 												<b>${review.rtitle}</b> <small>${review.rdate}</small><br> ${review.rcontent}
 											</div>
-											<div>
-												<c:forEach var="image" items="${review.boardReviewImageList}">
-													<img style="width: 100px" src="${myctx}/resources/Review_image/${image.rimage}">
-												</c:forEach>
-											</div>
+										</div>
 										</a>
 									</td>
 								</tr>
