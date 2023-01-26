@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myplant.mapper.MyPlantMapper">
+
+	<insert id="insertMyPlant" parameterType="MyPlant">
+		<selectKey keyProperty="plant_idx" resultType="int" order="BEFORE">
+			select myplant_seq.nextval from dual
+		</selectKey>
+		insert into myplant(plant_idx, midx, oidx, nickname, plantImage, percent, pcomment, pdate)
+		values(#{plant_idx}, #{midx}, #{oidx}, #{nickname:VARCHAR}, #{plantImage},
+		#{percent}, #{pcomment:VARCHAR}, sysdate)
+	</insert>
+	
+	<insert id="insertImage" parameterType="MyPlantI">
+		<selectKey keyProperty="image_pidx" resultType="int" order="BEFORE">
+			select myplant_image_seq.nextval from dual
+		</selectKey>
+		insert into myplant_image(image_pidx,pimage,pidate,plant_idx)
+		values(#{image_pidx},#{pimage},sysdate,#{plant_idx})
+	</insert>
+	
+	<select id="selectAllMyPlant" resultType="MyPlant" parameterType="Paging">
+		select * 
+		from(
+		select row_number() over(order by pdate desc) rn, m.*, (select email from member where midx = m.midx) email from myplant m
+		<include refid="findPlantTypeWhere"/>
+		)
+		<![CDATA[
+		where rn>#{start} and rn<#{end}
+		]]>
+		
+		<include refid="findPlantWhere"/>
+		<include refid="myplantSort" />
+	</select>
+	
+	<select id="getMyplantTotal" resultType="int" parameterType="Paging">
+		select count(*)
+		from myplant p join member m on p.midx = m.midx
+		<include refid="findPlantTypeWhere"/>
+		<include refid="findPlantWhere"/>
+	</select>
+	
+	<select id="getPlantImages" parameterType="int" resultType="MyPlantI">
+		select * from myplant_image where plant_idx=#{value}
+	</select>
+	
+	<update id="updateMyPlant" parameterType="PlantForm">
+		update myplant set pcomment=#{pcomment}, plantimage=#{plantImageStr}, percent=#{percent}
+		where plant_idx=#{plant_idx}
+	</update>
+	
+	<update id="updateMyPlantNickname" parameterType="MyPlant">
+		update myplant set nickname=#{nickname} where plant_idx=#{plant_idx}
+	</update>
+	
+	<select id="getMyPlantList" parameterType="int" resultType="MyPlant">
+		select mp.*,m.email,m.mname 
+		from myplant mp join member m on mp.midx=m.midx 
+		where mp.midx=#{value} 
+		order by mp.pdate desc
+	</select>
+	
+	<select id="getMyPlantDetail" parameterType="int" resultType="MyPlant">
+		select mp.*,m.email,m.mname 
+		from myplant mp join member m on mp.midx=m.midx 
+		where plant_idx=#{value}
+	</select>
+	
+	<sql id="findPlantTypeWhere">
+		<if test="findState==1">
+			<where>
+			<![CDATA[
+			percent<=0
+			]]>
+			</where>
+		</if>
+		<if test="findState==2">
+			<where>
+			<![CDATA[
+			percent>0 and percent<100
+			]]>
+			</where>
+		</if>
+		<if test="findState==3">
+			<where>
+			<![CDATA[
+			percent=100
+			]]>
+			</where>
+		</if>
+	</sql>
+	
+	<sql id="findPlantWhere">
+		<if test="findKeyword!=null and findKeyword!=''">	
+			and email like '%'||#{findKeyword}||'%'
+		</if>
+	</sql>
+	
+	<sql id="myplantSort">
+		<if test="findType!=null and findType!=''">
+			<if test="findType==1">
+				order by pdate desc
+			</if>
+			<if test="findType==2">
+				order by pdate asc
+			</if>
+			<if test="findType==3">
+				order by percent desc
+			</if>
+			<if test="findType==4">
+				order by percent asc
+			</if>
+		</if>
+	</sql>
+</mapper>

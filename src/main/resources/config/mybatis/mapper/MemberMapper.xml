@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into member(MIDX,EMAIL,PWD,MNAME,MHP1,MHP2,MHP3,MPOST,MADDR1,MADDR2,GRADE
 		,MDATE,status)
 		values(#{midx},#{email},#{pwd},#{mname},#{mhp1},#{mhp2},#{mhp3},#{mpost:VARCHAR},
-		#{maddr1:VARCHAR},#{maddr2:VARCHAR},'새싹회원',sysdate,#{status})
+		#{maddr1:VARCHAR},#{maddr2:VARCHAR},'씨앗회원',sysdate,#{status})
 	</insert>
 	
 	<sql id="findWhere">
@@ -57,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<select id="emailCheck" resultType="int"  parameterType="string">
-		select MIDX from member where EMAIL=#{value}
+		select MIDX,status from member where EMAIL=#{value}
 	</select>
 	
 	<select id="findUser" parameterType="Member" resultType="Member">
@@ -69,17 +69,71 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from member order by MIDX desc
 	</select>
 	
-	<select id="selectUserByUserid" parameterType="string" resultType="Member">
-		select * from member where EMAIL=#{value}	
+	<select id="getMember" parameterType="int" resultType="Member">
+		select * from member where midx=#{value}	
 	</select>
 
 	<update id="updateUser" parameterType="Member">
 		update  member set status=#{status} where midx=#{midx}
 	</update>
 	
+	<update id="updateMemberInfo" parameterType="Member">
+		update member set mhp1=#{mhp1},mhp2=#{mhp2},mhp3=#{mhp3},mpost=#{mpost},maddr1=#{maddr1},maddr2=#{maddr2}
+		where midx=#{midx}
+	</update>
+	
 	<delete id="deleteUser" parameterType="_int">
 		delete from member where MIDX=#{value}
 	</delete>
+
+	
+	<!--이메일 찾기  -->
+	<select id="findemail" parameterType="Member" resultType="Member">
+		select * from member where mname=#{mname} and mhp1=#{mhp1} and mhp2=#{mhp2} and mhp3=#{mhp3}
+	</select>
+	<!--비밀번호 찾기  -->
+	<select id="findPassword" parameterType="Member" resultType="Member">
+		select * from member where email=#{email} and mname=#{mname} and mhp1=#{mhp1} and mhp2=#{mhp2} and mhp3=#{mhp3}
+	</select>
+	<!--비밀번호 변경  -->
+	<update id="updatePassword" parameterType="Member">
+		update member set pwd=#{pwd} where email=#{email}
+	</update>
+	
+	<!-- 등급 확인 -->
+	<select id="getGrade" parameterType="_int" resultType="String">
+		<![CDATA[
+		select max(grade) keep(dense_rank first order by gpoint desc) 
+		as max_text from grade where gpoint <=#{mileage}
+		]]> 
+	</select>
+	<!-- 등급 변경 -->
+	<update id="updateGrade" parameterType="Member">
+		update member set grade = #{grade}
+		where midx=#{midx}
+	</update>
+	<!-- 포인트 적립 -->
+	<update id="RewardMileage" parameterType="_int">
+		update member set mileage = mileage + #{point}
+		where midx=#{midx}
+	</update>
+	<!-- 포인트 확인 -->
+	<select id="getMileage" parameterType="_int" resultType="_int">
+		select mileage from member 
+		where midx=#{midx}	
+	</select>
+	
+	<select id="getDrate" parameterType="Member" resultType="com.user.model.GradeVO">
+		select g.* from member m join grade g on m.grade = g.grade
+		where midx=#{midx}
+	</select>
+	
+	<select id="getNextGrade" parameterType="Member" resultType="com.user.model.GradeVO">
+		select * from grade 
+		where gpoint>${mileage} and rownum=1 
+		order by gpoint asc
+	</select>
+
 
 
 </mapper>

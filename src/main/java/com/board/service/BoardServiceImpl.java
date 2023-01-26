@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.board.mapper.BoardMapper;
-import com.board.model.BoardVO;
+import com.board.model.BoardComVO;
+import com.user.model.PagingVO;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -15,8 +16,13 @@ public class BoardServiceImpl implements BoardService {
 	BoardMapper boardMapper;
 	
 	@Override
-	public List<BoardVO> getBoardList() {
-		return boardMapper.getBoardList();
+	public List<BoardComVO> getBoardList(PagingVO paging) {
+		return boardMapper.getBoardList(paging);
+	}
+
+	@Override
+	public int getBoardCount(PagingVO paging) {
+		return boardMapper.getBoardCount(paging);
 	}
 
 }

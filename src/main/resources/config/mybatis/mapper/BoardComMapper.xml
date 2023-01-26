@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.board.mapper.BoardComMapper">
+	<select id="getBoardList" resultType="BoardCom"
+		parameterType="Paging">
+		select * 
+		from
+		(select row_number() over(order by cidx desc) rn, board_com.*,(select email from member  where midx=board_com.midx ) email 
+		from board_com )
+		<![CDATA[
+			 where rn > #{start} and rn < #{end}
+		]]>
+	</select>
+
+	<select id="getBoardCount" resultType="int"
+		parameterType="Paging">
+		select count(cidx) from board_com
+	</select>
+
+	<insert id="insertBoard" parameterType="BoardCom">
+		<selectKey keyProperty="cidx" resultType="int" order="BEFORE">
+			select board_community_seq.nextval from dual
+		</selectKey>
+		insert into board_com(cidx,midx,ctitle,ccontent,cdate,creadnum, clikenum)
+		values(#{cidx},#{midx},#{ctitle},#{ccontent:VARCHAR},SYSDATE,#{creadnum},0
+		)	
+	</insert>
+	
+	<select id="getBoardCom" parameterType="BoardCom" resultType="BoardCom">
+		select board_com.*,(select email from member where midx=board_com.midx ) email from  Board_Com where cidx=#{cidx}
+	</select>
+	
+	<delete id="deleteboard" parameterType="BoardCom">
+		delete from board_com where cidx=#{cidx}
+	</delete>
+	
+	<update id="updateBoard" parameterType="BoardCom">
+		update board_com set ccontent=#{ccontent,jdbcType=VARCHAR},ctitle=#{ctitle} where cidx=#{cidx}
+	</update>
+	
+	<update id="updateReadnum" parameterType="int">
+		update board_com set creadnum=creadnum+1 where cidx=#{cidx}
+	</update>
+	
+	<select id="selectBoardByIdx" resultType="BoardCom" parameterType="int">
+		select board_com.*,(select email from member where midx=board_com.midx ) email from  Board_Com where cidx=#{cidx}
+	</select>
+	
+	<select id="selectComByMidx" parameterType="int" resultType="BoardCom">
+		select * from board_com where midx=#{value}
+	</select>
+	
+	<select id="getBoardComListTop" parameterType="int" resultType="BoardCom">
+		select board_com.*, (select email from member where midx=board_com.midx ) email from board_com 
+		<![CDATA[
+			 where rownum<#{value}+1 
+		]]>
+		ORDER by clikenum desc, creadnum desc
+	</select>
+	
+	<update id="BoardComLike" parameterType="int">
+		update board_com set clikenum = clikenum+1 where cidx=#{value}
+	</update>
+	
+	<insert id="insertBoardComRe" parameterType="BoardComRe">
+		<selectKey keyProperty="re_cidx" resultType="int" order="BEFORE">
+			select board_community_comment_seq.nextval from dual
+		</selectKey>
+		insert into re_board_com(re_cidx, cidx, midx,re_ccontent,re_cdate)
+		values(#{re_cidx},#{cidx},#{midx},#{re_ccontent:VARCHAR},SYSDATE)	
+	</insert>
+	
+	<delete id="deleteBoardComRe" parameterType="int">
+		delete from re_board_com where re_cidx=#{value}
+	</delete>
+	
+	<select id="getBoardComReListByCidx" parameterType="int" resultType="BoardComRe">
+		select b.*,(select m.email from member m where m.midx=b.midx) email 
+		from re_board_com b where cidx=#{value} order by re_cdate desc
+	</select>
+	
+</mapper>

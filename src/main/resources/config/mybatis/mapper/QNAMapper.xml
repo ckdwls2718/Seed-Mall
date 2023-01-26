@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.mapper.QNAMapper">
+	<insert id="insertQNA" parameterType="QNA">
+	<selectKey keyProperty="qidx" order="BEFORE" resultType="int" >
+		select board_qna_seq.nextval from dual
+	</selectKey>
+	insert into board_qna(qidx, pidx, midx, qcontent, secret, qdate)
+	values(#{qidx},#{pidx},#{midx},#{qcontent},#{secret}, sysdate)
+	</insert>
+	
+	<insert id="insertQNA_Re" parameterType="QNARe">
+	<selectKey keyProperty="re_qidx" order="BEFORE" resultType="int" >
+		select board_qna_comment_seq.nextval from dual
+	</selectKey>
+	insert into re_board_qna(re_qidx, qidx, midx, re_qcontent, re_qdate)
+	values(#{re_qidx}, #{qidx}, #{midx}, #{re_qcontent}, sysdate)
+	</insert>
+	
+	<select id="getQNAListByMidx" parameterType="int" resultType="QNA">
+		select b.*, m.email 
+		from board_qna b join member m on b.midx=m.midx 
+		where b.midx=#{value}
+		order by qdate desc
+	</select>
+	
+	<select id="getQNAReListByQidx" parameterType="int" resultType="QNARe">
+		select *
+		from re_board_qna 
+		where qidx=#{value}
+		order by re_qdate desc
+	</select>
+	
+	<select id="getQNAListByPidx" parameterType="int" resultType="QNA">
+		select b.* ,(select email from member where midx = b.midx) email
+		from board_qna b
+		where pidx=#{value}
+		order by qdate desc
+	</select>
+	
+	<select id="getQNAList" parameterType="BoardPaging" resultType="QNA">
+		select * from(
+		<include refid="getQnaQuery"/>
+		)
+		<![CDATA[
+		where rn > #{start} and rn < #{end}
+		]]>
+	</select>
+	
+	<select id="getQNACount" parameterType="BoardPaging" resultType="int">
+		<include refid="getQnaCountQuery"/>
+	</select>
+	
+	<delete id="deleteQNA" parameterType="int">
+		delete from board_qna where qidx=#{value}
+	</delete>
+	
+	<delete id="deleteQNARe" parameterType="int">
+		delete from re_board_qna where re_qidx=#{value}
+	</delete>
+	
+	<sql id="getQnaQuery">
+		<if test="findState!=1 &amp;&amp; findState!=2">
+		select row_number() over(order by b.qdate desc) rn, b.*, m.email 
+		from board_qna b join member m on b.midx=m.midx
+		</if>
+		<if test="findState==1">
+		select row_number() over(order by b.qdate desc) rn, b.*, (select email from member m where m.midx=b.midx) email
+		from board_qna b left outer join re_board_qna r on b.qidx=r.qidx where r.re_qidx is null
+		</if>
+		<if test="findState==2">
+		select row_number() over(order by b.qdate desc) rn, b.*, (select email from member m where m.midx=b.midx) email
+		from board_qna b join re_board_qna r on b.qidx=r.qidx
+		</if>
+	</sql>
+	
+	<sql id="getQnaCountQuery">
+		<if test="findState!=1 &amp;&amp; findState!=2">
+			select count(qidx) from board_qna
+		</if>
+		<if test="findState==1">
+			select count(b.qidx) from board_qna b left outer join re_board_qna r on b.qidx=r.qidx where r.re_qidx is null
+		</if>
+		<if test="findState==2">
+			select count(b.qidx) from board_qna b join re_board_qna r on b.qidx=r.qidx
+		</if>
+	</sql>
+</mapper>

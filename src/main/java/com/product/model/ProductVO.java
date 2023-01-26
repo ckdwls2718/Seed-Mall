@@ -25,11 +25,15 @@ public class ProductVO {
 	private int ppoint;
 	
 	private String pspec;
+	private String sun;
+	private String temp;
+	private String soil;
 	private String pcontent;
 	
 	private java.sql.Date pdate;
 	private int preadnum;
 	private int plikenum;
+	private double sentiment; //긍정도 평점
 	
 	//상품 이미지 리스트
 	List<ProductImageVO> pimageList = new ArrayList<>();

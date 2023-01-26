@@ -17,7 +17,7 @@ import lombok.Data;
 public class PagingVO {
 	// 페이징 처리 관련 프로퍼티
 	private int cpage; // 현재 보여줄 페이지 번호
-	private int pageSize=5; // 한페이지당 보여줄 목록 갯수
+	private int pageSize = 20; // 한페이지당 보여줄 목록 갯수
 	private int totalCount; // 총 게시글 수
 	private int pageCount; // 페이지 수
 
@@ -26,7 +26,7 @@ public class PagingVO {
 	private int end;
 
 	// 페이징 블럭 처리를 위한 프로퍼티
-	private int pagingBlock = 5; // 한 블럭당 보여줄 페이지 수
+	private int pagingBlock = 10; // 한 블럭당 보여줄 페이지 수
 	private int prevBlock; // 이전 5개
 	private int nextBlock; // 이후 5개
 
@@ -34,18 +34,17 @@ public class PagingVO {
 	private String findKeyword; // 검색 키워드
 	private String upcg; // 상위 카테고리
 	private String downcg; // 하위 카테고리
-	
-	
+
 	// 정렬 관련 프로퍼티
-	private int sort=1; // 정렬 유형
+	private int sort = 1; // 정렬 유형
 
 	// 페이징 처리 연산을 수행하는 메서드
 	public void init(HttpSession ses) {
-		
-		if(ses!=null) {
+
+		if (ses != null) {
 			ses.setAttribute("pageSize", pageSize);
 		}
-		
+
 		this.pageCount = (totalCount - 1) / pageSize + 1;
 		if (cpage < 1) {
 			cpage = 1;
@@ -59,76 +58,56 @@ public class PagingVO {
 		// [2] where절 rn> a and rn<b 를 사용할 경우
 		start = (cpage - 1) * pageSize;
 		end = start + pageSize + 1;
-		
-		//페이징 블럭 연산
+
+		// 페이징 블럭 연산
 		/*
-		 * cpage
-		 * [1][2][3][4][5] | [6][7][8][9][10] | [11][12][13][14][15] | [16][17][18][19][20]
+		 * cpage [1][2][3][4][5] | [6][7][8][9][10] | [11][12][13][14][15] |
+		 * [16][17][18][19][20]
 		 * 
-		 * cpage		pagingblock			prevBlock(이전 5개) 		nextBlock(이후 5개)
-		 * 1~5				5					0							6
-		 * 6~10									5							11
-		 * 11~15 								10							16
+		 * cpage pagingblock prevBlock(이전 5개) nextBlock(이후 5개) 1~5 5 0 6 6~10 5 11 11~15
+		 * 10 16
 		 * 
-		 * */
-		prevBlock = (cpage-1)/pagingBlock * pagingBlock;
-		nextBlock = prevBlock+(pagingBlock+1);
-		
-		
+		 */
+		prevBlock = (cpage - 1) / pagingBlock * pagingBlock;
+		nextBlock = prevBlock + (pagingBlock + 1);
+
 	}
-	/*
-	public String getPageNavi(String myctx, String loc, String userAgent) {
-		//myctx:컨텍스트명, loc:/multiweb/board/list, userAgent: 브라우저 종류를 파악하기 위한 문자열
-		//검색관련---------
-		if(findType==null) { //넘어오지 않을경우
-			findType="";
-			findKeyword="";
-		} else {
-			//브라우저가 IE일 경우 검색어 한글 처리하기
-			if(userAgent.indexOf("MSIE")>-1 || userAgent.indexOf("Trident")>-1) {
-				try {
-					findKeyword=URLEncoder.encode(findKeyword, "UTF-8");
-				} catch(UnsupportedEncodingException e) {
-					System.out.println(e);
-				}
-				
-			}
-		}
-		String link=myctx+"/"+loc;
-		String qStr="?pageSize="+pageSize+"&findType="+findType+"&findKeyword="+findKeyword;
-		link+=qStr;
-		String str="";
+
+	public String getPageNavi(String myctx, String loc) {
+
+		if (findKeyword == null)
+			findKeyword = "";
+
+		String link = myctx + "/" + loc;
+		String qStr = "?pageSize=" + pageSize + "&sort=" + sort + "&findKeyword=" + findKeyword;
+		link += qStr;
+		String str = "";
 		StringBuilder sb = new StringBuilder();
 		sb.append("<ul class='pagination justify-content-center'>");
-		if(prevBlock>0) {
+		if (prevBlock > 0) {
 			sb.append("<li class='page-item'>")
-			.append("<a class='page-link' href='"+link+"&cpage="+prevBlock+"'>")
-			.append("Prev")
-			.append("</a>")
-			.append("</li>");	
+					.append("<a class='page-link' href='" + link + "&cpage=" + prevBlock + "'>").append("Prev")
+					.append("</a>").append("</li>");
 		}
-		for(int i=prevBlock+1; i<=nextBlock-1 && i<=pageCount; i++) {
-			String css=(i==cpage)?"active":"";
-			sb.append("<li class='page-item "+css+"'>");
-			sb.append("<a class='page-link' href='"+link+"&cpage="+i+"'>");
+		for (int i = prevBlock + 1; i <= nextBlock - 1 && i <= pageCount; i++) {
+			String css = (i == cpage) ? "active" : "";
+			sb.append("<li class='page-item " + css + "'>");
+			sb.append("<a class='page-link' href='" + link + "&cpage=" + i + "'>");
 			sb.append(i);
 			sb.append("</a>");
 			sb.append("</li>");
 		}
-		
-		
-		if(nextBlock<=pageCount) {
+
+		if (nextBlock <= pageCount) {
 			sb.append("<li class='page-item'>")
-			.append("<a class='page-link' href='"+link+"&cpage="+nextBlock+"'>")
-			.append("Next")
-			.append("</a>")
-			.append("</li>");	
+					.append("<a class='page-link' href='" + link + "&cpage=" + nextBlock + "'>").append("Next")
+					.append("</a>").append("</li>");
 		}
 		sb.append("</ul>");
-		
+
 		str = sb.toString();
-		//System.out.println(str);
+		// System.out.println(str);
 		return str;
 	}
-	*/
+
 }

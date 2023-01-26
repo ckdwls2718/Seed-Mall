@@ -9,10 +9,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 
 import com.user.mapper.MemberMapper;
+import com.user.model.GradeVO;
 import com.user.model.MemberVO;
 import com.user.model.NotUserException;
 import com.user.model.PagingVO;
 
+import lombok.extern.log4j.Log4j;
+
+@Log4j
 @Service("MemberService")
 public class MemberServiceImpl implements MemberService {
 
@@ -35,14 +39,7 @@ public class MemberServiceImpl implements MemberService {
 		return MemberMapper.listUser(pvo);
 	}
 
-	@Override
-	public boolean EmailCheck(String email) {
-		Integer n = MemberMapper.emailCheck(email);
-		if (n == null) {
-			return true;
-		}
-		return false;
-	}
+	
 
 	@Override
 	public int deleteMember(Integer midx) {
@@ -53,18 +50,22 @@ public class MemberServiceImpl implements MemberService {
 	public int updateMember(MemberVO member) {
 		return MemberMapper.updateUser(member);
 	}
+	
+	@Override
+	public int updateMemberInfo(MemberVO member) {
+		return MemberMapper.updateMemberInfo(member);
+	}
 
 	@Override
 	public MemberVO getMember(Integer midx) {
-		// TODO Auto-generated method stub
-		return null;
+		return MemberMapper.getMember(midx);
 	}
 
 	@Override
 	public MemberVO findUser(MemberVO findUser) throws NotUserException {
 		MemberVO user = MemberMapper.findUser(findUser);
 		if (user == null) {
-			throw new NotUserException("존재하지 않는 이메일입니다");
+			throw new NotUserException("존재하지 않는 이메일입니다1");
 		}
 		return user;
 	}
@@ -81,6 +82,9 @@ public class MemberServiceImpl implements MemberService {
 		if (!member.getPwd().equals(pwd)) {
 			throw new NotUserException("비밀번호가 일치하지 않습니다.");
 		}
+		if(member.getStatus()==1 || member.getStatus()==2) {
+			throw new NotUserException("정지 또는 탈퇴한 회원입니다.");
+		}
 
 		return member;
 
@@ -89,7 +93,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void logout(HttpSession session) throws Exception {
 		session.invalidate();
-		
+
 	}
 	// 게시목록 가져오기
 	@Override
@@ -106,4 +110,56 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberVO> findMember(PagingVO pvo){
 		return this.MemberMapper.findMember(pvo);
 	}
+
+	@Override
+	public boolean emailCheck(String email) {
+		Integer n= MemberMapper.emailCheck(email);
+		if(n==null) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public MemberVO findemail(MemberVO vo) {
+		
+		return MemberMapper.findemail(vo);
+	}
+
+	@Override
+	public MemberVO findPassword(MemberVO vo) {
+		return MemberMapper.findPassword(vo);
+	}
+
+	@Override
+	public int updatePassword(MemberVO vo) {
+		
+		return MemberMapper.updatePassword(vo);
+	}
+	
+	@Override
+	public int RewardMileage(int midx, int point) {
+		return this.MemberMapper.RewardMileage(midx, point);
+	}
+
+	@Override
+	public int updateGrade(MemberVO mvo) {
+		int mileage= MemberMapper.getMileage(mvo.getMidx());
+		String grade= MemberMapper.getGrade(mileage);
+		mvo.setGrade(grade);
+		log.info("mvo="+mvo);
+		return this.MemberMapper.updateGrade(mvo);
+	}
+	
+	@Override
+	public GradeVO getDrate(MemberVO mvo) {
+		return MemberMapper.getDrate(mvo);
+	}
+	
+	@Override
+	public GradeVO getNextGrade(MemberVO mvo) {
+		return MemberMapper.getNextGrade(mvo);
+	}
+
+
 }
