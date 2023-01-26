@@ -64,4 +64,21 @@
 		update board_com set clikenum = clikenum+1 where cidx=#{value}
 	</update>
 	
+	<insert id="insertBoardComRe" parameterType="BoardComRe">
+		<selectKey keyProperty="re_cidx" resultType="int" order="BEFORE">
+			select board_community_comment_seq.nextval from dual
+		</selectKey>
+		insert into re_board_com(re_cidx, cidx, midx,re_ccontent,re_cdate)
+		values(#{re_cidx},#{cidx},#{midx},#{re_ccontent:VARCHAR},SYSDATE)	
+	</insert>
+	
+	<delete id="deleteBoardComRe" parameterType="int">
+		delete from re_board_com where re_cidx=#{value}
+	</delete>
+	
+	<select id="getBoardComReListByCidx" parameterType="int" resultType="BoardComRe">
+		select b.*,(select m.email from member m where m.midx=b.midx) email 
+		from re_board_com b where cidx=#{value} order by re_cdate desc
+	</select>
+	
 </mapper>

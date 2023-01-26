@@ -2,6 +2,7 @@ package com.board.mapper;
 
 import java.util.List;
 
+import com.board.model.BoardComReVO;
 import com.board.model.BoardComVO;
 import com.user.model.PagingVO;
 
@@ -34,4 +35,13 @@ public interface BoardComMapper {
 	int Clike_check(BoardComVO board);
 	
 	int Clike_check_cancel(BoardComVO board);
+	
+	//댓글 리스트 가져오기
+	List<BoardComReVO> getBoardComReListByCidx(int cidx);
+	
+	//댓글 등록
+	int insertBoardComRe(BoardComReVO comRe);
+		
+	//댓글 삭제
+	int deleteBoardComRe(int re_cidx);
 }

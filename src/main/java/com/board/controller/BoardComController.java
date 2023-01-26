@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.board.model.BoardComReVO;
 import com.board.model.BoardComVO;
 import com.board.service.BoardComService;
 import com.common.service.CommonService;
@@ -130,6 +131,10 @@ public class BoardComController {
 		int n=boardComService.updateReadnum(cidx);
 		log.info("n==="+n);
 		BoardComVO boardCom = boardComService.selectBoardByIdx(cidx);
+		for(BoardComReVO comRe : boardCom.getComReArr()) {
+			String email = commonService.emailPrivate(comRe.getEmail());
+			comRe.setEmail(email);
+		}
 		String email = commonService.emailPrivate(boardCom.getEmail());
 		boardCom.setEmail(email);
 		m.addAttribute("boardCom",boardCom);
@@ -137,6 +142,25 @@ public class BoardComController {
 		return "boardCom/boardComView";
 		//게시판 글보기 및 조회수 업데이트
 	}//-------------------------------
+	
+	//커뮤니티 댓글 작성
+	@PostMapping("/user/boardRe")
+	public String boardComReply(@ModelAttribute BoardComReVO comRe) {
+		
+		int n = boardComService.insertBoardComRe(comRe);
+		
+		return "redirect:/boardGet?cidx="+comRe.getCidx();
+	}
+	
+	//커뮤니티 댓글 삭제
+	@PostMapping(value="/user/boardReDel",produces = "application/json")
+	@ResponseBody
+	public int deleteboardComReply(@RequestParam("re_cidx") int re_cidx) {
+		log.info("cidx =="+re_cidx);
+		
+		int n = boardComService.deleteBoardComRe(re_cidx);
+		return n;
+	}
 	
 
 	@PostMapping(value="/user/boardCom/like",produces = "application/json")
