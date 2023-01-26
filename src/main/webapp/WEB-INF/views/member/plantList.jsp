@@ -11,7 +11,7 @@
 <div class="d-flex">
 	<%@ include file="/WEB-INF/views/member/mypageSidebar.jsp"%>
 
-	<main class="m-3" style="width: 105%; height:1000px; margin: auto;">
+	<main class="m-3" style="width: 105%; min-height:1000px; margin: auto;">
 		<section class="py-5 text-center container">
 			<div class="row py-lg-5">
 				<div class="col-lg-6 col-md-8 mx-auto">
@@ -25,43 +25,39 @@
 		</section>
 
 		<div class="album py-5 bg-light">
-			<div class="container">
-
-				<div class=" g-3"style="text-align: center;">
-					<c:if test="${plantArr eq null or empty plantArr}">
-					
-						<div class="lead text-muted" style="margin-bottom:10px;">식물이 없습니다</div>
-						<a href="#" class="btn btn-primary" >쇼핑하러 가기</a>
-					</c:if>
-
-					<c:if test="${plantArr ne null and not empty plantArr}">
-
-						<c:forEach var="plant" items="${plantArr}">
-							<div class="col">
-								<div class="card shadow-sm">
-									<img src="${myctx}/resources/plant_images/${plant.plantImage}">
-									<div class="card-body">
-										<h4 class="cart-text">${plant.nickname}</h4>
-										<small class="text-muted"><b>${plant.percent}%</b></small>
-										<p class="card-text">${plant.pcomment}</p>
-										<div class="d-flex justify-content-between align-items-center">
-											<div class="btn-group">
-												<button class="btn btn-sm btn-outline-secondary" type="button" onclick="detailPlant('${plant.plant_idx}')">상세보기</button>
-											</div>
-											<small class="text-muted">${plant.pdate}</small>
-										</div>
-									</div>
-								</div>
-							</div>
-						</c:forEach>
-
-					</c:if>
-					<!-- --------------------- -->
-				</div>
-			</div>
-		</div>
+    <div class="container">
+    	
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <c:if test="${plantArr eq null or empty plantArr}">
+      <p class="lead text-muted">식물이 없습니다</p>
+      </c:if>
+      
+      <c:if test="${plantArr ne null and not empty plantArr}">
+      
+      <c:forEach var="plant" items="${plantArr}">
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="${myctx}/resources/plant_images/${plant.plantImage}">
+            <div class="card-body">
+              <h4 class="cart-text">${plant.nickname}</h4><small class="text-muted"><b>${plant.percent}%</b></small>
+              <p class="card-text">${plant.pcomment}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button class="btn btn-sm btn-outline-secondary" type="button" onclick="detailPlant('${plant.plant_idx}')">상세보기</button>
+                </div>
+                <small class="text-muted">${plant.pdate}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        </c:forEach>
+         
+        </c:if>
+		<!-- --------------------- -->
+      </div>
+    </div>
+  </div>
 	</main>
-	<div style="width: 230px;"></div>
 </div>
 <form id="pdF" action="plant" method="post">
 	<input type="hidden" name="pidx" id="pidx">
