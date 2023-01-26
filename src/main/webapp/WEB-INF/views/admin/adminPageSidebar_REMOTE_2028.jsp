@@ -27,7 +27,7 @@
 
 <div class="wrapper" style="height: auto">
     <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion flex-column" id="accordionSidebar" >
+        <ul class="navbar-nav bg-gradient-secondary sidebar sidebar-dark accordion flex-column" id="accordionSidebar" >
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
