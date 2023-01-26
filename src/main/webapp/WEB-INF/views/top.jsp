@@ -48,16 +48,6 @@ body, h1, h2, h3, h4, h5, h6, input, textarea, select {
 	<nav class="py-2 bg-white border-bottom">
 		<div class="container d-flex flex-wrap text-end ">
 			<ul class="nav me-auto">
-				<%-- 	<c:if test="${loginUser.status == 9}">
-					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">관리자 도구</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="${myctx}/admin/adminPage">어드민페이지</a></li>
-							<li><hr class="dropdown-divider" /></li>
-							<li><a class="dropdown-item" href="${myctx}/admin/prodForm">상품 등록</a></li>
-							<li><a class="dropdown-item" href="${myctx}/admin/prodList">상품 목록</a></li>
-							<li><a class="dropdown-item" href="${myctx}/admin/memberList">회원 관리</a></li>
-						</ul></li>
-				</c:if> --%>
 			</ul>
 			<ul class="nav">
 				<c:if test="${loginUser == null}">
@@ -99,9 +89,8 @@ body, h1, h2, h3, h4, h5, h6, input, textarea, select {
 			</c:if>
 		</div>
 	</nav>
-	<header class="py-3 mb-4 border-bottom ">
-
-		<div class="container" style="text-align: center; width: 1224px;">
+	<header class="py-3 mb-4 border-bottom">
+		<div class="container" style="text-align: center; width: 1000px;">
 			<div style="display: inline;">
 				<a href="${myctx}" class=" align-items" style="float: left"> <img src="${myctx}/assets/logo-removebg-preview.png" style="width: 70px;">
 				</a>

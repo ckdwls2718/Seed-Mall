@@ -32,17 +32,18 @@ const deleteQna = function(qidx){
 <%@ include file="/WEB-INF/views/top.jsp"%>
 <div class="d-flex">
 	<%@ include file="/WEB-INF/views/member/mypageSidebar.jsp"%>
-	<div class="container" style="width: 1100px; margin:auto; margin-top:0;">
+	<div class="container" style="width: 1000px; margin:auto; margin-top:0;">
 		
 			<div class="col-md-12">
 				<h2 style="	font-size: calc(1.325rem + .9vw); margin: 70px 0px 40px 0px;font-family: 'Noto Sans KR', sans-serif; font-weight: bold; /* color: #39b559; */text-align: center;">내가 쓴 문의글</h2>
-				<table class="table table-striped" id="products"style="text-align: center;">
+				<table class="table table-striped" id="products"style="text-align: center; width:1000px;">
 					<thead >
 						<tr>
-							<th style="width:10%">상태</th>
-							<th style="width:25%">상품</th>
-							<th style="width:50%">제목</th>
-							<th style="width:15%">작성일</th>
+							<th style="width:8%">상태</th>
+							<th style="width:15%">상품</th>
+							<th style="width:34%">제목</th>
+							<th style="width:10%">작성일</th>
+							<th style="width:16%"></th>
 						</tr>
 					</thead>
 					<tbody>

@@ -47,44 +47,55 @@ const boardLike = function(){
 td{
 	vertical-align: middle;
 }
+td:first-child{
+text-align: center;
+}
 </style>
-<div class="container mt-3" >
+<div class="container mt-3" style="width:1000px; height: auto;" >
+<div style="text-align: center;">
+		<img src="${myctx}/assets/Cbanner3.jpg" style="width: 550px;   margin: 20px 0;">
+	</div>
 <form name="bf" id="bf" role="form" method="POST" >
    <input type="hidden" name="midx" value="${loginUser.midx}">
    <input type="hidden" name="cidx" value="${boardCom.cidx}">      
-    <table class="table">
+    <table class="table" style="width:900px; margin:auto;">
        <tr>
-          <td style="width:10%"><b>제목</b></td>
-          <td style="width:40%" colspan="2">
+          <td style="width:10%; background:#0000000d;"><b>제목</b></td>
+          <td style="width:90%;" colspan="2">
            ${boardCom.ctitle }
           </td>
        </tr>
        <tr>
-          <td style="width:20%"><b>작성자</b></td>
-          <td style="width:80%" colspan="2">
+          <td style="width:10%; background:#0000000d;"><b>작성자</b></td>
+          <td style="width:90%" colspan="2">
           ${boardCom.email}
           </td>
        </tr>       
-       <tr >
-          <td style="width:20%"><b>추천수</b></td>
-          <td style="width:70%" >
+       <tr>
+          <td style="width:10%;background:#0000000d;"><b>추천수</b></td>
+          <td style="width:75%" >
            	${boardCom.clikenum}
           </td>
-          <td><button class="btn btn-outline-danger" id="likebtn" type="button" onclick="boardLike()">좋아요</button></td>
+          <td><button class="btn btn-outline-danger" id="likebtn" type="button" onclick="boardLike()">좋아요!</button></td>
        </tr>
-       <tr >
-          <td style="width:20%"><b>조회수</b></td>
-          <td style="width:80%" colspan="2">
+       <tr>
+          <td style="width:10%;  background:#0000000d;"><b>조회수</b></td>
+          <td style="width:90%" colspan="2">
            	${boardCom.creadnum}
+          </td>
+       </tr>
+       <tr>
+          <td style="width:10%;  background:#0000000d;"><b>내용</b></td>
+          <td style="width:90%" colspan="2">
+           ${boardCom.ccontent}
           </td>
        </tr>
 
       </table>
-      <div class="row" style="min-height: 300px">${boardCom.ccontent}</div>
       <c:if test="${loginUser.midx eq boardCom.midx}">
       <div class="text-center m-3">
-      		<button type="button" type="button" class="btn btn-success" onclick="edit()">글수정</button>
-            <button type="button" type="button" class="btn btn-danger" onclick="delete1()">글삭제</button>
+      		<button type="button" type="button" class="btn btn-success" onclick="edit()"style="margin:30px; 30px;">수정</button>
+            <button type="button" type="button" class="btn btn-danger" onclick="delete1()">삭제</button>
             </div>
       </c:if>
       
