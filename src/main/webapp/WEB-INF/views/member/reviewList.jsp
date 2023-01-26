@@ -13,16 +13,16 @@ const reviewDetail = function(ridx){
 <%@ include file="/WEB-INF/views/top.jsp"%>
 <div class="d-flex">
 	<%@ include file="/WEB-INF/views/member/mypageSidebar.jsp"%>
-	<div class="container" style="text-align: center">
+	<div class="container" style="text-align: center; width:1000px;" >
 		<div class="row">
 			<div class="col-md-12">
-				<h2 class="text-center m-4" style="margin: 1em">:::나의 리뷰 목록:::</h2>
-				<table class="table table-striped" id="products">
+				<h2 style="	font-size: calc(1.325rem + .9vw); margin: 70px 0px 40px 0px;font-family: 'Noto Sans KR', sans-serif; font-weight: bold; /* color: #39b559; */text-align: center;">작성한 리뷰</h2>
+				<table class="table table" id="products"style="text-align: center;">
 					<thead>
-						<tr>
-							<th>내용</th>
-							<th>추천수</th>
-							<th>작성일</th>
+						<tr style="background: #0000000d; ">
+							<th width="70%">내용</th>
+							<th width="10%">추천수</th>
+							<th width="20%">작성일</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -70,5 +70,6 @@ const reviewDetail = function(ridx){
 			</div>
 		</div>
 	</div>
+			<div style="width: 230px;"></div>
 </div>
 <%@ include file="/WEB-INF/views/foot.jsp"%>

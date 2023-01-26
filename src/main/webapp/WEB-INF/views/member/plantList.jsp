@@ -1,40 +1,35 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <script>
-
-const detailPlant = function(pidx){
-	$('input[name=pidx]').val(pidx);
-	pdF.submit();
-}
-
+	const detailPlant = function(pidx) {
+		$('input[name=pidx]').val(pidx);
+		pdF.submit();
+	}
 </script>
 <%@ include file="/WEB-INF/views/top.jsp"%>
 
 <div class="d-flex">
-<%@ include file="/WEB-INF/views/member/mypageSidebar.jsp"%>
+	<%@ include file="/WEB-INF/views/member/mypageSidebar.jsp"%>
 
-<main class="m-3" style="width:70%">
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">나의 소중한 식물</h1>
-        <p class="lead text-muted">식물의 상태를 확인해보세요</p>
-        <p>
-          <a href="#" class="btn btn-primary my-2">쇼핑하러 가기</a>
-          <a href="#" class="btn btn-secondary my-2">장바구니 가기</a>
-        </p>
-      </div>
-    </div>
-  </section>
+	<main class="m-3" style="width: 105%; min-height:1000px; margin: auto;">
+		<section class="py-5 text-center container">
+			<div class="row py-lg-5">
+				<div class="col-lg-6 col-md-8 mx-auto">
+					<h1 class="fw-light">나의 소중한 식물</h1>
+					<p class="lead text-muted">식물의 상태를 확인해보세요</p>
+					<p>
+						<a href="/seedmall/prod" class="btn btn-primary my-2">쇼핑하러 가기</a> <a href="/seedmall/user/cart" class="btn btn-secondary my-2">장바구니 가기</a>
+					</p>
+				</div>
+			</div>
+		</section>
 
-  <div class="album py-5 bg-light">
+		<div class="album py-5 bg-light">
     <div class="container">
     	
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
       <c:if test="${plantArr eq null or empty plantArr}">
       <p class="lead text-muted">식물이 없습니다</p>
-        <a href="#" class="btn btn-primary my-2">쇼핑하러 가기</a>
       </c:if>
       
       <c:if test="${plantArr ne null and not empty plantArr}">
@@ -62,11 +57,10 @@ const detailPlant = function(pidx){
       </div>
     </div>
   </div>
-
-</main>
+	</main>
 </div>
-<form id="pdF" action="plant" method="post"> 
-      <input type="hidden" name="pidx" id="pidx">
+<form id="pdF" action="plant" method="post">
+	<input type="hidden" name="pidx" id="pidx">
 </form>
 
 <%@ include file="/WEB-INF/views/foot.jsp"%>

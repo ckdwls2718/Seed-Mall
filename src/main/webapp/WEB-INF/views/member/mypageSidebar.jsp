@@ -27,19 +27,19 @@
       <li>
         <a href="${myctx}/user/mypage/reviewList" class="nav-link link-dark">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-          내가 쓴 리뷰
+          작성한 리뷰
         </a>
       </li>
       <li>
         <a href="${myctx}/user/mypage/communityList" class="nav-link link-dark">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-          내가 쓴 글
+          작성한 글
         </a>
       </li>
       <li>
         <a href="${myctx}/user/mypage/QNA" class="nav-link link-dark">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-          내가 쓴 문의글
+          작성한 문의글
         </a>
       </li>
       <li>
