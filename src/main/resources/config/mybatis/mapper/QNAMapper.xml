@@ -22,18 +22,21 @@
 		select b.*, m.email 
 		from board_qna b join member m on b.midx=m.midx 
 		where b.midx=#{value}
+		order by qdate desc
 	</select>
 	
 	<select id="getQNAReListByQidx" parameterType="int" resultType="QNARe">
 		select *
 		from re_board_qna 
 		where qidx=#{value}
+		order by re_qdate desc
 	</select>
 	
 	<select id="getQNAListByPidx" parameterType="int" resultType="QNA">
 		select b.* ,(select email from member where midx = b.midx) email
 		from board_qna b
 		where pidx=#{value}
+		order by qdate desc
 	</select>
 	
 	<select id="getQNAList" parameterType="BoardPaging" resultType="QNA">
