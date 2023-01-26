@@ -1,5 +1,8 @@
 package com.board.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,5 +19,7 @@ public class BoardComVO {
 	private int creadnum; // 조회수
 	private int clikenum; // 좋아요수
 	private java.sql.Date cdate; // 작성일
+	
+	List<BoardComReVO> comReArr = new ArrayList<>(); //댓글리스트
 	
 }

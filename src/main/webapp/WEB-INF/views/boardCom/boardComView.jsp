@@ -41,6 +41,29 @@ const boardLike = function(){
 		
 	})
 }
+const deleteRe = function(re_cidx){
+	$.ajax({
+		url:'${myctx}/user/boardReDel',
+		type:'post',
+		data:'re_cidx='+re_cidx,
+		dataType:'json',
+		cache:false,
+		success:function(res){
+			if(res>0){
+				location.reload();
+			}
+		},
+		error:function(err){
+			if(err.status==200){
+				alert('로그인 후 이용해주세요');
+				location.href='${myctx}/login';
+				return;
+			}
+			alert('err:'+err.status);
+		}
+		
+	})
+}
 </script>
 
 <style>
@@ -99,6 +122,38 @@ text-align: center;
             </div>
       </c:if>
       
-</form>  
+</form>
+</div>
+<div class="container">
+<hr size="10">
+<c:if test="${loginUser ne null }">
+<div>
+<form action="${myctx}/user/boardRe" method="post">
+	<input type="hidden" name="cidx" value="${boardCom.cidx}">
+	<input type="hidden" name="midx" value="${loginUser.midx}">
+	<textarea class="form-control" name="re_ccontent" rows="3" cols="10" style="width:80%" required></textarea>
+	<button class="btn btn-info btn-lg m-3">등록</button>
+</form>
+</div>
+<hr>
+</c:if>
+<table class="table">
+	<c:forEach var="reply" items="${boardCom.comReArr}">
+	<tr>
+		<td style="text-align: left">
+		<div> 
+		
+			${reply.email} <small>${reply.re_cdate}</small>
+			<c:if test="${loginUser.midx eq reply.midx }">
+				<a class="btn btn-danger btn-sm" onclick="deleteRe('${reply.re_cidx}')">x</a>
+			</c:if>
+		</div>
+		<div>
+		 <b>${reply.re_ccontent}</b> 
+		</div>
+		</td>
+	</tr>
+	</c:forEach>
+</table>
 </div>
 <%@ include file="/WEB-INF/views/foot.jsp"%>

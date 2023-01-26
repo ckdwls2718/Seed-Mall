@@ -20,9 +20,9 @@
 	<form name="omfrm" id="omfrm" action="deliveryStatus" method="post">
 		<input type="hidden" name="desc_oidx"> <input type="hidden"
 			name="deliveryState">
-		<div class="container mt-4" style="width: 1200px">
+		<div class="container mt-4">
 			<div>
-				<table class="table table-condensed">
+				<table class="table table-condensed" style="width:1500px">
 					<thead>
 						<tr>
 							<th>주문개요번호</th>
