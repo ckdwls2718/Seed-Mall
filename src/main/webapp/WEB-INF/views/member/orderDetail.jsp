@@ -2,11 +2,7 @@
 <%@ include file="/WEB-INF/views/top.jsp"%>
 <script>
 	$(function() {
-		let status = $
-		{
-			order.deliveryState
-		}
-		;
+		let status = ${order.deliveryState};
 		//alert(status);
 		let src = $('#status' + status + ' img').attr('src');
 		//alert(src);
