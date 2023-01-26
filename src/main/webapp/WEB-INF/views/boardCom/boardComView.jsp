@@ -140,7 +140,7 @@ text-align: center;
 <table class="table">
 	<c:forEach var="reply" items="${boardCom.comReArr}">
 	<tr>
-		<td>
+		<td style="text-align: left">
 		<div> 
 		
 			${reply.email} <small>${reply.re_cdate}</small>
