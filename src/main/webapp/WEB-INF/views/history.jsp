@@ -66,7 +66,7 @@ var downoqtyList = downoqty.replace('[','').replace(']','').split(',');
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav  sidebar sidebar-dark accordion" id="accordionSidebar" style="background: #999999 ">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
@@ -409,11 +409,11 @@ var downoqtyList = downoqty.replace('[','').replace(']','').split(',');
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div class="align-items-center justify-content-between mb-4">
+                    <div class="align-items-center justify-content-between mt-4 mb-4">
                     	<form>
                         <h1 class="h3 mb-0 text-gray-800">
-                        <input type="number" name="year" value="${year}" style="width:100px" onchange="submit()"> 년도
-                        <input type="number" name="month" value="${month}" min="1" max="12" style="width:100px" onchange="submit()"> 월
+                        <input type="number" name="year" value="${year}" style="width:100px; height: 35px;" onchange="submit()"> 년도
+                        <input type="number" name="month" value="${month}" min="1" max="12" style="width:100px;height: 35px; " onchange="submit()"> 월
                         </h1>
                         </form>
                         <!-- a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
@@ -425,6 +425,7 @@ var downoqtyList = downoqty.replace('[','').replace(']','').split(',');
 
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
+                        
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -505,7 +506,7 @@ var downoqtyList = downoqty.replace('[','').replace(']','').split(',');
                     <!-- Content Row -->
                     <div class="row">
                     	<!-- Pie Chart -->
-                        <div class="col-xl-4 col-lg-5">
+                        <div class="flex col-xl-4 col-lg-5">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div
@@ -736,7 +737,6 @@ var downoqtyList = downoqty.replace('[','').replace(']','').split(',');
 
                 </div>
                 <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
 
@@ -753,6 +753,7 @@ var downoqtyList = downoqty.replace('[','').replace(']','').split(',');
         </div>
         <!-- End of Content Wrapper -->
 
+<div style="width:224px; background:rgb(244,245,248);"></div> 
     </div>
     <!-- End of Page Wrapper -->
 
@@ -778,6 +779,7 @@ var downoqtyList = downoqty.replace('[','').replace(']','').split(',');
                     <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
+
         </div>
     </div>
 

@@ -12,7 +12,7 @@ h2 {
 	font-size: calc(1.325rem + .9vw);
 	margin: 40px 0px 80px;
 	font-family: 'Noto Sans KR', sans-serif;
-	font-weight: 700;
+	/* font-weight: 700; */
 	color: #39b559;
 	text-align: center;
 	padding: 0 20px;
